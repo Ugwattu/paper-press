@@ -5,7 +5,8 @@ A static, no-build web app. Everything runs in the browser; nothing is uploaded.
 ## Files
 | File | Purpose |
 |---|---|
-| `index.html`, `styles.css`, `script.js` | the app |
+| `index.html`, `script.js` | the app (page structure and logic) |
+| `app.css`, `paper.css` | interface styling / paper-preview styling |
 | `banks.js` | question banks (edit here) |
 | `tools/validate-banks.js` | checks banks.js for malformed rows |
 
@@ -32,3 +33,10 @@ Edit `banks.js`, then run `node tools/validate-banks.js` before committing. Row 
 
 ## Keyboard shortcuts (press `?` in the app for the live list)
 `Ctrl/⌘+S` save .docx · `Ctrl/⌘+P` print · `Ctrl/⌘+Z` undo · `Ctrl/⌘+Shift+Z` redo · `S` shuffle · `K` answer key · `B` bilingual · `O` OMR · `E` edit tools · `T` chapter tags · `+`/`−` zoom · `0` 100% · `F` fit · `[` `]` collapse/expand groups · `1 2 3` phone tabs.
+
+## Interface
+Five settings sections in the left navigation (**Paper · Header · Layout · Edit · Library**), the paper in the middle, and a **Blueprint** panel (button in the top bar, or `L`) that slides in from the right and docks beside the paper on very wide screens. On phones the bottom bar switches between Settings, Paper and Blueprint. Light and dark themes; colours are CSS variables at the top of `app.css`.
+
+## Word / OnlyOffice export notes
+* Every paragraph gets an **exact** line height computed like the preview (a multiple of the font size). Word's default "auto" spacing multiplies the font's own built-in line height (about 1.15 for Times, about 2 for Nastaliq), which is what used to add extra space only in the file.
+* The OMR response sheet is one flat table (no nested tables, which force extra empty paragraphs) laid out like the board sample: contiguous blocks filled down each column, shared borders, bubbles as shared PNG images.

@@ -53,16 +53,19 @@
     const local = root.location && root.location.protocol === 'file:';
     document.body.innerHTML = '<div style="max-width:640px;margin:12vh auto;padding:0 20px;font:16px/1.5 system-ui,sans-serif;color:#222">' +
       '<h2>Paper Press could not load its question banks</h2><p style="color:#b00020">' + String(e.message || e).replace(/</g, '&lt;') + '</p>' +
-      (local ? '<p>You opened the page straight from disk, and browsers block loading JSON that way. Either publish it on GitHub Pages, or run <code>python -m http.server</code> in this folder and open <code>http://localhost:8000</code>.</p>' : '<p>Check <code>banks/manifest.json</code> and the JSON files it lists (run <code>node tools/validate-banks.js</code>).</p>') + '</div>';
+      (local ? '<p>You opened the page straight from disk, and browsers block loading JSON that way. Either publish it on GitHub Pages, or run <code>python -m http.server</code> in this folder and open <code>http://localhost:8000</code>.</p>' : '<p>Expected layout next to <code>index.html</code>: <code>banks/manifest.json</code>, <code>banks/class-9-computer-science.json</code>, <code>banks/class-10-computer-science.json</code>. Upload the folder itself, not just its files.</p>') + '</div>';
   }
 
   async function boot(version) {
     const q = version ? '?v=' + encodeURIComponent(version) : '';
     try {
-      const man = await getJSON('banks/manifest.json' + q);
-      if (!man || !Array.isArray(man.banks)) fail('banks/manifest.json needs a "banks" list');
+      /* normal layout: banks/manifest.json. If the files were uploaded flat (no banks folder), fall back to the same folder as index.html */
+      let base = 'banks/', man;
+      try { man = await getJSON(base + 'manifest.json' + q); }
+      catch (e1) { if (!/HTTP 404/.test(e1.message)) throw e1; base = ''; man = await getJSON('manifest.json' + q).catch(() => { throw new Error(e1.message + ' — the banks folder was not found next to index.html. Upload the whole "banks" folder (manifest.json and the two class .json files inside it).'); }); }
+      if (!man || !Array.isArray(man.banks)) fail(base + 'manifest.json needs a "banks" list');
       root.PP_META = {};
-      const loaded = await Promise.all(man.banks.map(async (b) => ({ b, c: convert(await getJSON('banks/' + b.file + q), b.file) })));
+      const loaded = await Promise.all(man.banks.map(async (b) => ({ b, c: convert(await getJSON(base + b.file + q), b.file) })));
       loaded.forEach(({ b, c }) => {
         if (c.classNo !== Number(b.class)) fail(`${b.file}: manifest says class ${b.class} but the file says class ${c.classNo}`);
         root['RAW' + c.classNo] = c.raw; root.PP_META[c.classNo] = c.meta;

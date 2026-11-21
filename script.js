@@ -363,23 +363,24 @@ function omrHTML(s,showKey,screen){
  if(s.omrNewPage)h+='<br clear="all" style="mso-special-character:line-break;page-break-before:always">';
  h+=`<div class="omrwrap" ${screen?'data-omr="1"':''} style="margin:${s.omrGapT}pt 0 ${s.omrGapB}pt 0;text-align:${s.omrAlign};">`;
  if(screen)h+='<div class="omrhandle" id="omrHandle" title="Drag to another position"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 9h14M5 15h14"/></svg>Drag OMR</div>';
- h+=`<div style="display:inline-block;width:${s.omrWidth}%;text-align:left;">`;
- h+=`<div style="text-align:center;margin:0 0 5pt 0;${base}"><span style="font-size:${FS+7}pt;font-weight:bold;letter-spacing:.4pt;">MCQs RESPONSE PART</span><span style="font-size:${FS-1}pt;font-weight:bold;">(TO BE FILLED BY THE STUDENT)</span>`;
- if(s.omrUrdu&&s.showUrdu)h+=`<span dir="rtl" lang="ur" style="font-family:'${s.urFont}','Noto Nastaliq Urdu',serif;font-size:${s.urSize+2}pt;"> &nbsp;(امیدوار خود پُر کرے)</span>`;
- h+='</div>';
- if(s.omrRule)h+=`<table border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;width:100%;border:${BD};margin-bottom:5pt;${base}"><tr><td style="border:${BD};padding:${s.pad+1}pt;text-align:center;font-weight:bold;font-size:${FS+1}pt;">PLEASE CAREFULLY READ THE QUESTIONS AND FILL THE ANSWER CORRECTLY</td></tr></table>`;
- h+=`<table border="1" cellspacing="0" cellpadding="5" style="border-collapse:collapse;width:100%;border:${BD};${base}"><tr><td style="border:0;padding:5pt;">`;
- h+=`<table border="0" cellspacing="5" cellpadding="0" style="border-collapse:separate;width:100%;${base}"><tr>`;
- for(let c=0;c<cols;c++){
-  h+=`<td style="border:${BD};padding:0;vertical-align:top;width:${(100/cols).toFixed(2)}%;"><table border="0" cellspacing="0" cellpadding="${s.omrPad}" style="border-collapse:collapse;width:100%;${base}">`;
-  for(let r=0;r<rows;r++){const idx=c*rows+r+1;h+='<tr>';
-   if(idx>n)h+='<td style="border:0;">&nbsp;</td><td style="border:0;"></td><td style="border:0;"></td><td style="border:0;"></td><td style="border:0;"></td>';
-   else{h+=`<td style="border:0;font-weight:bold;white-space:nowrap;width:16%;">${idx}.</td>`;
-    for(let k=0;k<4;k++){const on=showKey&&built.mcq[idx-1].a===k,b=bubblePNG('ABCD'[k],s.bubSize,on);
-     h+=`<td style="border:0;text-align:center;"><img src="${b.url}" width="${b.px}" height="${b.px}" style="width:${s.bubSize}pt;height:${s.bubSize}pt;vertical-align:middle;" alt="${'ABCD'[k]}"></td>`;}}
+   const AR="font-family:Arial,Helvetica,sans-serif;color:#000;",tSz=FS+3,sSz=Math.max(5,FS-5),nSz=Math.max(5,FS-4.5),NUMP=18;
+  h+=`<div style="display:inline-block;width:${s.omrWidth}%;text-align:left;">`;
+  h+=`<div style="text-align:center;margin:0 0 6pt 0;${AR}line-height:1.25;"><span style="font-size:${tSz}pt;font-weight:bold;">MCQs RESPONSE PART</span><span style="font-size:${sSz}pt;"> (TO BE FILLED BY THE STUDENT)</span>`;
+  if(s.omrUrdu&&s.showUrdu)h+=`<span dir="rtl" lang="ur" style="font-family:'${s.urFont}','Noto Nastaliq Urdu',serif;font-size:${s.urSize+1}pt;"> &nbsp;(اُمیدوار خود پُر کرے)</span>`;
+  h+='</div>';
+  if(s.omrRule)h+=`<table cellspacing="0" cellpadding="0" style="border-collapse:collapse;width:100%;border:${BD};margin-bottom:6pt;${AR}"><tr><td style="border:${BD};padding:${s.pad+2}pt;text-align:center;font-weight:bold;font-size:${FS-2.5}pt;">PLEASE CAREFULLY READ THE&nbsp; QUESTIONS AND FILL THE ANSWER CORRECTLY</td></tr></table>`;
+  h+=`<table cellspacing="0" cellpadding="0" style="border-collapse:collapse;table-layout:fixed;width:100%;border:${BD};${AR}"><colgroup>`;
+  for(let c=0;c<cols;c++){h+=`<col style="width:${(NUMP/cols).toFixed(3)}%">`;for(let k=0;k<4;k++)h+=`<col style="width:${((100-NUMP)/4/cols).toFixed(3)}%">`;}
+  h+='</colgroup>';
+  for(let r=0;r<rows;r++){h+='<tr>';
+   for(let c=0;c<cols;c++){const idx=c*rows+r+1,sep=c?`border-left:${BD};`:'';
+    h+=`<td style="${sep}border-top:0;border-bottom:0;border-right:0;padding:${s.omrPad}pt 0 ${s.omrPad}pt 3pt;font-weight:bold;font-size:${nSz}pt;vertical-align:middle;white-space:nowrap;">${idx<=n?idx+'.':''}</td>`;
+    for(let k=0;k<4;k++){
+     if(idx>n){h+='<td style="border:0;"></td>';continue;}
+     const on=showKey&&built.mcq[idx-1].a===k,bb=bubblePNG('ABCD'[k],s.bubSize,on);
+     h+=`<td style="border:0;padding:${s.omrPad}pt 0;text-align:center;vertical-align:middle;line-height:0;font-size:0;"><img src="${bb.url}" width="${bb.px}" height="${bb.px}" style="width:${s.bubSize}pt;height:${s.bubSize}pt;display:inline-block;" alt="${'ABCD'[k]}"></td>`;}}
    h+='</tr>';}
-  h+='</table></td>';}
- h+='</tr></table></td></tr></table></div></div>';
+  h+='</table></div></div>';
  return h;
 }
 function wordHtmlDoc(s){const pg=PAGES[s.page];
@@ -414,37 +415,49 @@ const tw=pt=>Math.round(pt*20),emu=pt=>Math.round(pt*12700);
 let media=[],rid=2,mediaMap=new Map(); /* rId1/rId2 belong to styles & settings, so images start at rId3 */
 function addMedia(bytes,ext){if(mediaMap.has(bytes))return mediaMap.get(bytes);rid++;const n='image'+rid+'.'+ext,r={rid:'rId'+rid,href:'media/'+n,name:'word/media/'+n,data:bytes};media.push(r);mediaMap.set(bytes,r);return r;} /* the relationship list reads rid/href from these records */
 function imgXml(m,cx,cy,id,name){return `<w:r><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0"><wp:extent cx="${cx}" cy="${cy}"/><wp:effectExtent l="0" t="0" r="0" b="0"/><wp:docPr id="${id}" name="${X(name)}"/><wp:cNvGraphicFramePr><a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/></wp:cNvGraphicFramePr><a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:nvPicPr><pic:cNvPr id="${id}" name="${X(name)}"/><pic:cNvPicPr/></pic:nvPicPr><pic:blipFill><a:blip r:embed="${m.rid}"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="${cx}" cy="${cy}"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic></wp:inline></w:drawing></w:r>`;}
-function run(t,o){o=o||{};const f=o.ur?state.urFont:state.enFont,sz=Math.max(2,Math.round((o.sz||(o.ur?state.urSize:state.enSize))*2));
+function run(t,o){o=o||{};const f=o.font||(o.ur?state.urFont:state.enFont),sz=Math.max(2,Math.round((o.sz||(o.ur?state.urSize:state.enSize))*2));
  let p='<w:rPr>'+`<w:rFonts w:ascii="${X(f)}" w:hAnsi="${X(f)}" w:cs="${X(f)}" w:eastAsia="${X(f)}"/>`;
  if(o.b)p+='<w:b/><w:bCs/>';p+=`<w:sz w:val="${sz}"/><w:szCs w:val="${sz}"/>`;if(o.ur)p+='<w:rtl/><w:lang w:bidi="ur-PK"/>';p+='</w:rPr>';
  return `<w:r>${p}<w:t xml:space="preserve">${X(t)}</w:t></w:r>`;}
-function para(inner,o){o=o||{};
- const nRun=((inner||'').match(/<w:r>/g)||[]).length,nRtl=((inner||'').match(/<w:rtl\/>/g)||[]).length;
- if(nRun>0&&nRtl===nRun)o=Object.assign({},o,{bidi:true}); /* a paragraph made only of Urdu runs is always right-to-left */
- /* Word/OnlyOffice read jc left/right in a right-to-left paragraph as start/end, so a bidi paragraph must NOT say "right":
-    leaving jc out makes it start on the right edge. Element order follows the schema: bidi, spacing, jc. */
- let p='<w:pPr>'+(o.bidi?'<w:bidi/>':'')+`<w:spacing w:before="${o.before?tw(o.before):0}" w:after="${o.after?tw(o.after):0}" w:line="${Math.round((o.lh||state.lineH)*240)}" w:lineRule="auto"/>`;
- const jc=o.bidi?(o.align==='center'?'center':''):(o.align||'left');if(jc)p+=`<w:jc w:val="${jc}"/>`;p+='</w:pPr>';
- return `<w:p>${p}${inner||''}</w:p>`;}
+function para(inner,o){o=o||{};const src=inner||'';
+ const nRun=(src.match(/<w:r>/g)||[]).length,nRtl=(src.match(/<w:rtl\/>/g)||[]).length;
+ if(nRun>0&&nRtl===nRun)o=Object.assign({},o,{bidi:true}); /* Urdu-only paragraph = right-to-left */
+ /* Line height: the preview uses CSS line-height (a multiple of the font SIZE). Word's "auto" multiplies the font's own
+    built-in line height instead (about 1.15 for Times, about 2 for Nastaliq) which adds visible extra space, so every
+    paragraph gets an EXACT height computed the same way as the preview. Images are never clipped. */
+ let line;
+ if(o.exact!=null)line=o.exact;
+ else{const lh=o.lh||state.lineH;line=0;
+  for(const m of src.matchAll(/<w:r>(?:(?!<\/w:r>)[\s\S])*<\/w:r>/g)){const r=m[0],ex=r.match(/<wp:extent cx="\d+" cy="(\d+)"/),sz=r.match(/<w:sz w:val="(\d+)"/);
+   if(ex)line=Math.max(line,ex[1]/12700+1);else if(sz)line=Math.max(line,sz[1]/2*(r.includes('<w:rtl/>')?Math.max(lh+.35,1.5):lh));}
+  if(!line)line=state.enSize*lh;}
+ line=Math.max(1,line);
+ /* Word/OnlyOffice read jc left/right inside a right-to-left paragraph as start/end, so bidi paragraphs carry no jc. Order: bidi, spacing, jc, rPr. */
+ let p='<w:pPr>'+(o.bidi?'<w:bidi/>':'')+`<w:spacing w:before="${o.before?tw(o.before):0}" w:after="${o.after?tw(o.after):0}" w:line="${Math.round(line*20)}" w:lineRule="exact"/>`;
+ const jc=o.bidi?(o.align==='center'?'center':''):(o.align||'left');if(jc)p+=`<w:jc w:val="${jc}"/>`;
+ if(!src)p+='<w:rPr><w:sz w:val="2"/><w:szCs w:val="2"/></w:rPr>';
+ p+='</w:pPr>';return `<w:p>${p}${src}</w:p>`;}
 function txtP(t,o){return para(run(t,o),o);}
+function outerBorders(sz){const e=k=>`<w:${k} w:val="single" w:sz="${sz}" w:space="0" w:color="000000"/>`;return `<w:tblBorders>${e('top')}${e('left')}${e('bottom')}${e('right')}<w:insideH w:val="nil"/><w:insideV w:val="nil"/></w:tblBorders>`;}
 function borders(on,sz){if(!on)return '<w:tblBorders><w:top w:val="nil"/><w:left w:val="nil"/><w:bottom w:val="nil"/><w:right w:val="nil"/><w:insideH w:val="nil"/><w:insideV w:val="nil"/></w:tblBorders>';
  const e=k=>`<w:${k} w:val="single" w:sz="${sz}" w:space="0" w:color="000000"/>`;
  return `<w:tblBorders>${e('top')}${e('left')}${e('bottom')}${e('right')}${e('insideH')}${e('insideV')}</w:tblBorders>`;}
 function tbl(grid,rows,o){o=o||{};const total=grid.reduce((a,b)=>a+b,0),sz=Math.max(2,Math.round(state.borderW*8)),m=tw(o.pad!=null?o.pad:state.pad);
- let p='<w:tblPr>'+`<w:tblW w:w="${total}" w:type="dxa"/><w:jc w:val="${o.align||'left'}"/>`+borders(o.borders!==false,sz);
- p+=`<w:tblCellMar><w:top w:w="${m}" w:type="dxa"/><w:left w:w="${m+20}" w:type="dxa"/><w:bottom w:w="${m}" w:type="dxa"/><w:right w:w="${m+20}" w:type="dxa"/></w:tblCellMar><w:tblLayout w:type="fixed"/></w:tblPr>`;
+ let p='<w:tblPr>'+`<w:tblW w:w="${total}" w:type="dxa"/><w:jc w:val="${o.align||'left'}"/>`+(o.outer?outerBorders(sz):borders(o.borders!==false,sz));
+ p+=`<w:tblCellMar><w:top w:w="${m}" w:type="dxa"/><w:left w:w="${m+30}" w:type="dxa"/><w:bottom w:w="${m}" w:type="dxa"/><w:right w:w="${m+30}" w:type="dxa"/></w:tblCellMar><w:tblLayout w:type="fixed"/></w:tblPr>`;
  p+='<w:tblGrid>'+grid.map(w=>`<w:gridCol w:w="${Math.max(1,w)}"/>`).join('')+'</w:tblGrid>';
  return `<w:tbl>${p}${rows.join('')}</w:tbl>`;}
 function tc(content,o){o=o||{};let p='<w:tcPr>'+`<w:tcW w:w="${Math.max(1,o.w||1000)}" w:type="dxa"/>`;
  if(o.span&&o.span>1)p+=`<w:gridSpan w:val="${o.span}"/>`;
  p+=`<w:vAlign w:val="${o.valign||'top'}"/>`;
  if(o.shd)p+=`<w:shd w:val="clear" w:color="auto" w:fill="${o.shd}"/>`;
+ if(o.bd){const z=Math.max(2,Math.round(state.borderW*8)),e=(k,on)=>on?`<w:${k} w:val="single" w:sz="${z}" w:space="0" w:color="000000"/>`:`<w:${k} w:val="nil"/>`;p+=`<w:tcBorders>${e('top',o.bd.t)}${e('left',o.bd.l)}${e('bottom',o.bd.b)}${e('right',o.bd.r)}</w:tcBorders>`;}
  if(o.noBorder)p+='<w:tcBorders><w:top w:val="nil"/><w:left w:val="nil"/><w:bottom w:val="nil"/><w:right w:val="nil"/></w:tcBorders>';
  p+='</w:tcPr>';let body=content||'';
- if(!body)body=para('');else if(/<\/w:tbl>$/.test(body))body+=para('');
+ if(!body)body=para('',{exact:1});else if(/<\/w:tbl>$/.test(body))body+=para('',{exact:1});
  return `<w:tc>${p}${body}</w:tc>`;}
 function tr(cells){return `<w:tr><w:trPr><w:cantSplit/></w:trPr>${cells.join('')}</w:tr>`;}
-function pageBreak(){return '<w:p><w:pPr><w:spacing w:after="0" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:br w:type="page"/></w:r></w:p>';}
+function pageBreak(){return '<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="20" w:lineRule="exact"/></w:pPr><w:r><w:br w:type="page"/></w:r></w:p>';}
 function buildDocx(raw){
  media=[];rid=2;mediaMap=new Map();
  const s=state,bi=s.showUrdu,mk=plan.marks,pg=PAGES[s.page],SN=serials();
@@ -452,7 +465,7 @@ function buildDocx(raw){
  const nw=Math.round(CW*s.numW/100),mid=CW-2*nw,q4=Math.round(mid/4);
  const grid6=[nw,q4,q4,q4,mid-3*q4,nw],eW=Math.round(mid*.53),grid4=bi?[nw,eW,mid-eW,nw]:[nw,CW-nw];
  const shd=s.shade?'E9E4D6':null,zeb=i=>s.zebra&&i%2===1?'F7F4EA':null;
- const Bx=[];const push=x=>Bx.push(x),spacer=pt=>push(para('',{after:pt||4,lh:1}));
+ const Bx=[];const push=x=>Bx.push(x),spacer=pt=>push(para('',{exact:Math.max(1,pt||4)}));
  const titleRuns=()=>{let r='';
   if(s.institute.trim())r+=para(run(s.institute,{b:s.bHeader,sz:s.enSize+5}),{align:'center',after:1,lh:1.1});
   r+=para(run(s.title,{b:s.bHeader,sz:s.enSize+1}),{align:'center',after:1,lh:1.1});
@@ -484,28 +497,27 @@ function buildDocx(raw){
  const insRow=(grid,en,ur)=>{const G=insCells(grid,bi);
   if(G.mono)return tr([tc(txtP(en,{b:s.bInstr}),{w:G.wAll,span:G.spanAll,shd:shd})]);
   return tr([tc(txtP(en,{b:s.bInstr}),{w:G.wL,span:G.nL,shd:shd}),tc(txtP(ur,{ur:true,b:s.bInstr}),{w:G.wR,span:G.nR,shd:shd})]);};
- function omrBlock(){
-  const n=built.mcq.length;if(!n)return;
-  const cols=clamp(parseInt(s.omrCols,10)||4,1,4),rows=Math.ceil(n/cols),innerW=Math.round(CW*s.omrWidth/100);
-  if(s.omrNewPage)push(pageBreak());
-  if(s.omrGapT)spacer(s.omrGapT);
-  let t=para(run('MCQs RESPONSE PART',{b:true,sz:s.enSize+7})+run('(TO BE FILLED BY THE STUDENT)',{b:true,sz:s.enSize-1})+(s.omrUrdu&&bi?run('  (امیدوار خود پُر کرے)',{ur:true,sz:s.urSize+2}):''),{align:'center',after:4,lh:1.2});
-  if(s.omrRule){t+=tbl([innerW],[tr([tc(txtP('PLEASE CAREFULLY READ THE QUESTIONS AND FILL THE ANSWER CORRECTLY',{b:true,align:'center',sz:s.enSize+1}),{w:innerW,valign:'center'})])],{borders:true,pad:s.pad+1});t+=para('',{after:3,lh:1});}
-  const gap=100,padCell=100,boxOuter=innerW-2*padCell,bw=Math.max(600,Math.floor((boxOuter-(cols-1)*gap)/cols));
-  const bgrid=[];let ba=0;for(let i=0;i<cols;i++){const w=i===cols-1?boxOuter-ba:bw;bgrid.push(w);ba+=w;}
-  const numW=Math.round(bw*.17),bubW=Math.max(200,Math.floor((bw-numW)/4)),lastW=Math.max(200,bw-numW-3*bubW),cellsOuter=[];
-  for(let c=0;c<cols;c++){const rowsX=[];
-   for(let r=0;r<rows;r++){const idx=c*rows+r+1,cells=[];
-    if(idx>n){cells.push(tc(txtP(' ',{}),{w:numW,noBorder:true}));for(let k=0;k<3;k++)cells.push(tc('',{w:bubW,noBorder:true}));cells.push(tc('',{w:lastW,noBorder:true}));}
-    else{cells.push(tc(txtP(idx+'.',{b:true}),{w:numW,noBorder:true,valign:'center'}));
-     for(let k=0;k<4;k++){const bp=bubblePNG('ABCD'[k],s.bubSize,false),mm=addMedia(bp.bytes,'png'),cx=emu(s.bubSize);
-      cells.push(tc(para(imgXml(mm,cx,cx,1000+idx*10+k,'Bubble '+'ABCD'[k]),{align:'center',lh:1}),{w:k===3?lastW:bubW,noBorder:true,valign:'center'}));}}
+   function omrBlock(){
+   const n=built.mcq.length;if(!n)return;
+   const cols=clamp(parseInt(s.omrCols,10)||4,1,4),rows=Math.ceil(n/cols),innerW=Math.round(CW*s.omrWidth/100),AR='Arial',nSz=Math.max(5,s.enSize-4.5);
+   if(s.omrNewPage)push(pageBreak());
+   if(s.omrGapT)spacer(s.omrGapT);
+   let t=para(run('MCQs RESPONSE PART',{b:true,sz:s.enSize+3,font:AR})+run(' (TO BE FILLED BY THE STUDENT)',{sz:Math.max(5,s.enSize-5),font:AR})+(s.omrUrdu&&bi?run('  (اُمیدوار خود پُر کرے)',{ur:true,sz:s.urSize+1}):''),{align:'center',after:6,lh:1.25});
+   if(s.omrRule){t+=tbl([innerW],[tr([tc(txtP('PLEASE CAREFULLY READ THE  QUESTIONS AND FILL THE ANSWER CORRECTLY',{b:true,align:'center',sz:s.enSize-2.5,font:AR}),{w:innerW,valign:'center'})])],{borders:true,pad:s.pad+2,align:s.omrAlign});t+=para('',{exact:6});}
+   const blockW=Math.floor(innerW/cols),numW=Math.round(blockW*.18),bubW=Math.floor((blockW-numW)/4),lastW=blockW-numW-3*bubW,grid=[];
+   for(let c=0;c<cols;c++)grid.push(numW,bubW,bubW,bubW,lastW);
+   const rowsX=[];
+   for(let r=0;r<rows;r++){const cells=[];
+    for(let c=0;c<cols;c++){const idx=c*rows+r+1,ok=idx<=n;
+     cells.push(tc(ok?txtP(idx+'.',{b:true,sz:nSz,font:AR}):'',{w:numW,valign:'center',bd:{t:r===0,b:r===rows-1,l:true,r:false}}));
+     for(let k=0;k<4;k++){let body='';
+      if(ok){const bp=bubblePNG('ABCD'[k],s.bubSize,false),mm=addMedia(bp.bytes,'png'),cx=emu(s.bubSize);body=para(imgXml(mm,cx,cx,1000+idx*10+k,'Bubble '+'ABCD'[k]),{align:'center'});}
+      cells.push(tc(body,{w:k===3?lastW:bubW,valign:'center',bd:{t:r===0,b:r===rows-1,l:false,r:k===3&&c===cols-1}}));}}
     rowsX.push(tr(cells));}
-   cellsOuter.push(tc(tbl([numW,bubW,bubW,bubW,lastW],rowsX,{borders:true,pad:s.omrPad}),{w:bgrid[c],valign:'top'}));}
-  t+=tbl([innerW],[tr([tc(tbl(bgrid,[tr(cellsOuter)],{borders:false,pad:2}),{w:innerW})])],{borders:true,pad:5,align:s.omrAlign});
-  push(t);if(s.omrGapB)spacer(s.omrGapB);
- }
- if(s.omr&&s.omrPos==='front'){omrBlock();spacer(5);}
+   t+=tbl(grid,rowsX,{outer:true,pad:s.omrPad,align:s.omrAlign});
+   push(t);if(s.omrGapB)spacer(s.omrGapB);
+  }
+if(s.omr&&s.omrPos==='front'){omrBlock();spacer(5);}
  bar(`PART-I  ·  OBJECTIVE  (${mk.mcq} Marks)`,'حصہ اول: معروضی سوالات');
  {const rows=[insRow(grid6,`Q. No. 1: Choose the Best option and fill the Bubble.  (${built.mcq.length} × ${s.mcqMark} = ${mk.mcq})`,'سوال نمبر 1: درست جواب کا انتخاب کریں۔ اور ببل بھریں۔')];
   built.mcq.forEach((m,i)=>{const S=SN[m._key];
@@ -1302,15 +1314,22 @@ $('btnUndo').addEventListener('click',()=>histGo(-1));$('btnRedo').addEventListe
 document.addEventListener('keydown',e=>{if(!(e.ctrlKey||e.metaKey)||e.altKey)return;const k=e.key.toLowerCase();if(k!=='z'&&k!=='y')return;const t=e.target;
  if(t&&(t.tagName==='TEXTAREA'||t.isContentEditable||(t.tagName==='INPUT'&&!['range','checkbox','button'].includes(t.type))))return;e.preventDefault();histGo(k==='y'||e.shiftKey?1:-1);});
 /* ══════════ COLLAPSIBLE RAIL GROUPS ══════════ */
-(function(){const GK='pp.groups.v1',gs=[...document.querySelectorAll('.rail .grp')];let open=LS.get(GK,null);
+(function(){const GK='pp.groups.v2',gs=[...document.querySelectorAll('.rail .grp')];let open=LS.get(GK,null);
  const nm=g=>[...g.querySelector('h3').childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join('').trim();
- if(!open){open={};gs.forEach((g,i)=>open[nm(g)]=i<2);}
+ if(!open){open={};gs.forEach(g=>open[nm(g)]=!['Bold Emphasis','Type Sizes & Faces','Table & Page','Question Editor'].includes(nm(g)));}
  const apply=(g,on)=>{g.classList.toggle('closed',!on);g.querySelector('h3').setAttribute('aria-expanded',on);open[nm(g)]=on;};
  gs.forEach(g=>{const h=g.querySelector('h3');h.setAttribute('role','button');h.tabIndex=0;
   const tog=()=>{apply(g,g.classList.contains('closed'));LS.set(GK,open);};
   h.addEventListener('click',tog);h.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();tog();}});apply(g,open[nm(g)]!==false);});
  const all=on=>{gs.forEach(g=>apply(g,on));LS.set(GK,open);};
  $('grpAll').addEventListener('click',()=>all(true));$('grpNone').addEventListener('click',()=>all(false));})();
+/* ══════════ SETTINGS SECTIONS (icon navigation) & BLUEPRINT PANEL ══════════ */
+(function(){const nav=$('nav'),T={paper:'Paper',header:'Header',layout:'Layout',edit:'Edit',library:'Library & output'};
+ const set=p=>{if(!T[p])p='paper';document.body.dataset.pane=p;$('paneTitle').textContent=T[p];nav.querySelectorAll('button').forEach(b=>{const on=b.dataset.pane===p;b.classList.toggle('on',on);b.setAttribute('aria-current',on?'page':'false');});LS.set('pp.pane',p);const ps=document.querySelector('#rail .panes');if(ps)ps.scrollTop=0;};
+ nav.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>set(b.dataset.pane)));window.setPane=set;set(LS.get('pp.pane','paper'));
+ const bp=$('btnBP'),apply=on=>{document.body.classList.toggle('bp-open',on);bp.classList.toggle('on',on);bp.setAttribute('aria-pressed',on);LS.set('pp.bp',on);setTimeout(()=>{if(state.autoFit)fitZoom();},80);};
+ bp.addEventListener('click',()=>apply(!document.body.classList.contains('bp-open')));$('btnBPClose').addEventListener('click',()=>apply(false));
+ apply(LS.get('pp.bp',window.innerWidth>=1760));})();
 /* ══════════ MOBILE TAB BAR ══════════ */
 (function(){const tb=$('tabbar');
  const setTab=t=>{document.body.dataset.tab=t;tb.querySelectorAll('[data-tab]').forEach(b=>{const on=b.dataset.tab===t;b.classList.toggle('on',on);b.setAttribute('aria-current',on?'page':'false');});
@@ -1322,7 +1341,7 @@ const SHORTCUTS=[
  ['Ctrl / ⌘ + S','Save as .docx'],['Ctrl / ⌘ + P','Print / PDF'],['Ctrl / ⌘ + Z','Undo'],['Ctrl / ⌘ + Shift + Z','Redo'],
  ['S','Shuffle the paper'],['K','Show / hide answer key'],['B','Bilingual (Urdu column) on / off'],['O','OMR sheet on / off'],
  ['E','Question edit tools on / off'],['T','Chapter tags on / off'],['+  /  −','Zoom in / out'],['0','Zoom 100%'],['F','Fit paper to width'],
- ['[  /  ]','Collapse / expand all settings groups'],['1  2  3','Settings · Paper · Blueprint (phone layout)'],['?','Show this list'],['Esc','Close panel / dialog']];
+ ['[  /  ]','Collapse / expand all settings groups'],['1 – 5','Settings section: Paper · Header · Layout · Edit · Library'],['L','Show / hide the Blueprint panel'],['1 2 3','Settings · Paper · Blueprint (phone layout)'],['?','Show this list'],['Esc','Close panel / dialog']];
 (function(){
  const dlg=$('keysDlg');
  $('keysList').innerHTML=SHORTCUTS.map(([k,d])=>`<kbd>${esc(k)}</kbd><span>${esc(d)}</span>`).join('');
@@ -1341,7 +1360,7 @@ const SHORTCUTS=[
   if(lk==='s')doShuffle();else if(lk==='k')$('miniKey').click();else if(lk==='b')flip('showUrdu','Bilingual');else if(lk==='o')flip('omr','OMR sheet');
   else if(lk==='e')flip('qTools','Edit tools');else if(lk==='t')flip('showTags','Chapter tags');else if(k==='+'||k==='=')zoomBy(10);else if(k==='-'||k==='_')zoomBy(-10);
   else if(k==='0')$('btn100').click();else if(lk==='f')$('btnFit').click();else if(k==='[')$('grpNone').click();else if(k===']')$('grpAll').click();
-  else if(k==='?')open();else if(tabs&&'123'.includes(k)&&k.length===1)$('tabbar').querySelectorAll('[data-tab]')['123'.indexOf(k)].click();else return;
+  else if(k==='?')open();else if(lk==='l')$('btnBP').click();else if(k.length===1&&'12345'.includes(k)){if(tabs){if(+k<4)$('tabbar').querySelectorAll('[data-tab]')[+k-1].click();else return;}else window.setPane(['paper','header','layout','edit','library'][+k-1]);}else return;
   e.preventDefault();});
 })();
 /* ══════════ BOOT ══════════ */
