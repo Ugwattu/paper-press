@@ -1,0 +1,15 @@
+{
+  "_help": "List one question-bank file per class. \"file\" is relative to this folder.",
+  "banks": [
+    {
+      "class": 9,
+      "subject": "Computer Science & Entrepreneurship",
+      "file": "class-9-computer-science.json"
+    },
+    {
+      "class": 10,
+      "subject": "Computer Science & Entrepreneurship",
+      "file": "class-10-computer-science.json"
+    }
+  ]
+}

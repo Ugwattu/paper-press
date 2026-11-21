@@ -1,0 +1,14 @@
+{
+  "name": "paper-press",
+  "private": true,
+  "scripts": {
+    "test": "node tools/validate-banks.js && node tools/test-boot.js && node tools/test-parity.js && node tools/test-docx.js"
+  },
+  "devDependencies": {
+    "jsdom": "^24.1.0",
+    "jszip": "^3.10.1"
+  },
+  "optionalDependencies": {
+    "@napi-rs/canvas": "^0.1.0"
+  }
+}
