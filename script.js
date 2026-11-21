@@ -34,7 +34,7 @@ const SCOPES={
  header:{label:'Header, student fields & logo',keys:['institute','title','klass','subject','subjectUr','time','date','sectionVal','showName','showRoll','showSection','showDate','infoPos','footer','logo','logoName','logoH','logoPos']},
  type:{label:'Fonts, sizes & bold',keys:['enFont','enSize','urFont','urSize','lineH','pad','bHeader','bBar','bInstr','bNum','bStem','bOpt','bShort','bLong']},
  omr:{label:'OMR layout & position',keys:['omr','omrRule','omrUrdu','omrPos','omrCols','bubSize','omrPad','omrAlign','omrWidth','omrGapT','omrGapB','omrNewPage']},
- page:{label:'Page, table & layers',keys:['hideLines','borderW','numW','optMode','page','margin','shade','zebra','showUrdu']}
+ page:{label:'Page, table & layers',keys:['hideLines','borderW','numW','insSplit','vAlign','serAlign','optMode','page','margin','shade','zebra','showUrdu']}
 };
 const ALLSC=Object.keys(SCOPES);
 const DEF={grade:9,alp:true,chapters:BOOKS[9].alpCh.slice(),schemeId:'off9',longPick:{},
@@ -45,7 +45,7 @@ const DEF={grade:9,alp:true,chapters:BOOKS[9].alpCh.slice(),schemeId:'off9',long
  enFont:'Times New Roman',enSize:11,urFont:'Jameel Noori Nastaleeq',urSize:11,lineH:1.35,pad:4,
  bHeader:true,bBar:true,bInstr:true,bNum:true,bStem:true,bOpt:false,bShort:false,bLong:false,
  omr:true,omrRule:true,omrUrdu:true,omrPos:'front',omrCols:4,bubSize:13,omrPad:4,omrAlign:'center',omrWidth:100,omrGapT:6,omrGapB:8,omrNewPage:false,
- hideLines:false,borderW:.75,numW:10,optMode:'auto',page:'a4',margin:24,shade:true,zebra:false,
+ hideLines:false,borderW:.75,numW:10,insSplit:58,vAlign:'top',serAlign:'middle',optMode:'auto',page:'a4',margin:24,shade:true,zebra:false,
  showUrdu:true,showKey:false,showTags:false,
  qTools:true,noDup:true,showPins:true,zoom:100,autoFit:true,seed:7,presetId:'',dirty:false};
 const CFG_KEYS=new Set([].concat(...Object.values(SCOPES).map(s=>s.keys)));
@@ -87,7 +87,7 @@ function idbGet(k){return idbOpen().then(db=>new Promise(res=>{const q=db.transa
 function idbSet(k,v){return idbOpen().then(db=>new Promise(res=>{const t=db.transaction(IDBS,'readwrite');t.objectStore(IDBS).put(v,k);t.oncomplete=()=>res(true);t.onerror=()=>res(false);})).catch(()=>false);}
 let _saveT=null,_logoLoaded=false,_lastLogo=null,_hT=null,_rest=false;
 function saveState(){clearTimeout(_saveT);_saveT=setTimeout(flushState,400);if(!_rest){clearTimeout(_hT);_hT=setTimeout(()=>histPush(),600);}}
-function flushState(){clearTimeout(_saveT);_saveT=null;const rest=Object.assign({},state),logo=rest.logo;rest.logo='';LS.set('pp.state.v7',rest);
+function flushState(){clearTimeout(_saveT);_saveT=null;if(window.__ppRestoring)return;const rest=Object.assign({},state),logo=rest.logo;rest.logo='';LS.set('pp.state.v7',rest);
  if(_logoLoaded&&logo!==_lastLogo){_lastLogo=logo;idbSet('logo',logo||'');}}
 window.addEventListener('pagehide',flushState);document.addEventListener('visibilitychange',()=>{if(document.hidden)flushState();});
 function downscaleLogo(url,max){return new Promise(res=>{const im=new Image();im.onload=()=>{if(!im.width||!im.height)return res(url);const k=Math.min(1,max/Math.max(im.width,im.height));if(k>=1&&url.length<300000)return res(url);
@@ -224,10 +224,19 @@ function serials(){const map={};
  const first=2+state.shortParts;
  built.long.forEach((q,i)=>map[q._key]={no:'Q. No. '+(first+i),ur:'سوال نمبر '+(first+i)});
  return map;}
-function insCells(grid,bi){const n=grid.length,total=grid.reduce((a,b)=>a+b,0);
- if(!bi)return{mono:true,spanAll:n,wAll:total};
- const half=Math.floor(n/2);
- return{mono:false,nL:half,nR:n-half,wL:grid.slice(0,half).reduce((a,b)=>a+b,0),wR:grid.slice(half).reduce((a,b)=>a+b,0)};}
+/* Column grids. "Edges" are % positions where a cell may start or end; every row is built from cells between two edges, so a
+   cell simply spans however many narrow columns it needs. That is how the "Q. No." instruction row can split at a different
+   place than the stems below it (like the Word template): the English side is a bit wider than half. */
+function mkGrid(edges,total,round){
+ const e=[...new Set(edges.map(v=>+(+v).toFixed(3)))].sort((a,b)=>a-b);
+ const at=v=>{const i=e.findIndex(x=>Math.abs(x-v)<.01);if(i<0)throw new Error('grid edge '+v);return i;};
+ const pos=e.map(v=>round?Math.round(total*v/100):total*v/100);
+ return{edges:e,cols:pos.slice(1).map((p,i)=>p-pos[i]),sp:(a,b)=>at(b)-at(a),w:(a,b)=>pos[at(b)]-pos[at(a)]};}
+function qEdges(s,bi){
+ const nw=s.numW,mid=100-2*nw,q4=mid/4,H=clamp(+s.insSplit||58,45,72),R=100-nw,B1=nw+mid/2,B2=nw+mid*.53;
+ return{nw,q4,H,R,B1,B2,
+  mcq:bi?[0,nw,nw+q4,B1,nw+3*q4,H,R,100]:[0,nw,nw+q4,B1,nw+3*q4,R,100],
+  two:bi?[0,nw,B2,H,R,100]:[0,nw,100]};}
 
 /* ══════════ BUBBLES ══════════ */
 const bubCache={};
@@ -262,10 +271,11 @@ function paperInner(s,mode){
  const mk=plan.marks,F=s.enFont,FS=s.enSize,UF=s.urFont,US=s.urSize,BD=`${s.borderW}pt solid #000000`;
  const cb=s.hideLines?'border:0;':`border:${BD};`,bAttr=s.hideLines?'0':'1';
  const base=`font-family:'${F}',serif;font-size:${FS}pt;line-height:${s.lineH};color:#000;`;
- const cell=`${cb}padding:${s.pad}pt ${s.pad+1.5}pt;vertical-align:top;${base}`;
- const cc=`${cb}padding:${s.pad}pt;vertical-align:middle;text-align:center;${base}`;
- const uc=`${cb}padding:${s.pad}pt ${s.pad+1.5}pt;vertical-align:top;direction:rtl;text-align:right;font-family:'${UF}','Noto Nastaliq Urdu',serif;font-size:${US}pt;line-height:${s.lineH+.35};color:#000;`;
- const uNum=`${cb}padding:${s.pad}pt;vertical-align:middle;text-align:center;direction:rtl;font-family:'${UF}','Noto Nastaliq Urdu',serif;font-size:${US}pt;line-height:${s.lineH+.35};color:#000;`;
+ const VA=s.vAlign==='middle'?'middle':'top',SA=s.serAlign==='top'?'top':'middle';
+ const cell=`${cb}padding:${s.pad}pt ${s.pad+1.5}pt;vertical-align:${VA};${base}`;
+ const cc=`${cb}padding:${s.pad}pt;vertical-align:${SA};text-align:center;${base}`,ch=`${cb}padding:${s.pad}pt;vertical-align:${VA};text-align:center;${base}`;
+ const uc=`${cb}padding:${s.pad}pt ${s.pad+1.5}pt;vertical-align:${VA};direction:rtl;text-align:right;font-family:'${UF}','Noto Nastaliq Urdu',serif;font-size:${US}pt;line-height:${s.lineH+.35};color:#000;`;
+ const uNum=`${cb}padding:${s.pad}pt;vertical-align:${SA};text-align:center;direction:rtl;font-family:'${UF}','Noto Nastaliq Urdu',serif;font-size:${US}pt;line-height:${s.lineH+.35};color:#000;`;
  const ui=t=>t?` <span dir="rtl" lang="ur" style="font-family:'${UF}','Noto Nastaliq Urdu',serif;font-size:${US}pt;">${esc(t)}</span>`:'';
  const sh=s.shade?'#e9e4d6':'#ffffff',zb=i=>s.zebra&&i%2===1?'background:#f7f4ea;':'';
  const tg=t=>showTags?`<span style="font-family:Arial,sans-serif;font-size:${Math.max(6,FS-4)}pt;color:#7a6a45;"> [${t}]</span>`:'';
@@ -275,23 +285,23 @@ function paperInner(s,mode){
  const nw=s.numW,mid=100-2*nw,q4=mid/4;
  const wH=s.bHeader?'bold':'normal',wB=s.bBar?'bold':'normal',wI=s.bInstr?'bold':'normal',wN=s.bNum?'bold':'normal',wS=s.bStem?'bold':'normal',wO=s.bOpt?'bold':'normal',wQ=s.bShort?'bold':'normal',wL=s.bLong?'bold':'normal';
  const dz=z=>screen?`<div class="dropzone" data-zone="${z}"><span>Drop OMR — ${ZLABEL[z]}</span></div>`:'';
- const g6=[nw,q4,q4,q4,q4,nw],g4=bi?[nw,mid*.53,mid*.47,nw]:[nw,100-nw];
+ const QE=qEdges(s,bi),GM=mkGrid(QE.mcq,100),GT=mkGrid(QE.two,100),g6=GM.cols,g4=GT.cols,cs=(G,a,b)=>{const n=G.sp(a,b);return n>1?` colspan="${n}"`:'';};
  const cg=grid=>`<colgroup>${grid.map(w=>`<col style="width:${w}%">`).join('')}</colgroup>`;
- const ins=(en,ur,grid)=>{const G=insCells(grid,bi);
-  if(G.mono)return `<tr><td colspan="${G.spanAll}" style="${cell}background:${sh};font-weight:${wI};">${esc(en)}</td></tr>`;
-  return `<tr><td colspan="${G.nL}" style="${cell}background:${sh};font-weight:${wI};">${esc(en)}</td><td colspan="${G.nR}" style="${uc}background:${sh};font-weight:${wI};">${esc(ur)}</td></tr>`;};
+ const ins=(en,ur,G)=>{
+  if(!bi)return `<tr><td colspan="${G.sp(0,100)}" style="${cell}background:${sh};font-weight:${wI};">${esc(en)}</td></tr>`;
+  return `<tr><td colspan="${G.sp(0,QE.H)}" style="${cell}background:${sh};font-weight:${wI};">${esc(en)}</td><td colspan="${G.sp(QE.H,100)}" style="${uc}background:${sh};font-weight:${wI};">${esc(ur)}</td></tr>`;};
  let h='';
  const logoImg=s.logo?`<img src="${s.logo}" alt="logo" style="height:${s.logoH}pt;width:auto;display:block;">`:'';
  const titleBlock=()=>{let t='';
   if(s.institute.trim())t+=`<div style="${base}font-size:${FS+5}pt;font-weight:${wH};">${esc(s.institute)}</div>`;
   t+=`<div style="${base}font-size:${FS+1}pt;font-weight:${wH};margin-top:1pt;">${esc(s.title)}</div>`;
-  if(bi)t+=`<div dir="rtl" lang="ur" style="font-family:'${UF}','Noto Nastaliq Urdu',serif;font-size:${US+1}pt;margin-top:2pt;">${esc(state.subjectUr||'')}${state.subjectUr?' — ':''}${state.grade===9?'جماعت نہم':'جماعت دہم'}</div>`;
+  if(bi)t+=`<div dir="rtl" lang="ur" style="font-family:'${UF}','Noto Nastaliq Urdu',serif;font-size:${US+1}pt;font-weight:${wH};margin-top:2pt;">${esc(state.subjectUr||'')}${state.subjectUr?' — ':''}${state.grade===9?'جماعت نہم':'جماعت دہم'}</div>`;
   return t;};
  if(logoImg&&s.logoPos==='center')h+=`<div style="text-align:center;margin-bottom:4pt;"><div style="display:inline-block;">${logoImg}</div></div><div style="text-align:center;margin-bottom:5pt;">${titleBlock()}</div>`;
  else if(logoImg){const lc=`<td style="border:0;padding:0;width:${s.logoH+16}pt;vertical-align:middle;">${logoImg}</td>`,tc2=`<td style="border:0;padding:0 6pt;vertical-align:middle;text-align:center;">${titleBlock()}</td>`;
   h+=`<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;width:100%;margin-bottom:5pt;"><tr>${s.logoPos==='left'?lc+tc2:tc2+lc}</tr></table>`;}
  else h+=`<div style="text-align:center;margin-bottom:5pt;">${titleBlock()}</div>`;
- h+=T('margin-bottom:6pt;')+`<tr><td style="${cc}width:22%;font-weight:${wH};">Class: ${esc(s.klass)}</td><td style="${cc}width:38%;font-weight:${wH};">Subject: ${esc(s.subject)}</td><td style="${cc}width:20%;font-weight:${wH};">Total Marks: ${mk.total}</td><td style="${cc}width:20%;font-weight:${wH};">Time: ${esc(s.time)}</td></tr></table>`;
+ h+=T('margin-bottom:6pt;')+`<tr><td style="${ch}width:22%;font-weight:${wH};">Class: ${esc(s.klass)}</td><td style="${ch}width:38%;font-weight:${wH};">Subject: ${esc(s.subject)}</td><td style="${ch}width:20%;font-weight:${wH};">Total Marks: ${mk.total}</td><td style="${ch}width:20%;font-weight:${wH};">Time: ${esc(s.time)}</td></tr></table>`;
  const infoRow=()=>{const f=[];
   if(s.showName)f.push(['Name','____________________________']);
   if(s.showRoll)f.push(['Roll No','____________________']);
@@ -301,27 +311,27 @@ function paperInner(s,mode){
   return T('margin:0 0 6pt;')+`<tr>${f.map(([k,v])=>`<td style="${cell}width:${w}%;font-weight:${wH};">${k}: ${v}</td>`).join('')}</tr></table>`;};
  if(s.infoPos==='top')h+=infoRow();
  const bar=(en,ur)=>{let x=T('margin-bottom:5pt;')+`<tr><td style="${cb}padding:${s.pad+2}pt;background:${sh};text-align:center;${base}font-size:${FS+1.5}pt;font-weight:${wB};letter-spacing:.5pt;">${esc(en)}`;
-  if(bi)x+=`<div dir="rtl" lang="ur" style="font-family:'${UF}','Noto Nastaliq Urdu',serif;font-size:${US}pt;font-weight:normal;letter-spacing:0;margin-top:2pt;">${esc(ur)}</div>`;
+  if(bi)x+=`<div dir="rtl" lang="ur" style="font-family:'${UF}','Noto Nastaliq Urdu',serif;font-size:${US}pt;font-weight:${wB};letter-spacing:0;margin-top:2pt;">${esc(ur)}</div>`;
   return x+`</td></tr></table>`;};
  h+=dz('front');
  if(s.omr&&s.omrPos==='front')h+=omrHTML(s,showKey,screen);
  h+=bar(`PART-I  ·  OBJECTIVE  (${mk.mcq} Marks)`,'حصہ اول: معروضی سوالات');
  h+=T('margin-bottom:7pt;')+cg(g6);
- h+=ins(`Q. No. 1: Choose the Best option and fill the Bubble.  (${built.mcq.length} × ${s.mcqMark} = ${mk.mcq})`,'سوال نمبر 1: درست جواب کا انتخاب کریں۔ اور ببل بھریں۔',g6);
+ h+=ins(`Q. No. 1: Choose the Best option and fill the Bubble.  (${built.mcq.length} × ${s.mcqMark} = ${mk.mcq})`,'سوال نمبر 1: درست جواب کا انتخاب کریں۔ اور ببل بھریں۔',GM);
  built.mcq.forEach((m,i)=>{
   const lay=layoutFor(m),z=zb(i),sk=screen?` data-slot="${m._key}"`:'',S=SN[m._key];
   let stem=`<tr${sk} style="${z}"><td style="${cc}font-weight:${wN};">${S.no}${pin(m)}${cross(m)}</td>`;
-  if(bi)stem+=`<td colspan="2" style="${cell}font-weight:${wS};">${esc(m.en)}${tg('Ch '+m.ch)}</td><td colspan="2" style="${uc}">${esc(m.ur)}</td><td style="${uNum}font-weight:${wN};">${S.ur}</td>`;
-  else stem+=`<td colspan="5" style="${cell}font-weight:${wS};">${esc(m.en)}${tg('Ch '+m.ch)}</td>`;
+  if(bi)stem+=`<td${cs(GM,QE.nw,QE.B1)} style="${cell}font-weight:${wS};">${esc(m.en)}${tg('Ch '+m.ch)}</td><td${cs(GM,QE.B1,QE.R)} style="${uc}font-weight:${wS};">${esc(m.ur)}</td><td style="${uNum}font-weight:${wN};">${S.ur}</td>`;
+  else stem+=`<td${cs(GM,QE.nw,100)} style="${cell}font-weight:${wS};">${esc(m.en)}${tg('Ch '+m.ch)}</td>`;
   h+=stem+'</tr>';
   const op=k=>{const o=m.o[k];if(!o)return{t:'',st:''};const key=showKey&&k===m.a;
    return{t:`${'ABCD'[k]}. ${esc(o[0])}${bi?ui(o[1]):''}${key?` <span style="font-family:Arial,sans-serif;font-size:${FS-2}pt;color:#046a38;font-weight:bold;">&#10003;</span>`:''}`,st:(key?'background:#e6f6ec;':'')+`font-weight:${wO};`};};
   if(lay===4){const o=[0,1,2,3].map(op);
-   h+=`<tr${sk} style="${z}"><td style="${cc}"></td>${o.map(x=>`<td style="${cell}${x.st}">${x.t}</td>`).join('')}<td style="${cc}"></td></tr>`;}
+   h+=`<tr${sk} style="${z}"><td style="${cc}"></td>${o.map((x,k)=>`<td${cs(GM,QE.nw+k*QE.q4,QE.nw+(k+1)*QE.q4)} style="${cell}${x.st}">${x.t}</td>`).join('')}<td style="${cc}"></td></tr>`;}
   else if(lay===2){for(let r=0;r<2;r++){const a=op(r*2),b=op(r*2+1);
-   h+=`<tr${sk} style="${z}"><td style="${cc}"></td><td colspan="2" style="${cell}${a.st}">${a.t}</td><td colspan="2" style="${cell}${b.st}">${b.t}</td><td style="${cc}"></td></tr>`;}}
+   h+=`<tr${sk} style="${z}"><td style="${cc}"></td><td${cs(GM,QE.nw,QE.B1)} style="${cell}${a.st}">${a.t}</td><td${cs(GM,QE.B1,QE.R)} style="${cell}${b.st}">${b.t}</td><td style="${cc}"></td></tr>`;}}
   else{for(let k=0;k<4;k++){const a=op(k);
-   h+=`<tr${sk} style="${z}"><td style="${cc}"></td><td colspan="4" style="${cell}${a.st}">${a.t}</td><td style="${cc}"></td></tr>`;}}});
+   h+=`<tr${sk} style="${z}"><td style="${cc}"></td><td${cs(GM,QE.nw,QE.R)} style="${cell}${a.st}">${a.t}</td><td style="${cc}"></td></tr>`;}}});
  h+='</table>'+dz('after');
  if(s.omr&&s.omrPos==='after')h+=omrHTML(s,showKey,screen);
  h+=bar(`PART-II  ·  SHORT QUESTIONS  (${mk.short} Marks)`,'حصہ دوم: مختصر سوالات');
@@ -330,10 +340,10 @@ function paperInner(s,mode){
   const en=all?`Q. No. ${p.q}: Answer ALL ${NE[p.items.length]} (${p.items.length}) short questions.  (${p.items.length} × ${s.shortMark} = ${p.items.length*s.shortMark})`
    :`Q. No. ${p.q}: Write short answers to any ${NE[p.attempt]} (${p.attempt}) questions.  (${p.attempt} × ${s.shortMark} = ${p.attempt*s.shortMark})`;
   const ur=all?`سوال نمبر ${p.q}: تمام ${NU[p.items.length]} مختصر سوالات کے جوابات دیں۔`:`سوال نمبر ${p.q}: کوئی سے ${NU[p.attempt]} مختصر سوالات کے جوابات دیں۔`;
-  h+=T('margin-bottom:7pt;')+cg(g4)+ins(en,ur,g4);
+  h+=T('margin-bottom:7pt;')+cg(g4)+ins(en,ur,GT);
   p.items.forEach((q,i)=>{const sk=screen?` data-slot="${q._key}"`:'',S=SN[q._key];
-   h+=`<tr${sk} style="${zb(i)}"><td style="${cc}font-weight:${wN};">${S.no}${pin(q)}${cross(q)}</td><td style="${cell}font-weight:${wQ};">${esc(q.en)}${tg('Ch '+q.ch)}</td>`;
-   if(bi)h+=`<td style="${uc}">${esc(q.ur)}</td><td style="${uNum}font-weight:${wN};">${S.ur}</td>`;
+   h+=`<tr${sk} style="${zb(i)}"><td style="${cc}font-weight:${wN};">${S.no}${pin(q)}${cross(q)}</td><td${cs(GT,QE.nw,bi?QE.B2:100)} style="${cell}font-weight:${wQ};">${esc(q.en)}${tg('Ch '+q.ch)}</td>`;
+   if(bi)h+=`<td${cs(GT,QE.B2,QE.R)} style="${uc}font-weight:${wQ};">${esc(q.ur)}</td><td style="${uNum}font-weight:${wN};">${S.ur}</td>`;
    h+='</tr>';});
   h+='</table>';});
  h+=dz('mid');
@@ -344,10 +354,10 @@ function paperInner(s,mode){
  const len=allL?`Q. No. ${first}${built.long.length>1?' to '+last:''}: Attempt ALL ${NE[built.long.length]} (${built.long.length}) detailed questions.  (${built.long.length} × ${s.longMark} = ${mk.long})`
   :`Q. No. ${first}${built.long.length>1?' to '+last:''}: Attempt any ${NE[state.longAttempt]} (${state.longAttempt}) detailed questions.  (${state.longAttempt} × ${s.longMark} = ${mk.long})`;
  const lur=allL?`سوال نمبر ${first} تا ${last}: تمام ${NU[built.long.length]} تفصیلی سوالات کے جوابات دیں۔`:`سوال نمبر ${first} تا ${last}: کوئی سے ${NU[state.longAttempt]} تفصیلی سوالات کے جوابات دیں۔`;
- h+=T('margin-bottom:5pt;')+cg(g4)+ins(len,lur,g4);
+ h+=T('margin-bottom:5pt;')+cg(g4)+ins(len,lur,GT);
  built.long.forEach((q,i)=>{const sk=screen?` data-slot="${q._key}"`:'',S=SN[q._key];
-  h+=`<tr${sk} style="${zb(i)}"><td style="${cc}font-weight:${wN};">${S.no}${pin(q)}${cross(q)}</td><td style="${cell}font-weight:${wL};">${esc(q.en)}${tg('Ch '+q.ch)}</td>`;
-  if(bi)h+=`<td style="${uc}">${esc(q.ur)}</td><td style="${uNum}font-weight:${wN};">${S.ur}</td>`;
+  h+=`<tr${sk} style="${zb(i)}"><td style="${cc}font-weight:${wN};">${S.no}${pin(q)}${cross(q)}</td><td${cs(GT,QE.nw,bi?QE.B2:100)} style="${cell}font-weight:${wL};">${esc(q.en)}${tg('Ch '+q.ch)}</td>`;
+  if(bi)h+=`<td${cs(GT,QE.B2,QE.R)} style="${uc}font-weight:${wL};">${esc(q.ur)}</td><td style="${uNum}font-weight:${wN};">${S.ur}</td>`;
   h+='</tr>';});
  h+='</table>'+dz('end');
  if(s.omr&&s.omrPos==='end')h+=omrHTML(s,showKey,screen);
@@ -462,14 +472,14 @@ function buildDocx(raw){
  media=[];rid=2;mediaMap=new Map();
  const s=state,bi=s.showUrdu,mk=plan.marks,pg=PAGES[s.page],SN=serials();
  const W=tw(pg.w),H=tw(pg.h),M=tw(s.margin),CW=W-2*M;
- const nw=Math.round(CW*s.numW/100),mid=CW-2*nw,q4=Math.round(mid/4);
- const grid6=[nw,q4,q4,q4,mid-3*q4,nw],eW=Math.round(mid*.53),grid4=bi?[nw,eW,mid-eW,nw]:[nw,CW-nw];
+ const QE=qEdges(s,bi),GM=mkGrid(QE.mcq,CW,true),GT=mkGrid(QE.two,CW,true),grid6=GM.cols,grid4=GT.cols;
+ const CWX=(G,a,b)=>{const n=G.sp(a,b),o={w:G.w(a,b)};if(n>1)o.span=n;return o;},VA=s.vAlign==='middle'?'center':'top',SA=s.serAlign==='top'?'top':'center';
  const shd=s.shade?'E9E4D6':null,zeb=i=>s.zebra&&i%2===1?'F7F4EA':null;
  const Bx=[];const push=x=>Bx.push(x),spacer=pt=>push(para('',{exact:Math.max(1,pt||4)}));
  const titleRuns=()=>{let r='';
   if(s.institute.trim())r+=para(run(s.institute,{b:s.bHeader,sz:s.enSize+5}),{align:'center',after:1,lh:1.1});
   r+=para(run(s.title,{b:s.bHeader,sz:s.enSize+1}),{align:'center',after:1,lh:1.1});
-  if(bi)r+=para(run((s.subjectUr?s.subjectUr+' — ':'')+(state.grade===9?'جماعت نہم':'جماعت دہم'),{ur:true,sz:s.urSize+1}),{bidi:true,after:2,lh:1.5});
+  if(bi)r+=para(run((s.subjectUr?s.subjectUr+' — ':'')+(state.grade===9?'جماعت نہم':'جماعت دہم'),{ur:true,b:s.bHeader,sz:s.urSize+1}),{bidi:true,align:'center',after:2,lh:1.5});
   return r;};
  if(s.logo&&logoPNG){const m=addMedia(logoPNG.bytes,'png'),cy=emu(s.logoH),cx=Math.round(cy*(logoPNG.ratio||1));
   const ip=para(imgXml(m,cx,cy,900,'Institute logo'),{align:'center',after:3,lh:1});
@@ -480,7 +490,7 @@ function buildDocx(raw){
  spacer(4);
  {const a=Math.round(CW*.22),b2=Math.round(CW*.38),c=Math.round(CW*.20),d=CW-a-b2-c,g=[a,b2,c,d];
   const items=['Class: '+s.klass,'Subject: '+s.subject,'Total Marks: '+mk.total,'Time: '+s.time];
-  push(tbl(g,[tr(items.map((t,i)=>tc(txtP(t,{b:s.bHeader,align:'center'}),{w:g[i],valign:'center'})))],{borders:!s.hideLines}));}
+  push(tbl(g,[tr(items.map((t,i)=>tc(txtP(t,{b:s.bHeader,align:'center'}),{w:g[i],valign:VA})))],{borders:!s.hideLines}));}
  const infoTbl=()=>{const f=[];
   if(s.showName)f.push('Name: ____________________________');
   if(s.showRoll)f.push('Roll No: ____________________');
@@ -492,11 +502,11 @@ function buildDocx(raw){
  if(s.infoPos==='top'){spacer(4);push(infoTbl());}
  spacer(5);
  const bar=(en,ur)=>{let c=txtP(en,{b:s.bBar,align:'center',sz:s.enSize+1.5});
-  if(bi)c+=txtP(ur,{ur:true,align:'center'});
+  if(bi)c+=txtP(ur,{ur:true,b:s.bBar,align:'center'});
   push(tbl([CW],[tr([tc(c,{w:CW,shd:shd})])],{borders:!s.hideLines,pad:s.pad+2}));spacer(4);};
- const insRow=(grid,en,ur)=>{const G=insCells(grid,bi);
-  if(G.mono)return tr([tc(txtP(en,{b:s.bInstr}),{w:G.wAll,span:G.spanAll,shd:shd})]);
-  return tr([tc(txtP(en,{b:s.bInstr}),{w:G.wL,span:G.nL,shd:shd}),tc(txtP(ur,{ur:true,b:s.bInstr}),{w:G.wR,span:G.nR,shd:shd})]);};
+ const insRow=(G,en,ur)=>{const sd={shd:shd};
+  if(!bi)return tr([tc(txtP(en,{b:s.bInstr}),Object.assign(CWX(G,0,100),sd))]);
+  return tr([tc(txtP(en,{b:s.bInstr}),Object.assign(CWX(G,0,QE.H),sd)),tc(txtP(ur,{ur:true,b:s.bInstr}),Object.assign(CWX(G,QE.H,100),sd))]);};
    function omrBlock(){
    const n=built.mcq.length;if(!n)return;
    const cols=clamp(parseInt(s.omrCols,10)||4,1,4),rows=Math.ceil(n/cols),innerW=Math.round(CW*s.omrWidth/100),AR='Arial',nSz=Math.max(5,s.enSize-4.5);
@@ -519,19 +529,17 @@ function buildDocx(raw){
   }
 if(s.omr&&s.omrPos==='front'){omrBlock();spacer(5);}
  bar(`PART-I  ·  OBJECTIVE  (${mk.mcq} Marks)`,'حصہ اول: معروضی سوالات');
- {const rows=[insRow(grid6,`Q. No. 1: Choose the Best option and fill the Bubble.  (${built.mcq.length} × ${s.mcqMark} = ${mk.mcq})`,'سوال نمبر 1: درست جواب کا انتخاب کریں۔ اور ببل بھریں۔')];
-  built.mcq.forEach((m,i)=>{const S=SN[m._key];
-   const cells=[tc(txtP(S.no,{b:s.bNum,align:'center'}),{w:grid6[0],valign:'center',shd:zeb(i)})];
-   if(bi){cells.push(tc(txtP(m.en,{b:s.bStem}),{w:grid6[1]+grid6[2],span:2,shd:zeb(i)}));
-    cells.push(tc(txtP(m.ur,{ur:true}),{w:grid6[3]+grid6[4],span:2,shd:zeb(i)}));
-    cells.push(tc(txtP(S.ur,{ur:true,b:s.bNum,align:'center'}),{w:grid6[5],valign:'center',shd:zeb(i)}));}
-   else cells.push(tc(txtP(m.en,{b:s.bStem}),{w:CW-grid6[0],span:5,shd:zeb(i)}));
+ {const rows=[insRow(GM,`Q. No. 1: Choose the Best option and fill the Bubble.  (${built.mcq.length} × ${s.mcqMark} = ${mk.mcq})`,'سوال نمبر 1: درست جواب کا انتخاب کریں۔ اور ببل بھریں۔')];
+  built.mcq.forEach((m,i)=>{const S=SN[m._key],z=zeb(i),cell=(a,b,body,o)=>tc(body,Object.assign(CWX(GM,a,b),{shd:z},o||{}));
+   const cells=[cell(0,QE.nw,txtP(S.no,{b:s.bNum,align:'center'}),{valign:SA})];
+   if(bi){cells.push(cell(QE.nw,QE.B1,txtP(m.en,{b:s.bStem})));cells.push(cell(QE.B1,QE.R,txtP(m.ur,{ur:true,b:s.bStem})));cells.push(cell(QE.R,100,txtP(S.ur,{ur:true,b:s.bNum,align:'center'}),{valign:SA}));}
+   else cells.push(cell(QE.nw,100,txtP(m.en,{b:s.bStem})));
    rows.push(tr(cells));
    const optRuns=k=>{const o=m.o[k];if(!o)return'';let r=run('ABCD'[k]+'. '+o[0],{b:s.bOpt});if(bi&&o[1])r+=run('  '+o[1],{ur:true,b:s.bOpt});return r;};
    const lay=layoutFor(m);
-   if(lay===4){const c=[tc('',{w:grid6[0],shd:zeb(i)})];for(let k=0;k<4;k++)c.push(tc(para(optRuns(k)),{w:grid6[k+1],shd:zeb(i)}));c.push(tc('',{w:grid6[5],shd:zeb(i)}));rows.push(tr(c));}
-   else if(lay===2){for(let r=0;r<2;r++)rows.push(tr([tc('',{w:grid6[0],shd:zeb(i)}),tc(para(optRuns(r*2)),{w:grid6[1]+grid6[2],span:2,shd:zeb(i)}),tc(para(optRuns(r*2+1)),{w:grid6[3]+grid6[4],span:2,shd:zeb(i)}),tc('',{w:grid6[5],shd:zeb(i)})]));}
-   else{for(let k=0;k<4;k++)rows.push(tr([tc('',{w:grid6[0],shd:zeb(i)}),tc(para(optRuns(k)),{w:mid,span:4,shd:zeb(i)}),tc('',{w:grid6[5],shd:zeb(i)})]));}});
+   if(lay===4){const c=[cell(0,QE.nw,'')];for(let k=0;k<4;k++)c.push(cell(QE.nw+k*QE.q4,QE.nw+(k+1)*QE.q4,para(optRuns(k))));c.push(cell(QE.R,100,''));rows.push(tr(c));}
+   else if(lay===2){for(let r=0;r<2;r++)rows.push(tr([cell(0,QE.nw,''),cell(QE.nw,QE.B1,para(optRuns(r*2))),cell(QE.B1,QE.R,para(optRuns(r*2+1))),cell(QE.R,100,'')]));}
+   else{for(let k=0;k<4;k++)rows.push(tr([cell(0,QE.nw,''),cell(QE.nw,QE.R,para(optRuns(k))),cell(QE.R,100,'')]));}});
   push(tbl(grid6,rows,{borders:!s.hideLines}));}
  spacer(6);
  if(s.omr&&s.omrPos==='after'){omrBlock();spacer(5);}
@@ -541,10 +549,10 @@ if(s.omr&&s.omrPos==='front'){omrBlock();spacer(5);}
   const en=all?`Q. No. ${p.q}: Answer ALL ${NE[p.items.length]} (${p.items.length}) short questions.  (${p.items.length} × ${s.shortMark} = ${p.items.length*s.shortMark})`
    :`Q. No. ${p.q}: Write short answers to any ${NE[p.attempt]} (${p.attempt}) questions.  (${p.attempt} × ${s.shortMark} = ${p.attempt*s.shortMark})`;
   const ur=all?`سوال نمبر ${p.q}: تمام ${NU[p.items.length]} مختصر سوالات کے جوابات دیں۔`:`سوال نمبر ${p.q}: کوئی سے ${NU[p.attempt]} مختصر سوالات کے جوابات دیں۔`;
-  const g=grid4,rows=[insRow(g,en,ur)];
-  p.items.forEach((q,i)=>{const S=SN[q._key];
-   const c=[tc(txtP(S.no,{b:s.bNum,align:'center'}),{w:g[0],valign:'center',shd:zeb(i)}),tc(txtP(q.en,{b:s.bShort}),{w:g[1],shd:zeb(i)})];
-   if(bi){c.push(tc(txtP(q.ur,{ur:true}),{w:g[2],shd:zeb(i)}));c.push(tc(txtP(S.ur,{ur:true,b:s.bNum,align:'center'}),{w:g[3],valign:'center',shd:zeb(i)}));}
+  const g=grid4,rows=[insRow(GT,en,ur)];
+  p.items.forEach((q,i)=>{const S=SN[q._key],z=zeb(i),cell=(a,b,body,o)=>tc(body,Object.assign(CWX(GT,a,b),{shd:z},o||{}));
+   const c=[cell(0,QE.nw,txtP(S.no,{b:s.bNum,align:'center'}),{valign:SA}),cell(QE.nw,bi?QE.B2:100,txtP(q.en,{b:s.bShort}))];
+   if(bi){c.push(cell(QE.B2,QE.R,txtP(q.ur,{ur:true,b:s.bShort})));c.push(cell(QE.R,100,txtP(S.ur,{ur:true,b:s.bNum,align:'center'}),{valign:SA}));}
    rows.push(tr(c));});
   push(tbl(g,rows,{borders:!s.hideLines}));spacer(6);});
  if(s.omr&&s.omrPos==='mid'){omrBlock();spacer(5);}
@@ -554,10 +562,10 @@ if(s.omr&&s.omrPos==='front'){omrBlock();spacer(5);}
   const en=allL?`Q. No. ${first}${built.long.length>1?' to '+last:''}: Attempt ALL ${NE[built.long.length]} (${built.long.length}) detailed questions.  (${built.long.length} × ${s.longMark} = ${mk.long})`
    :`Q. No. ${first}${built.long.length>1?' to '+last:''}: Attempt any ${NE[s.longAttempt]} (${s.longAttempt}) detailed questions.  (${s.longAttempt} × ${s.longMark} = ${mk.long})`;
   const ur=allL?`سوال نمبر ${first} تا ${last}: تمام ${NU[built.long.length]} تفصیلی سوالات کے جوابات دیں۔`:`سوال نمبر ${first} تا ${last}: کوئی سے ${NU[s.longAttempt]} تفصیلی سوالات کے جوابات دیں۔`;
-  const g=grid4,rows=[insRow(g,en,ur)];
-  built.long.forEach((q,i)=>{const S=SN[q._key];
-   const c=[tc(txtP(S.no,{b:s.bNum,align:'center'}),{w:g[0],valign:'center',shd:zeb(i)}),tc(txtP(q.en,{b:s.bLong}),{w:g[1],shd:zeb(i)})];
-   if(bi){c.push(tc(txtP(q.ur,{ur:true}),{w:g[2],shd:zeb(i)}));c.push(tc(txtP(S.ur,{ur:true,b:s.bNum,align:'center'}),{w:g[3],valign:'center',shd:zeb(i)}));}
+  const g=grid4,rows=[insRow(GT,en,ur)];
+  built.long.forEach((q,i)=>{const S=SN[q._key],z=zeb(i),cell=(a,b,body,o)=>tc(body,Object.assign(CWX(GT,a,b),{shd:z},o||{}));
+   const c=[cell(0,QE.nw,txtP(S.no,{b:s.bNum,align:'center'}),{valign:SA}),cell(QE.nw,bi?QE.B2:100,txtP(q.en,{b:s.bLong}))];
+   if(bi){c.push(cell(QE.B2,QE.R,txtP(q.ur,{ur:true,b:s.bLong})));c.push(cell(QE.R,100,txtP(S.ur,{ur:true,b:s.bNum,align:'center'}),{valign:SA}));}
    rows.push(tr(c));});
   push(tbl(g,rows,{borders:!s.hideLines}));}
  if(s.omr&&s.omrPos==='end'){spacer(5);omrBlock();}
@@ -1094,7 +1102,8 @@ function syncUI(){
  $('rLh').value=state.lineH;$('vLh').textContent=state.lineH.toFixed(2);
  $('rPad').value=state.pad;$('vPad').textContent=state.pad+' pt';
  $('rBw').value=state.borderW;$('vBw').textContent=state.borderW+' pt';
- $('rNumW').value=state.numW;$('vNumW').textContent=state.numW+'%';
+ $('rNumW').value=state.numW;$('vNumW').textContent=state.numW+'%';$('rInsSplit').value=state.insSplit;$('vInsSplit').textContent=state.insSplit+'%';
+ document.querySelectorAll('#segVAlign button').forEach(x=>x.classList.toggle('on',x.dataset.v===state.vAlign));document.querySelectorAll('#segSerAlign button').forEach(x=>x.classList.toggle('on',x.dataset.v===state.serAlign));
  $('bwWrap').classList.toggle('hidden',state.hideLines);
  $('lineEm').textContent=state.hideLines?'lines hidden':'lines visible';
  $('rMg').value=state.margin;$('vMg').textContent=state.margin+' pt';
@@ -1197,13 +1206,13 @@ document.querySelectorAll('#omap .oz').forEach(z=>z.addEventListener('click',()=
  state.omrPos=z.dataset.z;markDirty();repaint();syncUI();toast('OMR strip moved to '+ZLABEL[state.omrPos],'mag');}));
 function segWire(id,key){document.querySelectorAll('#'+id+' button').forEach(b=>b.addEventListener('click',()=>{
  state[key]=b.dataset.v;markDirty();repaint();syncUI();if(state.autoFit)fitZoom();}));}
-segWire('segOmrAlign','omrAlign');segWire('segOpt','optMode');segWire('segPage','page');segWire('segLogo','logoPos');segWire('segInfo','infoPos');
+segWire('segOmrAlign','omrAlign');segWire('segOpt','optMode');segWire('segPage','page');segWire('segLogo','logoPos');segWire('segInfo','infoPos');segWire('segVAlign','vAlign');segWire('segSerAlign','serAlign');
 document.querySelectorAll('#segOmrCols button').forEach(b=>b.addEventListener('click',()=>{state.omrCols=+b.dataset.v;markDirty();repaint();syncUI();}));
 [['rOmrW','omrWidth','vOmrW',v=>v+'%'],['rGapT','omrGapT','vGapT',v=>v+'pt'],['rGapB','omrGapB','vGapB',v=>v+'pt'],
  ['rBub','bubSize','vBub',v=>v+' pt'],['rOmrPad','omrPad','vOmrPad',v=>v+' pt'],
  ['rLogo','logoH','vLogo',v=>v+' pt'],['rEn','enSize','vEn',v=>v+' pt'],['rUr','urSize','vUr',v=>v+' pt'],
  ['rLh','lineH','vLh',v=>v.toFixed(2)],['rPad','pad','vPad',v=>v+' pt'],['rBw','borderW','vBw',v=>v+' pt'],
- ['rNumW','numW','vNumW',v=>v+'%'],['rMg','margin','vMg',v=>v+' pt']]
+ ['rNumW','numW','vNumW',v=>v+'%'],['rInsSplit','insSplit','vInsSplit',v=>v+'%'],['rMg','margin','vMg',v=>v+' pt']]
 .forEach(([id,k,vid,f])=>{$(id).addEventListener('input',e=>{state[k]=parseFloat(e.target.value);$(vid).textContent=f(state[k]);bump($(vid));markDirty();(k==='margin'?repaint():repaintSoon());if(state.autoFit&&k==='margin')fitZoom();});});
 $('rZm').addEventListener('input',e=>{state.zoom=+e.target.value;state.autoFit=false;$('vZm').textContent=state.zoom+'%';bump($('vZm'));applyZoom();});
 document.querySelectorAll('.rail .tg[data-tg]').forEach(t=>t.addEventListener('click',()=>{
@@ -1336,7 +1345,35 @@ document.addEventListener('keydown',e=>{if(!(e.ctrlKey||e.metaKey)||e.altKey)ret
   window.scrollTo(0,0);if(t==='stage')setTimeout(()=>{if(state.autoFit)fitZoom();else applyZoom();},40);if(t==='ledger')setTimeout(paintLedger,40);};
  tb.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));
  $('tabSave').addEventListener('click',doDocx);setTab('stage');})();
-/* ══════════ KEYBOARD SHORTCUTS ══════════ */
+/* ══════════ BACKUP & RESTORE ══════════ */
+(function(){
+ const MAGIC='paper-press-backup',info=$('backupInfo'),stamp=()=>{const t=LS.get('pp.lastBackup',null);info.textContent=t?'Last backup from this device: '+new Date(t).toLocaleString():'No backup made from this device yet.';};
+ async function collect(){flushState();const data={};
+  try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&k.startsWith('pp.')&&k!=='pp.lastBackup'){try{data[k]=JSON.parse(localStorage.getItem(k));}catch(e){data[k]=localStorage.getItem(k);}}}}catch(e){}
+  return{app:MAGIC,version:1,created:new Date().toISOString(),data,logo:state.logo||await idbGet('logo')||''};}
+ $('btnBackup').addEventListener('click',async()=>{const j=await collect(),n=Object.keys(j.data).length;
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(j)],{type:'application/json'}));a.download='paper-press-backup-'+new Date().toISOString().slice(0,10)+'.json';
+  document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);LS.set('pp.lastBackup',Date.now());stamp();toast('Backup saved ('+n+' items'+(j.logo?' + logo':'')+')','ok');});
+ $('btnRestore').addEventListener('click',()=>$('backupFile').click());
+ $('backupFile').addEventListener('change',async e=>{const f=e.target.files&&e.target.files[0];e.target.value='';if(!f)return;
+  if(f.size>8e6)return toast('That file is too large to be a Paper Press backup.','err');
+  let j;try{j=JSON.parse(await f.text());}catch(x){return toast('That file is not valid JSON.','err');}
+  if(!j||j.app!==MAGIC||!j.data||typeof j.data!=='object')return toast('This is not a Paper Press backup file.','err');
+  const keys=Object.keys(j.data).filter(k=>/^pp\.[\w.\-]+$/.test(k)&&k!=='pp.lastBackup');
+  if(!keys.length)return toast('The backup contains no data.','warn');
+  if(!confirm('Restore '+keys.length+' saved items from this backup'+(j.created?' (made '+new Date(j.created).toLocaleString()+')':'')+'?\n\nThis replaces the current paper, presets and schemes on this device.'))return;
+  window.__ppRestoring=true;
+  try{
+   const pr=j.data['pp.presets.v7'];if(Array.isArray(pr))pr.forEach(p=>{if(p&&p.cfg)p.cfg=cleanCfg(p.cfg);});
+   const sc=j.data['pp.schemes.v7'];if(Array.isArray(sc))j.data['pp.schemes.v7']=sc.map(cleanScheme).filter(Boolean);
+   const st=j.data['pp.state.v7'];if(st&&typeof st==='object'){st.logo='';}
+   keys.forEach(k=>localStorage.setItem(k,JSON.stringify(j.data[k])));
+   const lg=typeof j.logo==='string'&&/^data:image\/(png|jpe?g|gif|webp);base64,/.test(j.logo)&&j.logo.length<4e6?j.logo:'';
+   await idbSet('logo',lg);
+  }catch(x){window.__ppRestoring=false;return toast('Could not write the backup into browser storage.','err');}
+  toast('Backup restored — reloading…','ok');setTimeout(()=>location.reload(),800);});
+ stamp();})();
+/* ══════════ KEYBOARD SHORTCUTS ══════════
 const SHORTCUTS=[
  ['Ctrl / ⌘ + S','Save as .docx'],['Ctrl / ⌘ + P','Print / PDF'],['Ctrl / ⌘ + Z','Undo'],['Ctrl / ⌘ + Shift + Z','Redo'],
  ['S','Shuffle the paper'],['K','Show / hide answer key'],['B','Bilingual (Urdu column) on / off'],['O','OMR sheet on / off'],

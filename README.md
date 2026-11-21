@@ -7,6 +7,7 @@ A static, no-build web app. Everything runs in the browser; nothing is uploaded.
 |---|---|
 | `index.html`, `script.js` | the app (page structure and logic) |
 | `app.css`, `paper.css` | interface styling / paper-preview styling |
+| `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png`, `icon-*.png`, `manifest.webmanifest` | browser-tab icon and home-screen icons |
 | `banks.js` | question banks (edit here) |
 | `tools/validate-banks.js` | checks banks.js for malformed rows |
 
@@ -33,6 +34,15 @@ Edit `banks.js`, then run `node tools/validate-banks.js` before committing. Row 
 
 ## Keyboard shortcuts (press `?` in the app for the live list)
 `Ctrl/⌘+S` save .docx · `Ctrl/⌘+P` print · `Ctrl/⌘+Z` undo · `Ctrl/⌘+Shift+Z` redo · `S` shuffle · `K` answer key · `B` bilingual · `O` OMR · `E` edit tools · `T` chapter tags · `+`/`−` zoom · `0` 100% · `F` fit · `[` `]` collapse/expand groups · `1 2 3` phone tabs.
+
+## Reporting bugs & feature requests
+Open an issue at <https://github.com/Ugwattu/paper-press/issues> (there is also a bug icon in the top bar and a button under **Library → Help & feedback**). Attach a backup file if the problem depends on your data.
+
+## Backup & restore
+**Library → Backup & restore** downloads one JSON file with your presets, schemes, current paper, settings and logo, and restores it on any device or browser. Restoring replaces the data on that device (you are asked to confirm first). Browsers can clear site data, so back up now and then.
+
+## Table layout (matches the Word template)
+The “Q. No. …” instruction row is wider on the English side than the Urdu side (**Table & Page → Instruction row split**, default 58%), while the stems below stay equal. Text in cells is top-aligned (switchable), serial numbers are centred like the template, and every bold option applies to both the English and the Urdu text.
 
 ## Interface
 Five settings sections in the left navigation (**Paper · Header · Layout · Edit · Library**), the paper in the middle, and a **Blueprint** panel (button in the top bar, or `L`) that slides in from the right and docks beside the paper on very wide screens. On phones the bottom bar switches between Settings, Paper and Blueprint. Light and dark themes; colours are CSS variables at the top of `app.css`.

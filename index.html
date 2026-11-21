@@ -4,18 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
 <title>Paper Press — ALP Board Paper Studio · Computer Science 9 &amp; 10</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23046a38'/><stop offset='.55' stop-color='%2312b5cb'/><stop offset='1' stop-color='%237b53e8'/></linearGradient></defs><rect width='32' height='32' rx='8' fill='url(%23g)'/><path d='M9 7h9l5 5v13H9z' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/><path d='M18 7v5h5' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/><path d='M12 17h8M12 21h5' stroke='white' stroke-width='2' stroke-linecap='round'/></svg>">
+<link rel="icon" href="icon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="icon/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="icon/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23046a38'/><stop offset='.55' stop-color='%2312b5cb'/><stop offset='1' stop-color='%237b53e8'/></linearGradient></defs><rect width='32' height='32' rx='8' fill='url(%23g)'/><path d='M9 7h9l5 5v13H9z' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/><path d='M18 7v5h5' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/><path d='M12 17h8M12 21h5' stroke='white' stroke-width='2' stroke-linecap='round'/></svg>">
 <meta name="theme-color" content="#ffffff">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="app.css?v=12">
-<link rel="stylesheet" href="paper.css?v=12">
+<link rel="stylesheet" href="app.css?v=13">
+<link rel="stylesheet" href="paper.css?v=13">
 
 </head>
 <body>
 <header class="topbar">
   <div class="brand">
-    <div class="sigil"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/><path d="M9 12h7M9 16h5"/></svg></div>
+    <a href="./" class="brand-logo">
+      <img src="icon/favicon.svg" alt="Paper Press logo" width="28" height="28">
+    </a>
     <div><h1>Paper <em>Press</em></h1><p>ALP Board Studio · CS 9 &amp; 10</p></div>
   </div>
   <span class="topdiv"></span>
@@ -29,6 +35,7 @@
   <button class="ibtn ico" id="btnUndo" title="Undo (Ctrl+Z)" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 010 12h-3"/></svg></button>
   <button class="ibtn ico" id="btnRedo" title="Redo (Ctrl+Shift+Z)" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14l5-5-5-5"/><path d="M20 9H10a6 6 0 000 12h3"/></svg></button>
   <button class="ibtn ico" id="btnKeys" title="Keyboard shortcuts (?)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg></button>
+  <a class="ibtn ico" id="btnBug" href="https://github.com/Ugwattu/paper-press/issues" target="_blank" rel="noopener noreferrer" title="Report a bug or request a feature" aria-label="Report a bug or request a feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2l1.9 1.9M16 2l-1.9 1.9M9 7.1V6a3 3 0 016 0v1.1"/><path d="M12 20a6 6 0 01-6-6v-3a4 4 0 014-4h4a4 4 0 014 4v3a6 6 0 01-6 6zM12 20v-9M6 13H2M22 13h-4M6 17l-3 2M18 17l3 2M6 9L3 7M18 9l3-2"/></svg></a>
   <button class="ibtn ico" id="themeBtn" title="Toggle light / dark"><svg id="themeIco" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg></button>
   <button class="ibtn" id="btnBP" title="Paper blueprint (L)" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg><span class="tx">Blueprint</span></button>
   <button class="ibtn pri" id="topExp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 20h16"/></svg><span class="tx">Save .docx</span></button>
@@ -204,7 +211,13 @@
       </div>
       <div class="ctl" id="bwWrap"><div class="lab"><span>Border weight</span><b id="vBw">0.75 pt</b></div><input type="range" id="rBw" min="0.25" max="2.5" step="0.25"></div>
       <div class="ctl"><div class="lab"><span>Serial column width</span><b id="vNumW">10%</b></div><input type="range" id="rNumW" min="6" max="18" step="0.5">
-        <div class="hint">Left English serial and right Urdu serial columns are <b>always equal</b>. No marks column.</div></div>
+        <div class="hint">The English and Urdu serial columns are always the same width. No marks column.</div></div>
+      <div class="ctl"><div class="lab"><span>Instruction row split</span><b id="vInsSplit">58%</b></div><input type="range" id="rInsSplit" min="45" max="72" step="1">
+        <div class="hint">Width of the English side of each “Q. No. …” row. 50% = equal halves; the stems below stay equal.</div></div>
+      <div class="ctl"><div class="lab"><span>Text alignment in cells</span></div>
+        <div class="seg" id="segVAlign"><button data-v="top">Top</button><button data-v="middle">Middle</button></div></div>
+      <div class="ctl"><div class="lab"><span>Serial numbers</span></div>
+        <div class="seg" id="segSerAlign"><button data-v="top">Top</button><button data-v="middle">Middle</button></div></div>
       <div class="ctl"><div class="lab"><span>MCQ option rows</span></div>
         <div class="seg" id="segOpt"><button data-v="auto">Auto</button><button data-v="4">4-up</button><button data-v="2">2-up</button><button data-v="1">1-up</button></div>
         <div class="hint">Auto: <b>1 word → 4-up</b>, <b>2 words → 2-up</b>, <b>&gt;2 words → 1-up</b>.</div></div>
@@ -298,6 +311,22 @@
       </div>
     </div>
   </div>
+<div class="grp g-v">
+    <h3><i></i>Backup &amp; restore<em>all your data</em></h3>
+    <div class="bd">
+      <div class="hint">One file with your presets, schemes, current paper, settings and logo. Browsers can clear site data, so keep a copy somewhere safe.</div>
+      <div class="actg"><button class="act sav" id="btnBackup">Back up</button><button class="act" id="btnRestore">Restore…</button></div>
+      <input type="file" id="backupFile" accept="application/json,.json" hidden>
+      <div class="hint" id="backupInfo"></div>
+    </div>
+  </div>
+  <div class="grp g-a">
+    <h3><i></i>Help &amp; feedback</h3>
+    <div class="bd">
+      <a class="act wide" href="https://github.com/Ugwattu/paper-press/issues" target="_blank" rel="noopener noreferrer">Report a bug or request a feature</a>
+      <div class="hint">Opens the project’s issue tracker on GitHub. Mention what you clicked and, if you can, attach the backup file.</div>
+    </div>
+  </div>
 </section>
   </div>
 </aside>
@@ -362,8 +391,8 @@
 <div class="busy" id="busy" role="status" aria-live="polite"><div class="bx"><div class="sp2"></div><b>Building your .docx</b><small>packaging WordprocessingML + images…</small></div></div>
 <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
 
-<script src="bank-loader.js?v=12"></script>
-<script>PPBanks.boot('12');</script>
+<script src="bank-loader.js?v=13"></script>
+<script>PPBanks.boot('13');</script>
 <noscript><p style="position:fixed;inset:0;background:#05091a;color:#fff;padding:2em;font:16px sans-serif">Paper Press needs JavaScript to build question papers.</p></noscript>
 
 </body>
