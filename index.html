@@ -4,16 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
 <title>Paper Press — ALP Board Paper Studio · Computer Science 9 &amp; 10</title>
-<link rel="icon" href="icon/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="icon/favicon-32.png" sizes="32x32" type="image/png">
-<link rel="apple-touch-icon" href="icon/apple-touch-icon.png">
+<link rel="icon" href="icons/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="icons/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
 <defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23046a38'/><stop offset='.55' stop-color='%2312b5cb'/><stop offset='1' stop-color='%237b53e8'/></linearGradient></defs><rect width='32' height='32' rx='8' fill='url(%23g)'/><path d='M9 7h9l5 5v13H9z' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/><path d='M18 7v5h5' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/><path d='M12 17h8M12 21h5' stroke='white' stroke-width='2' stroke-linecap='round'/></svg>">
 <meta name="theme-color" content="#ffffff">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="app.css?v=14">
-<link rel="stylesheet" href="paper.css?v=14">
+<link rel="stylesheet" href="app.css?v=16">
+<link rel="stylesheet" href="paper.css?v=16">
 
 </head>
 <body>
@@ -127,6 +127,9 @@
   <div class="grp">
     <h3><i></i>Header &amp; Student Fields</h3>
     <div class="bd">
+      <div class="ctl"><div class="lab"><span>Header style</span></div>
+        <div class="seg" id="segHdr"><button data-v="classic">Classic</button><button data-v="banner">Banner</button><button data-v="ruled">Ruled</button><button data-v="split">Split</button></div>
+        <div class="hint">Layout of the title block and the Class · Subject · Marks · Time strip.</div></div>
       <div class="ctl"><div class="lab"><span>Institute</span></div><input type="text" id="iInst"></div>
       <div class="ctl"><div class="lab"><span>Test title</span></div><input type="text" id="iTitle"></div>
       <div class="row2">
@@ -144,8 +147,11 @@
         <div class="tg" data-tg="showRoll"><div><span>Roll number field</span></div><div class="sw"></div></div>
         <div class="tg" data-tg="showSection"><div><span>Section field</span></div><div class="sw"></div></div>
         <div class="tg" data-tg="showDate"><div><span>Date field</span></div><div class="sw"></div></div>
-        <div class="tg" data-tg="footer"><div><span>Paper code &amp; examiner line</span><small>printed at the very end</small></div><div class="sw"></div></div>
+        <div class="tg" data-tg="footer"><div><span>Paper code &amp; examiner line</span><small>printed at the very top</small></div><div class="sw"></div></div>
       </div>
+      <div class="ctl"><div class="lab"><span>Student fields style</span></div>
+        <div class="seg" id="segInfoStyle"><button data-v="table">Boxed</button><button data-v="lines">Lines</button><button data-v="stacked">Stacked</button><button data-v="boxes">Roll boxes</button></div>
+        <div class="hint">Boxed table · one row of fill-in lines · Name on its own line · Roll No. as digit boxes.</div></div>
       <div class="ctl" id="infoPosWrap"><div class="lab"><span>Name / Roll No. line</span></div>
         <div class="seg" id="segInfo"><button data-v="top">Top of paper</button><button data-v="bottom">End of paper</button></div>
         <div class="hint">One line holding Name · Roll No. · Section · Date, whichever are switched on above.</div></div>
@@ -180,7 +186,7 @@
         <div class="ctl"><div class="lab"><span>Line height</span><b id="vLh">1.35</b></div><input type="range" id="rLh" min="1" max="2" step="0.05"></div>
         <div class="ctl"><div class="lab"><span>Cell padding</span><b id="vPad">4 pt</b></div><input type="range" id="rPad" min="1" max="12" step="0.5"></div>
       </div>
-      <div class="quick"><button class="qb" id="sz11">Standard · 11 / 11 pt</button><button class="qb" id="szUr16">Large Urdu · 16 pt</button></div>
+      
     </div>
   </div>
   <div class="grp g-m">
@@ -192,7 +198,6 @@
         <div class="tg" data-tg="bInstr"><div><span>Q. No. instruction rows</span></div><div class="sw"></div></div>
         <div class="tg" data-tg="bNum"><div><span>Serial numbers (both sides)</span></div><div class="sw"></div></div>
         <div class="tg" data-tg="bStem"><div><span>MCQ question statements</span></div><div class="sw"></div></div>
-        <div class="tg" data-tg="bOpt"><div><span>MCQ options</span></div><div class="sw"></div></div>
         <div class="tg" data-tg="bShort"><div><span>Short question statements</span></div><div class="sw"></div></div>
         <div class="tg" data-tg="bLong"><div><span>Long question statements</span></div><div class="sw"></div></div>
       </div>
@@ -213,10 +218,6 @@
       <div class="tg" data-tg="insAuto"><div><span>Auto-fit instruction row</span><small>keeps “Q. No. 4: … (4 × 2 = 8)” on one line</small></div><div class="sw"></div></div>
       <div class="ctl"><div class="lab"><span>Instruction row split</span><b id="vInsSplit">Auto</b></div><input type="range" id="rInsSplit" min="45" max="76" step="1">
         <div class="hint">Width of the English side of each “Q. No. …” row when auto-fit is off. The stems below stay equal.</div></div>
-      <div class="ctl"><div class="lab"><span>Text alignment in cells</span></div>
-        <div class="seg" id="segVAlign"><button data-v="top">Top</button><button data-v="middle">Middle</button></div></div>
-      <div class="ctl"><div class="lab"><span>Serial numbers</span></div>
-        <div class="seg" id="segSerAlign"><button data-v="top">Top</button><button data-v="middle">Middle</button></div></div>
       <div class="ctl"><div class="lab"><span>MCQ option rows</span></div>
         <div class="seg" id="segOpt"><button data-v="auto">Auto</button><button data-v="4">4-up</button><button data-v="2">2-up</button><button data-v="1">1-up</button></div>
         <div class="hint">Auto: <b>1 word → 4-up</b>, <b>2 words → 2-up</b>, <b>&gt;2 words → 1-up</b>.</div></div>
@@ -290,6 +291,7 @@
     <div class="bd">
       <button class="act sav wide" id="btnSavePreset" style="height:38px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>Save current setup as preset</button>
       <div class="psearch"><input type="text" id="preSearch" placeholder="Search presets…"><select id="preSort" style="width:100px;flex:none"><option value="new">Newest</option><option value="name">A–Z</option><option value="marks">Marks</option><option value="grade">Grade</option></select></div>
+      <button class="qb hidden" id="preRestoreF"></button>
       <div class="seg mag" id="segPreFilter"><button data-v="all">All</button><button data-v="mine">Mine</button><button data-v="factory">Factory</button><button data-v="g9">9th</button><button data-v="g10">10th</button></div>
       <div class="bulkbar hidden" id="bulkBar"><span id="bulkTxt">0 selected</span><button class="qb mag" id="bulkDel" style="flex:none;width:76px">Delete</button><button class="qb" id="bulkClr" style="flex:none;width:56px">Clear</button></div>
       <div class="plist" id="preList"></div>
@@ -315,6 +317,7 @@
     <div class="bd">
       <div class="hint">One file with your presets, schemes, current paper, settings and logo. Browsers can clear site data, so keep a copy somewhere safe.</div>
       <div class="actg"><button class="act sav" id="btnBackup">Back up</button><button class="act" id="btnRestore">Restore…</button></div>
+      <button class="act wide hidden" id="btnAutoBackup"></button>
       <input type="file" id="backupFile" accept="application/json,.json" hidden>
       <div class="hint" id="backupInfo"></div>
     </div>
@@ -392,8 +395,8 @@
 <div class="busy" id="busy" role="status" aria-live="polite"><div class="bx"><div class="sp2"></div><b>Building your .docx</b><small>packaging WordprocessingML + images…</small></div></div>
 <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
 
-<script src="bank-loader.js?v=14"></script>
-<script>PPBanks.boot('14');</script>
+<script src="bank-loader.js?v=16"></script>
+<script>PPBanks.boot('16');</script>
 <noscript><p style="position:fixed;inset:0;background:#05091a;color:#fff;padding:2em;font:16px sans-serif">Paper Press needs JavaScript to build question papers.</p></noscript>
 
 </body>

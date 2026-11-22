@@ -45,17 +45,35 @@ const bad = (tag, m) => { fails++; console.error(`FAIL ${tag}: ${m}`); };
     const tag = 'layout rules'; runs++;
     try {
       ev(`state=JSON.parse(JSON.stringify(DEF));state.grade=9;state.alp=true;state.chapters=BOOKS[9].alpCh.slice();state.schemeId=offFor(9).id;state.showUrdu=true;state.omr=false;
-        ['bHeader','bBar','bInstr','bNum','bStem','bOpt','bShort','bLong'].forEach(k=>state[k]=true);overrides={};sticky={};applySchemeCounts(true);render();`);
+        ['bHeader','bBar','bInstr','bNum','bStem','bShort','bLong'].forEach(k=>state[k]=true);overrides={};sticky={};applySchemeCounts(true);render();`);
       const zip = await JSZip.loadAsync(await ev('zipPack(buildDocx(true))')), doc = await zip.file('word/document.xml').async('string');
       const tcs = doc.match(/<w:tc>[\s\S]*?<\/w:tc>/g) || [], width = (t) => +(t.match(/<w:tcW w:w="(\d+)"/) || [0, 0])[1];
       const en = tcs.find((t) => t.includes('Q. No. 1:')), ur = tcs.find((t) => t.includes('سوال نمبر 1:'));
       if (!en || !ur) bad(tag, 'instruction row cells not found'); else if (!(width(en) > width(ur))) bad(tag, `instruction row: English cell (${width(en)}) must be wider than Urdu (${width(ur)}), like the template`);
       const sub = (doc.match(/<w:p>(?:(?!<\/w:p>)[\s\S])*جماعت(?:(?!<\/w:p>)[\s\S])*<\/w:p>/g) || [])[0];
       if (!sub || !/<w:jc w:val="center"\/>/.test(sub)) bad(tag, 'the Urdu subject line in the header must be centered');
-      const plain = (doc.match(/<w:r>(?:(?!<\/w:r>)[\s\S])*<w:rtl\/>(?:(?!<\/w:r>)[\s\S])*<\/w:r>/g) || []).filter((r) => !r.includes('<w:b/>'));
-      if (plain.length) bad(tag, `${plain.length} Urdu runs are not bold although every bold option is on`);
+      const plain = (doc.match(/<w:p>[\s\S]*?<\/w:p>/g) || []).filter((p) => { const t = (p.match(/<w:r>(?:(?!<\/w:r>)[\s\S])*<\/w:r>/g) || []).filter((r) => /<w:t[ >]/.test(r)); return t.length && t.every((r) => r.includes('<w:rtl/>')) && t.some((r) => !r.includes('<w:b/>')); });
+      if (plain.length) bad(tag, `${plain.length} Urdu-only paragraphs are not bold although every bold option is on`);
       const topCells = tcs.filter((t) => /Which software enhances|Data unit in packet/.test(t));
       if (!topCells.length || topCells.some((t) => !/<w:vAlign w:val="top"\/>/.test(t))) bad(tag, 'question text cells must be top-aligned');
+    } catch (e) { bad(tag, e.stack.split('\n').slice(0, 3).join(' | ')); }
+  }
+
+  /* every header style x student-field style builds a valid file, keeps its content, and puts the paper-code line first */
+  for (const hs of ['classic', 'banner', 'ruled', 'split']) for (const is of ['table', 'lines', 'stacked', 'boxes']) for (const urdu of [true, false]) {
+    const tag = `header ${hs} / fields ${is} / ${urdu ? 'bi' : 'en'}`; runs++;
+    try {
+      ev(`state=JSON.parse(JSON.stringify(DEF));state.grade=9;state.alp=true;state.chapters=BOOKS[9].alpCh.slice();state.schemeId=offFor(9).id;state.showUrdu=${urdu};state.omr=false;state.footer=true;
+        state.hdrStyle='${hs}';state.infoStyle='${is}';state.showSection=true;state.sectionVal='B';overrides={};sticky={};applySchemeCounts(true);render();`);
+      const zip = await JSZip.loadAsync(await ev('zipPack(buildDocx(true))'), { checkCRC32: true }), doc = await zip.file('word/document.xml').async('string');
+      if (new dom.window.DOMParser().parseFromString(doc, 'application/xml').getElementsByTagName('parsererror').length) bad(tag, 'document.xml is not well-formed');
+      const plainText = doc.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
+      for (const need of ['Class: 9th', 'Total Marks:', 'Time:', 'Name:', 'Roll No', 'Section:', 'Date:', 'Government High School']) if (!plainText.includes(need)) bad(tag, `docx is missing "${need}"`);
+      if (plainText.indexOf('Paper CS9-ALP') < 0 || plainText.indexOf('Paper CS9-ALP') > plainText.indexOf('Government High School')) bad(tag, 'the paper-code line must come first in the .docx');
+      const prev = ev('sheet.textContent').replace(/\s+/g, ' ');
+      if (prev.indexOf('Paper CS9-ALP') < 0 || prev.indexOf('Paper CS9-ALP') > prev.indexOf('Government High School')) bad(tag, 'the paper-code line must come first in the preview');
+      for (const need of ['Class: 9th', 'Total Marks:', 'Name:', 'Section:', 'Date:']) if (!prev.includes(need)) bad(tag, `preview is missing "${need}"`);
+      if (!/Roll No/.test(prev)) bad(tag, 'preview is missing Roll No');
     } catch (e) { bad(tag, e.stack.split('\n').slice(0, 3).join(' | ')); }
   }
   console.log(`${runs - Math.min(fails, runs)}/${runs} docx files passed${realCanvas ? '' : ' (stub canvas)'}`); process.exit(fails ? 1 : 0);

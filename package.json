@@ -2,7 +2,7 @@
   "name": "paper-press",
   "private": true,
   "scripts": {
-    "test": "node tools/validate-banks.js && node tools/test-boot.js && node tools/test-parity.js && node tools/test-docx.js"
+    "test": "node tools/validate-banks.js && node tools/test-boot.js && node tools/test-parity.js && node tools/test-docx.js && node tools/test-persistence.js && node tools/test-shortcuts.js"
   },
   "devDependencies": {
     "jsdom": "^24.1.0",

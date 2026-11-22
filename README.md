@@ -7,7 +7,7 @@ A static, no-build web app. Everything runs in the browser; nothing is uploaded.
 |---|---|
 | `index.html`, `script.js` | the app (page structure and logic) |
 | `app.css`, `paper.css` | interface styling / paper-preview styling |
-| `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png`, `icon-*.png`, `manifest.webmanifest` | browser-tab icon and home-screen icons |
+| `icons/` (`favicon.svg`, `favicon-32.png`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`) and `manifest.webmanifest` | browser-tab icon and home-screen icons |
 | `banks.js` | question banks (edit here) |
 | `tools/validate-banks.js` | checks banks.js for malformed rows |
 
@@ -50,3 +50,17 @@ Five settings sections in the left navigation (**Paper · Header · Layout · Ed
 ## Word / OnlyOffice export notes
 * Every paragraph gets an **exact** line height computed like the preview (a multiple of the font size). Word's default "auto" spacing multiplies the font's own built-in line height (about 1.15 for Times, about 2 for Nastaliq), which is what used to add extra space only in the file.
 * The OMR response sheet is one flat table (no nested tables, which force extra empty paragraphs) laid out like the board sample: contiguous blocks filled down each column, shared borders, bubbles as shared PNG images.
+
+## Your data survives updates
+Everything is stored in the browser for the exact address the app is opened from (`https://<user>.github.io/<repo>/`, or `http://localhost:8000`, …). Updating the files never touches it: new versions read the stored settings, presets and schemes and fill in any new options with defaults. Two things to know:
+* A *different* address (another port, `localhost` vs `127.0.0.1`, a file opened from disk, another browser/profile) has its own empty storage. Use **Library → Backup & restore** to move data between them.
+* Each time a new build opens existing data it first saves a raw safety copy; **Library → Backup & restore → “Download the safety copy…”** gives it back as a normal backup file.
+`npm test` includes a persistence test that loads a profile saved by the original version of the app.
+
+## Header and student-field styles
+**Header → Header style:** *Classic* (title block + boxed Class/Subject/Marks/Time strip), *Banner* (shaded title box with the strip attached), *Ruled* (borderless strip between two rules) and *Split* (Class/Subject left, title centre, Time/Marks right).
+**Header → Student fields style:** *Boxed* (table cells), *Lines* (one row of fill-in lines), *Stacked* (Name on its own line, the rest below) and *Roll boxes* (Roll No. as six digit boxes). All of them work in the preview and the .docx, honour the Name / Roll No. / Section / Date toggles, and can sit at the top or the end of the paper.
+The *Paper code & examiner line* is printed at the very top of the paper. Text and serial numbers in the question tables are always top-aligned.
+
+## System presets
+The built-in presets can be removed with **Remove** on their card (undo is offered) and brought back with **Restore system presets**. Which ones you removed is saved with your other data.
