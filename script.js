@@ -34,7 +34,7 @@ const SCOPES={
  header:{label:'Header, student fields & logo',keys:['institute','title','klass','subject','subjectUr','time','date','sectionVal','showName','showRoll','showSection','showDate','infoPos','footer','logo','logoName','logoH','logoPos']},
  type:{label:'Fonts, sizes & bold',keys:['enFont','enSize','urFont','urSize','lineH','pad','bHeader','bBar','bInstr','bNum','bStem','bOpt','bShort','bLong']},
  omr:{label:'OMR layout & position',keys:['omr','omrRule','omrUrdu','omrPos','omrCols','bubSize','omrPad','omrAlign','omrWidth','omrGapT','omrGapB','omrNewPage']},
- page:{label:'Page, table & layers',keys:['hideLines','borderW','numW','insSplit','vAlign','serAlign','optMode','page','margin','shade','zebra','showUrdu']}
+ page:{label:'Page, table & layers',keys:['hideLines','borderW','numW','insSplit','insAuto','vAlign','serAlign','optMode','page','margin','shade','zebra','showUrdu']}
 };
 const ALLSC=Object.keys(SCOPES);
 const DEF={grade:9,alp:true,chapters:BOOKS[9].alpCh.slice(),schemeId:'off9',longPick:{},
@@ -45,7 +45,7 @@ const DEF={grade:9,alp:true,chapters:BOOKS[9].alpCh.slice(),schemeId:'off9',long
  enFont:'Times New Roman',enSize:11,urFont:'Jameel Noori Nastaleeq',urSize:11,lineH:1.35,pad:4,
  bHeader:true,bBar:true,bInstr:true,bNum:true,bStem:true,bOpt:false,bShort:false,bLong:false,
  omr:true,omrRule:true,omrUrdu:true,omrPos:'front',omrCols:4,bubSize:13,omrPad:4,omrAlign:'center',omrWidth:100,omrGapT:6,omrGapB:8,omrNewPage:false,
- hideLines:false,borderW:.75,numW:10,insSplit:58,vAlign:'top',serAlign:'middle',optMode:'auto',page:'a4',margin:24,shade:true,zebra:false,
+ hideLines:false,borderW:.75,numW:10,insSplit:58,insAuto:true,vAlign:'top',serAlign:'top',optMode:'auto',page:'a4',margin:24,shade:true,zebra:false,
  showUrdu:true,showKey:false,showTags:false,
  qTools:true,noDup:true,showPins:true,zoom:100,autoFit:true,seed:7,presetId:'',dirty:false};
 const CFG_KEYS=new Set([].concat(...Object.values(SCOPES).map(s=>s.keys)));
@@ -232,8 +232,12 @@ function mkGrid(edges,total,round){
  const at=v=>{const i=e.findIndex(x=>Math.abs(x-v)<.01);if(i<0)throw new Error('grid edge '+v);return i;};
  const pos=e.map(v=>round?Math.round(total*v/100):total*v/100);
  return{edges:e,cols:pos.slice(1).map((p,i)=>p-pos[i]),sp:(a,b)=>at(b)-at(a),w:(a,b)=>pos[at(b)]-pos[at(a)]};}
-function qEdges(s,bi){
- const nw=s.numW,mid=100-2*nw,q4=mid/4,H=clamp(+s.insSplit||58,45,72),R=100-nw,B1=nw+mid/2,B2=nw+mid*.53;
+let _mc=null;
+function textPt(txt,bold,pt,font){try{_mc=_mc||document.createElement('canvas').getContext('2d');_mc.font=`${bold?'bold ':''}${pt}pt \"${font}\",serif`;return _mc.measureText(txt).width*0.75;}catch(e){return 0;}}
+/* share of the table width (in %) the English instruction needs to stay on one line: text + cell padding + a little safety */
+function fitSplit(s,txt){const need=textPt(txt,s.bInstr,s.enSize,s.enFont)+2*(s.pad+1.5)+9,pct=Math.ceil(need/(PAGES[s.page].w-2*s.margin)*100);return clamp(pct||58,45,76);}
+function qEdges(s,bi,enText){
+ const nw=s.numW,mid=100-2*nw,q4=mid/4,H=s.insAuto&&enText?fitSplit(s,enText):clamp(+s.insSplit||58,45,76),R=100-nw,B1=nw+mid/2,B2=nw+mid*.53;
  return{nw,q4,H,R,B1,B2,
   mcq:bi?[0,nw,nw+q4,B1,nw+3*q4,H,R,100]:[0,nw,nw+q4,B1,nw+3*q4,R,100],
   two:bi?[0,nw,B2,H,R,100]:[0,nw,100]};}
@@ -285,7 +289,9 @@ function paperInner(s,mode){
  const nw=s.numW,mid=100-2*nw,q4=mid/4;
  const wH=s.bHeader?'bold':'normal',wB=s.bBar?'bold':'normal',wI=s.bInstr?'bold':'normal',wN=s.bNum?'bold':'normal',wS=s.bStem?'bold':'normal',wO=s.bOpt?'bold':'normal',wQ=s.bShort?'bold':'normal',wL=s.bLong?'bold':'normal';
  const dz=z=>screen?`<div class="dropzone" data-zone="${z}"><span>Drop OMR — ${ZLABEL[z]}</span></div>`:'';
- const QE=qEdges(s,bi),GM=mkGrid(QE.mcq,100),GT=mkGrid(QE.two,100),g6=GM.cols,g4=GT.cols,cs=(G,a,b)=>{const n=G.sp(a,b);return n>1?` colspan="${n}"`:'';};
+ const mcqEn=`Q. No. 1: Choose the Best option and fill the Bubble.  (${built.mcq.length} × ${s.mcqMark} = ${mk.mcq})`;
+ let QE=qEdges(s,bi,mcqEn),GM=mkGrid(QE.mcq,100),GT=mkGrid(QE.two,100),g6=GM.cols,g4=GT.cols;
+ const cs=(G,a,b)=>{const n=G.sp(a,b);return n>1?` colspan="${n}"`:'';};
  const cg=grid=>`<colgroup>${grid.map(w=>`<col style="width:${w}%">`).join('')}</colgroup>`;
  const ins=(en,ur,G)=>{
   if(!bi)return `<tr><td colspan="${G.sp(0,100)}" style="${cell}background:${sh};font-weight:${wI};">${esc(en)}</td></tr>`;
@@ -317,7 +323,7 @@ function paperInner(s,mode){
  if(s.omr&&s.omrPos==='front')h+=omrHTML(s,showKey,screen);
  h+=bar(`PART-I  ·  OBJECTIVE  (${mk.mcq} Marks)`,'حصہ اول: معروضی سوالات');
  h+=T('margin-bottom:7pt;')+cg(g6);
- h+=ins(`Q. No. 1: Choose the Best option and fill the Bubble.  (${built.mcq.length} × ${s.mcqMark} = ${mk.mcq})`,'سوال نمبر 1: درست جواب کا انتخاب کریں۔ اور ببل بھریں۔',GM);
+ h+=ins(mcqEn,'سوال نمبر 1: درست جواب کا انتخاب کریں۔ اور ببل بھریں۔',GM);
  built.mcq.forEach((m,i)=>{
   const lay=layoutFor(m),z=zb(i),sk=screen?` data-slot="${m._key}"`:'',S=SN[m._key];
   let stem=`<tr${sk} style="${z}"><td style="${cc}font-weight:${wN};">${S.no}${pin(m)}${cross(m)}</td>`;
@@ -340,6 +346,7 @@ function paperInner(s,mode){
   const en=all?`Q. No. ${p.q}: Answer ALL ${NE[p.items.length]} (${p.items.length}) short questions.  (${p.items.length} × ${s.shortMark} = ${p.items.length*s.shortMark})`
    :`Q. No. ${p.q}: Write short answers to any ${NE[p.attempt]} (${p.attempt}) questions.  (${p.attempt} × ${s.shortMark} = ${p.attempt*s.shortMark})`;
   const ur=all?`سوال نمبر ${p.q}: تمام ${NU[p.items.length]} مختصر سوالات کے جوابات دیں۔`:`سوال نمبر ${p.q}: کوئی سے ${NU[p.attempt]} مختصر سوالات کے جوابات دیں۔`;
+  QE=qEdges(s,bi,en);GT=mkGrid(QE.two,100);g4=GT.cols;
   h+=T('margin-bottom:7pt;')+cg(g4)+ins(en,ur,GT);
   p.items.forEach((q,i)=>{const sk=screen?` data-slot="${q._key}"`:'',S=SN[q._key];
    h+=`<tr${sk} style="${zb(i)}"><td style="${cc}font-weight:${wN};">${S.no}${pin(q)}${cross(q)}</td><td${cs(GT,QE.nw,bi?QE.B2:100)} style="${cell}font-weight:${wQ};">${esc(q.en)}${tg('Ch '+q.ch)}</td>`;
@@ -354,6 +361,7 @@ function paperInner(s,mode){
  const len=allL?`Q. No. ${first}${built.long.length>1?' to '+last:''}: Attempt ALL ${NE[built.long.length]} (${built.long.length}) detailed questions.  (${built.long.length} × ${s.longMark} = ${mk.long})`
   :`Q. No. ${first}${built.long.length>1?' to '+last:''}: Attempt any ${NE[state.longAttempt]} (${state.longAttempt}) detailed questions.  (${state.longAttempt} × ${s.longMark} = ${mk.long})`;
  const lur=allL?`سوال نمبر ${first} تا ${last}: تمام ${NU[built.long.length]} تفصیلی سوالات کے جوابات دیں۔`:`سوال نمبر ${first} تا ${last}: کوئی سے ${NU[state.longAttempt]} تفصیلی سوالات کے جوابات دیں۔`;
+ QE=qEdges(s,bi,len);GT=mkGrid(QE.two,100);g4=GT.cols;
  h+=T('margin-bottom:5pt;')+cg(g4)+ins(len,lur,GT);
  built.long.forEach((q,i)=>{const sk=screen?` data-slot="${q._key}"`:'',S=SN[q._key];
   h+=`<tr${sk} style="${zb(i)}"><td style="${cc}font-weight:${wN};">${S.no}${pin(q)}${cross(q)}</td><td${cs(GT,QE.nw,bi?QE.B2:100)} style="${cell}font-weight:${wL};">${esc(q.en)}${tg('Ch '+q.ch)}</td>`;
@@ -472,7 +480,8 @@ function buildDocx(raw){
  media=[];rid=2;mediaMap=new Map();
  const s=state,bi=s.showUrdu,mk=plan.marks,pg=PAGES[s.page],SN=serials();
  const W=tw(pg.w),H=tw(pg.h),M=tw(s.margin),CW=W-2*M;
- const QE=qEdges(s,bi),GM=mkGrid(QE.mcq,CW,true),GT=mkGrid(QE.two,CW,true),grid6=GM.cols,grid4=GT.cols;
+ const mcqEn=`Q. No. 1: Choose the Best option and fill the Bubble.  (${built.mcq.length} × ${s.mcqMark} = ${mk.mcq})`;
+ let QE=qEdges(s,bi,mcqEn),GM=mkGrid(QE.mcq,CW,true),GT=mkGrid(QE.two,CW,true),grid6=GM.cols,grid4=GT.cols;
  const CWX=(G,a,b)=>{const n=G.sp(a,b),o={w:G.w(a,b)};if(n>1)o.span=n;return o;},VA=s.vAlign==='middle'?'center':'top',SA=s.serAlign==='top'?'top':'center';
  const shd=s.shade?'E9E4D6':null,zeb=i=>s.zebra&&i%2===1?'F7F4EA':null;
  const Bx=[];const push=x=>Bx.push(x),spacer=pt=>push(para('',{exact:Math.max(1,pt||4)}));
@@ -529,7 +538,7 @@ function buildDocx(raw){
   }
 if(s.omr&&s.omrPos==='front'){omrBlock();spacer(5);}
  bar(`PART-I  ·  OBJECTIVE  (${mk.mcq} Marks)`,'حصہ اول: معروضی سوالات');
- {const rows=[insRow(GM,`Q. No. 1: Choose the Best option and fill the Bubble.  (${built.mcq.length} × ${s.mcqMark} = ${mk.mcq})`,'سوال نمبر 1: درست جواب کا انتخاب کریں۔ اور ببل بھریں۔')];
+ {const rows=[insRow(GM,mcqEn,'سوال نمبر 1: درست جواب کا انتخاب کریں۔ اور ببل بھریں۔')];
   built.mcq.forEach((m,i)=>{const S=SN[m._key],z=zeb(i),cell=(a,b,body,o)=>tc(body,Object.assign(CWX(GM,a,b),{shd:z},o||{}));
    const cells=[cell(0,QE.nw,txtP(S.no,{b:s.bNum,align:'center'}),{valign:SA})];
    if(bi){cells.push(cell(QE.nw,QE.B1,txtP(m.en,{b:s.bStem})));cells.push(cell(QE.B1,QE.R,txtP(m.ur,{ur:true,b:s.bStem})));cells.push(cell(QE.R,100,txtP(S.ur,{ur:true,b:s.bNum,align:'center'}),{valign:SA}));}
@@ -549,7 +558,7 @@ if(s.omr&&s.omrPos==='front'){omrBlock();spacer(5);}
   const en=all?`Q. No. ${p.q}: Answer ALL ${NE[p.items.length]} (${p.items.length}) short questions.  (${p.items.length} × ${s.shortMark} = ${p.items.length*s.shortMark})`
    :`Q. No. ${p.q}: Write short answers to any ${NE[p.attempt]} (${p.attempt}) questions.  (${p.attempt} × ${s.shortMark} = ${p.attempt*s.shortMark})`;
   const ur=all?`سوال نمبر ${p.q}: تمام ${NU[p.items.length]} مختصر سوالات کے جوابات دیں۔`:`سوال نمبر ${p.q}: کوئی سے ${NU[p.attempt]} مختصر سوالات کے جوابات دیں۔`;
-  const g=grid4,rows=[insRow(GT,en,ur)];
+  QE=qEdges(s,bi,en);GT=mkGrid(QE.two,CW,true);const g=GT.cols,rows=[insRow(GT,en,ur)];
   p.items.forEach((q,i)=>{const S=SN[q._key],z=zeb(i),cell=(a,b,body,o)=>tc(body,Object.assign(CWX(GT,a,b),{shd:z},o||{}));
    const c=[cell(0,QE.nw,txtP(S.no,{b:s.bNum,align:'center'}),{valign:SA}),cell(QE.nw,bi?QE.B2:100,txtP(q.en,{b:s.bShort}))];
    if(bi){c.push(cell(QE.B2,QE.R,txtP(q.ur,{ur:true,b:s.bShort})));c.push(cell(QE.R,100,txtP(S.ur,{ur:true,b:s.bNum,align:'center'}),{valign:SA}));}
@@ -562,7 +571,7 @@ if(s.omr&&s.omrPos==='front'){omrBlock();spacer(5);}
   const en=allL?`Q. No. ${first}${built.long.length>1?' to '+last:''}: Attempt ALL ${NE[built.long.length]} (${built.long.length}) detailed questions.  (${built.long.length} × ${s.longMark} = ${mk.long})`
    :`Q. No. ${first}${built.long.length>1?' to '+last:''}: Attempt any ${NE[s.longAttempt]} (${s.longAttempt}) detailed questions.  (${s.longAttempt} × ${s.longMark} = ${mk.long})`;
   const ur=allL?`سوال نمبر ${first} تا ${last}: تمام ${NU[built.long.length]} تفصیلی سوالات کے جوابات دیں۔`:`سوال نمبر ${first} تا ${last}: کوئی سے ${NU[s.longAttempt]} تفصیلی سوالات کے جوابات دیں۔`;
-  const g=grid4,rows=[insRow(GT,en,ur)];
+  QE=qEdges(s,bi,en);GT=mkGrid(QE.two,CW,true);const g=GT.cols,rows=[insRow(GT,en,ur)];
   built.long.forEach((q,i)=>{const S=SN[q._key],z=zeb(i),cell=(a,b,body,o)=>tc(body,Object.assign(CWX(GT,a,b),{shd:z},o||{}));
    const c=[cell(0,QE.nw,txtP(S.no,{b:s.bNum,align:'center'}),{valign:SA}),cell(QE.nw,bi?QE.B2:100,txtP(q.en,{b:s.bLong}))];
    if(bi){c.push(cell(QE.B2,QE.R,txtP(q.ur,{ur:true,b:s.bLong})));c.push(cell(QE.R,100,txtP(S.ur,{ur:true,b:s.bNum,align:'center'}),{valign:SA}));}
@@ -1102,7 +1111,7 @@ function syncUI(){
  $('rLh').value=state.lineH;$('vLh').textContent=state.lineH.toFixed(2);
  $('rPad').value=state.pad;$('vPad').textContent=state.pad+' pt';
  $('rBw').value=state.borderW;$('vBw').textContent=state.borderW+' pt';
- $('rNumW').value=state.numW;$('vNumW').textContent=state.numW+'%';$('rInsSplit').value=state.insSplit;$('vInsSplit').textContent=state.insSplit+'%';
+ $('rNumW').value=state.numW;$('vNumW').textContent=state.numW+'%';$('rInsSplit').value=state.insSplit;$('rInsSplit').disabled=!!state.insAuto;$('vInsSplit').textContent=state.insAuto?'Auto':state.insSplit+'%';
  document.querySelectorAll('#segVAlign button').forEach(x=>x.classList.toggle('on',x.dataset.v===state.vAlign));document.querySelectorAll('#segSerAlign button').forEach(x=>x.classList.toggle('on',x.dataset.v===state.serAlign));
  $('bwWrap').classList.toggle('hidden',state.hideLines);
  $('lineEm').textContent=state.hideLines?'lines hidden':'lines visible';
@@ -1345,7 +1354,22 @@ document.addEventListener('keydown',e=>{if(!(e.ctrlKey||e.metaKey)||e.altKey)ret
   window.scrollTo(0,0);if(t==='stage')setTimeout(()=>{if(state.autoFit)fitZoom();else applyZoom();},40);if(t==='ledger')setTimeout(paintLedger,40);};
  tb.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));
  $('tabSave').addEventListener('click',doDocx);setTab('stage');})();
-/* ══════════ BACKUP & RESTORE ══════════ */
+/* ══════════ BUG REPORTS (every report carries its own ID + diagnostics) ══════════ */
+const APP_BUILD='v14 · 2026-11-21',ISSUES='https://github.com/Ugwattu/paper-press/issues';
+function bugReport(){
+ const s=state,b=BOOKS[s.grade],id='PP-'+Date.now().toString(36).toUpperCase()+'-'+Math.random().toString(36).slice(2,6).toUpperCase();
+ const sch=(typeof activeScheme==='function'&&activeScheme())||{},mk=plan&&plan.marks||{};
+ const diag=['- App build: '+APP_BUILD,'- Browser: '+navigator.userAgent,'- Screen: '+innerWidth+'×'+innerHeight+' @'+(devicePixelRatio||1)+'x, theme '+document.documentElement.dataset.theme,
+  '- Class: '+b.name+' · ALP '+(s.alp?'on':'off')+' · scheme: '+(sch.name||s.schemeId),'- Paper: seed '+s.seed+' · '+built.mcq.length+' MCQ / '+built.short.reduce((n,p)=>n+p.items.length,0)+' short / '+built.long.length+' long · '+(mk.total||'?')+' marks',
+  '- Bilingual: '+(s.showUrdu?'yes':'no')+' · OMR: '+(s.omr?'yes ('+s.omrPos+')':'no')+' · page '+s.page+', margin '+s.margin+'pt · fonts '+s.enFont+' / '+s.urFont,
+  '- Opened the .docx in: (Word / OnlyOffice / other?)'].join('\n');
+ const body='**Report ID:** '+id+'\n\n**What happened?**\n\n\n**What did you expect instead?**\n\n\n**Steps to reproduce**\n1. \n2. \n\n<details><summary>Diagnostics (auto-filled — please keep)</summary>\n\n'+diag+'\n\n</details>\n';
+ return{id,diag,body,url:ISSUES+'/new?title='+encodeURIComponent('['+id+'] ')+'&body='+encodeURIComponent(body)};}
+(function(){const a=[$('btnBug'),$('bugLink')].filter(Boolean),upd=e=>{try{e.currentTarget.href=bugReport().url;}catch(x){e.currentTarget.href=ISSUES;}};
+ a.forEach(el=>['pointerenter','focus','click','auxclick','contextmenu'].forEach(ev=>el.addEventListener(ev,upd)));
+ const cp=$('btnCopyDiag');if(cp)cp.addEventListener('click',async()=>{const r=bugReport();try{await navigator.clipboard.writeText('Report ID: '+r.id+'\n'+r.diag);toast('Diagnostics copied ('+r.id+')','ok');}catch(e){toast('Could not copy — your browser blocked clipboard access.','warn');}});
+ const bi=$('buildInfo');if(bi)bi.textContent='Build '+APP_BUILD;})();
+/* ══════════ BACKUP & RESTORE ══════════
 (function(){
  const MAGIC='paper-press-backup',info=$('backupInfo'),stamp=()=>{const t=LS.get('pp.lastBackup',null);info.textContent=t?'Last backup from this device: '+new Date(t).toLocaleString():'No backup made from this device yet.';};
  async function collect(){flushState();const data={};
@@ -1405,6 +1429,7 @@ setTheme(LS.get('pp.theme',null)||(window.matchMedia&&window.matchMedia('(prefer
 customSchemes=LS.get('pp.schemes.v7',[]);
 presets=LS.get('pp.presets.v7',[]);
 const saved=LS.get('pp.state.v7',null);
+if(saved&&!LS.get('pp.mig.ser14',false)){saved.serAlign='top';LS.set('pp.mig.ser14',true);}
 if(saved&&typeof saved==='object'&&BOOKS[saved.grade]){
  state=Object.assign(JSON.parse(JSON.stringify(DEF)),saved);
  state.chapters=(state.chapters||[]).filter(c=>BOOKS[state.grade].chapters.includes(c));

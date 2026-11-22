@@ -352,3 +352,6 @@ kbd{font:600 11.5px ui-monospace,Menlo,Consolas,monospace;background:var(--surfa
 
 .actg .wide{grid-column:1/-1}
 a.ibtn,a.act{text-decoration:none}a.act{justify-content:center}
+
+.sigil{width:36px;height:36px;background:none!important;border-radius:0;box-shadow:none}.sigil svg{width:36px;height:36px;display:block}
+input[type=range]:disabled{opacity:.4;cursor:not-allowed}
