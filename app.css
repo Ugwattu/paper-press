@@ -357,3 +357,9 @@ a.ibtn,a.act{text-decoration:none}a.act{justify-content:center}
 input[type=range]:disabled{opacity:.4;cursor:not-allowed}
 
 .grp.off>.bd{opacity:.45;pointer-events:none;filter:grayscale(.7)}.grp.off>h3 em{color:var(--danger)}
+
+/* steppers inside a settings row: − value + fills the whole row instead of leaving a gap on the right */
+.ctl>.stepper{display:flex;width:100%}
+.ctl>.stepper button{flex:none;width:46px;height:36px}
+.ctl>.stepper b,.ctl>.stepper span,.ctl>.stepper input{flex:1;min-width:0;display:grid;place-items:center;font-size:14px}
+.ctl>.stepper button:first-child{border-right:1px solid var(--border)}.ctl>.stepper button:last-child{border-left:1px solid var(--border)}
