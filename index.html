@@ -12,8 +12,8 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="app.css?v=16">
-<link rel="stylesheet" href="paper.css?v=16">
+<link rel="stylesheet" href="app.css?v=17">
+<link rel="stylesheet" href="paper.css?v=17">
 
 </head>
 <body>
@@ -58,7 +58,18 @@
       </div>
     </div>
   </div>
-  <div class="grp g-v">
+<div class="grp g-a" id="grpSections">
+    <h3><i></i>Paper sections<em id="secEm"></em></h3>
+    <div class="bd">
+      <div class="tgs">
+        <div class="tg" data-tg="incMcq"><div><span>MCQs</span><small id="secM"></small></div><div class="sw"></div></div>
+        <div class="tg" data-tg="incShort"><div><span>Short questions</span><small id="secS"></small></div><div class="sw"></div></div>
+        <div class="tg" data-tg="incLong"><div><span>Long questions</span><small id="secL"></small></div><div class="sw"></div></div>
+      </div>
+      <div class="hint">Switch a section off to print a paper without it. Part numbers, question numbers, marks, the OMR sheet and the Blueprint adjust automatically. At least one section stays on.</div>
+    </div>
+  </div>
+    <div class="grp g-v">
     <h3><i></i>Chapters<em id="chEm"></em></h3>
     <div class="bd">
       <div class="chgrid" id="chGrid"></div>
@@ -87,18 +98,17 @@
       <input type="file" id="schFile" accept="application/json,.json" class="hidden">
     </div>
   </div>
-  <div class="grp g-a">
+  <div class="grp g-a" id="grpMcq">
     <h3><i></i>Objective · MCQs<em id="mcqEm"></em></h3>
     <div class="bd">
-      <div class="ctl"><div class="lab"><span>Number of MCQs</span><b id="vMcq">10</b></div>
-        <input type="range" id="rMcq" min="1" max="30" step="1">
+      <div class="ctl"><div class="lab"><span>Number of MCQs</span></div>
         <div class="stepper" data-step="mcqCount"><button data-d="-1">−</button><b id="sMcq">10</b><button data-d="1">+</button></div></div>
       <div class="ctl"><div class="lab"><span>Marks per MCQ</span></div>
         <select id="selMcqMark"><option value="1">1 mark each</option><option value="2">2 marks each</option></select></div>
       <div class="hint" id="mcqHint"></div>
     </div>
   </div>
-  <div class="grp g-a">
+  <div class="grp g-a" id="grpShort">
     <h3><i></i>Subjective · Short<em id="shortEm"></em></h3>
     <div class="bd">
       <div class="row2">
@@ -110,7 +120,7 @@
       <div class="ctl"><div class="lab"><span>Attempt count per part</span><b id="vAtt">4·4·4</b></div><div class="attgrid" id="attGrid"></div></div>
     </div>
   </div>
-  <div class="grp g-a">
+  <div class="grp g-a" id="grpLong">
     <h3><i></i>Subjective · Long<em id="longEm"></em></h3>
     <div class="bd">
       <div class="row2">
@@ -395,8 +405,8 @@
 <div class="busy" id="busy" role="status" aria-live="polite"><div class="bx"><div class="sp2"></div><b>Building your .docx</b><small>packaging WordprocessingML + images…</small></div></div>
 <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
 
-<script src="bank-loader.js?v=16"></script>
-<script>PPBanks.boot('16');</script>
+<script src="bank-loader.js?v=17"></script>
+<script>PPBanks.boot('17');</script>
 <noscript><p style="position:fixed;inset:0;background:#05091a;color:#fff;padding:2em;font:16px sans-serif">Paper Press needs JavaScript to build question papers.</p></noscript>
 
 </body>

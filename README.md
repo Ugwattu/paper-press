@@ -64,3 +64,6 @@ The *Paper code & examiner line* is printed at the very top of the paper. Text a
 
 ## System presets
 The built-in presets can be removed with **Remove** on their card (undo is offered) and brought back with **Restore system presets**. Which ones you removed is saved with your other data.
+
+## Paper sections (MCQs / Short / Long)
+**Paper → Paper sections** has a switch for each part. A paper can be MCQs only, short + long, long only, and so on (at least one stays on). Switching a section off removes its Part heading and tables, renumbers the remaining Parts (PART-I, PART-II …) and questions (“Q. No. 1” for the first thing printed), drops it from Total Marks, hides the OMR sheet when there are no MCQs, and leaves it out of the Blueprint checks. The switches are saved with presets (scope “Question counts & marks”). MCQ count is set with the − / + stepper only.

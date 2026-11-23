@@ -30,7 +30,7 @@ const offFor=g=>OFFICIAL.find(s=>s.grade===g);
 const SCOPES={
  syllabus:{label:'Class, ALP & chapters',keys:['grade','alp','chapters']},
  scheme:{label:'Pairing scheme & long sources',keys:['schemeId','longPick']},
- counts:{label:'Question counts & marks',keys:['mcqCount','mcqMark','shortParts','shortPrinted','shortMark','shortAttempts','longPrinted','longAttempt','longMark']},
+ counts:{label:'Question counts & marks',keys:['incMcq','incShort','incLong','mcqCount','mcqMark','shortParts','shortPrinted','shortMark','shortAttempts','longPrinted','longAttempt','longMark']},
  header:{label:'Header, student fields & logo',keys:['institute','title','klass','subject','subjectUr','time','date','sectionVal','showName','showRoll','showSection','showDate','infoPos','hdrStyle','infoStyle','footer','logo','logoName','logoH','logoPos']},
  type:{label:'Fonts, sizes & bold',keys:['enFont','enSize','urFont','urSize','lineH','pad','bHeader','bBar','bInstr','bNum','bStem','bShort','bLong']},
  omr:{label:'OMR layout & position',keys:['omr','omrRule','omrUrdu','omrPos','omrCols','bubSize','omrPad','omrAlign','omrWidth','omrGapT','omrGapB','omrNewPage']},
@@ -38,7 +38,7 @@ const SCOPES={
 };
 const ALLSC=Object.keys(SCOPES);
 const DEF={grade:9,alp:true,chapters:BOOKS[9].alpCh.slice(),schemeId:'off9',longPick:{},
- mcqCount:10,mcqMark:1,shortParts:3,shortPrinted:6,shortMark:2,shortAttempts:[4,4,4,4],longPrinted:3,longAttempt:2,longMark:8,
+ mcqCount:10,mcqMark:1,incMcq:true,incShort:true,incLong:true,shortParts:3,shortPrinted:6,shortMark:2,shortAttempts:[4,4,4,4],longPrinted:3,longAttempt:2,longMark:8,
  logo:'',logoName:'',logoH:54,logoPos:'center',
  institute:'Government High School, Lahore',title:'Model Question Paper',klass:'9th',subject:BOOKS[9].subject,subjectUr:BOOKS[9].subjectUr,time:'120 Minutes',date:'',sectionVal:'',
  showName:true,showRoll:true,showSection:false,showDate:true,infoPos:'top',hdrStyle:'classic',infoStyle:'table',footer:true,
@@ -149,6 +149,10 @@ function longSlots(){
   if(!av.length)av=chs.slice();
   return{allow,av};});
 }
+/* Paper sections: any of MCQ / short / long can be switched off (never all three). Numbering follows what is printed. */
+const secM=()=>state.incMcq!==false||(state.incShort===false&&state.incLong===false);
+const secS=()=>state.incShort!==false,secL=()=>state.incLong!==false;
+const shortQ0=()=>1+(secM()?1:0),longQ0=()=>shortQ0()+(secS()?state.shortParts:0);
 function makePlan(){
  const b=B(),sch=activeScheme(),chs=activeCh(),cm={},cs={},cl={};
  chs.forEach(c=>{const k=caps(c);cm[c]=k.m;cs[c]=k.s;cl[c]=k.l;});
@@ -162,9 +166,9 @@ function makePlan(){
  for(let i=0;i<4;i++)state.shortAttempts[i]=clamp(state.shortAttempts[i],1,state.shortPrinted);
  const wM={};chs.forEach(c=>wM[c]=sch.mcq[c]||0);
  if(!chs.some(c=>wM[c]>0))chs.forEach(c=>wM[c]=1);
- const mA=alloc(state.mcqCount,chs,wM,cm);
+ const mA=secM()?alloc(state.mcqCount,chs,wM,cm):{out:{},placed:0};
  const parts=[];
- for(let p=0;p<state.shortParts;p++){
+ for(let p=0;p<(secS()?state.shortParts:0);p++){
   const src=sch.short[p%sch.short.length]||{ch:{},attempt:4};
   let group=Object.keys(src.ch).map(Number).filter(c=>chs.includes(c)&&src.ch[c]>0);
   if(!group.length)group=chs.filter((_,i)=>i%state.shortParts===p);
@@ -175,15 +179,15 @@ function makePlan(){
  parts.forEach(pt=>{const a=alloc(state.shortPrinted,pt.group,pt.w,rem);pt.alloc=a.out;pt.placed=a.placed;
   pt.group.forEach(c=>rem[c]-=a.out[c]);minP=Math.min(minP,a.placed);});
  if(minP<state.shortPrinted&&minP>=2){state.shortPrinted=minP;for(let i=0;i<4;i++)state.shortAttempts[i]=clamp(state.shortAttempts[i],1,minP);return makePlan();}
- parts.forEach((pt,i)=>{pt.q=i+2;pt.attempt=clamp(state.shortAttempts[i],1,state.shortPrinted);});
+ parts.forEach((pt,i)=>{pt.q=i+shortQ0();pt.attempt=clamp(state.shortAttempts[i],1,state.shortPrinted);});
  const slots=longSlots(),r=rng(state.seed*7919+state.grade*104729),lch=[],lslot=[];
- for(let i=0;i<state.longPrinted;i++){
+ for(let i=0;i<(secL()?state.longPrinted:0);i++){
   const sl=slots[i%slots.length]||{allow:chs,av:chs};
   const forced=state.longPick[i];
   const c=(forced&&sl.av.includes(forced))?forced:sl.av[Math.floor(r()*sl.av.length)];
   lch.push(c);lslot.push(i%slots.length);}
  const sT=parts.reduce((a,p)=>a+p.attempt*state.shortMark,0);
- const marks={mcq:mA.placed*state.mcqMark,short:sT,long:state.longAttempt*state.longMark};
+ const marks={mcq:mA.placed*state.mcqMark,short:sT,long:secL()?state.longAttempt*state.longMark:0};
  marks.total=marks.mcq+marks.short+marks.long;
  return{chs,cm,cs,cl,maxM,maxS,maxL,mcqAlloc:mA.out,parts,longChs:lch,longSlot:lslot,slots,marks,sch};
 }
@@ -191,7 +195,7 @@ function build(){
  const slots=[];let mi=0;
  plan.chs.forEach(c=>{for(let i=0;i<(plan.mcqAlloc[c]||0);i++){slots.push({key:'m'+mi,type:'mcq',ch:c,planCh:c,label:'MCQ '+(mi+1)});mi++;}});
  plan.parts.forEach((p,pi)=>{let ii=0;p.group.forEach(c=>{for(let i=0;i<(p.alloc[c]||0);i++){slots.push({key:'s'+pi+'.'+ii,type:'short',ch:c,planCh:c,label:'Q.'+p.q+' ('+(ii+1)+')',part:pi});ii++;}});});
- plan.longChs.forEach((c,i)=>slots.push({key:'l'+i,type:'long',ch:c,planCh:c,label:'Q.'+(2+state.shortParts+i)}));
+ plan.longChs.forEach((c,i)=>slots.push({key:'l'+i,type:'long',ch:c,planCh:c,label:'Q.'+(longQ0()+i)}));
  const keys=new Set(slots.map(s=>s.key));
  Object.keys(overrides).forEach(k=>{if(!keys.has(k))delete overrides[k];});
  Object.keys(sticky).forEach(k=>{if(!keys.has(k))delete sticky[k];});
@@ -224,7 +228,7 @@ function layoutFor(m){if(state.optMode!=='auto')return parseInt(state.optMode,10
 function serials(){const map={};
  built.mcq.forEach((q,i)=>map[q._key]={no:String(i+1),ur:String(i+1)});
  built.short.forEach(p=>p.items.forEach((q,i)=>map[q._key]={no:String(i+1),ur:String(i+1)}));
- const first=2+state.shortParts;
+ const first=longQ0();
  built.long.forEach((q,i)=>map[q._key]={no:'Q. No. '+(first+i),ur:'سوال نمبر '+(first+i)});
  return map;}
 /* Column grids. "Edges" are % positions where a cell may start or end; every row is built from cells between two edges, so a
@@ -305,7 +309,8 @@ function paperInner(s,mode){
  const T=x=>`<table border="${bAttr}" cellspacing="0" cellpadding="0" style="border-collapse:collapse;width:100%;${s.hideLines?'':'border:'+BD+';'}${base}${x||''}">`;
  const nw=s.numW,mid=100-2*nw,q4=mid/4;
  const wH=s.bHeader?'bold':'normal',wB=s.bBar?'bold':'normal',wI=s.bInstr?'bold':'normal',wN=s.bNum?'bold':'normal',wS=s.bStem?'bold':'normal',wO='normal',wQ=s.bShort?'bold':'normal',wL=s.bLong?'bold':'normal';
- const dz=z=>screen?`<div class="dropzone" data-zone="${z}"><span>Drop OMR — ${ZLABEL[z]}</span></div>`:'';
+ const dz=z=>screen&&built.mcq.length?`<div class="dropzone" data-zone="${z}"><span>Drop OMR — ${ZLABEL[z]}</span></div>`:'';
+ const hasM=built.mcq.length>0,hasS=built.short.some(p=>p.items.length>0),hasL=built.long.length>0,PR=['I','II','III'],PU=['اول','دوم','سوم'];let partNo=0;
  const mcqEn=`Q. No. 1: Choose the Best option and fill the Bubble.  (${built.mcq.length} × ${s.mcqMark} = ${mk.mcq})`;
  let QE=qEdges(s,bi,mcqEn),GM=mkGrid(QE.mcq,100),GT=mkGrid(QE.two,100),g6=GM.cols,g4=GT.cols;
  const cs=(G,a,b)=>{const n=G.sp(a,b);return n>1?` colspan="${n}"`:'';};
@@ -360,8 +365,8 @@ function paperInner(s,mode){
   if(bi)x+=`<div dir="rtl" lang="ur" style="font-family:'${UF}','Noto Nastaliq Urdu',serif;font-size:${US}pt;font-weight:${wB};letter-spacing:0;margin-top:2pt;">${esc(ur)}</div>`;
   return x+`</td></tr></table>`;};
  h+=dz('front');
- if(s.omr&&s.omrPos==='front')h+=omrHTML(s,showKey,screen);
- h+=bar(`PART-I  ·  OBJECTIVE  (${mk.mcq} Marks)`,'حصہ اول: معروضی سوالات');
+ if(s.omr&&hasM&&s.omrPos==='front')h+=omrHTML(s,showKey,screen);
+ if(hasM){const pi=partNo++;h+=bar(`PART-${PR[pi]}  ·  OBJECTIVE  (${mk.mcq} Marks)`,`حصہ ${PU[pi]}: معروضی سوالات`);
  h+=T('margin-bottom:7pt;')+cg(g6);
  h+=ins(mcqEn,'سوال نمبر 1: درست جواب کا انتخاب کریں۔ اور ببل بھریں۔',GM);
  built.mcq.forEach((m,i)=>{
@@ -378,9 +383,10 @@ function paperInner(s,mode){
    h+=`<tr${sk} style="${z}"><td style="${cc}"></td><td${cs(GM,QE.nw,QE.B1)} style="${cell}${a.st}">${a.t}</td><td${cs(GM,QE.B1,QE.R)} style="${cell}${b.st}">${b.t}</td><td style="${cc}"></td></tr>`;}}
   else{for(let k=0;k<4;k++){const a=op(k);
    h+=`<tr${sk} style="${z}"><td style="${cc}"></td><td${cs(GM,QE.nw,QE.R)} style="${cell}${a.st}">${a.t}</td><td style="${cc}"></td></tr>`;}}});
- h+='</table>'+dz('after');
- if(s.omr&&s.omrPos==='after')h+=omrHTML(s,showKey,screen);
- h+=bar(`PART-II  ·  SHORT QUESTIONS  (${mk.short} Marks)`,'حصہ دوم: مختصر سوالات');
+ h+='</table>';}
+ h+=dz('after');
+ if(s.omr&&hasM&&s.omrPos==='after')h+=omrHTML(s,showKey,screen);
+ if(hasS){const pi=partNo++;h+=bar(`PART-${PR[pi]}  ·  SHORT QUESTIONS  (${mk.short} Marks)`,`حصہ ${PU[pi]}: مختصر سوالات`);
  built.short.forEach(p=>{if(!p.items.length)return;
   const all=p.attempt>=p.items.length;
   const en=all?`Q. No. ${p.q}: Answer ALL ${NE[p.items.length]} (${p.items.length}) short questions.  (${p.items.length} × ${s.shortMark} = ${p.items.length*s.shortMark})`
@@ -392,11 +398,11 @@ function paperInner(s,mode){
    h+=`<tr${sk} style="${zb(i)}"><td style="${cc}font-weight:${wN};">${S.no}${pin(q)}${cross(q)}</td><td${cs(GT,QE.nw,bi?QE.B2:100)} style="${cell}font-weight:${wQ};">${esc(q.en)}${tg('Ch '+q.ch)}</td>`;
    if(bi)h+=`<td${cs(GT,QE.B2,QE.R)} style="${uc}font-weight:${wQ};">${esc(q.ur)}</td><td style="${uNum}font-weight:${wN};">${S.ur}</td>`;
    h+='</tr>';});
-  h+='</table>';});
+  h+='</table>';});}
  h+=dz('mid');
- if(s.omr&&s.omrPos==='mid')h+=omrHTML(s,showKey,screen);
- const first=2+state.shortParts,last=first+built.long.length-1;
- h+=bar(`PART-III  ·  DETAILED QUESTIONS  (${mk.long} Marks)`,'حصہ سوم: تفصیلی سوالات');
+ if(s.omr&&hasM&&s.omrPos==='mid')h+=omrHTML(s,showKey,screen);
+ if(hasL){const first=longQ0(),last=first+built.long.length-1,pi=partNo++;
+ h+=bar(`PART-${PR[pi]}  ·  DETAILED QUESTIONS  (${mk.long} Marks)`,`حصہ ${PU[pi]}: تفصیلی سوالات`);
  const allL=state.longAttempt>=built.long.length;
  const len=allL?`Q. No. ${first}${built.long.length>1?' to '+last:''}: Attempt ALL ${NE[built.long.length]} (${built.long.length}) detailed questions.  (${built.long.length} × ${s.longMark} = ${mk.long})`
   :`Q. No. ${first}${built.long.length>1?' to '+last:''}: Attempt any ${NE[state.longAttempt]} (${state.longAttempt}) detailed questions.  (${state.longAttempt} × ${s.longMark} = ${mk.long})`;
@@ -407,8 +413,9 @@ function paperInner(s,mode){
   h+=`<tr${sk} style="${zb(i)}"><td style="${cc}font-weight:${wN};">${S.no}${pin(q)}${cross(q)}</td><td${cs(GT,QE.nw,bi?QE.B2:100)} style="${cell}font-weight:${wL};">${esc(q.en)}${tg('Ch '+q.ch)}</td>`;
   if(bi)h+=`<td${cs(GT,QE.B2,QE.R)} style="${uc}font-weight:${wL};">${esc(q.ur)}</td><td style="${uNum}font-weight:${wN};">${S.ur}</td>`;
   h+='</tr>';});
- h+='</table>'+dz('end');
- if(s.omr&&s.omrPos==='end')h+=omrHTML(s,showKey,screen);
+ h+='</table>';}
+ h+=dz('end');
+ if(s.omr&&hasM&&s.omrPos==='end')h+=omrHTML(s,showKey,screen);
  if(s.infoPos==='bottom')h+=infoRowAny();
  return h;
 }
@@ -519,6 +526,7 @@ function buildDocx(raw){
  media=[];rid=2;mediaMap=new Map();
  const s=state,bi=s.showUrdu,mk=plan.marks,pg=PAGES[s.page],SN=serials();
  const W=tw(pg.w),H=tw(pg.h),M=tw(s.margin),CW=W-2*M;
+ const hasM=built.mcq.length>0,hasS=built.short.some(p=>p.items.length>0),hasL=built.long.length>0,PR=['I','II','III'],PU=['اول','دوم','سوم'];let partNo=0;
  const mcqEn=`Q. No. 1: Choose the Best option and fill the Bubble.  (${built.mcq.length} × ${s.mcqMark} = ${mk.mcq})`;
  let QE=qEdges(s,bi,mcqEn),GM=mkGrid(QE.mcq,CW,true),GT=mkGrid(QE.two,CW,true),grid6=GM.cols,grid4=GT.cols;
  const CWX=(G,a,b)=>{const n=G.sp(a,b),o={w:G.w(a,b)};if(n>1)o.span=n;return o;},VA='top',SA='top';
@@ -595,8 +603,8 @@ function buildDocx(raw){
    t+=tbl(grid,rowsX,{outer:true,pad:s.omrPad,align:s.omrAlign});
    push(t);if(s.omrGapB)spacer(s.omrGapB);
   }
-if(s.omr&&s.omrPos==='front'){omrBlock();spacer(5);}
- bar(`PART-I  ·  OBJECTIVE  (${mk.mcq} Marks)`,'حصہ اول: معروضی سوالات');
+if(s.omr&&hasM&&s.omrPos==='front'){omrBlock();spacer(5);}
+ if(hasM){const pi=partNo++;bar(`PART-${PR[pi]}  ·  OBJECTIVE  (${mk.mcq} Marks)`,`حصہ ${PU[pi]}: معروضی سوالات`);
  {const rows=[insRow(GM,mcqEn,'سوال نمبر 1: درست جواب کا انتخاب کریں۔ اور ببل بھریں۔')];
   built.mcq.forEach((m,i)=>{const S=SN[m._key],z=zeb(i),cell=(a,b,body,o)=>tc(body,Object.assign(CWX(GM,a,b),{shd:z},o||{}));
    const cells=[cell(0,QE.nw,txtP(S.no,{b:s.bNum,align:'center'}),{valign:SA})];
@@ -609,9 +617,9 @@ if(s.omr&&s.omrPos==='front'){omrBlock();spacer(5);}
    else if(lay===2){for(let r=0;r<2;r++)rows.push(tr([cell(0,QE.nw,''),cell(QE.nw,QE.B1,para(optRuns(r*2))),cell(QE.B1,QE.R,para(optRuns(r*2+1))),cell(QE.R,100,'')]));}
    else{for(let k=0;k<4;k++)rows.push(tr([cell(0,QE.nw,''),cell(QE.nw,QE.R,para(optRuns(k))),cell(QE.R,100,'')]));}});
   push(tbl(grid6,rows,{borders:!s.hideLines}));}
- spacer(6);
- if(s.omr&&s.omrPos==='after'){omrBlock();spacer(5);}
- bar(`PART-II  ·  SHORT QUESTIONS  (${mk.short} Marks)`,'حصہ دوم: مختصر سوالات');
+ spacer(6);}
+ if(s.omr&&hasM&&s.omrPos==='after'){omrBlock();spacer(5);}
+ if(hasS){const pi=partNo++;bar(`PART-${PR[pi]}  ·  SHORT QUESTIONS  (${mk.short} Marks)`,`حصہ ${PU[pi]}: مختصر سوالات`);
  built.short.forEach(p=>{if(!p.items.length)return;
   const all=p.attempt>=p.items.length;
   const en=all?`Q. No. ${p.q}: Answer ALL ${NE[p.items.length]} (${p.items.length}) short questions.  (${p.items.length} × ${s.shortMark} = ${p.items.length*s.shortMark})`
@@ -622,10 +630,10 @@ if(s.omr&&s.omrPos==='front'){omrBlock();spacer(5);}
    const c=[cell(0,QE.nw,txtP(S.no,{b:s.bNum,align:'center'}),{valign:SA}),cell(QE.nw,bi?QE.B2:100,txtP(q.en,{b:s.bShort}))];
    if(bi){c.push(cell(QE.B2,QE.R,txtP(q.ur,{ur:true,b:s.bShort})));c.push(cell(QE.R,100,txtP(S.ur,{ur:true,b:s.bNum,align:'center'}),{valign:SA}));}
    rows.push(tr(c));});
-  push(tbl(g,rows,{borders:!s.hideLines}));spacer(6);});
- if(s.omr&&s.omrPos==='mid'){omrBlock();spacer(5);}
- const first=2+state.shortParts,last=first+built.long.length-1;
- bar(`PART-III  ·  DETAILED QUESTIONS  (${mk.long} Marks)`,'حصہ سوم: تفصیلی سوالات');
+  push(tbl(g,rows,{borders:!s.hideLines}));spacer(6);});}
+ if(s.omr&&hasM&&s.omrPos==='mid'){omrBlock();spacer(5);}
+ if(hasL){const first=longQ0(),last=first+built.long.length-1,pi=partNo++;
+ bar(`PART-${PR[pi]}  ·  DETAILED QUESTIONS  (${mk.long} Marks)`,`حصہ ${PU[pi]}: تفصیلی سوالات`);
  {const allL=s.longAttempt>=built.long.length;
   const en=allL?`Q. No. ${first}${built.long.length>1?' to '+last:''}: Attempt ALL ${NE[built.long.length]} (${built.long.length}) detailed questions.  (${built.long.length} × ${s.longMark} = ${mk.long})`
    :`Q. No. ${first}${built.long.length>1?' to '+last:''}: Attempt any ${NE[s.longAttempt]} (${s.longAttempt}) detailed questions.  (${s.longAttempt} × ${s.longMark} = ${mk.long})`;
@@ -635,8 +643,8 @@ if(s.omr&&s.omrPos==='front'){omrBlock();spacer(5);}
    const c=[cell(0,QE.nw,txtP(S.no,{b:s.bNum,align:'center'}),{valign:SA}),cell(QE.nw,bi?QE.B2:100,txtP(q.en,{b:s.bLong}))];
    if(bi){c.push(cell(QE.B2,QE.R,txtP(q.ur,{ur:true,b:s.bLong})));c.push(cell(QE.R,100,txtP(S.ur,{ur:true,b:s.bNum,align:'center'}),{valign:SA}));}
    rows.push(tr(c));});
-  push(tbl(g,rows,{borders:!s.hideLines}));}
- if(s.omr&&s.omrPos==='end'){spacer(5);omrBlock();}
+  push(tbl(g,rows,{borders:!s.hideLines}));}}
+ if(s.omr&&hasM&&s.omrPos==='end'){spacer(5);omrBlock();}
  if(s.infoPos==='bottom'){spacer(6);push(infoTbl());}
  const sect=`<w:sectPr><w:pgSz w:w="${W}" w:h="${H}"/><w:pgMar w:top="${M}" w:right="${M}" w:bottom="${M}" w:left="${M}" w:header="0" w:footer="0" w:gutter="0"/><w:cols w:space="720"/><w:docGrid w:linePitch="360"/></w:sectPr>`;
  const doc=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><w:body>${Bx.join('')}${sect}</w:body></w:document>`;
@@ -662,12 +670,12 @@ function analyse(){
  const exItems=all.filter(a=>a.ex).length,conf=[];
  const am={};built.mcq.forEach(q=>am[q.ch]=(am[q.ch]||0)+1);
  const t=schemeTotals(sch);
- conf.push({label:'MCQ spread matches scheme',ok:state.mcqCount===t.mcq&&Object.keys(sch.mcq).every(c=>(am[c]||0)===(sch.mcq[c]||0)||!plan.chs.includes(+c)),got:state.mcqCount+'/'+t.mcq});
- conf.push({label:'Short parts × printed',ok:state.shortParts===t.parts&&t.printed.every(p=>p===state.shortPrinted),got:state.shortParts+'×'+state.shortPrinted});
- conf.push({label:'Attempt per short part',ok:built.short.every((p,i)=>p.attempt===(sch.short[i%sch.short.length].attempt)),got:built.short.map(p=>p.attempt).join('·')});
+ if(secM())conf.push({label:'MCQ spread matches scheme',ok:state.mcqCount===t.mcq&&Object.keys(sch.mcq).every(c=>(am[c]||0)===(sch.mcq[c]||0)||!plan.chs.includes(+c)),got:state.mcqCount+'/'+t.mcq});
+ if(secS())conf.push({label:'Short parts × printed',ok:state.shortParts===t.parts&&t.printed.every(p=>p===state.shortPrinted),got:state.shortParts+'×'+state.shortPrinted});
+ if(secS())conf.push({label:'Attempt per short part',ok:built.short.every((p,i)=>p.attempt===(sch.short[i%sch.short.length].attempt)),got:built.short.map(p=>p.attempt).join('·')});
  const lok=built.long.length===sch.long.length&&built.long.every((q,i)=>sch.long[i].includes(q.ch));
- conf.push({label:'Long chapters follow scheme',ok:lok,got:built.long.map(q=>q.ch).join('·')});
- conf.push({label:'Paper totals '+t.total+' marks',ok:plan.marks.total===t.total,got:plan.marks.total+''});
+ if(secL())conf.push({label:'Long chapters follow scheme',ok:lok,got:built.long.map(q=>q.ch).join('·')});
+ if(secM()&&secS()&&secL())conf.push({label:'Paper totals '+t.total+' marks',ok:plan.marks.total===t.total,got:plan.marks.total+''});
  if(state.alp){conf.push({label:'Excluded unit '+b.alpEx.join(', ')+' absent',ok:!all.some(a=>b.alpEx.includes(a.ch)),got:all.some(a=>b.alpEx.includes(a.ch))?'present':'absent'});
   conf.push({label:'Excluded topics withheld',ok:exItems===0,got:exItems+' items'});}
  const crossN=built.slots.filter(s=>s.ch!==s.planCh).length;
@@ -675,7 +683,15 @@ function analyse(){
 }
 const CHK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
 const WRN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9.5 17H2.5z"/><path d="M12 9v5M12 17.4v.1"/></svg>';
-function paintLedger(){
+function paintSections(){
+ const on={m:secM(),s:secS(),l:secL()},mk=plan.marks;
+ [['grpMcq',on.m],['grpShort',on.s],['grpLong',on.l]].forEach(([id,v])=>{const e=$(id);if(e)e.classList.toggle('off',!v);});
+ $('secM').textContent=on.m?built.mcq.length+' questions · '+mk.mcq+' marks':'off — no MCQ part, no OMR';
+ $('secS').textContent=on.s?built.short.reduce((n,p)=>n+p.items.length,0)+' questions in '+built.short.filter(p=>p.items.length).length+' parts · '+mk.short+' marks':'off';
+ $('secL').textContent=on.l?built.long.length+' printed · attempt '+state.longAttempt+' · '+mk.long+' marks':'off';
+ $('secEm').textContent=[on.m&&'MCQ',on.s&&'Short',on.l&&'Long'].filter(Boolean).join(' + ');
+ if(!on.m)$('mcqEm').textContent='off';if(!on.s)$('shortEm').textContent='off';if(!on.l)$('longEm').textContent='off';}
+function paintLedger(){paintSections();
  const a=analyse(),mk=plan.marks,b=B(),sch=plan.sch,np=Object.keys(overrides).length,t=schemeTotals(sch);
  $('tMarks').textContent=mk.total;$('tItems').textContent=a.items;$('tPins').textContent=np;
  $('ledTotal').textContent=mk.total;
@@ -685,11 +701,11 @@ function paintLedger(){
  $('barB').style.flexGrow=Math.max(1,mk.short);$('barB').textContent=mk.short;
  $('barC').style.flexGrow=Math.max(1,mk.long);$('barC').textContent=mk.long;
  $('schName').textContent=sch.name;
- const first=2+state.shortParts;
+ const first=longQ0();
  $('schRows').innerHTML=
-  `<div class="row"><div class="pip"></div><div class="nm">MCQ weighting</div><div class="ct"><b>${Object.keys(sch.mcq).filter(c=>sch.mcq[c]>0).sort((x,y)=>x-y).map(c=>'C'+c+'×'+sch.mcq[c]).join(' ')}</b></div></div>`
-  +sch.short.map((p,i)=>`<div class="row"><div class="pip"></div><div class="nm">Q.${i+2} short</div><div class="ct"><b>${Object.keys(p.ch).filter(c=>p.ch[c]>0).sort((x,y)=>x-y).map(c=>'C'+c+'×'+p.ch[c]).join(' ')}</b> · try ${p.attempt}</div></div>`).join('')
-  +sch.long.map((al,i)=>`<div class="row"><div class="pip ${al.length>1?'mag':''}"></div><div class="nm">Q.${first+i} long ${al.length>1?'(either)':'(compulsory)'}</div><div class="ct"><b>Ch ${al.join(' or ')}</b></div></div>`).join('')
+  (secM()?`<div class="row"><div class="pip"></div><div class="nm">MCQ weighting</div><div class="ct"><b>${Object.keys(sch.mcq).filter(c=>sch.mcq[c]>0).sort((x,y)=>x-y).map(c=>'C'+c+'×'+sch.mcq[c]).join(' ')}</b></div></div>`:'')
+  +(secS()?sch.short.map((p,i)=>`<div class="row"><div class="pip"></div><div class="nm">Q.${shortQ0()+i} short</div><div class="ct"><b>${Object.keys(p.ch).filter(c=>p.ch[c]>0).sort((x,y)=>x-y).map(c=>'C'+c+'×'+p.ch[c]).join(' ')}</b> · try ${p.attempt}</div></div>`).join(''):'')
+  +(secL()?sch.long.map((al,i)=>`<div class="row"><div class="pip ${al.length>1?'mag':''}"></div><div class="nm">Q.${first+i} long ${al.length>1?'(either)':'(compulsory)'}</div><div class="ct"><b>Ch ${al.join(' or ')}</b></div></div>`).join(''):'')
   +`<div class="row"><div class="pip off"></div><div class="nm">Scheme total</div><div class="ct"><b>${t.total}</b> marks</div></div>`;
  const am={},as={},al={};
  built.mcq.forEach(q=>am[q.ch]=(am[q.ch]||0)+1);
@@ -722,7 +738,7 @@ function paintLedger(){
  $('exEm').style.color=state.alp?(th===0?'var(--green)':'var(--red)'):'var(--amber)';
  $('exList').innerHTML=a.hits.map(x=>`<div class="ex ${x.n>0?'hit':''}">${x.n>0?WRN:CHK}<div><b>Unit ${x.e.u} — ${x.e.name}</b><span>${x.e.pp} · ${x.n} ${state.alp?'match':'in play'}</span></div></div>`).join('');
  const pg=PAGES[state.page],usable=pg.h*96/72-state.margin*2*96/72;
- let est=Math.max(1,Math.ceil(($('sheet').offsetHeight||900)/usable));if(state.omr&&state.omrNewPage)est++;
+ let est=Math.max(1,Math.ceil(($('sheet').offsetHeight||900)/usable));if(state.omr&&built.mcq.length&&state.omrNewPage)est++;
  $('tagPages').textContent=`${pg.label} · ${est} sheet${est>1?'s':''}`;
  $('tagSeed').textContent='Set V-'+String(state.seed).padStart(2,'0');
  $('tagStruct').textContent=`${built.mcq.length} MCQ · ${ts} Short · ${built.long.length} Long`;
@@ -739,11 +755,11 @@ function paintLedger(){
 /* ══════════ PRESETS ══════════ */
 const saveHidden=()=>LS.set('pp.hiddenFactory.v1',hiddenF);
 const allPresets=()=>FACTORY.filter(p=>!hiddenF.includes(p.id)).concat(presets);
-function presetMarks(p){const c=p.cfg;
- const mc=(c.mcqCount!=null?c.mcqCount:state.mcqCount)*(c.mcqMark!=null?c.mcqMark:state.mcqMark);
+function presetMarks(p){const c=p.cfg,on=k=>(c[k]!==undefined?c[k]:state[k])!==false;
+ const mc=!on('incMcq')&&(on('incShort')||on('incLong'))?0:(c.mcqCount!=null?c.mcqCount:state.mcqCount)*(c.mcqMark!=null?c.mcqMark:state.mcqMark);
  const att=c.shortAttempts||state.shortAttempts,parts=c.shortParts!=null?c.shortParts:state.shortParts,sm=c.shortMark!=null?c.shortMark:state.shortMark;
- let sh=0;for(let i=0;i<parts;i++)sh+=(att[i]||0)*sm;
- return mc+sh+(c.longAttempt!=null?c.longAttempt:state.longAttempt)*(c.longMark!=null?c.longMark:state.longMark);}
+ let sh=0;if(on('incShort'))for(let i=0;i<parts;i++)sh+=(att[i]||0)*sm;
+ return mc+sh+(on('incLong')?(c.longAttempt!=null?c.longAttempt:state.longAttempt)*(c.longMark!=null?c.longMark:state.longMark):0);}
 function savePresets(){LS.set('pp.presets.v7',presets);}
 function captureConfig(sc){const cfg={};sc.forEach(s=>SCOPES[s].keys.forEach(k=>{cfg[k]=JSON.parse(JSON.stringify(state[k]));}));return cfg;}
 function applyPreset(p){if(!p)return;
@@ -1102,7 +1118,7 @@ function buildAttempts(){
   `<div class="attrow"><div class="al">Part ${i+1} → <em>${state.shortAttempts[i]*state.shortMark} marks</em></div>
    <div class="stepper" data-att="${i}"><button data-d="-1">−</button><b>${state.shortAttempts[i]}</b><button data-d="1">+</button></div></div>`).join('');}
 function buildLongSrc(){
- const first=2+state.shortParts,slots=plan.slots,b=B();
+ const first=longQ0(),slots=plan.slots,b=B();
  $('longSrc').innerHTML=Array.from({length:state.longPrinted},(_,i)=>{
   const sl=slots[i%slots.length]||{allow:[],av:[]},cur=plan.longChs[i];
   const opts=sl.allow.length?sl.allow:sl.av;
@@ -1133,7 +1149,7 @@ function syncUI(){
   el.classList.toggle('lock',!has||(state.alp&&B().alpEx.includes(c)));
   el.dataset.lock=!has?'—':'ALP';el.querySelector('.cap').textContent=`${k.m}·${k.s}·${k.l}`;});
  $('chEm').textContent=plan.chs.length+' / '+b.chapters.length;
- $('rMcq').value=state.mcqCount;$('vMcq').textContent=state.mcqCount;$('sMcq').textContent=state.mcqCount;
+ $('sMcq').textContent=state.mcqCount;
  $('selMcqMark').value=String(state.mcqMark);$('mcqEm').textContent=plan.marks.mcq+' marks';
  $('mcqHint').innerHTML=`Scheme wants <b>${t.mcq}</b>. Bank holds <b>${plan.maxM}</b>. Spread: `+plan.chs.map(c=>`C${c}×${plan.mcqAlloc[c]||0}`).join(' · ');
  $('sParts').textContent=state.shortParts;$('sPrint').textContent=state.shortPrinted;
@@ -1257,7 +1273,6 @@ document.querySelectorAll('.qb[data-q]').forEach(b=>b.addEventListener('click',(
  else state.chapters=schemeChapters(activeScheme()).filter(c=>bk.chapters.includes(c)&&!(state.alp&&B().alpEx.includes(c)));
  if(!state.chapters.length)state.chapters=[bk.alpCh[0]];
  markDirty();buildChips();render();}));
-$('rMcq').addEventListener('input',e=>{state.mcqCount=+e.target.value;markDirty();renderSoon();bump($('vMcq'));});
 $('selMcqMark').addEventListener('change',e=>{state.mcqMark=+e.target.value;markDirty();render();});
 $('selShortMark').addEventListener('change',e=>{state.shortMark=+e.target.value;markDirty();render();});
 $('selLongMark').addEventListener('change',e=>{state.longMark=+e.target.value;markDirty();render();});
@@ -1415,7 +1430,7 @@ document.addEventListener('keydown',e=>{if(!(e.ctrlKey||e.metaKey)||e.altKey)ret
  tb.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));
  $('tabSave').addEventListener('click',doDocx);setTab('stage');})();
 /* ══════════ BUG REPORTS (every report carries its own ID + diagnostics) ══════════ */
-const APP_BUILD='v16 · 2026-11-22',ISSUES='https://github.com/Ugwattu/paper-press/issues';
+const APP_BUILD='v17 · 2026-11-22',ISSUES='https://github.com/Ugwattu/paper-press/issues';
 function bugReport(){
  const s=state,b=BOOKS[s.grade],id='PP-'+Date.now().toString(36).toUpperCase()+'-'+Math.random().toString(36).slice(2,6).toUpperCase();
  const sch=(typeof activeScheme==='function'&&activeScheme())||{},mk=plan&&plan.marks||{};
@@ -1461,6 +1476,9 @@ function bugReport(){
  if(ab&&ab.raw&&abBtn){abBtn.classList.remove('hidden');abBtn.textContent='Download the safety copy made before the last update ('+new Date(ab.saved).toLocaleDateString()+')';
   abBtn.addEventListener('click',()=>{const data={};for(const k in ab.raw){try{data[k]=JSON.parse(ab.raw[k]);}catch(e){}}
    const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({app:MAGIC,version:1,created:ab.saved,data,logo:''})],{type:'application/json'}));a.download='paper-press-safety-copy-'+ab.saved.slice(0,10)+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);});}})();
+/* ══════════ PAPER SECTIONS: at least one must stay on ══════════ */
+(function(){const K=['incMcq','incShort','incLong'];K.forEach(k=>{const el=document.querySelector('.tg[data-tg="'+k+'"]');if(!el)return;
+ el.addEventListener('click',e=>{if(state[k]!==false&&K.filter(x=>x!==k).every(x=>state[x]===false)){e.stopImmediatePropagation();toast('At least one section must stay on.','warn');}},true);});})();
 /* ══════════ KEYBOARD SHORTCUTS ══════════ */
 const SHORTCUTS=[
  ['Ctrl / ⌘ + S','Save as .docx'],['Ctrl / ⌘ + P','Print / PDF'],['Ctrl / ⌘ + Z','Undo'],['Ctrl / ⌘ + Shift + Z','Redo'],

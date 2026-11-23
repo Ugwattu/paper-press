@@ -355,3 +355,5 @@ a.ibtn,a.act{text-decoration:none}a.act{justify-content:center}
 
 .sigil{width:36px;height:36px;background:none!important;border-radius:0;box-shadow:none}.sigil svg{width:36px;height:36px;display:block}
 input[type=range]:disabled{opacity:.4;cursor:not-allowed}
+
+.grp.off>.bd{opacity:.45;pointer-events:none;filter:grayscale(.7)}.grp.off>h3 em{color:var(--danger)}
