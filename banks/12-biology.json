@@ -1,0 +1,376 @@
+{
+  "schemaVersion": 2,
+  "courseId": "12-biology",
+  "class": 12,
+  "classLabel": "2nd year",
+  "classUr": "",
+  "subjectId": "biology",
+  "code": "BIO-12",
+  "subject": "Biology",
+  "subjectUr": "",
+  "language": "english",
+  "marks": 85,
+  "times": {
+    "objective": 20,
+    "subjective": 160,
+    "basis": "stated"
+  },
+  "alp": {
+    "chapters": [
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      23,
+      24,
+      25
+    ],
+    "excludedChapters": [
+      22
+    ],
+    "summary": "PECTAA Smart Syllabus / ALP and Pairing Scheme for Academic Session 2026–27 / BISE Exam-2027. The pattern below encodes the official paper distribution. Topic-level ALP rules are represented in exclusionRules where transcribed; consult the applicable PECTAA notification for the complete page/exercise deletion list. No questions are prefilled. Entirely deleted chapters: 22."
+  },
+  "patterns": [
+    {
+      "id": "alp-full",
+      "name": "ALP full paper",
+      "note": "Official PECTAA 2026–27 pairing scheme. Question banks are intentionally empty; author original questions in the chapter arrays.",
+      "mcq": {
+        "13": 1,
+        "14": 1,
+        "15": 2,
+        "16": 1,
+        "17": 1,
+        "18": 2,
+        "19": 2,
+        "20": 2,
+        "21": 1,
+        "23": 1,
+        "24": 1,
+        "25": 2
+      },
+      "mcqMark": 1,
+      "short": [
+        {
+          "ch": {
+            "13": 3,
+            "14": 3,
+            "19": 3,
+            "20": 3
+          },
+          "attempt": 8
+        },
+        {
+          "ch": {
+            "15": 2,
+            "16": 2,
+            "17": 2,
+            "18": 4,
+            "24": 2
+          },
+          "attempt": 8
+        },
+        {
+          "ch": {
+            "21": 3,
+            "23": 3,
+            "25": 3
+          },
+          "attempt": 6
+        }
+      ],
+      "shortMark": 2,
+      "longGroups": [
+        {
+          "id": "long",
+          "name": "Detailed questions",
+          "attempt": 3,
+          "questions": [
+            {
+              "id": "q5",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      13
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      25
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q6",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      14
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      24
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q7",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      15
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      21
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q8",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      16
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      20
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q9",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      17
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      19
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "totalMarks": 85
+    }
+  ],
+  "exclusionRules": [
+    {
+      "chapter": 13,
+      "name": "Homeostasis mechanisms and nature of excretory products by habitat",
+      "pages": "1–12",
+      "pattern": "basic mechanism of homeostasis|nature of excretory products in relation to habitat",
+      "flags": "i"
+    },
+    {
+      "chapter": 14,
+      "name": "Urinary-tract disorders",
+      "pages": "19–25",
+      "pattern": "disorders of urinary tract",
+      "flags": "i"
+    },
+    {
+      "chapter": 15,
+      "name": "Cranial nerves, autonomic effects, receptors, drugs and disorders",
+      "pages": "43–58",
+      "pattern": "cranial nerves|autonomic nervous system|receptors in human body|effects of drugs on nervous coordination|disorders of nervous system",
+      "flags": "i"
+    },
+    {
+      "chapter": 16,
+      "name": "Hormone nature, endocrine feedback and selected glands",
+      "pages": "59–74",
+      "pattern": "chemical nature of hormones|artificially synthesized steroids|other endocrine glands|feedback mechanism in endocrine system",
+      "flags": "i"
+    },
+    {
+      "chapter": 18,
+      "name": "Inheritance topics and selected exercise questions",
+      "pages": "90–116",
+      "pattern": "limitations to the law of independent assortment|inheritance and mathematical probabilities|polygenic inheritance|sex limited and sex influenced traits",
+      "flags": "i"
+    },
+    {
+      "chapter": 19,
+      "name": "DNA replication, gene expression and genetic-disease boxes",
+      "pages": "131–156",
+      "pattern": "dna replication|stability and variability in dna|regulating gene expression|minor mutations in humans|genetic diseases",
+      "flags": "i"
+    },
+    {
+      "chapter": 20,
+      "name": "Genetically modified organisms",
+      "pages": "(source notification page 157 onward)",
+      "pattern": "genetically modified organisms",
+      "flags": "i"
+    },
+    {
+      "chapter": 22,
+      "name": "Entire chapter excluded by ALP: Biostatistics",
+      "pages": "Not specified in the summary table",
+      "pattern": ".*",
+      "flags": "i"
+    }
+  ],
+  "chapters": [
+    {
+      "number": 13,
+      "name": "Thermoregulation and Osmoregulation",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 14,
+      "name": "Human Urinary System",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 15,
+      "name": "Human Nervous System",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 16,
+      "name": "Human Endocrine System",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 17,
+      "name": "Human Reproductive System",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 18,
+      "name": "Inheritance",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 19,
+      "name": "Chromosomes and DNA",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 20,
+      "name": "Biotechnology",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 21,
+      "name": "Immunity",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 22,
+      "name": "Biostatistics",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 23,
+      "name": "Pharmacology",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 24,
+      "name": "Evolution",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 25,
+      "name": "Ecology",
+      "mcq": [],
+      "short": [],
+      "long": []
+    }
+  ]
+}

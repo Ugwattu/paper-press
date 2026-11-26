@@ -1,0 +1,381 @@
+{
+  "schemaVersion": 2,
+  "courseId": "11-physics",
+  "class": 11,
+  "classLabel": "1st year",
+  "classUr": "",
+  "subjectId": "physics",
+  "code": "PHY-11",
+  "subject": "Physics",
+  "subjectUr": "",
+  "language": "english",
+  "marks": 85,
+  "times": {
+    "objective": 20,
+    "subjective": 160,
+    "basis": "stated"
+  },
+  "alp": {
+    "chapters": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "excludedChapters": [],
+    "summary": "PECTAA Smart Syllabus / ALP and Pairing Scheme for Academic Session 2026–27 / BISE Exam-2027. The pattern below encodes the official paper distribution. Topic-level ALP rules are represented in exclusionRules where transcribed; consult the applicable PECTAA notification for the complete page/exercise deletion list. No questions are prefilled."
+  },
+  "patterns": [
+    {
+      "id": "alp-full",
+      "name": "ALP full paper",
+      "note": "Official PECTAA 2026–27 pairing scheme. Question banks are intentionally empty; author original questions in the chapter arrays.",
+      "mcq": {
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 2,
+        "6": 1,
+        "7": 2,
+        "8": 1,
+        "9": 2,
+        "10": 2,
+        "11": 1,
+        "12": 2
+      },
+      "mcqMark": 1,
+      "short": [
+        {
+          "ch": {
+            "1": 2,
+            "2": 2,
+            "3": 4,
+            "4": 4
+          },
+          "attempt": 8
+        },
+        {
+          "ch": {
+            "6": 2,
+            "8": 2,
+            "5": 4,
+            "7": 4
+          },
+          "attempt": 8
+        },
+        {
+          "ch": {
+            "9": 3,
+            "10": 3,
+            "11": 1,
+            "12": 2
+          },
+          "attempt": 6
+        }
+      ],
+      "shortMark": 2,
+      "longGroups": [
+        {
+          "id": "long",
+          "name": "Detailed questions",
+          "attempt": 3,
+          "questions": [
+            {
+              "id": "q5",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "either",
+                    "chapters": [
+                      1,
+                      2,
+                      3
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 3,
+                  "chapterRule": {
+                    "type": "different-from-a",
+                    "chapters": [
+                      1,
+                      2,
+                      3
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q6",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "either",
+                    "chapters": [
+                      4,
+                      5,
+                      6
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 3,
+                  "chapterRule": {
+                    "type": "different-from-a",
+                    "chapters": [
+                      4,
+                      5,
+                      6
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q7",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "either",
+                    "chapters": [
+                      7,
+                      8
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 3,
+                  "chapterRule": {
+                    "type": "different-from-a",
+                    "chapters": [
+                      7,
+                      8
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q8",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "either",
+                    "chapters": [
+                      9,
+                      10
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 3,
+                  "chapterRule": {
+                    "type": "different-from-a",
+                    "chapters": [
+                      9,
+                      10
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q9",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "either",
+                    "chapters": [
+                      11,
+                      12
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 3,
+                  "chapterRule": {
+                    "type": "different-from-a",
+                    "chapters": [
+                      11,
+                      12
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "totalMarks": 85
+    }
+  ],
+  "exclusionRules": [
+    {
+      "chapter": 1,
+      "name": "Physical quantities and SI units",
+      "pages": "2–5",
+      "pattern": "physical quantities and their units|international system of units",
+      "flags": "i"
+    },
+    {
+      "chapter": 2,
+      "name": "Specified derivation, two-dimensional collisions and rocket propulsion topics",
+      "pages": "20–44",
+      "pattern": "derivation of equations of motion by graphical method|elastic collision in two dimensions|inelastic collision in two dimensions|rocket propulsion",
+      "flags": "i"
+    },
+    {
+      "chapter": 3,
+      "name": "Centripetal-force applications, flywheel and gyroscope",
+      "pages": "54–65",
+      "pattern": "applications of centripetal force|flywheel|gyroscope",
+      "flags": "i"
+    },
+    {
+      "chapter": 4,
+      "name": "Specified work and kinetic-energy topics",
+      "pages": "69–83",
+      "pattern": "work done by a constant force|energy.*k.e.",
+      "flags": "i"
+    },
+    {
+      "chapter": 5,
+      "name": "Specified solids/fluid dynamics topics",
+      "pages": "88–108",
+      "pattern": "classification of solids|young.s modulus|increase in flow velocity|viscous fluids|superfluids",
+      "flags": "i"
+    },
+    {
+      "chapter": 6,
+      "name": "Kinetic theory of gases and heat engine content",
+      "pages": "113–122",
+      "pattern": "kinetic theory of gasses|heat engine",
+      "flags": "i"
+    },
+    {
+      "chapter": 7,
+      "name": "Waves, stationary waves and tuning musical instruments",
+      "pages": "132–156",
+      "pattern": "stationary waves|tuning musical instruments",
+      "flags": "i"
+    },
+    {
+      "chapter": 8,
+      "name": "Optical activity and space-time distortion/tidal forces",
+      "pages": "169–181",
+      "pattern": "optical activity|space.time distortion|tidal forces",
+      "flags": "i"
+    }
+  ],
+  "chapters": [
+    {
+      "number": 1,
+      "name": "Measurements",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 2,
+      "name": "Force and Motion",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 3,
+      "name": "Circular and Rotational Motion",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 4,
+      "name": "Work, Energy and Power",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 5,
+      "name": "Solids and Fluid Dynamics",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 6,
+      "name": "Heat and Thermodynamics",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 7,
+      "name": "Waves and Vibrations",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 8,
+      "name": "Physical Optics and Gravitational Waves",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 9,
+      "name": "Electrostatics and Current Electricity",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 10,
+      "name": "Electromagnetic Induction",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 11,
+      "name": "Special Theory of Relativity",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 12,
+      "name": "Nuclear Physics",
+      "mcq": [],
+      "short": [],
+      "long": []
+    }
+  ]
+}

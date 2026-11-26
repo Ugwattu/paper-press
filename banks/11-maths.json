@@ -1,0 +1,409 @@
+{
+  "schemaVersion": 2,
+  "courseId": "11-maths",
+  "class": 11,
+  "classLabel": "1st year",
+  "classUr": "",
+  "subjectId": "maths",
+  "code": "MATH-11",
+  "subject": "Mathematics",
+  "subjectUr": "",
+  "language": "english",
+  "marks": 100,
+  "times": {
+    "objective": 30,
+    "subjective": 150,
+    "basis": "stated"
+  },
+  "alp": {
+    "chapters": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "excludedChapters": [
+      8
+    ],
+    "summary": "PECTAA 2026–27 ALP and pairing scheme for Class 11 Mathematics. The official chapter numbering and pairing distributions are encoded below. Topic/exercise exclusions are recorded in exclusionRules where transcribed; consult the applicable revised notification for the complete deletion schedule. Question arrays are intentionally empty for the author to populate with original questions."
+  },
+  "patterns": [
+    {
+      "id": "alp-full",
+      "name": "ALP full paper",
+      "note": "Official PECTAA Class 11 scheme: 20 MCQs; short Q2/Q3 attempt 8 and Q4 attempt 9; five long questions (5+5), attempt any 3. Unit 8 Mathematical Induction and Binomial Theorem is fully excluded.",
+      "mcq": {
+        "1": 2,
+        "2": 1,
+        "3": 1,
+        "4": 2,
+        "5": 1,
+        "6": 2,
+        "7": 2,
+        "9": 1,
+        "10": 2,
+        "11": 1,
+        "12": 1,
+        "13": 2,
+        "14": 2
+      },
+      "mcqMark": 1,
+      "short": [
+        {
+          "ch": {
+            "1": 4,
+            "2": 2,
+            "3": 2,
+            "4": 3,
+            "5": 1
+          },
+          "attempt": 8
+        },
+        {
+          "ch": {
+            "6": 4,
+            "7": 3,
+            "9": 2,
+            "10": 3
+          },
+          "attempt": 8
+        },
+        {
+          "ch": {
+            "11": 2,
+            "12": 3,
+            "13": 4,
+            "14": 4
+          },
+          "attempt": 9
+        }
+      ],
+      "shortMark": 2,
+      "longGroups": [
+        {
+          "id": "part-ii",
+          "name": "Part II · long questions",
+          "attempt": 3,
+          "questions": [
+            {
+              "id": "q5",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      1
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "either",
+                    "chapters": [
+                      2,
+                      3
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q6",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      4
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "either",
+                    "chapters": [
+                      5,
+                      9
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q7",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      6
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      7
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q8",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      10
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      12
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q9",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      13
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      14
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "totalMarks": 100
+    }
+  ],
+  "exclusionRules": [
+    {
+      "chapter": 1,
+      "pattern": "polar form.*complex|real.world.*complex number",
+      "flags": "i",
+      "name": "Deleted polar-form operations/examples and selected real-world applications; Exercise 1.5 Q2–22.",
+      "pages": "pp. 15–21"
+    },
+    {
+      "chapter": 2,
+      "pattern": "real.life applications.*functions|real.life.*graphs",
+      "flags": "i",
+      "name": "Deleted real-life application Examples 12–13 and Exercise 2.2 Q4–5.",
+      "pages": "pp. 31–33"
+    },
+    {
+      "chapter": 3,
+      "pattern": "real.world problems.*quadratic|application.*quadratic function",
+      "flags": "i",
+      "name": "Deleted real-world problem Examples 9–10 and Exercise 3.2 Q2–7.",
+      "pages": "pp. 41–43"
+    },
+    {
+      "chapter": 4,
+      "pattern": "elementary row operations|echelon form|reduced.*echelon|nonhomogeneous.*matrix|homogeneous.*matrix|applications.*matrices",
+      "flags": "i",
+      "name": "Deleted Sections 4.6–4.10 (row operations, echelon forms, non-homogeneous and homogeneous systems, applications) and listed Exercise 4.3 items.",
+      "pages": "pp. 61–77"
+    },
+    {
+      "chapter": 6,
+      "pattern": "arithmetico.geometric progression|real.life problems.*sequence|real.life.*series",
+      "flags": "i",
+      "name": "Deleted listed questions from Exercises 6.2–6.7; Section 6.8 arithmetico-geometric progressions and Exercise 6.8; listed Exercise 6.9 items; Section 6.11 real-life problems and Exercise 6.11.",
+      "pages": "pp. 94–122"
+    },
+    {
+      "chapter": 7,
+      "pattern": "permutation.*application|combination.*application",
+      "flags": "i",
+      "name": "Selected items in Exercises 7.2–7.4 are excluded.",
+      "pages": "pp. 129–139"
+    },
+    {
+      "chapter": 10,
+      "pattern": "triple angle identities|triple.angle formula",
+      "flags": "i",
+      "name": "Deleted Section 10.6 triple-angle identities and listed items from Exercises 10.3–10.4.",
+      "pages": "pp. 192–199"
+    },
+    {
+      "chapter": 11,
+      "pattern": "graph of sine|graph of cosine|graph of tangent|trigonometric function.*graph",
+      "flags": "i",
+      "name": "Deleted Sections 11.4.1–11.4.4 graphs of trigonometric functions and Exercise 11.2.",
+      "pages": "pp. 205–211"
+    },
+    {
+      "chapter": 12,
+      "pattern": "real.life applications.*transcendental|transcendental functions.*application",
+      "flags": "i",
+      "name": "Deleted applications of transcendental functions in real-life problems (Examples 14–17), Exercise 12.3.",
+      "pages": "pp. 234–236"
+    },
+    {
+      "chapter": 13,
+      "pattern": "applications of differentiation|real.life.*differentiation",
+      "flags": "i",
+      "name": "Deleted Section 13.7 application Examples 12–15 and Exercise 13.3.",
+      "pages": "pp. 255–257"
+    },
+    {
+      "chapter": 14,
+      "pattern": "scalar triple product|applications.*vectors in space",
+      "flags": "i",
+      "name": "Deleted listed items from Exercises 14.1–14.2 and Section 14.4 scalar triple product (Examples 23–31); Exercise 14.4.",
+      "pages": "pp. 266–290"
+    }
+  ],
+  "chapters": [
+    {
+      "number": 1,
+      "name": "Complex Numbers",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 2,
+      "name": "Functions and Graphs",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 3,
+      "name": "Theory of Quadratic Functions",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 4,
+      "name": "Matrices and Determinants",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 5,
+      "name": "Partial Fractions",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 6,
+      "name": "Sequences and Series",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 7,
+      "name": "Permutations and Combinations",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 8,
+      "name": "Mathematical Induction and Binomial Theorem",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 9,
+      "name": "Division of Polynomials",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 10,
+      "name": "Trigonometric Identities",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 11,
+      "name": "Trigonometric Functions and their Graphs",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 12,
+      "name": "Limit and Continuity",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 13,
+      "name": "Differentiations",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 14,
+      "name": "Vectors in Space",
+      "mcq": [],
+      "short": [],
+      "long": []
+    }
+  ]
+}

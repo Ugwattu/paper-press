@@ -1,0 +1,307 @@
+{
+  "schemaVersion": 2,
+  "courseId": "10-physics",
+  "class": 10,
+  "classLabel": "10th",
+  "classUr": "جماعت دہم",
+  "subjectId": "physics",
+  "code": "PHY-10",
+  "subject": "Physics",
+  "subjectUr": "طبیعیات",
+  "language": "bilingual",
+  "marks": 60,
+  "times": {
+    "objective": 15,
+    "subjective": 105,
+    "basis": "stated"
+  },
+  "alp": {
+    "chapters": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21
+    ],
+    "excludedChapters": [],
+    "summary": "PECTAA Smart Syllabus / ALP and Pairing Scheme for Academic Session 2026–27 / BISE Exam-2027. The pattern below encodes the official paper distribution. Topic-level ALP rules are represented in exclusionRules where transcribed; consult the applicable PECTAA notification for the complete page/exercise deletion list. No questions are prefilled."
+  },
+  "patterns": [
+    {
+      "id": "alp-full",
+      "name": "ALP full paper",
+      "note": "Official PECTAA 2026–27 pairing scheme. Question banks are intentionally empty; author original questions in the chapter arrays.",
+      "mcq": {
+        "10": 1,
+        "11": 1,
+        "12": 1,
+        "13": 1,
+        "14": 1,
+        "15": 1,
+        "16": 1,
+        "17": 1,
+        "18": 1,
+        "19": 1,
+        "20": 1,
+        "21": 1
+      },
+      "mcqMark": 1,
+      "short": [
+        {
+          "ch": {
+            "10": 2,
+            "11": 2,
+            "12": 2,
+            "13": 2
+          },
+          "attempt": 5
+        },
+        {
+          "ch": {
+            "14": 2,
+            "15": 2,
+            "16": 2,
+            "17": 2
+          },
+          "attempt": 5
+        },
+        {
+          "ch": {
+            "18": 2,
+            "19": 2,
+            "20": 2,
+            "21": 2
+          },
+          "attempt": 5
+        }
+      ],
+      "shortMark": 2,
+      "longGroups": [
+        {
+          "id": "long",
+          "name": "Detailed questions",
+          "attempt": 2,
+          "questions": [
+            {
+              "id": "q5",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "either",
+                    "chapters": [
+                      10,
+                      11,
+                      12,
+                      13
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "different-from-a",
+                    "chapters": [
+                      10,
+                      11,
+                      12,
+                      13
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q6",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "either",
+                    "chapters": [
+                      14,
+                      15,
+                      16,
+                      17
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "different-from-a",
+                    "chapters": [
+                      14,
+                      15,
+                      16,
+                      17
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q7",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "either",
+                    "chapters": [
+                      18,
+                      19,
+                      20,
+                      21
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "different-from-a",
+                    "chapters": [
+                      18,
+                      19,
+                      20,
+                      21
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "totalMarks": 60
+    }
+  ],
+  "exclusionRules": [
+    {
+      "chapter": 10,
+      "name": "Specific heat capacity, evaporation and superconductivity",
+      "pages": "7–16",
+      "pattern": "specific heat capacity|evaporation|superconductivity",
+      "flags": "i"
+    },
+    {
+      "chapter": 11,
+      "name": "Heat transfer through radiation",
+      "pages": "25–28",
+      "pattern": "heat transfer through radiation",
+      "flags": "i"
+    },
+    {
+      "chapter": 12,
+      "name": "Properties of waves and seismic/tsunami waves",
+      "pages": "39–43",
+      "pattern": "properties of waves|seismic and tsunami waves",
+      "flags": "i"
+    },
+    {
+      "chapter": 13,
+      "name": "Echo, refraction/diffraction of sound and acoustic protection",
+      "pages": "53–59",
+      "pattern": "reflection of sound|echo|refraction and diffraction of sound|acoustic protection",
+      "flags": "i"
+    }
+  ],
+  "chapters": [
+    {
+      "number": 10,
+      "name": "Thermal Physics",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 11,
+      "name": "Transfer of Thermal Energy",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 12,
+      "name": "Waves",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 13,
+      "name": "Sound",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 14,
+      "name": "Light",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 15,
+      "name": "Electrostatics",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 16,
+      "name": "Electricity",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 17,
+      "name": "Electromagnetism",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 18,
+      "name": "Electromagnetic Induction and Electromagnetic Waves",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 19,
+      "name": "Electronics",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 20,
+      "name": "Atomic and Nuclear Physics",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 21,
+      "name": "Space and Environment",
+      "mcq": [],
+      "short": [],
+      "long": []
+    }
+  ]
+}

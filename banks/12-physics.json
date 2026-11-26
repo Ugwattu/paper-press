@@ -1,0 +1,309 @@
+{
+  "schemaVersion": 2,
+  "courseId": "12-physics",
+  "class": 12,
+  "classLabel": "2nd year",
+  "classUr": "",
+  "subjectId": "physics",
+  "code": "PHY-12",
+  "subject": "Physics",
+  "subjectUr": "",
+  "language": "english",
+  "marks": 85,
+  "times": {
+    "objective": 20,
+    "subjective": 160,
+    "basis": "inferred"
+  },
+  "alp": {
+    "chapters": [
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21
+    ],
+    "excludedChapters": [],
+    "summary": "PECTAA Smart Syllabus / ALP and Pairing Scheme for Academic Session 2026–27 / BISE Exam-2027. The pattern below encodes the official paper distribution. Topic-level ALP rules are represented in exclusionRules where transcribed; consult the applicable PECTAA notification for the complete page/exercise deletion list. No questions are prefilled. Chapter titles for 12-physics were rechecked against the 2026–27 PECTAA ALP notification."
+  },
+  "patterns": [
+    {
+      "id": "alp-full",
+      "name": "ALP full paper",
+      "note": "Official PECTAA 2026–27 pairing scheme. Question banks are intentionally empty; author original questions in the chapter arrays.",
+      "mcq": {
+        "13": 2,
+        "14": 2,
+        "15": 2,
+        "16": 2,
+        "17": 2,
+        "18": 2,
+        "19": 2,
+        "20": 2,
+        "21": 1
+      },
+      "mcqMark": 1,
+      "short": [
+        {
+          "ch": {
+            "13": 4,
+            "14": 4,
+            "15": 4
+          },
+          "attempt": 8
+        },
+        {
+          "ch": {
+            "16": 4,
+            "17": 4,
+            "18": 4
+          },
+          "attempt": 8
+        },
+        {
+          "ch": {
+            "19": 3,
+            "20": 3,
+            "21": 3
+          },
+          "attempt": 6
+        }
+      ],
+      "shortMark": 2,
+      "longGroups": [
+        {
+          "id": "long",
+          "name": "Detailed questions",
+          "attempt": 3,
+          "questions": [
+            {
+              "id": "q5",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      13
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 3,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      14
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q6",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      15
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 3,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      16
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q7",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      17
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 3,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      17
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q8",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      18
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 3,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      19
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q9",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      20
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 3,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      21
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "totalMarks": 85
+    }
+  ],
+  "exclusionRules": [
+    {
+      "chapter": 13,
+      "name": "Stellar evolution",
+      "pages": "9–12",
+      "pattern": "stellar evolution",
+      "flags": "i"
+    },
+    {
+      "chapter": 14,
+      "name": "Specified SHM graphical/resonance topics",
+      "pages": "22–38",
+      "pattern": "simple harmonic motion and uniform circular motion|graphical representation of s.h.m|sharpness of resonance",
+      "flags": "i"
+    },
+    {
+      "chapter": 15,
+      "name": "Interference, Newton rings and diffraction grating",
+      "pages": "45–52",
+      "pattern": "interference of microwaves|newton.s rings|diffraction grating",
+      "flags": "i"
+    },
+    {
+      "chapter": 16,
+      "name": "Combined capacitance and capacitor discharge",
+      "pages": "68–77",
+      "pattern": "combined capacitance of capacitors|exponential decay of discharging capacitor",
+      "flags": "i"
+    }
+  ],
+  "chapters": [
+    {
+      "number": 13,
+      "name": "Thermal Physics",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 14,
+      "name": "Simple Harmonic Motion",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 15,
+      "name": "Physical Optics",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 16,
+      "name": "Electrostatics",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 17,
+      "name": "Alternating Current",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 18,
+      "name": "Quantum Physics",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 19,
+      "name": "Nuclear and Particle Physics",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 20,
+      "name": "Medical Physics",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 21,
+      "name": "Space and Environment",
+      "mcq": [],
+      "short": [],
+      "long": []
+    }
+  ]
+}

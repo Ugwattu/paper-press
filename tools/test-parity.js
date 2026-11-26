@@ -13,8 +13,8 @@ let runs = 0, fails = 0;
 for (const grade of [9, 10]) for (const alp of [true, false]) for (const urdu of [true, false]) for (const seed of [3, 11]) for (const opt of ['auto', '2', '1']) {
   const tag = `g${grade} ${alp ? 'ALP' : 'full'} ${urdu ? 'bi' : 'en'} seed${seed} opt:${opt}`;
   try {
-    ev(`state=JSON.parse(JSON.stringify(DEF));state.grade=${grade};state.alp=${alp};state.chapters=${alp ? `BOOKS[${grade}].alpCh.slice()` : `BOOKS[${grade}].chapters.slice()`};
-      state.schemeId=offFor(${grade}).id;state.showUrdu=${urdu};state.seed=${seed};state.optMode='${opt}';overrides={};sticky={};applySchemeCounts(true);render();`);
+    ev(`state=JSON.parse(JSON.stringify(DEF));state.grade=${grade};state.sid='computer';state.alp=${alp};state.chapters=${alp ? `BOOKS['${grade}-computer'].alpCh.slice()` : `BOOKS['${grade}-computer'].chapters.slice()`};
+      state.schemeId=offFor('${grade}-computer').id;state.showUrdu=${urdu};state.seed=${seed};state.optMode='${opt}';overrides={};sticky={};applySchemeCounts(true);render();`);
     const items = JSON.parse(ev(`JSON.stringify([...built.mcq.map(q=>[q.en,...q.o.map(o=>o[0])]),...built.short.flatMap(p=>p.items).map(q=>[q.en]),...built.long.map(q=>[q.en])])`));
     const needles = items.flat().filter((t) => t && t !== '—').map(flat);
     const screen = flat(ev('sheet.textContent')), docx = docText();

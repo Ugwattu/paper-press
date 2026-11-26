@@ -1,0 +1,338 @@
+{
+  "schemaVersion": 2,
+  "courseId": "11-biology",
+  "class": 11,
+  "classLabel": "1st year",
+  "classUr": "",
+  "subjectId": "biology",
+  "code": "BIO-11",
+  "subject": "Biology",
+  "subjectUr": "",
+  "language": "english",
+  "marks": 85,
+  "times": {
+    "objective": 20,
+    "subjective": 160,
+    "basis": "stated"
+  },
+  "alp": {
+    "chapters": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "excludedChapters": [
+      7
+    ],
+    "summary": "PECTAA Smart Syllabus / ALP and Pairing Scheme for Academic Session 2026–27 / BISE Exam-2027. The pattern below encodes the official paper distribution. Topic-level ALP rules are represented in exclusionRules where transcribed; consult the applicable PECTAA notification for the complete page/exercise deletion list. No questions are prefilled."
+  },
+  "patterns": [
+    {
+      "id": "alp-full",
+      "name": "ALP full paper",
+      "note": "Official PECTAA 2026–27 pairing scheme. Question banks are intentionally empty; author original questions in the chapter arrays.",
+      "mcq": {
+        "1": 2,
+        "2": 1,
+        "3": 1,
+        "4": 2,
+        "5": 1,
+        "6": 2,
+        "8": 2,
+        "9": 1,
+        "10": 1,
+        "11": 2,
+        "12": 2
+      },
+      "mcqMark": 1,
+      "short": [
+        {
+          "ch": {
+            "1": 2,
+            "3": 3,
+            "8": 4,
+            "11": 3
+          },
+          "attempt": 8
+        },
+        {
+          "ch": {
+            "2": 2,
+            "5": 3,
+            "9": 3,
+            "12": 4
+          },
+          "attempt": 8
+        },
+        {
+          "ch": {
+            "4": 3,
+            "6": 3,
+            "10": 3
+          },
+          "attempt": 6
+        }
+      ],
+      "shortMark": 2,
+      "longGroups": [
+        {
+          "id": "long",
+          "name": "Detailed questions",
+          "attempt": 3,
+          "questions": [
+            {
+              "id": "q5",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      1
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      11
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q6",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      3
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      9
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q7",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      6
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      10
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q8",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      2
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      12
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q9",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      4
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      8
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "totalMarks": 85
+    }
+  ],
+  "exclusionRules": [
+    {
+      "chapter": 7,
+      "name": "Entire chapter deleted under ALP",
+      "pages": "167–176",
+      "pattern": ".*",
+      "flags": "i"
+    },
+    {
+      "chapter": 10,
+      "name": "Specified respiratory surface, gas transport and otitis media content",
+      "pages": "216–230",
+      "pattern": "properties of the respiratory surface|transport of gases|otitis media",
+      "flags": "i"
+    },
+    {
+      "chapter": 11,
+      "name": "Blood vessels and cardiovascular disorders",
+      "pages": "238–254",
+      "pattern": "blood vessels|cardiovascular disorders",
+      "flags": "i"
+    },
+    {
+      "chapter": 12,
+      "name": "Selected skeletal-system disorders/development topics",
+      "pages": "257–279",
+      "pattern": "bone development|disorders of skeletal system|rheumatoid arthritis|osteoarthritis|tetany|tetanus",
+      "flags": "i"
+    }
+  ],
+  "chapters": [
+    {
+      "number": 1,
+      "name": "Biodiversity and Classification",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 2,
+      "name": "Bacteria and Viruses",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 3,
+      "name": "Cells and Subcellular Organelles",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 4,
+      "name": "Biomolecules",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 5,
+      "name": "Enzymes",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 6,
+      "name": "Bioenergetics",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 7,
+      "name": "Structural and Computational Biology",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 8,
+      "name": "Plant Physiology",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 9,
+      "name": "Animal Nutrition",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 10,
+      "name": "Human Respiratory System",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 11,
+      "name": "Human Circulatory System",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 12,
+      "name": "Human Skeletal and Muscular Systems",
+      "mcq": [],
+      "short": [],
+      "long": []
+    }
+  ]
+}

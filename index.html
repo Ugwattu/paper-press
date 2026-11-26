@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-<title>Paper Press — ALP Board Paper Studio · Computer Science 9 &amp; 10</title>
+<title>Paper Press — PECTAA Board Paper Studio · Classes 9–12</title>
 <link rel="icon" href="icons/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="icons/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -12,15 +12,15 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="app.css?v=17">
-<link rel="stylesheet" href="paper.css?v=17">
+<link rel="stylesheet" href="app.css?v=22">
+<link rel="stylesheet" href="paper.css?v=22">
 
 </head>
 <body>
 <header class="topbar">
   <div class="brand">
     <div class="sigil"><svg viewBox="0 0 64 64" xmlns:c2pa="http://c2pa.org/manifest"><rect width="64" height="64" rx="15" fill="#2a58e0"/><path d="M19 12h19l9 9v29a3 3 0 01-3 3H19a3 3 0 01-3-3V15a3 3 0 013-3z" fill="#fff"/><path d="M38 12v9h9" fill="#cdd9fb"/><g fill="none" stroke="#2a58e0" stroke-width="2.4"><circle cx="24.5" cy="30" r="2.7"/><circle cx="32" cy="30" r="2.7"/><circle cx="39.5" cy="30" r="2.7"/><circle cx="24.5" cy="38" r="2.7"/><circle cx="32" cy="38" r="2.7" fill="#2a58e0"/><circle cx="39.5" cy="38" r="2.7"/></g><path d="M21.5 46h21" stroke="#9db4f4" stroke-width="2.4" stroke-linecap="round"/><metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTozM2QwNjVkYy0yYTU3LTRkOTgtOTE2Zi1kY2Q0Mzc0NTY4N2QAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaJHGolNRtnQcpDv2tlmkyMYAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDozMWZlNzI3Mi1jNzI5LTRjMTgtYWI1OS0wNGRlODk5NjY4YmJscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoExTlVLKbWopB4jfnAnicOQAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggoCyrFrqM7MS8EApo/Rm81PKW089R2cPoBh5CTM5M4oOkZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaPyln6c+jDrILCHXnac7gEwAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRMAAAAAAAAAAAAAAAAZGhhc2hYIMWWyyEwfeXxvCU+JxyLFuVb+DyWBUPcWn8j/ZX1eJIKZG5hbWVuanVtYmYgbWFuaWZlc3RqZXhjbHVzaW9uc4GiZXN0YXJ0GQKtZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjMzZDA2NWRjLTJhNTctNGQ5OC05MTZmLWRjZDQzNzQ1Njg3ZC9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOmFjMzI3ZjQ4LTFmYWYtNDAwYS1hMjMxLWJkNWZhZDlmMjQzYXJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCCgLKsWuozsxLwQCmj9GbzU8pbTz1HZw+gGHkJMzkzig6JjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFgg6IpYuhCoeZd3SpWxHFovxlVPAApH67D/q2ovyWvmXgOiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggoW7RFWbfzmhsdrraTa/wBABJiAropTlcXPNwtZVNeMl0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQHq/dgzZHGQ/Ry77kJhSUgU4j0leJh4nSq1zvyP0M8q8xxyrcgcQqd/ANfpfA1oZZzNPLFpDt1GA+yc3CfW3fZ8=</c2pa:manifest></metadata></svg></div>
-    <div><h1>Paper <em>Press</em></h1><p>ALP Board Studio · CS 9 &amp; 10</p></div>
+    <div><h1>Paper <em>Press</em></h1><p>PECTAA Board Paper Studio · Classes 9–12</p></div>
   </div>
   <span class="topdiv"></span>
   <div class="gbadge" id="gBadge">Class 9th</div>
@@ -46,12 +46,10 @@
   <div class="panes">
 <section class="pane" data-pane="paper">
   <div class="grp g-v">
-    <h3><i></i>Class &amp; Syllabus<em id="bookEm"></em></h3>
+    <h3><i></i>Class &amp; Subject<em id="bookEm"></em></h3>
     <div class="bd">
-      <div class="gradecard" id="gradeCard">
-        <button data-g="9"><b>9th</b><small>CS &amp; Entrepreneurship</small></button>
-        <button data-g="10"><b>10th</b><small>CS &amp; Entrepreneurship</small></button>
-      </div>
+      <div class="gradecard" id="gradeCard" aria-label="Choose class"></div>
+      <div class="coursegrid" id="courseGrid" aria-label="Choose subject"></div>
       <div class="alpcard" id="alpCard">
         <div class="r1"><div class="tt"><b id="alpTitle">ALP SMART SYLLABUS</b><small id="alpSub"></small></div><div class="bigsw"></div></div>
         <div class="desc" id="alpDesc"></div>
@@ -73,6 +71,7 @@
     <h3><i></i>Chapters<em id="chEm"></em></h3>
     <div class="bd">
       <div class="chgrid" id="chGrid"></div>
+      <div class="content-pick" id="contentPick"></div>
       <div class="quick"><button class="qb" data-q="all">All</button><button class="qb" data-q="alp">ALP set</button><button class="qb" data-q="scheme">Scheme set</button></div>
       <div class="hint">Badge = live bank <b>MCQ · Short · Long</b>. The picker can still reach <u>any</u> chapter.</div>
     </div>
@@ -142,12 +141,21 @@
         <div class="hint">Layout of the title block and the Class · Subject · Marks · Time strip.</div></div>
       <div class="ctl"><div class="lab"><span>Institute</span></div><input type="text" id="iInst"></div>
       <div class="ctl"><div class="lab"><span>Test title</span></div><input type="text" id="iTitle"></div>
-      <div class="row2">
-        <div class="ctl"><div class="lab"><span>Class (printed)</span></div><input type="text" id="iClass"></div>
-        <div class="ctl"><div class="lab"><span>Time</span></div><input type="text" id="iTime"></div>
+      <div class="ctl"><div class="lab"><span>Class (printed)</span></div><input type="text" id="iClass"></div>
+      <div class="ctl"><div class="lab"><span>Paper format</span></div>
+        <select id="selSheetMode"><option value="single">Single paper</option><option value="two">Objective + Subjective sheets (one file)</option></select>
+        <div class="hint">Two sheets are exported together in one Word file. Each sheet has its own header, student fields, marks and duration.</div></div>
+      <div class="ctl">
+        <div class="lab"><span>Exam timing · minutes</span><span id="timeBasis" class="time-badge">ALP default stated</span></div>
+        <div class="row2">
+          <div class="ctl"><div class="lab"><span>Objective</span></div><input type="number" id="iTimeObj" min=1 max=600 step=1 inputmode="numeric"></div>
+          <div class="ctl"><div class="lab"><span>Subjective</span></div><input type="number" id="iTimeSubj" min=1 max=600 step=1 inputmode="numeric"></div>
+        </div>
+        <div class="row2 time-actions"><button class="qb" type="button" id="btnTimeReset">Reset to ALP default</button><div class="hint" id="timeSummary">Single-paper duration: 2 Hours</div></div>
+        <div class="hint">Each paper section has its own duration. These minute values are saved with presets; the single-paper header prints their combined time.</div>
       </div>
       <div class="ctl"><div class="lab"><span>Subject</span></div><input type="text" id="iSubject"></div>
-      <div class="ctl"><div class="lab"><span>Subject (Urdu)</span></div><input type="text" id="iSubjectUr" dir="rtl" lang="ur"></div>
+      <div class="ctl" id="subjectUrWrap"><div class="lab"><span>Subject (Urdu)</span></div><input type="text" id="iSubjectUr" dir="rtl" lang="ur"></div>
       <div class="row2">
         <div class="ctl"><div class="lab"><span>Date (prefilled)</span></div><input type="text" id="iDate" placeholder="empty = fill-in line"></div>
         <div class="ctl"><div class="lab"><span>Section (prefilled)</span></div><input type="text" id="iSection" placeholder="empty = fill-in line"></div>
@@ -189,9 +197,11 @@
       <div class="ctl"><div class="lab"><span>English face</span></div>
         <select id="selEn"><option value="Times New Roman">Times New Roman</option><option value="Cambria">Cambria</option><option value="Georgia">Georgia</option><option value="Arial">Arial</option><option value="Book Antiqua">Book Antiqua</option></select></div>
       <div class="ctl"><div class="lab"><span>English font size</span><b id="vEn">11 pt</b></div><input type="range" id="rEn" min="7" max="18" step="0.5"></div>
-      <div class="ctl"><div class="lab"><span>Urdu face</span></div>
-        <select id="selUr"><option value="Jameel Noori Nastaleeq">Jameel Noori Nastaleeq</option><option value="Alvi Nastaleeq">Alvi Nastaleeq</option><option value="Noto Nastaliq Urdu">Noto Nastaliq Urdu</option><option value="Nafees Nastaleeq">Nafees Nastaleeq</option><option value="Urdu Typesetting">Urdu Typesetting</option></select></div>
-      <div class="ctl"><div class="lab"><span>Urdu font size</span><b id="vUr">11 pt</b></div><input type="range" id="rUr" min="7" max="30" step="0.5"></div>
+      <div id="urduTypeControls">
+        <div class="ctl"><div class="lab"><span>Urdu face</span></div>
+          <select id="selUr"><option value="Jameel Noori Nastaleeq">Jameel Noori Nastaleeq</option><option value="Alvi Nastaleeq">Alvi Nastaleeq</option><option value="Noto Nastaliq Urdu">Noto Nastaliq Urdu</option><option value="Nafees Nastaleeq">Nafees Nastaleeq</option><option value="Urdu Typesetting">Urdu Typesetting</option></select></div>
+        <div class="ctl"><div class="lab"><span>Urdu font size</span><b id="vUr">11 pt</b></div><input type="range" id="rUr" min="7" max="30" step="0.5"></div>
+      </div>
       <div class="row2">
         <div class="ctl"><div class="lab"><span>Line height</span><b id="vLh">1.35</b></div><input type="range" id="rLh" min="1" max="2" step="0.05"></div>
         <div class="ctl"><div class="lab"><span>Cell padding</span><b id="vPad">4 pt</b></div><input type="range" id="rPad" min="1" max="12" step="0.5"></div>
@@ -224,7 +234,7 @@
       </div>
       <div class="ctl" id="bwWrap"><div class="lab"><span>Border weight</span><b id="vBw">0.75 pt</b></div><input type="range" id="rBw" min="0.25" max="2.5" step="0.25"></div>
       <div class="ctl"><div class="lab"><span>Serial column width</span><b id="vNumW">10%</b></div><input type="range" id="rNumW" min="6" max="18" step="0.5">
-        <div class="hint">The English and Urdu serial columns are always the same width. No marks column.</div></div>
+        <div class="hint" id="numWidthHint">The English and Urdu serial columns are always the same width. No marks column.</div></div>
       <div class="tg" data-tg="insAuto"><div><span>Auto-fit instruction row</span><small>keeps “Q. No. 4: … (4 × 2 = 8)” on one line</small></div><div class="sw"></div></div>
       <div class="ctl"><div class="lab"><span>Instruction row split</span><b id="vInsSplit">Auto</b></div><input type="range" id="rInsSplit" min="45" max="76" step="1">
         <div class="hint">Width of the English side of each “Q. No. …” row when auto-fit is off. The stems below stay equal.</div></div>
@@ -243,7 +253,7 @@
       <div class="subwrap hidden" id="omrSub">
         <div class="tgs">
           <div class="tg" data-tg="omrRule"><div><span>Instruction bar</span></div><div class="sw"></div></div>
-          <div class="tg" data-tg="omrUrdu"><div><span>Urdu heading</span></div><div class="sw"></div></div>
+          <div class="tg" id="omrUrduControl" data-tg="omrUrdu"><div><span>Urdu heading</span></div><div class="sw"></div></div>
           <div class="tg" data-tg="omrNewPage"><div><span>OMR starts on a new page</span></div><div class="sw"></div></div>
         </div>
         <div class="ctl"><div class="lab"><span>Position on paper</span></div>
@@ -275,7 +285,7 @@
     <h3><i></i>Language &amp; Preview</h3>
     <div class="bd">
       <div class="tgs">
-        <div class="tg" data-tg="showUrdu"><div><span>Bilingual Urdu column</span><small>off = English full width</small></div><div class="sw"></div></div>
+        <div class="tg" id="bilingualToggle" data-tg="showUrdu"><div><span>Bilingual Urdu column</span><small>off = English full width</small></div><div class="sw"></div></div>
         <div class="tg" data-tg="showKey"><div><span>Answer key overlay</span><small>preview only</small></div><div class="sw"></div></div>
         <div class="tg" data-tg="showTags"><div><span>Chapter tags</span><small>preview only</small></div><div class="sw"></div></div>
       </div>
@@ -302,7 +312,7 @@
       <button class="act sav wide" id="btnSavePreset" style="height:38px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>Save current setup as preset</button>
       <div class="psearch"><input type="text" id="preSearch" placeholder="Search presets…"><select id="preSort" style="width:100px;flex:none"><option value="new">Newest</option><option value="name">A–Z</option><option value="marks">Marks</option><option value="grade">Grade</option></select></div>
       <button class="qb hidden" id="preRestoreF"></button>
-      <div class="seg mag" id="segPreFilter"><button data-v="all">All</button><button data-v="mine">Mine</button><button data-v="factory">Factory</button><button data-v="g9">9th</button><button data-v="g10">10th</button></div>
+      <div class="seg mag" id="segPreFilter"><button data-v="all">All</button><button data-v="course">This course</button><button data-v="mine">Mine</button><button data-v="factory">Factory</button><button data-v="g9">9th</button><button data-v="g10">10th</button></div>
       <div class="bulkbar hidden" id="bulkBar"><span id="bulkTxt">0 selected</span><button class="qb mag" id="bulkDel" style="flex:none;width:76px">Delete</button><button class="qb" id="bulkClr" style="flex:none;width:56px">Clear</button></div>
       <div class="plist" id="preList"></div>
       <div class="row2"><button class="filebtn" id="preExport">Export JSON</button><button class="filebtn" id="preImport">Import JSON</button></div>
@@ -355,6 +365,11 @@
     <button class="mini" id="miniShuffle">↻ new set</button>
     <button class="mini" id="miniKey">key</button>
   </div>
+  <div class="sheet-tabs hidden" id="sheetTabs" role="tablist" aria-label="Paper sheet preview">
+    <button type="button" data-sheet="both" class="on" role="tab">Both</button>
+    <button type="button" data-sheet="objective" role="tab">Objective</button>
+    <button type="button" data-sheet="subjective" role="tab">Subjective</button>
+  </div>
   <div class="sheetwrap" id="sheetwrap">
     <div class="sheet" id="sheet"></div>
     <div class="stamp" id="stamp"><b id="stampTitle">DOCX SAVED</b><span id="stampSub"></span></div>
@@ -405,8 +420,8 @@
 <div class="busy" id="busy" role="status" aria-live="polite"><div class="bx"><div class="sp2"></div><b>Building your .docx</b><small>packaging WordprocessingML + images…</small></div></div>
 <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
 
-<script src="bank-loader.js?v=17"></script>
-<script>PPBanks.boot('17');</script>
+<script src="bank-loader.js?v=29"></script>
+<script>PPBanks.boot('30');</script>
 <noscript><p style="position:fixed;inset:0;background:#05091a;color:#fff;padding:2em;font:16px sans-serif">Paper Press needs JavaScript to build question papers.</p></noscript>
 
 </body>

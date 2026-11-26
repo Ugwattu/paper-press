@@ -1,0 +1,215 @@
+{
+  "schemaVersion": 2,
+  "courseId": "11-computer",
+  "class": 11,
+  "classLabel": "1st year",
+  "classUr": "",
+  "subjectId": "computer",
+  "code": "CS-11",
+  "subject": "Computer Science & Entrepreneurship",
+  "subjectUr": "",
+  "language": "english",
+  "marks": 75,
+  "times": {
+    "objective": 20,
+    "subjective": 130,
+    "basis": "stated"
+  },
+  "alp": {
+    "chapters": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "excludedChapters": [],
+    "summary": "PECTAA 2026–27 ALP for Computer Science & Entrepreneurship, Grade 11 (notification 06-11-2026). Units 1–9 remain in the ALP scope; topic and exercise exclusions are recorded in exclusionRules. The official scheme is 15 MCQs, three short groups (attempt 6 of 9 in each), and five long questions (attempt 3). Question content has not yet been authored."
+  },
+  "patterns": [
+    {
+      "id": "pectaa-2026-27-computer-11",
+      "name": "PECTAA ALP · Official 2026–27 (11th)",
+      "note": "From PECTAA/C&C Unit/2026/1239, dated 06-11-2026. ALP exclusions apply; all questions remain to be authored.",
+      "mcq": {
+        "1": 3,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 2,
+        "6": 1,
+        "7": 2,
+        "8": 2,
+        "9": 2
+      },
+      "mcqMark": 1,
+      "short": [
+        {
+          "ch": {
+            "1": 4,
+            "2": 3,
+            "8": 2
+          },
+          "attempt": 6
+        },
+        {
+          "ch": {
+            "3": 3,
+            "6": 4,
+            "7": 2
+          },
+          "attempt": 6
+        },
+        {
+          "ch": {
+            "4": 3,
+            "5": 3,
+            "9": 3
+          },
+          "attempt": 6
+        }
+      ],
+      "shortMark": 2,
+      "long": [
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ],
+        [
+          5
+        ],
+        [
+          7
+        ]
+      ],
+      "longAttempt": 3,
+      "longMark": 8,
+      "totalMarks": 75
+    }
+  ],
+  "exclusionRules": [
+    {
+      "chapter": 1,
+      "name": "1.5 Graphical Representation of Software Systems",
+      "pages": "pp. 9–13 · MCQ 7 (p.18) · Short 5–6 (p.19) · Long 1, 3, 4 (p.19)",
+      "pattern": "graphical representation of software systems|software system diagram",
+      "flags": "i"
+    },
+    {
+      "chapter": 2,
+      "name": "2.8–2.10 Advanced Python topics",
+      "pages": "2.8 OOP (pp.35–36) · 2.9 Advanced concepts (pp.36–37) · 2.10 Testing/debugging (p.38) · MCQ 6 (p.39) · Short 5, 8 and Long 1(a,c) (p.40)",
+      "pattern": "object.oriented programming in python|advanced python concepts|testing and debugging in python",
+      "flags": "i"
+    },
+    {
+      "chapter": 3,
+      "name": "3.3.3 Complexity Classes (P, NP, NP-hard, NP-complete)",
+      "pages": "pp. 45–46 · MCQs 2–4 (p.54) · Long 1 (p.55)",
+      "pattern": "complexity classes|\\bNP.?hard\\b|\\bNP.?complete\\b",
+      "flags": "i"
+    },
+    {
+      "chapter": 5,
+      "name": "5.3 Building Statistical Models · 5.4.1.5 Boxplots",
+      "pages": "5.3 (pp.74–79) · 5.4.1.5 (p.82) · MCQs 1, 4, 5, 7, 8 · Short 1–2 · Long 1–2 (pp.84–85)",
+      "pattern": "building statistical models|\\bboxplots?\\b",
+      "flags": "i"
+    },
+    {
+      "chapter": 6,
+      "name": "6.4–6.5 Blockchain Technology",
+      "pages": "6.4 (pp.92–95) · 6.5 (pp.95–97) · MCQs 3, 5, 8 (p.99) · Short 1–2 and Long 4 (p.100)",
+      "pattern": "blockchain technology|\\bblockchain\\b",
+      "flags": "i"
+    },
+    {
+      "chapter": 7,
+      "name": "7.3 The Digital Divide and its Impacts",
+      "pages": "pp. 106–108 · MCQ 5 (p.113) · Short 3 and Long 2 (p.114)",
+      "pattern": "digital divide|digital divide and its impacts",
+      "flags": "i"
+    },
+    {
+      "chapter": 9,
+      "name": "9.5 Financial Concepts for Business",
+      "pages": "pp. 133–135 · MCQ 8 and Short 7 (p.140)",
+      "pattern": "financial concepts for business|business financial concepts",
+      "flags": "i"
+    }
+  ],
+  "chapters": [
+    {
+      "number": 1,
+      "name": "Introduction to Software Development",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 2,
+      "name": "Python Programming",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 3,
+      "name": "Algorithms and Problem Solving",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 4,
+      "name": "Computational Structures",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 5,
+      "name": "Data Analytics",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 6,
+      "name": "Emerging Technologies",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 7,
+      "name": "Legal and Ethical Aspects of Computing System",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 8,
+      "name": "Online Research and Digital Literacy",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 9,
+      "name": "Entrepreneurship in Digital Age",
+      "mcq": [],
+      "short": [],
+      "long": []
+    }
+  ]
+}

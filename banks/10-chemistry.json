@@ -1,0 +1,298 @@
+{
+  "schemaVersion": 2,
+  "courseId": "10-chemistry",
+  "class": 10,
+  "classLabel": "10th",
+  "classUr": "جماعت دہم",
+  "subjectId": "chemistry",
+  "code": "CHEM-10",
+  "subject": "Chemistry",
+  "subjectUr": "کیمیا",
+  "language": "bilingual",
+  "marks": 60,
+  "times": {
+    "objective": 15,
+    "subjective": 105,
+    "basis": "inferred"
+  },
+  "alp": {
+    "chapters": [
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26
+    ],
+    "excludedChapters": [],
+    "summary": "PECTAA Smart Syllabus / ALP and Pairing Scheme for Academic Session 2026–27 / BISE Exam-2027. The pattern below encodes the official paper distribution. Topic-level ALP rules are represented in exclusionRules where transcribed; consult the applicable PECTAA notification for the complete page/exercise deletion list. No questions are prefilled. Chapter titles for 10-chemistry were rechecked against the 2026–27 PECTAA ALP notification."
+  },
+  "patterns": [
+    {
+      "id": "alp-full",
+      "name": "ALP full paper",
+      "note": "Official PECTAA 2026–27 pairing scheme. Question banks are intentionally empty; author original questions in the chapter arrays.",
+      "mcq": {
+        "14": 1,
+        "15": 1,
+        "16": 1,
+        "17": 1,
+        "18": 1,
+        "19": 1,
+        "20": 1,
+        "21": 1,
+        "22": 1,
+        "23": 1,
+        "24": 1,
+        "26": 1
+      },
+      "mcqMark": 1,
+      "short": [
+        {
+          "ch": {
+            "14": 2,
+            "15": 1,
+            "16": 1,
+            "17": 2,
+            "18": 2
+          },
+          "attempt": 5
+        },
+        {
+          "ch": {
+            "19": 2,
+            "20": 2,
+            "21": 2,
+            "22": 2
+          },
+          "attempt": 5
+        },
+        {
+          "ch": {
+            "23": 2,
+            "24": 2,
+            "25": 2,
+            "26": 2
+          },
+          "attempt": 5
+        }
+      ],
+      "shortMark": 2,
+      "longGroups": [
+        {
+          "id": "long",
+          "name": "Detailed questions",
+          "attempt": 2,
+          "questions": [
+            {
+              "id": "q5",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      14
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      15
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q6",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      20
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      22
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q7",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      23
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      25
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "totalMarks": 60
+    }
+  ],
+  "exclusionRules": [
+    {
+      "chapter": 14,
+      "name": "Heating/cooling curves and diffusion of medicine",
+      "pages": "4–13",
+      "pattern": "heating and cooling curves|rates of diffusion of medicine",
+      "flags": "i"
+    },
+    {
+      "chapter": 15,
+      "name": "Limiting reactant and yield",
+      "pages": "25–28",
+      "pattern": "limiting reactant|yield",
+      "flags": "i"
+    },
+    {
+      "chapter": 16,
+      "name": "Selected electrochemical reactions/electrolysis",
+      "pages": "38–44",
+      "pattern": "oxidation.reduction reaction|electrolysis of .*aqueous solution|electrolysis of molten lead",
+      "flags": "i"
+    },
+    {
+      "chapter": 20,
+      "name": "Water treatment, water scarcity and plant-growth elements",
+      "pages": "91–95",
+      "pattern": "treatment of domestic water|water scarcity in pakistan|elements essential in plant growth",
+      "flags": "i"
+    }
+  ],
+  "chapters": [
+    {
+      "number": 14,
+      "name": "States of Matter and Phase Changes",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 15,
+      "name": "Stoichiometry",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 16,
+      "name": "Electrochemistry",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 17,
+      "name": "Reaction Kinetics",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 18,
+      "name": "Salts",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 19,
+      "name": "Nitrogen and Sulphur",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 20,
+      "name": "Water",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 21,
+      "name": "Organic Chemistry",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 22,
+      "name": "Hydrocarbons",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 23,
+      "name": "Monohydroxy alkane & alcohols",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 24,
+      "name": "Carboxylic Acid",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 25,
+      "name": "Biochemistry",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 26,
+      "name": "Polymers",
+      "mcq": [],
+      "short": [],
+      "long": []
+    }
+  ]
+}

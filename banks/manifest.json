@@ -1,15 +1,126 @@
 {
-  "_help": "List one question-bank file per class. \"file\" is relative to this folder.",
-  "banks": [
+  "version": 2,
+  "_help": "One course per entry. file is relative to this folder.",
+  "courses": [
     {
+      "id": "9-computer",
       "class": 9,
-      "subject": "Computer Science & Entrepreneurship",
-      "file": "class-9-computer-science.json"
+      "subject": "computer",
+      "file": "9-computer.json"
     },
     {
+      "id": "9-physics",
+      "class": 9,
+      "subject": "physics",
+      "file": "9-physics.json"
+    },
+    {
+      "id": "9-chemistry",
+      "class": 9,
+      "subject": "chemistry",
+      "file": "9-chemistry.json"
+    },
+    {
+      "id": "9-biology",
+      "class": 9,
+      "subject": "biology",
+      "file": "9-biology.json"
+    },
+    {
+      "id": "9-maths",
+      "class": 9,
+      "subject": "maths",
+      "file": "9-maths.json"
+    },
+    {
+      "id": "10-computer",
       "class": 10,
-      "subject": "Computer Science & Entrepreneurship",
-      "file": "class-10-computer-science.json"
+      "subject": "computer",
+      "file": "10-computer.json"
+    },
+    {
+      "id": "10-physics",
+      "class": 10,
+      "subject": "physics",
+      "file": "10-physics.json"
+    },
+    {
+      "id": "10-chemistry",
+      "class": 10,
+      "subject": "chemistry",
+      "file": "10-chemistry.json"
+    },
+    {
+      "id": "10-biology",
+      "class": 10,
+      "subject": "biology",
+      "file": "10-biology.json"
+    },
+    {
+      "id": "10-maths",
+      "class": 10,
+      "subject": "maths",
+      "file": "10-maths.json"
+    },
+    {
+      "id": "11-computer",
+      "class": 11,
+      "subject": "computer",
+      "file": "11-computer.json"
+    },
+    {
+      "id": "11-physics",
+      "class": 11,
+      "subject": "physics",
+      "file": "11-physics.json"
+    },
+    {
+      "id": "11-chemistry",
+      "class": 11,
+      "subject": "chemistry",
+      "file": "11-chemistry.json"
+    },
+    {
+      "id": "11-biology",
+      "class": 11,
+      "subject": "biology",
+      "file": "11-biology.json"
+    },
+    {
+      "id": "11-maths",
+      "class": 11,
+      "subject": "maths",
+      "file": "11-maths.json"
+    },
+    {
+      "id": "12-computer",
+      "class": 12,
+      "subject": "computer",
+      "file": "12-computer.json"
+    },
+    {
+      "id": "12-physics",
+      "class": 12,
+      "subject": "physics",
+      "file": "12-physics.json"
+    },
+    {
+      "id": "12-chemistry",
+      "class": 12,
+      "subject": "chemistry",
+      "file": "12-chemistry.json"
+    },
+    {
+      "id": "12-biology",
+      "class": 12,
+      "subject": "biology",
+      "file": "12-biology.json"
+    },
+    {
+      "id": "12-maths",
+      "class": 12,
+      "subject": "maths",
+      "file": "12-maths.json"
     }
   ]
 }

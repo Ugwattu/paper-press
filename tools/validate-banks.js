@@ -1,39 +1,48 @@
 #!/usr/bin/env node
-/* Validates banks/manifest.json and every bank file it lists.  Usage: node tools/validate-banks.js
-   Errors (exit code 1) = the app would misbehave. Warnings = worth a look (typos, blanks, duplicates). */
-const fs = require('fs'), path = require('path'), { convert } = require('../bank-loader.js');
-const dir = path.join(__dirname, '..', 'banks');
-let errors = 0, warns = 0;
-const err = (m) => { errors++; console.error('ERROR ' + m); }, warn = (m) => { warns++; console.warn('warn  ' + m); };
-const str = (v) => typeof v === 'string' && v.trim() !== '';
-const KEYS = { top: ['schemaVersion', 'class', 'subject', 'subjectUr', 'alp', 'exclusionRules', 'chapters'], chapter: ['number', 'name', 'mcq', 'short', 'long'],
-  mcq: ['question', 'questionUr', 'options', 'answer', 'alpExcluded'], short: ['question', 'questionUr', 'alpExcluded'], long: ['question', 'questionUr', 'source', 'alpExcluded'], option: ['en', 'ur'], rule: ['chapter', 'name', 'pages', 'pattern', 'flags'] };
-const unknown = (o, allowed, where) => Object.keys(o).filter((k) => !k.startsWith('_') && !allowed.includes(k)).forEach((k) => warn(`${where}: unknown key "${k}" (typo?)`));
-const manifest = JSON.parse(fs.readFileSync(path.join(dir, 'manifest.json'), 'utf8'));
-const classes = new Set();
-for (const b of manifest.banks) {
-  const file = path.join(dir, b.file), tag = b.file;
-  if (!fs.existsSync(file)) { err(`${tag}: listed in manifest.json but the file does not exist`); continue; }
-  let j; try { j = JSON.parse(fs.readFileSync(file, 'utf8')); } catch (e) { err(`${tag}: invalid JSON — ${e.message}`); continue; }
-  try { convert(j, tag); } catch (e) { err(e.message); continue; }
-  unknown(j, KEYS.top, tag); classes.add(Number(j.class));
-  if (Number(j.class) !== Number(b.class)) err(`${tag}: manifest says class ${b.class}, file says ${j.class}`);
-  if (!str(j.subject)) err(`${tag}: "subject" is empty`);
-  const nums = j.chapters.map((c) => c.number), c = { m: 0, s: 0, l: 0 }; let blankUr = 0;
-  ((j.alp && j.alp.chapters) || []).forEach((n) => { if (!nums.includes(n)) err(`${tag}: alp.chapters lists ${n}, which is not a chapter`); });
-  ((j.alp && j.alp.excludedChapters) || []).forEach((n) => { if (!nums.includes(n)) err(`${tag}: alp.excludedChapters lists ${n}, which is not a chapter`); });
-  (j.exclusionRules || []).forEach((r, i) => { unknown(r, KEYS.rule, `${tag} exclusionRules[${i}]`); if (!nums.includes(r.chapter)) warn(`${tag}: exclusionRules[${i}] refers to chapter ${r.chapter}, which does not exist`); });
-  j.chapters.forEach((ch) => { const at = (t, i) => `${tag} ch${ch.number} ${t} #${i + 1}`, seen = new Set(); unknown(ch, KEYS.chapter, `${tag} ch${ch.number}`);
-    if (!str(ch.name)) err(`${tag} ch${ch.number}: "name" is empty`);
-    (ch.mcq || []).forEach((q, i) => { c.m++; unknown(q, KEYS.mcq, at('mcq', i));
-      if (!str(q.question)) err(`${at('mcq', i)}: empty question`);
-      q.options.forEach((o, k) => { unknown(o, KEYS.option, at('mcq', i)); if (!str(o.en)) err(`${at('mcq', i)}: option ${'ABCD'[k]} has no English text`); if (!str(o.ur)) blankUr++; });
-      const opts = q.options.map((o) => String(o.en).trim().toLowerCase()); if (new Set(opts).size < 4) warn(`${at('mcq', i)}: two options are identical`);
-      if (seen.has(q.question)) warn(`${at('mcq', i)}: duplicate question text`); seen.add(q.question); });
-    (ch.short || []).forEach((q, i) => { c.s++; unknown(q, KEYS.short, at('short', i)); if (!str(q.question)) err(`${at('short', i)}: empty question`); if (!str(q.questionUr)) blankUr++; });
-    (ch.long || []).forEach((q, i) => { c.l++; unknown(q, KEYS.long, at('long', i)); if (!str(q.question)) err(`${at('long', i)}: empty question`); if (q.source && !['bank', 'composed'].includes(q.source)) err(`${at('long', i)}: "source" must be "bank" or "composed"`); if (!str(q.questionUr)) blankUr++; }); });
-  console.log(`${tag}: class ${j.class} · ${j.chapters.length} chapters · ${c.m} MCQ · ${c.s} short · ${c.l} long · ${blankUr} blank Urdu cells (info)`);
+/* Validates the schema-v2 manifest and each course bank. */
+const fs=require('fs'),path=require('path'),{convert}=require('../bank-loader.js');
+const dir=path.join(__dirname,'..','banks'),manifest=JSON.parse(fs.readFileSync(path.join(dir,'manifest.json'),'utf8'));
+let errors=0,warns=0,questions=0;const ids=new Set(),seenFiles=new Set();
+const defaults={
+ '9-computer':[50,15,105,'stated'],'10-computer':[50,15,105,'stated'],
+ '9-physics':[60,15,105,'stated'],'10-physics':[60,15,105,'stated'],
+ '9-chemistry':[60,15,105,'stated'],'10-chemistry':[60,15,105,'inferred'],
+ '9-biology':[60,15,105,'stated'],'10-biology':[60,15,105,'inferred'],
+ '9-maths':[75,20,130,'stated'],'10-maths':[75,20,130,'stated'],
+ '11-computer':[75,20,130,'stated'],'12-computer':[75,20,130,'inferred'],
+ '11-physics':[85,20,160,'stated'],'12-physics':[85,20,160,'inferred'],
+ '11-chemistry':[85,20,160,'stated'],'12-chemistry':[85,20,160,'inferred'],
+ '11-biology':[85,20,160,'stated'],'12-biology':[85,20,160,'stated'],
+ '11-maths':[100,30,150,'stated'],'12-maths':[100,30,150,'inferred']
+};
+const err=m=>{errors++;console.error('ERROR '+m);},warn=m=>{warns++;console.warn('warn  '+m);};
+const checkedSvgs=new Set(),unsafeSvg=/<\s*(?:script|foreignObject|iframe|object|embed)\b|<\s*!\s*(?:DOCTYPE|ENTITY)\b|<\?xml-stylesheet|\son[a-z]+\s*=|\b(?:href|xlink:href)\s*=\s*([\"'])\s*(?:https?:|\/\/|data:|javascript:)|url\(\s*[\"']?\s*(?:https?:|\/\/|data:|javascript:)|@import\b/i;
+const figure=(ref,tag)=>{if(ref==null||ref==='')return;if(typeof ref!=='string'){err(`${tag}: figure must be a filename string`);return;}const name=ref.replace(/^figures\//i,'');if(!/^[a-z0-9][a-z0-9._-]*\.(?:png|svg)$/i.test(name)){err(`${tag}: figure must be a PNG/SVG filename inside figures/`);return;}const full=path.join(__dirname,'..','figures',name);if(!fs.existsSync(full)){err(`${tag}: missing figure file figures/${name}`);return;}if(name.toLowerCase().endsWith('.svg')&&!checkedSvgs.has(name)){checkedSvgs.add(name);try{const svg=fs.readFileSync(full,'utf8');if(svg.length>2e6||unsafeSvg.test(svg))err(`${tag}: SVG figures must be under 2 MB, self-contained, and contain no scripts or external resources`);}catch(e){err(`${tag}: could not read SVG figure figures/${name} (${e.message})`);}}};
+if(+manifest.version!==2)err('manifest.json version must be 2');
+if(!Array.isArray(manifest.courses))err('manifest.json must contain a courses list');
+for(const c of manifest.courses||[]){
+ const tag=c.file||c.id||'unknown';if(ids.has(c.id))err(`${tag}: duplicate course id ${c.id}`);ids.add(c.id);
+ if(seenFiles.has(c.file))err(`${tag}: duplicate course file ${c.file}`);seenFiles.add(c.file);
+ const file=path.join(dir,c.file||'');if(!fs.existsSync(file)){err(`${tag}: listed in manifest but file is missing`);continue;}
+ let j;try{j=JSON.parse(fs.readFileSync(file,'utf8'));}catch(e){err(`${tag}: invalid JSON — ${e.message}`);continue;}
+ let converted;try{converted=convert(j,tag);}catch(e){err(e.message);continue;}
+ if(j.courseId!==c.id||+j.class!==+c.class||j.subjectId!==c.subject)err(`${tag}: manifest and course metadata do not match`);
+ const wanted=defaults[c.id],actual=[j.marks,j.times.objective,j.times.subjective,j.times.basis];
+ if(!wanted||JSON.stringify(actual)!==JSON.stringify(wanted))err(`${tag}: marks/time defaults ${JSON.stringify(actual)} do not match ALP ${JSON.stringify(wanted)}`);
+ const lang=+j.class<=10?'bilingual':'english';if(j.language!==lang)err(`${tag}: class ${j.class} must be ${lang}`);
+ if(j.language==='english'&&(j.classUr||j.subjectUr))err(`${tag}: English-only course must not contain Urdu labels`);
+ const nums=j.chapters.map(ch=>ch.number);let counts={m:0,s:0,l:0},blankUr=0;
+ j.chapters.forEach(ch=>{
+  (ch.mcq||[]).forEach((q,i)=>{counts.m++;questions++;const at=`${tag} chapter ${ch.number} MCQ #${i+1}`;if(!q.question||!q.question.trim())err(`${at}: empty question`);if(q.options.some(o=>!o.en||!o.en.trim()))err(`${at}: an English option is empty`);if(q.options.some(o=>!o.ur||!o.ur.trim()))blankUr++;figure(q.figure,at);(q.options||[]).forEach((o,k)=>figure(o.figure,`${at} option ${k+1}`));});
+  (ch.short||[]).forEach((q,i)=>{counts.s++;questions++;const at=`${tag} chapter ${ch.number} short #${i+1}`;if(!q.question||!q.question.trim())err(`${at}: empty question`);if(!q.questionUr)blankUr++;figure(q.figure,at);});
+  (ch.long||[]).forEach((q,i)=>{counts.l++;questions++;const at=`${tag} chapter ${ch.number} long #${i+1}`;if(!q.question||!q.question.trim())err(`${at}: empty question`);if(!q.questionUr)blankUr++;figure(q.figure,at);});
+ });
+ if(j.language==='english'&&j.subjectUr)warn(`${tag}: English-only course has a subjectUr value`);
+ if(!converted.meta.alpSummary&&j.patterns.length)warn(`${tag}: ALP summary is empty`);
+ const pat=converted.patterns.length;
+ console.log(`${tag}: Class ${j.class} · ${j.subject} · ${j.chapters.length} chapters · ${counts.m} MCQ · ${counts.s} short · ${counts.l} long · ${pat} scheme${pat===1?'':'s'}${j.chapters.length?'':' · no questions yet'} · ${blankUr} blank Urdu cells`);
 }
-if (!classes.has(9) || !classes.has(10)) err('manifest.json must include a bank for class 9 and class 10');
-console.log(`\n${errors} error(s), ${warns} warning(s)`);
-process.exit(errors ? 1 : 0);
+if(ids.size!==20)err(`manifest must list 20 courses; found ${ids.size}`);
+for(let grade=9;grade<=12;grade++)for(const sid of ['computer','physics','chemistry','biology','maths'])if(!ids.has(`${grade}-${sid}`))err(`manifest is missing ${grade}-${sid}`);
+if(!ids.has('9-computer')||!ids.has('10-computer'))err('Computer banks for classes 9 and 10 must be present');
+console.log(`\n${errors} error(s), ${warns} warning(s), ${questions} authored questions`);process.exit(errors?1:0);

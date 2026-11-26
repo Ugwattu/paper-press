@@ -1,0 +1,379 @@
+{
+  "schemaVersion": 2,
+  "courseId": "12-maths",
+  "class": 12,
+  "classLabel": "2nd year",
+  "classUr": "",
+  "subjectId": "maths",
+  "code": "MATH-12",
+  "subject": "Mathematics",
+  "subjectUr": "",
+  "language": "english",
+  "marks": 100,
+  "times": {
+    "objective": 30,
+    "subjective": 150,
+    "basis": "inferred"
+  },
+  "alp": {
+    "chapters": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "excludedChapters": [],
+    "summary": "PECTAA 2026–27 ALP and pairing scheme for Class 12 Mathematics. The official chapter numbering and pairing distributions are encoded below. Topic/exercise exclusions are recorded in exclusionRules where transcribed; consult the applicable revised notification for the complete deletion schedule. Question arrays are intentionally empty for the author to populate with original questions."
+  },
+  "patterns": [
+    {
+      "id": "alp-full",
+      "name": "ALP full paper",
+      "note": "Official PECTAA Class 12 scheme: 20 MCQs; short Q2/Q3 attempt 8 and Q4 attempt 9; five long questions (5+5), attempt any 3. The published table labels the fifth long-question group “Q-6” again (duplicate); this bank preserves it as the fifth slot, and Paper Press numbers questions sequentially by slot.",
+      "mcq": {
+        "1": 2,
+        "2": 3,
+        "3": 3,
+        "4": 1,
+        "5": 2,
+        "6": 2,
+        "7": 2,
+        "8": 1,
+        "9": 1,
+        "10": 2,
+        "11": 1
+      },
+      "mcqMark": 1,
+      "short": [
+        {
+          "ch": {
+            "1": 2,
+            "2": 5,
+            "4": 3,
+            "7": 2
+          },
+          "attempt": 8
+        },
+        {
+          "ch": {
+            "3": 5,
+            "5": 3,
+            "6": 4
+          },
+          "attempt": 8
+        },
+        {
+          "ch": {
+            "8": 3,
+            "9": 3,
+            "10": 3,
+            "11": 4
+          },
+          "attempt": 9
+        }
+      ],
+      "shortMark": 2,
+      "longGroups": [
+        {
+          "id": "part-ii",
+          "name": "Part II · long questions",
+          "attempt": 3,
+          "questions": [
+            {
+              "id": "q5",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      1
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "either",
+                    "chapters": [
+                      9,
+                      10
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q6",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      2
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      4
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q7",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      2
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      5
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q8",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      3
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      7
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q9",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      6
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      8
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "totalMarks": 100
+    }
+  ],
+  "exclusionRules": [
+    {
+      "chapter": 1,
+      "pattern": "hyperbolic plots|exponential function.*increasing|horizontal asymptote|graphical behavior.*logarithmic|applications.*exponential|applications.*logarithmic",
+      "flags": "i",
+      "name": "Deleted selected examples/exercises on exponential monotonicity, horizontal asymptotes, hyperbolic plots, graphical behavior of logarithmic functions, solving exponential/log equations and applications of exponential/log functions.",
+      "pages": "pp. 3–33"
+    },
+    {
+      "chapter": 2,
+      "pattern": "implicit differentiation.*exercise|further differentiation.*exercise",
+      "flags": "i",
+      "name": "Deleted listed items from Exercises 2.3–2.7.",
+      "pages": "pp. 47–70"
+    },
+    {
+      "chapter": 3,
+      "pattern": "integration by parts.*example|definite integral.*example|integration.*exercise",
+      "flags": "i",
+      "name": "Deleted listed integration examples and selected items from Exercises 3.1–3.7, including parts of integration by parts and definite integrals.",
+      "pages": "pp. 75–101"
+    },
+    {
+      "chapter": 4,
+      "pattern": "flow of electricity|applications of first.order differential equations|real.life.*differential equation",
+      "flags": "i",
+      "name": "Deleted Section 4.2.4 flow of electricity, selected Exercise 4.1 items, real-life first-order differential-equation applications (Examples 8–12), and Exercise 4.3 Q5–10.",
+      "pages": "pp. 128–143"
+    },
+    {
+      "chapter": 5,
+      "pattern": "analytical geometry.*exercise",
+      "flags": "i",
+      "name": "Deleted listed items from Exercises 5.1–5.3.",
+      "pages": "pp. 158–166"
+    },
+    {
+      "chapter": 6,
+      "pattern": "tangent and normal to conic|circle.*conic.*example",
+      "flags": "i",
+      "name": "Deleted selected circle/conic examples and questions, including tangent/normal Example 14 and listed items from Exercises 6.1–6.4.",
+      "pages": "pp. 175–203"
+    },
+    {
+      "chapter": 7,
+      "pattern": "kinematics.*exercise",
+      "flags": "i",
+      "name": "Deleted Exercise 7 Q1–5.",
+      "pages": "p. 235"
+    },
+    {
+      "chapter": 8,
+      "pattern": "numerical solution.*nonlinear.*exercise|newton.*raphson.*exercise",
+      "flags": "i",
+      "name": "Deleted selected items from Exercises 8.2–8.3 and all of Exercise 8.4.",
+      "pages": "pp. 248–258"
+    },
+    {
+      "chapter": 9,
+      "pattern": "graph.*inverse trigonometric|inverse trigonometric.*graph",
+      "flags": "i",
+      "name": "Deleted inverse-trigonometric graph sections/figures and listed items from Exercise 9.2.",
+      "pages": "pp. 259–278"
+    },
+    {
+      "chapter": 10,
+      "pattern": "solution of trigonometric equations.*exercise|trigonometric equation.*exercise",
+      "flags": "i",
+      "name": "Deleted listed items from Exercises 10.1–10.2.",
+      "pages": "pp. 283–288"
+    },
+    {
+      "chapter": 11,
+      "pattern": "vector valued function.*exercise|vector-valued function.*exercise",
+      "flags": "i",
+      "name": "Deleted all of Exercise 11.3.",
+      "pages": "pp. 297–298"
+    }
+  ],
+  "chapters": [
+    {
+      "number": 1,
+      "name": "Graphical Representation of Functions",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 2,
+      "name": "Further Differentiation",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 3,
+      "name": "Integration",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 4,
+      "name": "Differential Equations",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 5,
+      "name": "Analytical Geometry",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 6,
+      "name": "Conics",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 7,
+      "name": "Kinematics",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 8,
+      "name": "Numerical Solutions of Nonlinear Equations",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 9,
+      "name": "Inverse Trigonometric Functions and Their Graphs",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 10,
+      "name": "Solution of Trigonometric Equations",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 11,
+      "name": "Vector Valued Functions and Their Derivatives",
+      "mcq": [],
+      "short": [],
+      "long": []
+    }
+  ]
+}

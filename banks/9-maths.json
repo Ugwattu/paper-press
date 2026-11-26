@@ -1,0 +1,399 @@
+{
+  "schemaVersion": 2,
+  "courseId": "9-maths",
+  "class": 9,
+  "classLabel": "9th",
+  "classUr": "جماعت نہم",
+  "subjectId": "maths",
+  "code": "MATH-09",
+  "subject": "Mathematics",
+  "subjectUr": "ریاضی",
+  "language": "bilingual",
+  "marks": 75,
+  "times": {
+    "objective": 20,
+    "subjective": 130,
+    "basis": "stated"
+  },
+  "alp": {
+    "chapters": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "excludedChapters": [
+      8
+    ],
+    "summary": "PECTAA 2026–27 ALP and pairing scheme for Class 9 Mathematics. The official chapter numbering and pairing distributions are encoded below. Topic/exercise exclusions are recorded in exclusionRules where transcribed; consult the applicable revised notification for the complete deletion schedule. Question arrays are intentionally empty for the author to populate with original questions."
+  },
+  "patterns": [
+    {
+      "id": "alp-full",
+      "name": "ALP full paper",
+      "note": "Official PECTAA Grade 9 scheme: 15 MCQs; three short-question parts, attempt 6 in each; Part II attempt 2 of 3 long questions (4+4); Part III attempt 1 of 2 (4+4). Chapter 8 Logic is fully excluded from the ALP.",
+      "mcq": {
+        "1": 1,
+        "2": 1,
+        "3": 2,
+        "4": 2,
+        "5": 1,
+        "6": 2,
+        "7": 1,
+        "9": 1,
+        "10": 1,
+        "11": 1,
+        "12": 1,
+        "13": 1
+      },
+      "mcqMark": 1,
+      "short": [
+        {
+          "ch": {
+            "1": 2,
+            "2": 2,
+            "3": 2,
+            "4": 2,
+            "5": 1
+          },
+          "attempt": 6
+        },
+        {
+          "ch": {
+            "6": 3,
+            "7": 3,
+            "9": 3
+          },
+          "attempt": 6
+        },
+        {
+          "ch": {
+            "10": 2,
+            "11": 2,
+            "12": 3,
+            "13": 2
+          },
+          "attempt": 6
+        }
+      ],
+      "shortMark": 2,
+      "longGroups": [
+        {
+          "id": "part-ii",
+          "name": "Part II · long questions",
+          "attempt": 2,
+          "questions": [
+            {
+              "id": "q5",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      1
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      2
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q6",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      3
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      4
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q7",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      5
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      6
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "part-iii",
+          "name": "Part III · long questions",
+          "attempt": 1,
+          "questions": [
+            {
+              "id": "q8",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "either",
+                    "chapters": [
+                      7,
+                      10
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      9
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q9",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      12
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "either",
+                    "chapters": [
+                      11,
+                      13
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "totalMarks": 75
+    }
+  ],
+  "exclusionRules": [
+    {
+      "chapter": 1,
+      "pattern": "temperature conversion|profit and loss|real numbers in daily life",
+      "flags": "i",
+      "name": "Deleted: Introduction to Real Numbers (pp. 1–3); daily-life applications, temperature-conversion Example 10 and profit/loss Examples 11–14; Exercise 1.3 and listed Review Exercise 1 items.",
+      "pages": "pp. 1–3, 14–20"
+    },
+    {
+      "chapter": 2,
+      "pattern": "laws of logarithm|logarithm.*law|logarithmic laws",
+      "flags": "i",
+      "name": "Deleted: Section 2.4 laws of logarithms, Examples 12–15, Exercise 2.4 and listed Review Exercise 2 items.",
+      "pages": "pp. 30–36"
+    },
+    {
+      "chapter": 3,
+      "pattern": "mathematics as study of patterns|binary relation|domain and range|linear and quadratic functions|relation as a table|ordered pair relation",
+      "flags": "i",
+      "name": "Deleted: introductory patterns material; Example 5; listed Exercise 3.2 items; Sections 3.3–3.3.4 on binary relations, relation representations, functions/domain/range, notation and linear/quadratic functions; Exercise 3.3 and listed Review Exercise 3 items.",
+      "pages": "pp. 37–64"
+    },
+    {
+      "chapter": 4,
+      "pattern": "square root of algebraic expression|real.world problems of factorization",
+      "flags": "i",
+      "name": "Deleted: square roots of algebraic expressions (Examples 26–27), real-world factorization Examples 28–30, Exercise 4.4 and listed Review Exercise 4 items.",
+      "pages": "pp. 77–81"
+    },
+    {
+      "chapter": 5,
+      "pattern": "feasible solution|maximum and minimum values",
+      "flags": "i",
+      "name": "Deleted: feasible-solution Example 6 and maximum/minimum-value Example 7; Exercise 5.2 and listed Review Exercise 5 items.",
+      "pages": "pp. 91–96"
+    },
+    {
+      "chapter": 6,
+      "pattern": "angle of elevation|angle of depression|elevation and depression",
+      "flags": "i",
+      "name": "Deleted: listed items from Exercises 6.3–6.5 and Section 6.6 applications of angles of elevation/depression (Examples 19–20); Exercise 6.6 and listed Review Exercise 6 items.",
+      "pages": "pp. 109–122"
+    },
+    {
+      "chapter": 7,
+      "pattern": "applications of coordinate geometry|coordinate geometry in real life",
+      "flags": "i",
+      "name": "Deleted: listed items from Exercises 7.1–7.2, Section 7.3 applications (Examples 14–20), Exercise 7.3 and listed Review Exercise 7 items.",
+      "pages": "pp. 128–146"
+    },
+    {
+      "chapter": 9,
+      "pattern": "properties of polygons|similar polygons|polygon geometrical properties",
+      "flags": "i",
+      "name": "Deleted: selected items in Exercises 9.1–9.2 and Section 9.4 polygon geometrical properties/applications; Exercise 9.4 and listed Review Exercise 9 items.",
+      "pages": "pp. 166–184"
+    },
+    {
+      "chapter": 10,
+      "pattern": "exponential growth|exponential decay|gradient.*tangent|real.life.*graph",
+      "flags": "i",
+      "name": "Deleted: Section 10.2 exponential growth/decay, gradients by tangents and real-life graph applications (Examples 12–15); Exercise 10.2 and listed Review Exercise 10 items.",
+      "pages": "pp. 193–199"
+    },
+    {
+      "chapter": 11,
+      "pattern": "intersection of loci|real.life applications of loci",
+      "flags": "i",
+      "name": "Deleted: Section 11.5.2 intersection of loci, Section 11.6 real-life applications, Exercise 11.2 and listed Review Exercise 11 items.",
+      "pages": "pp. 209–214"
+    }
+  ],
+  "chapters": [
+    {
+      "number": 1,
+      "name": "Real Numbers",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 2,
+      "name": "Logarithms",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 3,
+      "name": "Sets and Functions",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 4,
+      "name": "Factorization and Algebraic Manipulation",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 5,
+      "name": "Linear Equations and Inequalities",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 6,
+      "name": "Trigonometry",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 7,
+      "name": "Coordinate Geometry",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 8,
+      "name": "Logic",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 9,
+      "name": "Similar Figures",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 10,
+      "name": "Graphs of Functions",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 11,
+      "name": "Loci and Construction",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 12,
+      "name": "Information Handling",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 13,
+      "name": "Probability",
+      "mcq": [],
+      "short": [],
+      "long": []
+    }
+  ]
+}

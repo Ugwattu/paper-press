@@ -1,0 +1,228 @@
+{
+  "schemaVersion": 2,
+  "courseId": "12-computer",
+  "class": 12,
+  "classLabel": "2nd year",
+  "classUr": "",
+  "subjectId": "computer",
+  "code": "CS-12",
+  "subject": "Computer Science & Entrepreneurship",
+  "subjectUr": "",
+  "language": "english",
+  "marks": 75,
+  "times": {
+    "objective": 20,
+    "subjective": 130,
+    "basis": "inferred"
+  },
+  "alp": {
+    "chapters": [
+      1,
+      2,
+      3,
+      4,
+      6,
+      7,
+      8,
+      9
+    ],
+    "excludedChapters": [
+      5
+    ],
+    "summary": "PECTAA 2026–27 ALP for Computer Science & Entrepreneurship, Grade 12 (notification 1258, dated 14-11-2026). Unit 5 is fully excluded; Units 1–4 and 6–9 remain in scope subject to topic and exercise exclusions recorded in exclusionRules. The official scheme is 15 MCQs, three short groups (attempt 6 of 9 in each), and five long questions (attempt 3). Question content has not yet been authored."
+  },
+  "patterns": [
+    {
+      "id": "pectaa-2026-27-computer-12",
+      "name": "PECTAA ALP · Official 2026–27 (12th)",
+      "note": "From PECTAA ALP notification 1258, dated 14-11-2026. Unit 5 is fully excluded; topic and exercise exclusions in other units are recorded in exclusionRules. All questions remain to be authored.",
+      "mcq": {
+        "1": 2,
+        "2": 3,
+        "3": 2,
+        "4": 2,
+        "6": 2,
+        "7": 2,
+        "8": 1,
+        "9": 1
+      },
+      "mcqMark": 1,
+      "short": [
+        {
+          "ch": {
+            "1": 3,
+            "2": 4,
+            "6": 2
+          },
+          "attempt": 6
+        },
+        {
+          "ch": {
+            "3": 3,
+            "4": 6
+          },
+          "attempt": 6
+        },
+        {
+          "ch": {
+            "7": 4,
+            "8": 2,
+            "9": 3
+          },
+          "attempt": 6
+        }
+      ],
+      "shortMark": 2,
+      "long": [
+        [
+          1
+        ],
+        [
+          3
+        ],
+        [
+          6
+        ],
+        [
+          8
+        ],
+        [
+          9
+        ]
+      ],
+      "longAttempt": 3,
+      "longMark": 8,
+      "totalMarks": 75
+    }
+  ],
+  "exclusionRules": [
+    {
+      "chapter": 1,
+      "name": "Home Network Setup, Wi-Fi/Router Security, Network Diagnostics, Load Balancing, Usability/Security Tradeoffs",
+      "pages": "pp. 11–13 · p.14 · p.16",
+      "pattern": "home network setup|wi.?fi security|router configuration|network diagnostic tools|network load balancing|usability and security tradeoffs",
+      "flags": "i"
+    },
+    {
+      "chapter": 2,
+      "name": "Predicate Logic and Logic-Based Reasoning",
+      "pages": "pp. 28–29 · Long Q8 (p.32)",
+      "pattern": "applying predicate logic|predicate logic to real.world problems|logic.based reasoning and inference",
+      "flags": "i"
+    },
+    {
+      "chapter": 3,
+      "name": "Polymorphism",
+      "pages": "pp. 39–41 · MCQs 5, 7 (p.43) · Short 9, 10 · Long 5, 7 (p.44)",
+      "pattern": "\\bpolymorphism\\b",
+      "flags": "i"
+    },
+    {
+      "chapter": 4,
+      "name": "GUI development with Tkinter",
+      "pages": "pp. 45–52 · MCQs 1–9 (p.58) · Short 1–8 and Long 1–7 (p.59)",
+      "pattern": "\\bt kinter\\b|\\btkinter\\b|graphical user interface development with tk",
+      "flags": "i"
+    },
+    {
+      "chapter": 5,
+      "name": "Complete Unit 5 — Code Testing and Debugging",
+      "pages": "whole unit excluded",
+      "pattern": "code testing and debugging|unit 5 code testing",
+      "flags": "i"
+    },
+    {
+      "chapter": 6,
+      "name": "Validation, Predictive Modeling and Machine Learning Platforms",
+      "pages": "pp. 82–85 · MCQ 10 (p.87) · Short 9–10 and Long 7–8 (p.88)",
+      "pattern": "validation and model improvement|predictive modeling and causality|machine learning tools and platforms",
+      "flags": "i"
+    },
+    {
+      "chapter": 7,
+      "name": "Data Visualization for Hypothesis Testing",
+      "pages": "pp. 96–99 · MCQs 8–10 (p.101) · Short 8–10 · Long 5–8 (p.88, as printed in notice)",
+      "pattern": "data visualization for hypothesis testing",
+      "flags": "i"
+    },
+    {
+      "chapter": 8,
+      "name": "Ethical and Cultural Implications of AI Systems",
+      "pages": "pp. 108–111 · MCQs 5–6 (p.116) · Short 5–6 · Long 7 (p.117)",
+      "pattern": "ethical and cultural implications of ai systems",
+      "flags": "i"
+    },
+    {
+      "chapter": 9,
+      "name": "Digital Collaboration, Equity and Wider Impacts of Computing",
+      "pages": "pp. 124–127 · pp.131–133 · MCQs 7–10 (p.135) · Short 8–9 · Long 7–8 (p.136)",
+      "pattern": "digital collaboration and equity in computing|ethical, legal and environmental impacts of computing",
+      "flags": "i"
+    }
+  ],
+  "chapters": [
+    {
+      "number": 1,
+      "name": "Computer Networks",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 2,
+      "name": "Computational Thinking and Algorithms",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 3,
+      "name": "Object-Oriented Programming using Python",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 4,
+      "name": "Development of Graphical User Interface (GUI)",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 5,
+      "name": "Code Testing and Debugging",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 6,
+      "name": "Data and Analytics",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 7,
+      "name": "Hypothesis Testing",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 8,
+      "name": "Applications of Computer Science",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 9,
+      "name": "Cybersecurity and Safe Digital Collaboration",
+      "mcq": [],
+      "short": [],
+      "long": []
+    }
+  ]
+}

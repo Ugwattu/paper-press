@@ -1,0 +1,16 @@
+'use strict';
+const fs=require('fs'),path=require('path');
+const src=fs.readFileSync(path.join(__dirname,'..','app-interface.js'),'utf8');
+const bank10=JSON.parse(fs.readFileSync(path.join(__dirname,'..','banks','10-computer.json'),'utf8'));
+const bank12Chem=JSON.parse(fs.readFileSync(path.join(__dirname,'..','banks','12-chemistry.json'),'utf8'));
+const start=src.indexOf('function buildChips(){');
+const end=src.indexOf('\nfunction ',start+10);
+const fn=src.slice(start,end>0?end:undefined);
+let n=0;const ok=(cond,msg)=>{if(!cond){console.error('FAIL '+msg);process.exitCode=1;}else{console.log('PASS '+msg);n++;}};
+ok(fn.includes("$('chGrid').innerHTML=b.chapters.slice().sort((a,b)=>a-b).map(c=>"),'chapter chip grid iterates active bank chapters');
+ok(fn.includes('const k=caps(c);'),'chapter counts resolve only for active course chapter');
+ok(fn.includes('${b.names[c]}'),'labels use active course bank names');
+ok(!fn.includes('ALLCH'),'global union no longer leaks unrelated chapter numbers');
+ok(bank10.chapters.length===8&&bank10.chapters.map(c=>c.number).join(',')==='1,2,3,4,5,6,7,8','Class 10 Computer grid has exactly its 8 chapters, not Chemistry 12 numbering');
+ok(bank12Chem.chapters.length===17&&bank12Chem.chapters[0].number===17&&bank12Chem.chapters.at(-1).number===33,'Class 12 Chemistry retains valid non-sequential textbook chapter numbering');
+console.log(`${n}/6 chapter-grid regression checks passed`);

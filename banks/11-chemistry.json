@@ -1,0 +1,380 @@
+{
+  "schemaVersion": 2,
+  "courseId": "11-chemistry",
+  "class": 11,
+  "classLabel": "1st year",
+  "classUr": "",
+  "subjectId": "chemistry",
+  "code": "CHEM-11",
+  "subject": "Chemistry",
+  "subjectUr": "",
+  "language": "english",
+  "marks": 85,
+  "times": {
+    "objective": 20,
+    "subjective": 160,
+    "basis": "stated"
+  },
+  "alp": {
+    "chapters": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "excludedChapters": [],
+    "summary": "PECTAA Smart Syllabus / ALP and Pairing Scheme for Academic Session 2026–27 / BISE Exam-2027. The pattern below encodes the official paper distribution. Topic-level ALP rules are represented in exclusionRules where transcribed; consult the applicable PECTAA notification for the complete page/exercise deletion list. No questions are prefilled. Chapter titles for 11-chemistry were rechecked against the 2026–27 PECTAA ALP notification."
+  },
+  "patterns": [
+    {
+      "id": "alp-full",
+      "name": "ALP full paper",
+      "note": "Official PECTAA 2026–27 pairing scheme. Question banks are intentionally empty; author original questions in the chapter arrays.",
+      "mcq": {
+        "1": 2,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 1,
+        "6": 2,
+        "7": 1,
+        "8": 1,
+        "9": 1,
+        "10": 2,
+        "11": 1,
+        "12": 1,
+        "13": 1,
+        "14": 1
+      },
+      "mcqMark": 1,
+      "short": [
+        {
+          "ch": {
+            "1": 3,
+            "2": 2,
+            "7": 2,
+            "8": 2,
+            "13": 3
+          },
+          "attempt": 8
+        },
+        {
+          "ch": {
+            "3": 3,
+            "5": 2,
+            "6": 3,
+            "9": 2,
+            "11": 2
+          },
+          "attempt": 8
+        },
+        {
+          "ch": {
+            "4": 2,
+            "10": 3,
+            "12": 2,
+            "14": 2
+          },
+          "attempt": 6
+        }
+      ],
+      "shortMark": 2,
+      "longGroups": [
+        {
+          "id": "long",
+          "name": "Detailed questions",
+          "attempt": 3,
+          "questions": [
+            {
+              "id": "q5",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      2
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      5
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q6",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      3
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      7
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q7",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      8
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      9
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q8",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      11
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      14
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q9",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      12
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      13
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "totalMarks": 85
+    }
+  ],
+  "exclusionRules": [
+    {
+      "chapter": 1,
+      "name": "Historical background, modern periodic table, blocks and families",
+      "pages": "2–5",
+      "pattern": "historical background|modern periodic table|block in periodic table|families in periodic table",
+      "flags": "i"
+    },
+    {
+      "chapter": 2,
+      "name": "Atomic spectra and electronic configurations",
+      "pages": "24, 35–39",
+      "pattern": "atomic spectra|electronic configuration and the periodic table|electronic configuration of ions",
+      "flags": "i"
+    },
+    {
+      "chapter": 3,
+      "name": "Specified chemical-bonding topics",
+      "pages": "44–51",
+      "pattern": "types of bonding|electronegativity|intermolecular forces|bond energy and bond length",
+      "flags": "i"
+    },
+    {
+      "chapter": 4,
+      "name": "Limiting/excess reactant and medicinal stoichiometry",
+      "pages": "81–89",
+      "pattern": "limiting and excess reactant|importance of stoichiometry in production and dosage of medicine",
+      "flags": "i"
+    },
+    {
+      "chapter": 6,
+      "name": "Entropy and free-energy change",
+      "pages": "129–136",
+      "pattern": "entropy|free energy change",
+      "flags": "i"
+    },
+    {
+      "chapter": 7,
+      "name": "Rate constant and reaction mechanism",
+      "pages": "154–158",
+      "pattern": "determination of rate constant|reaction mechanism",
+      "flags": "i"
+    },
+    {
+      "chapter": 8,
+      "name": "Specified chemical-equilibrium relationships/applications",
+      "pages": "166–181",
+      "pattern": "macroscopic and microscopic events|dynamic equilibrium|conditions for equilibrium|equilibrium constants|industrial applications of chemical equilibrium",
+      "flags": "i"
+    }
+  ],
+  "chapters": [
+    {
+      "number": 1,
+      "name": "Periodic Table and Periodic Properties",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 2,
+      "name": "Atomic Structure",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 3,
+      "name": "Chemical Bonding",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 4,
+      "name": "Stoichiometry",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 5,
+      "name": "States and Phases of Matter",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 6,
+      "name": "Chemical Energetics",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 7,
+      "name": "Reaction Kinetics",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 8,
+      "name": "Chemical Equilibrium",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 9,
+      "name": "Acid-Base Chemistry",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 10,
+      "name": "Electrochemistry",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 11,
+      "name": "Hydrocarbons",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 12,
+      "name": "Nitrogen and Sulfur",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 13,
+      "name": "Halogens",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 14,
+      "name": "Atmosphere",
+      "mcq": [],
+      "short": [],
+      "long": []
+    }
+  ]
+}

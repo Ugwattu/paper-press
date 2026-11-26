@@ -1,26 +1,129 @@
 {
-  "_help": ["TEMPLATE — copy this file to banks/class-<N>-<subject>.json and fill it in, then list it in banks/manifest.json.","Keys starting with an underscore are ignored. Use real Urdu text in the *Ur fields (leave \"\" if there is none).","answer: \"A\", \"B\", \"C\" or \"D\" (the correct option). alpExcluded: true marks a question that ALP papers must not use (omit when false).","long.source: \"bank\" (default) or \"composed\" (a question written to combine topics). Run `node tools/validate-banks.js` after editing."],
-  "schemaVersion": 1,
-  "class": 9,
-  "subject": "Computer Science & Entrepreneurship",
-  "subjectUr": "کمپیوٹر سائنس اینڈ انٹرپرینیورشپ",
-  "alp": {"chapters":[1,3],"excludedChapters":[2]},
-  "exclusionRules": [
-    {"chapter":1,"name":"Binary Arithmetic","pages":"pp. 8–16","pattern":"binary|octal|hexadecimal","flags":"i"}
+  "_help": [
+    "Copy this file to banks/<class>-<subject>.json, update all course metadata, and add the file to banks/manifest.json.",
+    "schemaVersion must stay 2. courseId must be '<class>-<subjectId>' and must match class and subjectId.",
+    "language is 'bilingual' for Classes 9/10 and 'english' for Classes 11/12. times are positive minutes; basis is 'stated' or 'inferred'.",
+    "alp.chapters and alp.excludedChapters must reference chapter numbers that exist in chapters. Empty chapters/patterns are allowed for a course not authored yet.",
+    "MCQ options must contain exactly four {en, ur} objects. answer is 'A', 'B', 'C' or 'D'. Use questionUr/ur as empty strings when no Urdu text applies.",
+    "Question objects support alpExcluded: true. Long questions support source: 'bank' (default) or 'composed'.",
+    "Inline rich text supports <sup>...</sup>, <sub>...</sub>, <b>...</b>, <i>...</i>, <br>, and isotope shorthand ^{mass}_{atomic}Element (for example ^{14}_{6}C). These tags are parsed from a whitelist; arbitrary HTML is displayed as text.",
+    "Questions and individual MCQ options may include optional figure and figureAlt strings. Put PNG/SVG files in figures/ and reference the filename (for example 'logic-gate.svg'); no external URLs or nested folders. SVGs must be self-contained and under 2 MB, with no scripts or external resources.",
+    "Pattern legacy shape: {id,name,note,mcq:{chapter:count},mcqMark,short:[{ch:{chapter:count},attempt}],shortMark,long:[[chapter,...]],longAttempt,longMark}. For split-part long questions use longGroups instead: [{id,name,attempt,questions:[{id,parts:[{label,marks,chapterRule:{type:'fixed'|'either'|'any'|'different-from-a',chapters:[...optional]}}]}]}]. Each question in a group must have the same part labels/marks; all groups may have different marks and attempt counts. 'fixed' takes one chapter, 'either' chooses among chapters, 'any' chooses from active ALP chapters unless chapters are specified, and 'different-from-a' chooses a chapter other than part (a). Do not mix non-empty legacy long slots with longGroups. Optional totalMarks is validated against the computed course total.",
+    "exclusionRules use {chapter,name,pages,pattern,flags}. Run 'node tools/validate-banks.js' and 'npm test' after editing.",
+    "LaTeX supports $x^2$ or \\(\\frac{a}{b}\\) for inline math and \\[\\int_0^1 f(x)\\,dx\\] or $$...$$ for display math. MathJax renders the preview and DOCX export (as embedded PNG); an internet connection is needed on first use. Unsafe HTML and resource macros such as \\href, \\input and \\includegraphics are rejected."
   ],
+  "schemaVersion": 2,
+  "courseId": "9-computer",
+  "class": 9,
+  "classLabel": "9th",
+  "classUr": "جماعت نہم",
+  "subjectId": "computer",
+  "code": "SUB-09",
+  "subject": "Subject name",
+  "subjectUr": "مضمون کا نام",
+  "language": "bilingual",
+  "marks": 50,
+  "times": {
+    "objective": 15,
+    "subjective": 105,
+    "basis": "stated"
+  },
+  "alp": {
+    "chapters": [
+      1
+    ],
+    "excludedChapters": [],
+    "summary": "Add the ALP summary or notification reference here."
+  },
+  "patterns": [],
+  "exclusionRules": [],
+  "contentCatalog": {
+    "1": {
+      "topics": [
+        {
+          "id": "topic-1",
+          "name": "Topic name",
+          "alpExcluded": false
+        }
+      ],
+      "exercises": [
+        {
+          "id": "exercise-1",
+          "name": "Exercise name",
+          "alpExcluded": false
+        }
+      ]
+    }
+  },
+  "questionContent": {
+    "1": {
+      "mcq": {
+        "0": {
+          "topics": [
+            "topic-1"
+          ],
+          "exercises": [
+            "exercise-1"
+          ]
+        }
+      }
+    }
+  },
   "chapters": [
     {
       "number": 1,
-      "name": "Computational Systems",
+      "name": "Chapter name",
       "mcq": [
-        {"question":"The primary function of a system is:","questionUr":"ایک سسٹم کا بنیادی کام کیا ہے؟","options":[{"en":"To work independently","ur":"آزادانہ طور پر کام کرنا"},{"en":"To achieve a common goal","ur":"ایک مشترکہ مقصد حاصل کرنا"},{"en":"To create new systems","ur":"نئے سسٹم بنانا"},{"en":"To store data only","ur":"صرف ڈیٹا محفوظ کرنا"}],"answer":"B"},
-        {"question":"Convert binary 101 to decimal.","questionUr":"","options":[{"en":"3","ur":""},{"en":"4","ur":""},{"en":"5","ur":""},{"en":"6","ur":""}],"answer":"C","alpExcluded":true}
+        {
+          "question": "Write the question here. Example: H<sub>2</sub>O and x<sup>2</sup>; isotope ^{14}_{6}C.",
+          "questionUr": "سوال یہاں لکھیں۔",
+          "options": [
+            {
+              "en": "Option A",
+              "ur": "اختیار الف",
+              "figure": "",
+              "figureAlt": ""
+            },
+            {
+              "en": "Option B",
+              "ur": "اختیار ب",
+              "figure": "",
+              "figureAlt": ""
+            },
+            {
+              "en": "Option C",
+              "ur": "اختیار ج",
+              "figure": "",
+              "figureAlt": ""
+            },
+            {
+              "en": "Option D",
+              "ur": "اختیار د",
+              "figure": "",
+              "figureAlt": ""
+            }
+          ],
+          "answer": "A",
+          "figure": "",
+          "figureAlt": ""
+        }
       ],
       "short": [
-        {"question":"Define a system.","questionUr":"سسٹم کی تعریف کریں۔"}
+        {
+          "question": "Write a short question here.",
+          "questionUr": "مختصر سوال یہاں لکھیں۔",
+          "figure": "",
+          "figureAlt": ""
+        }
       ],
       "long": [
-        {"question":"Explain the components of a computational system.","questionUr":"کمپیوٹیشنل سسٹم کے اجزاء کی وضاحت کریں۔","source":"bank"}
+        {
+          "question": "Write a long question here.",
+          "questionUr": "تفصیلی سوال یہاں لکھیں۔",
+          "source": "bank",
+          "figure": "",
+          "figureAlt": ""
+        }
       ]
     }
   ]

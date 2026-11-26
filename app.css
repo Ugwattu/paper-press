@@ -9,7 +9,7 @@
  --obj:#c47700;--short:#0a9467;--long:#6a4de0;--ok:#0a9467;--danger:#d02f4b;--pink:#c0306e;
  --shadow:0 1px 2px rgba(16,24,40,.06),0 10px 30px rgba(16,24,40,.1);
  --top:56px;--nav:78px;--panel:360px;--ledgerW:380px;--paper:#fff;--sh:.14;
- /* legacy names that script.js / inline styles still use */
+ /* legacy names that app modules / inline styles still use */
  --green:var(--ok);--amber:var(--obj);--violet:var(--long);--red:var(--danger);--magenta:var(--pink);--cyan:var(--accent);--cyan2:var(--accent2);
  --txt:var(--text);--txt2:var(--text2);--txt3:var(--text3);--txt4:var(--text4);--line:var(--border);--line2:var(--border2);--raise:var(--surface3);
  --field:var(--surface);--card:var(--surface2);--panelA:var(--surface);--panelB:var(--surface);--bg0:var(--bg);--bg1:var(--bg);--track:var(--surface3)}
@@ -110,6 +110,7 @@ input[type=color]{width:100%;height:38px;padding:3px;border:1px solid var(--bord
 .seg button{flex:1;min-width:0;height:30px;padding:0 8px;border:0;border-radius:8px;background:transparent;color:var(--text3);font-size:12.5px;font-weight:600;white-space:nowrap}
 .seg button:hover{color:var(--text)}
 .seg button.on{background:var(--surface);color:var(--accent);box-shadow:0 1px 3px rgba(16,24,40,.14)}
+#segPreFilter{flex-wrap:wrap}#segPreFilter button{flex:1 1 calc(33.333% - 4px)}
 .tg{display:flex;align-items:center;gap:12px;padding:6px 0;cursor:pointer;user-select:none}
 .tg>div:first-child{flex:1;min-width:0}
 .tg span{display:block;font-size:13.5px;font-weight:500}
@@ -143,6 +144,7 @@ input[type=color]{width:100%;height:38px;padding:3px;border:1px solid var(--bord
 .gradecard button small{font-size:11.5px;color:var(--text3)}
 .gradecard button:hover{border-color:var(--border2)}
 .gradecard button.on{border-color:var(--accent);background:var(--accent-weak)}.gradecard button.on b{color:var(--accent)}
+.coursegrid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:9px}.coursegrid button{min-width:0;display:flex;align-items:center;justify-content:space-between;gap:7px;padding:9px 10px;text-align:left;border:1.5px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text)}.coursegrid button b{font-size:12px;font-weight:750}.coursegrid button small{font-size:10px;color:var(--text3);white-space:nowrap}.coursegrid button:hover:not(:disabled){border-color:var(--border2)}.coursegrid button.on{border-color:var(--accent);background:var(--accent-weak)}.coursegrid button.on b{color:var(--accent)}.coursegrid button:disabled{opacity:.56;cursor:not-allowed}.coursegrid .status{font-size:9px;letter-spacing:.01em;color:var(--text3)}
 .alpcard{padding:12px 13px;border-radius:11px;border:1.5px solid var(--border);background:var(--surface2);cursor:pointer}
 .alpcard .r1{display:flex;align-items:center;gap:10px}.alpcard .tt{flex:1}
 .alpcard .tt b{display:block;font-size:12.5px;font-weight:800;letter-spacing:.03em}
@@ -153,7 +155,7 @@ input[type=color]{width:100%;height:38px;padding:3px;border:1px solid var(--bord
 .alpcard:not(.off){border-color:color-mix(in srgb,var(--ok) 50%,transparent);background:color-mix(in srgb,var(--ok) 7%,var(--surface))}
 .alpcard.off .bigsw{background:var(--border2)}.alpcard.off .bigsw::after{left:3px}
 
-/* chapters, attempts, long-question sources (built by script.js) */
+/* chapters, attempts, long-question sources (built by app modules) */
 .chgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .chip{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:0;padding:9px 11px;text-align:left;border:1.5px solid var(--border);border-radius:11px;background:var(--surface);position:relative;cursor:pointer}
 .chip:hover{border-color:var(--border2)}
@@ -363,3 +365,29 @@ input[type=range]:disabled{opacity:.4;cursor:not-allowed}
 .ctl>.stepper button{flex:none;width:46px;height:36px}
 .ctl>.stepper b,.ctl>.stepper span,.ctl>.stepper input{flex:1;min-width:0;display:grid;place-items:center;font-size:14px}
 .ctl>.stepper button:first-child{border-right:1px solid var(--border)}.ctl>.stepper button:last-child{border-left:1px solid var(--border)}
+
+/* Objective / Subjective timing controls */
+.time-badge{display:inline-flex;align-items:center;padding:3px 7px;border:1px solid var(--border2);border-radius:999px;color:var(--text3);font-size:10px;font-weight:700;white-space:nowrap}.time-badge.inferred{border-color:color-mix(in srgb,var(--amber) 45%,var(--border2));color:var(--amber)}.time-actions{align-items:center}.time-actions .qb{width:100%;white-space:normal}.time-actions .hint{align-self:center;text-align:right}
+
+/* Objective / Subjective sheet preview tabs */
+.sheet-tabs{display:flex;gap:6px;justify-content:center;align-items:center;margin:0 auto 12px;padding:5px;width:max-content;max-width:100%;border:1px solid var(--line);border-radius:12px;background:var(--panel);box-shadow:0 3px 12px rgba(0,0,0,.08)}
+.sheet-tabs button{border:0;border-radius:8px;padding:7px 13px;background:transparent;color:var(--muted);font:700 11px/1.2 Inter,system-ui,sans-serif;cursor:pointer}
+.sheet-tabs button.on{background:var(--accent);color:#fff}
+.sheet-tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media(max-width:640px){.sheet-tabs{margin-bottom:8px}.sheet-tabs button{padding:7px 10px}}
+
+/* Compact figures inside the question-picker cards */
+.qcard .pp-figure{max-width:170px;max-height:110px;margin:5px 0;text-align:left}
+.qcard .pp-figure img{max-height:110px}
+.qcard .pp-figure.option{max-width:92px;max-height:64px}
+.qcard .pp-figure.option img{max-height:64px}
+/* LaTeX math (MathJax SVG) in the question picker and live preview. */
+.pp-math-source{white-space:normal;color:inherit;}
+.pp-math-inline{display:inline-block;vertical-align:baseline;max-width:100%;}
+.pp-math-block{display:block;text-align:center;margin:.35em auto;max-width:100%;overflow-x:auto;}
+.pp-math-source mjx-container{max-width:100%;}
+.pp-math-source mjx-container[display="true"]{margin:.25em auto;}
+
+.content-pick{margin-top:10px;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--surface2)}.content-title{padding:10px 12px;display:flex;flex-direction:column;gap:3px;border-bottom:1px solid var(--border)}.content-title small,.content-ch summary small{font-size:11px;color:var(--text3)}.content-ch{border-bottom:1px solid var(--border)}.content-ch summary{padding:9px 11px;cursor:pointer;display:flex;flex-direction:column;gap:3px;list-style:none}.content-ch summary::-webkit-details-marker{display:none}.content-body{padding:8px 10px 11px;display:grid;gap:10px}.content-group{display:grid;gap:6px}.content-group>b{font-size:12px}.content-opt{display:flex;gap:7px;align-items:center;font-size:12px;color:var(--text2);padding:3px 1px}.content-opt input{accent-color:var(--accent)}.content-empty{font-size:11px;color:var(--text3);padding:3px}.content-help{font-size:10.5px;color:var(--text3);line-height:1.4}.content-opt.untagged{padding-top:7px;border-top:1px solid var(--border)}.qtag-tools{display:flex;gap:5px;padding-top:7px}.qtag-tools button{font-size:10px;padding:4px 7px;border:1px solid var(--border);border-radius:7px;background:var(--surface2);color:var(--text2)}
+.content-actions{display:flex;gap:5px}.content-actions .qb{padding:4px 7px;font-size:10px}
+.content-alp-tag{font-size:9px;flex:none;padding:3px 5px;border:1px solid var(--border);border-radius:6px;color:var(--text3);background:transparent}.content-alp-tag.on{border-color:var(--warning);color:var(--warning)}

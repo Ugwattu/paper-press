@@ -1,0 +1,331 @@
+{
+  "schemaVersion": 2,
+  "courseId": "9-chemistry",
+  "class": 9,
+  "classLabel": "9th",
+  "classUr": "جماعت نہم",
+  "subjectId": "chemistry",
+  "code": "CHEM-09",
+  "subject": "Chemistry",
+  "subjectUr": "کیمیا",
+  "language": "bilingual",
+  "marks": 60,
+  "times": {
+    "objective": 15,
+    "subjective": 105,
+    "basis": "stated"
+  },
+  "alp": {
+    "chapters": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "excludedChapters": [
+      12,
+      13
+    ],
+    "summary": "PECTAA Smart Syllabus / ALP and Pairing Scheme for Academic Session 2026–27 / BISE Exam-2027. The pattern below encodes the official paper distribution. Topic-level ALP rules are represented in exclusionRules where transcribed; consult the applicable PECTAA notification for the complete page/exercise deletion list. No questions are prefilled."
+  },
+  "patterns": [
+    {
+      "id": "alp-full",
+      "name": "ALP full paper",
+      "note": "Official PECTAA 2026–27 pairing scheme. Question banks are intentionally empty; author original questions in the chapter arrays.",
+      "mcq": {
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 1,
+        "6": 1,
+        "7": 1,
+        "8": 1,
+        "9": 1,
+        "10": 1,
+        "11": 2
+      },
+      "mcqMark": 1,
+      "short": [
+        {
+          "ch": {
+            "1": 1,
+            "2": 2,
+            "3": 2,
+            "4": 3
+          },
+          "attempt": 5
+        },
+        {
+          "ch": {
+            "5": 3,
+            "6": 2,
+            "7": 1,
+            "8": 2
+          },
+          "attempt": 5
+        },
+        {
+          "ch": {
+            "9": 3,
+            "10": 2,
+            "11": 3
+          },
+          "attempt": 5
+        }
+      ],
+      "shortMark": 2,
+      "longGroups": [
+        {
+          "id": "long",
+          "name": "Detailed questions",
+          "attempt": 2,
+          "questions": [
+            {
+              "id": "q5",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      1
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      2
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q6",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      3
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      7
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q7",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      8
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      10
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "totalMarks": 60
+    }
+  ],
+  "exclusionRules": [
+    {
+      "chapter": 1,
+      "name": "States of matter, allotropes and temperature effects on solubility",
+      "pages": "4–13",
+      "pattern": "states of matter|allotropic forms|effect of temperature on the solubility",
+      "flags": "i"
+    },
+    {
+      "chapter": 2,
+      "name": "Radioactive isotopes and applications",
+      "pages": "24–26",
+      "pattern": "radioactive isotopes|applications of radioactive isotopes|ionization of atoms by radioactive sources",
+      "flags": "i"
+    },
+    {
+      "chapter": 3,
+      "name": "Properties of ionic/covalent compounds and bonding nature",
+      "pages": "44–48",
+      "pattern": "properties of ionic and covalent compounds|nature of bonding and properties",
+      "flags": "i"
+    },
+    {
+      "chapter": 5,
+      "name": "Partial final paragraph of exothermic/endothermic reactions",
+      "pages": "71–74",
+      "pattern": "exothermic and endothermic reactions",
+      "flags": "i"
+    },
+    {
+      "chapter": 7,
+      "name": "Acid rain and its effects",
+      "pages": "102",
+      "pattern": "acid rain and its effects",
+      "flags": "i"
+    },
+    {
+      "chapter": 10,
+      "name": "Global warming and strategies to reduce environmental issues",
+      "pages": "136–141",
+      "pattern": "global warming|strategies to reduce environmental issues",
+      "flags": "i"
+    },
+    {
+      "chapter": 11,
+      "name": "Important reactions of hydrocarbons",
+      "pages": "151–153",
+      "pattern": "important reactions",
+      "flags": "i"
+    },
+    {
+      "chapter": 12,
+      "name": "Entire chapter excluded by ALP: Empirical Data Collection and Analysis",
+      "pages": "Not specified in the summary table",
+      "pattern": ".*",
+      "flags": "i"
+    },
+    {
+      "chapter": 13,
+      "name": "Entire chapter excluded by ALP: Laboratory and Practical Skills",
+      "pages": "Not specified in the summary table",
+      "pattern": ".*",
+      "flags": "i"
+    }
+  ],
+  "chapters": [
+    {
+      "number": 1,
+      "name": "States of Matter and Phase of Change",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 2,
+      "name": "Atomic Structure",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 3,
+      "name": "Chemical Bonding",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 4,
+      "name": "Stoichiometry",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 5,
+      "name": "Energetics",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 6,
+      "name": "Equilibria",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 7,
+      "name": "Acid Base Chemistry",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 8,
+      "name": "Electrochemistry",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 9,
+      "name": "Chemical Reactivity",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 10,
+      "name": "Environmental Chemistry",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 11,
+      "name": "Hydrocarbons",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 12,
+      "name": "Empirical Data Collection and Analysis",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 13,
+      "name": "Laboratory and Practical Skills",
+      "mcq": [],
+      "short": [],
+      "long": []
+    }
+  ]
+}

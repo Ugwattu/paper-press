@@ -18,7 +18,18 @@ server.listen(0, '127.0.0.1', async () => {
   const w = dom.window; let ok = false;
   for (let i = 0; i < 60 && !ok; i++) { await new Promise((r) => setTimeout(r, 100)); const s = w.document.getElementById('sheet'); ok = !!(s && s.textContent.length > 500); }
   const title = ok ? w.document.getElementById('tMarks').textContent : '';
+  let pickerOK = false;
+  if (ok) {
+    const grades = w.document.querySelectorAll('#gradeCard [data-grade]'), courses = w.document.querySelectorAll('#courseGrid [data-course]');
+    pickerOK = grades.length === 4 && courses.length === 5 && [...courses].filter(b => !b.disabled).length === 1;
+    const g10 = w.document.querySelector('#gradeCard [data-grade=\"10\"]');
+    if (g10) g10.click();
+    const c10 = w.document.querySelector('#courseGrid [data-course=\"10-computer\"]');
+    if (c10 && !c10.disabled) { c10.click(); pickerOK = pickerOK && w.document.getElementById('sheet').textContent.includes('Paper CS-10-ALP'); }
+    else pickerOK = false;
+  }
   server.close();
   if (!ok) { console.error('FAIL: the app did not render a paper after boot.', errs.slice(0, 3).join(' | '), (w.document.body.textContent || '').slice(0, 200)); process.exit(1); }
-  console.log(`boot OK — banks loaded from JSON, paper rendered (${title} marks)`); process.exit(0);
+  if (!pickerOK) { console.error('FAIL: course picker did not expose four grades, the five subject slots, or load Class 10 Computer.'); process.exit(1); }
+  console.log(`boot OK — 20-course picker loaded and Class 10 Computer rendered (${title} marks on initial paper)`); process.exit(0);
 });

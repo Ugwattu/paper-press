@@ -1,0 +1,306 @@
+{
+  "schemaVersion": 2,
+  "courseId": "9-physics",
+  "class": 9,
+  "classLabel": "9th",
+  "classUr": "جماعت نہم",
+  "subjectId": "physics",
+  "code": "PHY-09",
+  "subject": "Physics",
+  "subjectUr": "طبیعیات",
+  "language": "bilingual",
+  "marks": 60,
+  "times": {
+    "objective": 15,
+    "subjective": 105,
+    "basis": "stated"
+  },
+  "alp": {
+    "chapters": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "excludedChapters": [],
+    "summary": "PECTAA Smart Syllabus / ALP and Pairing Scheme for Academic Session 2026–27 / BISE Exam-2027. The pattern below encodes the official paper distribution. Topic-level ALP rules are represented in exclusionRules where transcribed; consult the applicable PECTAA notification for the complete page/exercise deletion list. No questions are prefilled."
+  },
+  "patterns": [
+    {
+      "id": "alp-full",
+      "name": "ALP full paper",
+      "note": "Official PECTAA 2026–27 pairing scheme. Question banks are intentionally empty; author original questions in the chapter arrays.",
+      "mcq": {
+        "1": 1,
+        "2": 1,
+        "3": 2,
+        "4": 2,
+        "5": 1,
+        "6": 2,
+        "7": 1,
+        "8": 1,
+        "9": 1
+      },
+      "mcqMark": 1,
+      "short": [
+        {
+          "ch": {
+            "1": 3,
+            "3": 3,
+            "2": 2
+          },
+          "attempt": 5
+        },
+        {
+          "ch": {
+            "4": 3,
+            "5": 3,
+            "6": 2
+          },
+          "attempt": 5
+        },
+        {
+          "ch": {
+            "7": 3,
+            "8": 3,
+            "9": 2
+          },
+          "attempt": 5
+        }
+      ],
+      "shortMark": 2,
+      "longGroups": [
+        {
+          "id": "long",
+          "name": "Detailed questions",
+          "attempt": 2,
+          "questions": [
+            {
+              "id": "q5",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "either",
+                    "chapters": [
+                      1,
+                      2,
+                      3
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "different-from-a",
+                    "chapters": [
+                      1,
+                      2,
+                      3
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q6",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "either",
+                    "chapters": [
+                      4,
+                      5,
+                      6
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "different-from-a",
+                    "chapters": [
+                      4,
+                      5,
+                      6
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q7",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "either",
+                    "chapters": [
+                      7,
+                      8,
+                      9
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "different-from-a",
+                    "chapters": [
+                      7,
+                      8,
+                      9
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "totalMarks": 60
+    }
+  ],
+  "exclusionRules": [
+    {
+      "chapter": 1,
+      "name": "Mass/time measuring instruments, measurement errors, uncertainty, precision and accuracy",
+      "pages": "16–22",
+      "pattern": "mass measuring instruments|time measuring instruments|errors in measurements|uncertainty in a measurement|precision and accuracy",
+      "flags": "i"
+    },
+    {
+      "chapter": 2,
+      "name": "Types of motion; distance-time and speed-time graph gradients",
+      "pages": "33, 41, 43",
+      "pattern": "types of motion|gradient of a distance.time graph|gradient of a speed.time graph",
+      "flags": "i"
+    },
+    {
+      "chapter": 3,
+      "name": "Fundamental forces, free-body diagrams, limitations of Newton laws, balances",
+      "pages": "55–65",
+      "pattern": "fundamental forces|free.body diagram|limitation of newton|mechanical and electronic balances",
+      "flags": "i"
+    },
+    {
+      "chapter": 4,
+      "name": "Centre of gravity/mass, stability and rotational versus translational motion",
+      "pages": "88–97",
+      "pattern": "centre of gravity|centre of mass|improvement of stability|rotational motion versus translational motion",
+      "flags": "i"
+    },
+    {
+      "chapter": 5,
+      "name": "Energy sources and methods of energy production",
+      "pages": "113–118",
+      "pattern": "sources of energy|advantages and disadvantages of methods of energy production",
+      "flags": "i"
+    },
+    {
+      "chapter": 6,
+      "name": "Hooke law applications and pressure measurement by manometer",
+      "pages": "129–138",
+      "pattern": "applications of hooke.s law|measurement of atmospheric pressure|measurement of pressure by manometer",
+      "flags": "i"
+    },
+    {
+      "chapter": 7,
+      "name": "Kinetic molecular theory and selected thermometer properties",
+      "pages": "149–156",
+      "pattern": "kinetic molecular theory|sensitivity.*range.*linearity|liquid in glass thermometer",
+      "flags": "i"
+    },
+    {
+      "chapter": 8,
+      "name": "Selected magnetism applications and domain theory",
+      "pages": "168–177",
+      "pattern": "permanent magnets|magnetic relay|telephone receiver|domain theory|recording technology|magnetic shield",
+      "flags": "i"
+    },
+    {
+      "chapter": 9,
+      "name": "Interdisciplinary research and science/technology base",
+      "pages": "186–191",
+      "pattern": "interdisciplinary research|scientific base of technology",
+      "flags": "i"
+    }
+  ],
+  "chapters": [
+    {
+      "number": 1,
+      "name": "Physical Quantities & Measurements",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 2,
+      "name": "Kinematics",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 3,
+      "name": "Dynamics",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 4,
+      "name": "Turning Effects of Force",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 5,
+      "name": "Work, Energy and Power",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 6,
+      "name": "Mechanical Properties of Matter",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 7,
+      "name": "Thermal Properties of Matter",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 8,
+      "name": "Magnetism",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 9,
+      "name": "Nature of Science",
+      "mcq": [],
+      "short": [],
+      "long": []
+    }
+  ]
+}

@@ -1,0 +1,404 @@
+{
+  "schemaVersion": 2,
+  "courseId": "10-maths",
+  "class": 10,
+  "classLabel": "10th",
+  "classUr": "جماعت دہم",
+  "subjectId": "maths",
+  "code": "MATH-10",
+  "subject": "Mathematics",
+  "subjectUr": "ریاضی",
+  "language": "bilingual",
+  "marks": 75,
+  "times": {
+    "objective": 20,
+    "subjective": 130,
+    "basis": "stated"
+  },
+  "alp": {
+    "chapters": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "excludedChapters": [],
+    "summary": "PECTAA 2026–27 ALP and pairing scheme for Class 10 Mathematics. The official chapter numbering and pairing distributions are encoded below. Topic/exercise exclusions are recorded in exclusionRules where transcribed; consult the applicable revised notification for the complete deletion schedule. Question arrays are intentionally empty for the author to populate with original questions."
+  },
+  "patterns": [
+    {
+      "id": "alp-full",
+      "name": "ALP full paper",
+      "note": "Official revised PECTAA Grade 10 notification No. 1266 dated 20 November 2026 (supersedes the 14 November notice): 15 MCQs; three short-question parts, attempt 6 in each; Part II attempt 2 of 3 long questions (4+4); Part III attempt 1 of 2 (4+4).",
+      "mcq": {
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 1,
+        "6": 1,
+        "7": 1,
+        "8": 1,
+        "9": 2,
+        "10": 1,
+        "11": 2,
+        "12": 2
+      },
+      "mcqMark": 1,
+      "short": [
+        {
+          "ch": {
+            "1": 2,
+            "2": 3,
+            "3": 2,
+            "4": 2
+          },
+          "attempt": 6
+        },
+        {
+          "ch": {
+            "5": 2,
+            "6": 3,
+            "7": 2,
+            "8": 2
+          },
+          "attempt": 6
+        },
+        {
+          "ch": {
+            "9": 2,
+            "10": 2,
+            "11": 3,
+            "12": 2
+          },
+          "attempt": 6
+        }
+      ],
+      "shortMark": 2,
+      "longGroups": [
+        {
+          "id": "part-ii",
+          "name": "Part II · long questions",
+          "attempt": 2,
+          "questions": [
+            {
+              "id": "q5",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      1
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      2
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q6",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      3
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      4
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q7",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      5
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      7
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "part-iii",
+          "name": "Part III · long questions",
+          "attempt": 1,
+          "questions": [
+            {
+              "id": "q8",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      6
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "either",
+                    "chapters": [
+                      8,
+                      11
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q9",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      10
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "either",
+                    "chapters": [
+                      9,
+                      12
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "totalMarks": 75
+    }
+  ],
+  "exclusionRules": [
+    {
+      "chapter": 1,
+      "pattern": "properties of complex conjugate|properties of modulus|simultaneous linear equations.*complex coefficients",
+      "flags": "i",
+      "name": "Deleted proofs/examples for properties of complex conjugates and modulus; listed Exercise 1.3, Exercise 1.4, complex-coefficient simultaneous equations Example 21, and Review Exercise 1 items.",
+      "pages": "pp. 11–21"
+    },
+    {
+      "chapter": 2,
+      "pattern": "quadratic equation.*real.life|quadratic inequalities.*application|word problems.*quadratic",
+      "flags": "i",
+      "name": "Selected quadratic-equation/inequality applications, examples and exercise items are excluded in the revised ALP; check the revised notification before adding questions from this unit.",
+      "pages": "as listed in revised ALP"
+    },
+    {
+      "chapter": 3,
+      "pattern": "associative law.*matrix|distributive law.*matrix|echelon|real.world applications.*matrices",
+      "flags": "i",
+      "name": "Deleted listed matrix-law proofs/examples, selected exercise items, real-world applications (Examples 12–13), role of mathematics in scientific theories, and listed Review Exercise 3 items.",
+      "pages": "pp. 62–80"
+    },
+    {
+      "chapter": 4,
+      "pattern": "real.life applications.*function|real.world problems.*graph",
+      "flags": "i",
+      "name": "Deleted Sections 4.5–4.6 real-life applications (Examples 15–18), Exercise 4.3 and listed Review Exercise 4 items.",
+      "pages": "pp. 92–96"
+    },
+    {
+      "chapter": 5,
+      "pattern": "exponential equation|reciprocal.*algebraic fraction|real.world.*algebraic fraction",
+      "flags": "i",
+      "name": "Deleted listed exponential/reciprocal equation types and examples, Exercise 5.4 selected items, real-world applications Examples 14–15, Exercise 5.5 and listed Review Exercise 5 items.",
+      "pages": "pp. 103–110"
+    },
+    {
+      "chapter": 6,
+      "pattern": "translation by a vector|geometric problems.*vector|applications.*vectors in plane",
+      "flags": "i",
+      "name": "Deleted translation by vector Example 9, selected geometric-problem examples, Exercise 6.3 and listed Review Exercise 6 items.",
+      "pages": "pp. 119–124"
+    },
+    {
+      "chapter": 7,
+      "pattern": "three.dimension.*trigonometry|3d problems|bearing.*three.figure|three.figure bearing",
+      "flags": "i",
+      "name": "Deleted 3D trigonometry Examples 8–9, selected Exercise 7.3 items, three-figure bearing Examples 12–14, Exercise 7.4 and listed Review Exercise 7 items.",
+      "pages": "pp. 142–162"
+    },
+    {
+      "chapter": 8,
+      "pattern": "congruent arcs|congruent chords|central angles.*chord",
+      "flags": "i",
+      "name": "Deleted Sections 8.1.6–8.1.9 on congruent arcs/chords/central angles, Exercise 8.2 and listed Review Exercise 8 items.",
+      "pages": "pp. 151–154"
+    },
+    {
+      "chapter": 9,
+      "pattern": "angles of a circle.*exercise|tangent.*circle.*exercise",
+      "flags": "i",
+      "name": "Deleted listed items from Exercises 9.1–9.2 and Review Exercise 9.",
+      "pages": "pp. 160–167"
+    },
+    {
+      "chapter": 10,
+      "pattern": "circle without centre|arcs.*without centre",
+      "flags": "i",
+      "name": "Deleted Section 10.1.4 circle construction without a centre and listed items from Exercises 10.1–10.2 and Review Exercise 10.",
+      "pages": "pp. 170–175"
+    },
+    {
+      "chapter": 11,
+      "pattern": "information handling.*application|statistical.*real.life",
+      "flags": "i",
+      "name": "Selected Information Handling topics/exercises are excluded in the revised ALP; check the notification's exact exercise list before authoring from this unit.",
+      "pages": "as listed in revised ALP"
+    },
+    {
+      "chapter": 12,
+      "pattern": "probability.*real.life|probability.*application",
+      "flags": "i",
+      "name": "Selected Probability topics/exercises are excluded in the revised ALP; check the notification's exact exercise list before authoring from this unit.",
+      "pages": "as listed in revised ALP"
+    }
+  ],
+  "chapters": [
+    {
+      "number": 1,
+      "name": "Complex Numbers",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 2,
+      "name": "Quadratic Equations and Inequalities",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 3,
+      "name": "Matrices and Determinants",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 4,
+      "name": "Functions and Graphs",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 5,
+      "name": "Algebraic Fractions",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 6,
+      "name": "Vectors in Plane",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 7,
+      "name": "Trigonometry",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 8,
+      "name": "Chords and Arcs of a Circle",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 9,
+      "name": "Tangent and Angles of a Circle",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 10,
+      "name": "Practical Geometry of Circles",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 11,
+      "name": "Information Handling",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 12,
+      "name": "Probability",
+      "mcq": [],
+      "short": [],
+      "long": []
+    }
+  ]
+}

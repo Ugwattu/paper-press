@@ -1,0 +1,290 @@
+{
+  "schemaVersion": 2,
+  "courseId": "10-biology",
+  "class": 10,
+  "classLabel": "10th",
+  "classUr": "جماعت دہم",
+  "subjectId": "biology",
+  "code": "BIO-10",
+  "subject": "Biology",
+  "subjectUr": "حیاتیات",
+  "language": "bilingual",
+  "marks": 60,
+  "times": {
+    "objective": 15,
+    "subjective": 105,
+    "basis": "inferred"
+  },
+  "alp": {
+    "chapters": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "excludedChapters": [],
+    "summary": "PECTAA Smart Syllabus / ALP and Pairing Scheme for Academic Session 2026–27 / BISE Exam-2027. The pattern below encodes the official paper distribution. Topic-level ALP rules are represented in exclusionRules where transcribed; consult the applicable PECTAA notification for the complete page/exercise deletion list. No questions are prefilled. Chapter titles for 10-biology were rechecked against the 2026–27 PECTAA ALP notification."
+  },
+  "patterns": [
+    {
+      "id": "alp-full",
+      "name": "ALP full paper",
+      "note": "Official PECTAA 2026–27 pairing scheme. Question banks are intentionally empty; author original questions in the chapter arrays.",
+      "mcq": {
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 2,
+        "5": 1,
+        "6": 1,
+        "7": 1,
+        "8": 1,
+        "9": 1,
+        "10": 2
+      },
+      "mcqMark": 1,
+      "short": [
+        {
+          "ch": {
+            "1": 2,
+            "2": 4,
+            "5": 2
+          },
+          "attempt": 5
+        },
+        {
+          "ch": {
+            "3": 2,
+            "4": 3,
+            "6": 1,
+            "7": 2
+          },
+          "attempt": 5
+        },
+        {
+          "ch": {
+            "8": 2,
+            "9": 2,
+            "10": 4
+          },
+          "attempt": 5
+        }
+      ],
+      "shortMark": 2,
+      "longGroups": [
+        {
+          "id": "long",
+          "name": "Detailed questions",
+          "attempt": 2,
+          "questions": [
+            {
+              "id": "q5",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      1
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      3
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q6",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      6
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      5
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "q7",
+              "parts": [
+                {
+                  "label": "a",
+                  "marks": 5,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      9
+                    ]
+                  }
+                },
+                {
+                  "label": "b",
+                  "marks": 4,
+                  "chapterRule": {
+                    "type": "fixed",
+                    "chapters": [
+                      8
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "totalMarks": 60
+    }
+  ],
+  "exclusionRules": [
+    {
+      "chapter": 1,
+      "name": "Nutrition and digestive-system disorders",
+      "pages": "2, 9–11",
+      "pattern": "nutrition and its importance|disorders of digestive system",
+      "flags": "i"
+    },
+    {
+      "chapter": 2,
+      "name": "Respiratory disorders and effects of smoking",
+      "pages": "17–23",
+      "pattern": "respiratory disorders|effect of smoking",
+      "flags": "i"
+    },
+    {
+      "chapter": 3,
+      "name": "Cardiovascular disorders",
+      "pages": "33–37",
+      "pattern": "cardiovascular disorders",
+      "flags": "i"
+    },
+    {
+      "chapter": 4,
+      "name": "Disorders of kidney",
+      "pages": "43–47",
+      "pattern": "disorders of kidney",
+      "flags": "i"
+    },
+    {
+      "chapter": 5,
+      "name": "Selected coordination content",
+      "pages": "49–63",
+      "pattern": "background information|table 5",
+      "flags": "i"
+    },
+    {
+      "chapter": 6,
+      "name": "Role of hormones in sexual development",
+      "pages": "67–72",
+      "pattern": "role of hormones in sexual development",
+      "flags": "i"
+    },
+    {
+      "chapter": 7,
+      "name": "Structure of chromosomes",
+      "pages": "74–85",
+      "pattern": "structure of chromosomes",
+      "flags": "i"
+    }
+  ],
+  "chapters": [
+    {
+      "number": 1,
+      "name": "Human Digestive System",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 2,
+      "name": "Human Respiratory System",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 3,
+      "name": "Human Blood Circulatory System",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 4,
+      "name": "Human Urinary System",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 5,
+      "name": "Coordination",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 6,
+      "name": "Reproductive System",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 7,
+      "name": "Inheritance",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 8,
+      "name": "Biotechnology",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 9,
+      "name": "Diseases and Immunity",
+      "mcq": [],
+      "short": [],
+      "long": []
+    },
+    {
+      "number": 10,
+      "name": "Evolution",
+      "mcq": [],
+      "short": [],
+      "long": []
+    }
+  ]
+}
