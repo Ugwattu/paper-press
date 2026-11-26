@@ -174,6 +174,16 @@ function buildDocxSheet(raw,sheetKind,keepMedia=false){
   }else if(HS==='split'){
    const w1=Math.round(CW*.28),w3=w1,w2=CW-w1-w3,bdc={t:false,b:!s.hideLines,l:false,r:false},z={bdz:ruleZ,valign:VA};
    push(tbl([w1,w2,w3],[tr([tc(txtP(metaT[0],{b:s.bHeader})+txtP(metaT[1],{b:s.bHeader}),Object.assign({w:w1,bd:bdc},z)),tc(logoTitleX,Object.assign({w:w2,bd:bdc},z)),tc(txtP(metaT[3],{b:s.bHeader,align:'right'})+txtP(metaT[2],{b:s.bHeader,align:'right'}),Object.assign({w:w3,bd:bdc},z))])],{borders:false,pad:s.pad+1}));
+  }else if(HS==='centered'){
+   push(logoTitleX);spacer(3);push(tbl([CW/4,CW/4,CW/4,CW-CW*3/4],[tr(metaT.map((t,i)=>tc(txtP(t,{b:s.bHeader,align:'center'}),{w:CW/4,bd:{t:!s.hideLines,b:!s.hideLines,l:!s.hideLines,r:!s.hideLines},valign:VA})))],{borders:!s.hideLines,pad:s.pad+1}));
+  }else if(HS==='minimal'){
+   push(logoTitleX);spacer(2);push(txtP(metaT.join('   ·   '),{align:'center',sz:s.enSize-1}));spacer(4);
+  }else if(HS==='boxed'){
+   push(tbl([CW],[tr([tc(logoTitleX,{w:CW,bd:{t:!s.hideLines,l:!s.hideLines,b:!s.hideLines,r:!s.hideLines},pad:s.pad+4})])],{borders:!s.hideLines,pad:s.pad+2}));spacer(3);push(tbl(g,[tr(metaT.map((t,i)=>tc(txtP(t,{b:s.bHeader,align:'center'}),{w:g[i],valign:VA})))],{borders:!s.hideLines,pad:s.pad+1}));
+  }else if(HS==='academy'){
+   push(tbl([CW],[tr([tc(logoTitleX,{w:CW,bd:{t:!s.hideLines,b:!s.hideLines,l:false,r:false},pad:s.pad+2})])],{borders:false,pad:s.pad+2}));spacer(2);push(tbl([CW/4,CW/4,CW/4,CW-CW*3/4],[tr(metaT.map(t=>tc(txtP(t,{b:s.bHeader,align:'center'}),{w:CW/4,bd:{t:!s.hideLines,b:!s.hideLines,l:false,r:false},valign:VA})))],{borders:false,pad:s.pad+1}));
+  }else if(HS==='compact'){
+   const w1=Math.round(CW*.64),w2=CW-w1;push(tbl([w1,w2],[tr([tc(logoTitleX,{w:w1,valign:VA,noBorder:true}),tc(metaT.map(t=>txtP(t,{b:s.bHeader,align:'right'})).join(''),{w:w2,valign:VA,noBorder:true})])],{borders:false,pad:s.pad+1}));
   }else{
    push(logoTitleX);spacer(4);
    push(tbl(g,[tr(metaT.map((t,i)=>tc(txtP(t,{b:s.bHeader,align:'center'}),{w:g[i],valign:VA})))],{borders:!s.hideLines}));}}

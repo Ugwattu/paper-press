@@ -12,8 +12,8 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="app.css?v=22">
-<link rel="stylesheet" href="paper.css?v=22">
+<link rel="stylesheet" href="app.css?v=37">
+<link rel="stylesheet" href="paper.css?v=37">
 
 </head>
 <body>
@@ -35,7 +35,7 @@
   <button class="ibtn ico" id="btnKeys" title="Keyboard shortcuts (?)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg></button>
   <a class="ibtn ico" id="btnBug" href="https://github.com/Ugwattu/paper-press/issues/new" target="_blank" rel="noopener noreferrer" title="Report a bug (pre-filled with a unique report ID)" aria-label="Report a bug or request a feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2l1.9 1.9M16 2l-1.9 1.9M9 7.1V6a3 3 0 016 0v1.1"/><path d="M12 20a6 6 0 01-6-6v-3a4 4 0 014-4h4a4 4 0 014 4v3a6 6 0 01-6 6zM12 20v-9M6 13H2M22 13h-4M6 17l-3 2M18 17l3 2M6 9L3 7M18 9l3-2"/></svg></a>
   <button class="ibtn ico" id="themeBtn" title="Toggle light / dark"><svg id="themeIco" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg></button>
-  <button class="ibtn" id="btnBP" title="Paper blueprint (L)" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg><span class="tx">Blueprint</span></button>
+  <button class="ibtn" id="btnTutorial" title="Start guided tour">? <span class="tx">Guide</span></button><button class="ibtn" id="btnBP" title="Paper blueprint (L)" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg><span class="tx">Blueprint</span></button>
   <button class="ibtn pri" id="topExp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 20h16"/></svg><span class="tx">Save .docx</span></button>
 </header>
 
@@ -48,8 +48,13 @@
   <div class="grp g-v">
     <h3><i></i>Class &amp; Subject<em id="bookEm"></em></h3>
     <div class="bd">
-      <div class="gradecard" id="gradeCard" aria-label="Choose class"></div>
-      <div class="coursegrid" id="courseGrid" aria-label="Choose subject"></div>
+      <div class="course-picker">
+        <div class="selected-course course-current" id="selectedCourse"></div>
+        <div class="picker-step"><span class="step-num">1</span><div><b>Choose your class</b><small>Start by selecting a grade</small></div></div>
+        <div class="gradecard" id="gradeCard" aria-label="Choose class"></div>
+        <div class="picker-step subject-step"><span class="step-num">2</span><div><b>Choose your subject</b><small>Only available banks can be opened</small></div></div>
+        <div class="coursegrid" id="courseGrid" aria-label="Choose subject"></div>
+      </div>
       <div class="alpcard" id="alpCard">
         <div class="r1"><div class="tt"><b id="alpTitle">ALP SMART SYLLABUS</b><small id="alpSub"></small></div><div class="bigsw"></div></div>
         <div class="desc" id="alpDesc"></div>
@@ -137,7 +142,7 @@
     <h3><i></i>Header &amp; Student Fields</h3>
     <div class="bd">
       <div class="ctl"><div class="lab"><span>Header style</span></div>
-        <div class="seg" id="segHdr"><button data-v="classic">Classic</button><button data-v="banner">Banner</button><button data-v="ruled">Ruled</button><button data-v="split">Split</button></div>
+        <div class="seg hdr-style-grid" id="segHdr"><button data-v="classic" title="Centered title with four-column metadata">Classic</button><button data-v="banner" title="Shaded title band with metadata row">Banner</button><button data-v="ruled" title="Title followed by horizontal metadata rules">Ruled</button><button data-v="split" title="Left details, centered title, right timing">Split</button><button data-v="centered" title="Centered title and balanced boxed metadata">Centered</button><button data-v="minimal" title="Clean title with one compact metadata line">Minimal</button><button data-v="boxed" title="Framed title block and separate metadata row">Boxed</button><button data-v="academy" title="Formal academy-style title framed by rules">Academy</button><button data-v="compact" title="Title on left and compact details on right">Compact</button></div>
         <div class="hint">Layout of the title block and the Class · Subject · Marks · Time strip.</div></div>
       <div class="ctl"><div class="lab"><span>Institute</span></div><input type="text" id="iInst"></div>
       <div class="ctl"><div class="lab"><span>Test title</span></div><input type="text" id="iTitle"></div>
@@ -420,8 +425,8 @@
 <div class="busy" id="busy" role="status" aria-live="polite"><div class="bx"><div class="sp2"></div><b>Building your .docx</b><small>packaging WordprocessingML + images…</small></div></div>
 <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
 
-<script src="bank-loader.js?v=29"></script>
-<script>PPBanks.boot('30');</script>
+<script src="bank-loader.js?v=37"></script>
+<script>PPBanks.boot('37');</script>
 <noscript><p style="position:fixed;inset:0;background:#05091a;color:#fff;padding:2em;font:16px sans-serif">Paper Press needs JavaScript to build question papers.</p></noscript>
 
 </body>

@@ -104,3 +104,25 @@ Use the bug icon in the top bar or **Library → Help & feedback**. Each report 
 ## Topic and exercise selection (v29)
 
 The chapter picker supports finer filters. Add per-chapter `contentCatalog` entries (`topics` and `exercises`, each optionally `alpExcluded`) and tag bank questions using `questionContent` (chapter → question type → zero-based index → topic/exercise IDs). The authoring template includes a sample mapping. In-app, you can add local topic/exercise labels and tag questions from the question browser. Selecting content filters the random MCQ/short/long pools and blueprint counts. Untagged questions can optionally remain included. Local catalogs, tags, and selection state are saved in browser storage; for permanent bank-wide metadata, add the fields to course JSON.
+
+
+## Build v31 — UI redesign
+- Refreshed the overall workspace visual hierarchy, spacing, surfaces, navigation, settings cards, buttons, and paper-preview framing.
+- Added nine named header styles, all supported by preview and Word export: Classic, Banner, Ruled, Split, Centered, Minimal, Boxed, Academy, and Compact.
+- Browser visual verification remains pending due to Chromium timeout in the build environment.
+
+
+## v35 — Guided onboarding update
+- The first-run tutorial now spotlights the real control or section being discussed while dimming the rest of the app.
+- It auto-navigates between Paper, Header, Layout, Edit and Library panes, opens collapsed groups, and explains 18 walkthrough screens with contextual tips.
+- Tutorial can be replayed from the Guide button; completion marker is `pp.tutorial.v3`.
+
+## v36 — Professional onboarding
+- The guided tour now uses a light, unblurred spotlight cut-out so the app remains visible behind the tutorial.
+- A polished explanation card follows each highlighted feature and includes a detailed description, practical tip, section label and progress indicator.
+- The card positions beside the highlighted control where space allows; keyboard, mobile and reduced-motion behavior are supported.
+- Guide remains replayable from the top bar.
+
+
+## v37 — Paper format dropdown fix
+- The Paper format field in Header now clearly renders as a dropdown, not a textbox. Native select affordance and pointer/focus styling are explicitly restored.

@@ -43,6 +43,9 @@ check('DOCX merge returns one package file list', Array.isArray(merged) && merge
 check('DOCX merge keeps both sheet bodies in Objective-then-Subjective order', doc.indexOf('<w:p>objective</w:p>') >= 0 && doc.indexOf('<w:p>objective</w:p>') < doc.indexOf('<w:p>subjective</w:p>'));
 check('DOCX merge inserts exactly one inter-sheet page break', (doc.match(/w:type="page"/g) || []).length === 1);
 check('DOCX merge retains the first sheet section properties and image parts', doc.includes('<w:sectPr><w:pgSz/></w:sectPr>') && merged.some(f => f.name === 'word/media/image3.png') && merged.some(f => f.name === 'word/_rels/document.xml.rels'));
+const sheetCss=fs.readFileSync('app.css','utf8');
+check('Paper format has an explicit native dropdown indicator', /#selSheetMode\{[^}]*appearance:auto;[^}]*-webkit-appearance:menulist;[^}]*background-image:none!important;[^}]*cursor:pointer/s.test(sheetCss));
 
 console.log(fails ? `${fails} split-sheet check(s) failed` : 'split-sheet structure and DOCX merge OK');
 process.exit(fails ? 1 : 0);
+

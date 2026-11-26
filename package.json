@@ -2,7 +2,7 @@
   "name": "paper-press",
   "private": true,
   "scripts": {
-    "test": "node tools/validate-banks.js && node tools/test-chapter-grid.js && node tools/test-boot.js && node tools/test-parity.js && node tools/test-docx.js && node tools/test-persistence.js && node tools/test-shortcuts.js && node tools/test-timing.js && node tools/test-language.js && node tools/test-sheets.js && node tools/test-modules.js && node tools/test-template.js && node tools/test-computer-upper.js && node tools/test-richtext.js && node tools/test-long-groups.js && node tools/test-long-engine.js && node tools/test-science-banks.js && node tools/test-latex.js && node tools/test-maths.js && node tools/test-long-table.js && node tools/test-content-selection.js"
+    "test": "node tools/validate-banks.js && node tools/test-header-styles.js && node tools/test-onboarding.js && node tools/test-chapter-grid.js && node tools/test-boot.js && node tools/test-parity.js && node tools/test-docx.js && node tools/test-persistence.js && node tools/test-shortcuts.js && node tools/test-timing.js && node tools/test-language.js && node tools/test-sheets.js && node tools/test-modules.js && node tools/test-template.js && node tools/test-computer-upper.js && node tools/test-richtext.js && node tools/test-long-groups.js && node tools/test-long-engine.js && node tools/test-science-banks.js && node tools/test-latex.js && node tools/test-maths.js && node tools/test-long-table.js && node tools/test-content-selection.js && node tools/test-selection-ui.js && node tools/test-tutorial.js"
   },
   "devDependencies": {
     "jsdom": "^24.1.0",

@@ -82,6 +82,16 @@ function paperInnerSheet(s,mode){
  }else if(HS==='split'){
   const sc=`padding:${s.pad}pt ${s.pad+1.5}pt;vertical-align:top;${base}font-weight:${wH};${s.hideLines?'':'border-bottom:'+RULE+';'}`;
   h+=`<table ${TB}margin-bottom:6pt;"><colgroup><col style="width:28%"><col style="width:44%"><col style="width:28%"></colgroup><tr><td style="${sc}text-align:left;">${metaT[0]}<br>${metaT[1]}</td><td style="${sc}text-align:center;">${lt(2)}</td><td style="${sc}text-align:right;">${metaT[3]}<br>${metaT[2]}</td></tr></table>`;
+ }else if(HS==='centered'){
+  h+=lt(3)+`<table ${TB}margin-bottom:6pt;">${mcg}<tr>${metaT.map(t=>`<td style="${cell}text-align:center;font-weight:${wH};background:#f5f5f5;">${t}</td>`).join('')}</tr></table>`;
+ }else if(HS==='minimal'){
+  h+=lt(2)+`<div style="${base}text-align:center;font-size:${FS-1}pt;margin:0 0 7pt;">${metaT.map(esc).join(' &nbsp; · &nbsp; ')}</div>`;
+ }else if(HS==='boxed'){
+  h+=`<table ${TB}margin-bottom:6pt;"><tr><td style="${cb}padding:${s.pad+4}pt;text-align:center;">${lt(0)}</td></tr></table>`+`<table ${TB}margin-bottom:6pt;">${mcg}<tr>${metaT.map(t=>`<td style="${cell}text-align:center;font-weight:${wH};">${t}</td>`).join('')}</tr></table>`;
+ }else if(HS==='academy'){
+  h+=`<div style="${base}text-align:center;border-top:${RULE};border-bottom:${RULE};padding:3pt 0;margin-bottom:3pt;">${lt(0)}</div>`+`<table ${TB}margin-bottom:6pt;">${mcg}<tr>${metaT.map(t=>`<td style="${cell}text-align:center;font-weight:${wH};">${t}</td>`).join('')}</tr></table>`;
+ }else if(HS==='compact'){
+  h+=`<table ${TB}margin-bottom:6pt;"><colgroup><col style="width:64%"><col style="width:36%"></colgroup><tr><td style="${cell}text-align:left;">${lt(0)}</td><td style="${cell}text-align:right;font-weight:${wH};">${metaT.map(t=>`<div>${t}</div>`).join('')}</td></tr></table>`;
  }else{
   h+=lt(5)+T('margin-bottom:6pt;')+`<tr><td style="${ch}width:22%;font-weight:${wH};">${metaT[0]}</td><td style="${ch}width:38%;font-weight:${wH};">${metaT[1]}</td><td style="${ch}width:20%;font-weight:${wH};">${metaT[2]}</td><td style="${ch}width:20%;font-weight:${wH};">${metaT[3]}</td></tr></table>`;
  }
