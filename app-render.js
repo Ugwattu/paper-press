@@ -91,11 +91,11 @@ function drawerShow(kind){
 function openPicker(key){
  const s=slotMap[key];if(!s)return;
  drawerMode='pick';drawerSlot=key;drawerQuery='';drawerFilter='all';drawerCh='all';drawerEx=false;
- $('dTitle').innerHTML='Choose any question<small>'+s.label+' · slot chapter '+s.planCh+' — '+B().names[s.planCh]+'</small>';
+ $('dTitle').innerHTML='Choose any question<small>'+esc(s.label)+' · slot chapter '+s.planCh+' — '+esc(B().names[s.planCh])+'</small>';
  drawerShow('pick');
  $('dSearch').value='';$('dEx').classList.remove('on');
  const b=B();
- $('dChap').innerHTML='<option value="all">All chapters — whole '+b.name+' book</option><option value="slot">Slot chapter '+s.planCh+' — '+esc(b.names[s.planCh])+'</option>'+b.chapters.map(c=>`<option value="${c}">Ch ${c} — ${esc(b.names[c])}</option>`).join('');
+ $('dChap').innerHTML='<option value="all">All chapters — whole '+esc(b.name)+' book</option><option value="slot">Slot chapter '+s.planCh+' — '+esc(b.names[s.planCh])+'</option>'+b.chapters.map(c=>`<option value="${c}">Ch ${c} — ${esc(b.names[c])}</option>`).join('');
  $('dChap').value='all';
  document.querySelectorAll('#dFilter button').forEach(x=>x.classList.toggle('on',x.dataset.v==='all'));
  $('dFoot').innerHTML='<button id="dpRand">Random from shown</button><button class="pri" id="dpPin">'+(overrides[key]?'Release pin':'Pin current')+'</button>';

@@ -6,8 +6,8 @@ const vm = require('vm');
 const { scripts, bundle } = require('../bank-loader.js');
 const root = path.join(__dirname, '..');
 const expected = [
-  'app-core.js', 'app-schemes.js', 'app-long.js', 'app-planning.js', 'app-paper.js', 'app-docx.js',
-  'app-analysis.js', 'app-presets.js', 'app-render.js', 'app-editors.js', 'app-interface.js', 'app-runtime.js'
+  'app-core.js', 'app-state.js', 'app-schemes.js', 'app-long.js', 'app-planning.js', 'app-paper.js', 'app-docx.js',
+  'app-analysis.js', 'app-presets.js', 'app-history.js', 'app-render.js', 'app-editors.js', 'app-interface.js', 'app-runtime.js'
 ];
 let failures = 0;
 const check = (label, ok) => { if (!ok) { failures++; console.error(`FAIL ${label}`); } else console.log(`OK ${label}`); };

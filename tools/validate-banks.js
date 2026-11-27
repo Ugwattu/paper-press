@@ -2,11 +2,15 @@
 /* Validates the schema-v2 manifest and each course bank. */
 const fs=require('fs'),path=require('path'),{convert}=require('../bank-loader.js');
 const dir=path.join(__dirname,'..','banks'),manifest=JSON.parse(fs.readFileSync(path.join(dir,'manifest.json'),'utf8'));
+const Ajv=require('ajv'),{checkBank,checkManifest,schemaErrors}=require('./bank-checks.js');
+const ajv=new Ajv({allErrors:true,strict:false}),readSchema=n=>JSON.parse(fs.readFileSync(path.join(__dirname,'..','schemas',n),'utf8'));
+const validateManifest=ajv.compile(readSchema('manifest.schema.json')),validateBank=ajv.compile(readSchema('bank.schema.json'));
 let errors=0,warns=0,questions=0;const ids=new Set(),seenFiles=new Set();
 
 const err=m=>{errors++;console.error('ERROR '+m);},warn=m=>{warns++;console.warn('warn  '+m);};
 const checkedSvgs=new Set(),unsafeSvg=/<\s*(?:script|foreignObject|iframe|object|embed)\b|<\s*!\s*(?:DOCTYPE|ENTITY)\b|<\?xml-stylesheet|\son[a-z]+\s*=|\b(?:href|xlink:href)\s*=\s*([\"'])\s*(?:https?:|\/\/|data:|javascript:)|url\(\s*[\"']?\s*(?:https?:|\/\/|data:|javascript:)|@import\b/i;
 const figure=(ref,tag)=>{if(ref==null||ref==='')return;if(typeof ref!=='string'){err(`${tag}: figure must be a filename string`);return;}const name=ref.replace(/^figures\//i,'');if(!/^[a-z0-9][a-z0-9._-]*\.(?:png|svg)$/i.test(name)){err(`${tag}: figure must be a PNG/SVG filename inside figures/`);return;}const full=path.join(__dirname,'..','figures',name);if(!fs.existsSync(full)){err(`${tag}: missing figure file figures/${name}`);return;}if(name.toLowerCase().endsWith('.svg')&&!checkedSvgs.has(name)){checkedSvgs.add(name);try{const svg=fs.readFileSync(full,'utf8');if(svg.length>2e6||unsafeSvg.test(svg))err(`${tag}: SVG figures must be under 2 MB, self-contained, and contain no scripts or external resources`);}catch(e){err(`${tag}: could not read SVG figure figures/${name} (${e.message})`);}}};
+schemaErrors(validateManifest,manifest,'banks/manifest.json').forEach(err);checkManifest(manifest).forEach(err);
 if(+manifest.version!==2)err('manifest.json version must be 2');
 if(!Array.isArray(manifest.courses))err('manifest.json must contain a courses list');
 for(const c of manifest.courses||[]){
@@ -15,6 +19,8 @@ for(const c of manifest.courses||[]){
  const file=path.join(dir,c.file||'');if(!fs.existsSync(file)){err(`${tag}: listed in manifest but file is missing`);continue;}
  let j;try{j=JSON.parse(fs.readFileSync(file,'utf8'));}catch(e){err(`${tag}: invalid JSON — ${e.message}`);continue;}
  let converted;try{converted=convert(j,tag);}catch(e){err(e.message);continue;}
+ schemaErrors(validateBank,j,'banks/'+c.file,j).forEach(err);
+ {const r=checkBank('banks/'+c.file,j,{manifest,course:c,figureExists:n=>fs.existsSync(path.join(__dirname,'..','figures',n))});r.errors.forEach(err);r.warnings.forEach(warn);}
  if(j.courseId!==c.id||+j.class!==+c.class||j.subjectId!==c.subject)err(`${tag}: manifest and course metadata do not match`);
  const wanted=c.expected,actual={marks:j.marks,times:j.times,language:j.language};
  if(wanted&&JSON.stringify(actual)!==JSON.stringify(wanted))err(`${tag}: bank marks/time/language do not match manifest expected values`);

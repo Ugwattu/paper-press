@@ -2,12 +2,28 @@
   "name": "paper-press",
   "private": true,
   "scripts": {
-    "test": "node tools/build-bundle.js && node tools/validate-banks.js && node tools/test-stable-ids.js && node tools/test-header-styles.js && node tools/test-onboarding.js && node tools/test-chapter-grid.js && node tools/test-boot.js && node tools/test-groups.js && node tools/test-parity.js && node tools/test-docx.js && node tools/test-persistence.js && node tools/test-shortcuts.js && node tools/test-timing.js && node tools/test-language.js && node tools/test-sheets.js && node tools/test-modules.js && node tools/test-template.js && node tools/test-computer-upper.js && node tools/test-richtext.js && node tools/test-long-groups.js && node tools/test-long-engine.js && node tools/test-science-banks.js && node tools/test-latex.js && node tools/test-maths.js && node tools/test-long-table.js && node tools/test-content-selection.js && node tools/test-selection-ui.js && node tools/test-tutorial.js",
-    "build": "node tools/build-bundle.js"
+    "test": "node tools/build-bundle.js && node tools/validate-banks.js && node tools/test-bank-validation.js && node tools/test-stable-ids.js && node tools/test-header-styles.js && node tools/test-onboarding.js && node tools/test-chapter-grid.js && node tools/test-boot.js && node tools/test-groups.js && node tools/test-parity.js && node tools/test-docx.js && node tools/test-docx-xml.js && node tools/test-security.js && node tools/test-answer-key.js && node tools/test-history.js && node tools/test-offline.js && node tools/test-csp.js && node tools/contrast.js && node tools/test-a11y.js && node tools/test-persistence.js && node tools/test-shortcuts.js && node tools/test-timing.js && node tools/test-language.js && node tools/test-sheets.js && node tools/test-modules.js && node tools/test-template.js && node tools/test-computer-upper.js && node tools/test-richtext.js && node tools/test-long-groups.js && node tools/test-long-engine.js && node tools/test-science-banks.js && node tools/test-latex.js && node tools/test-maths.js && node tools/test-long-table.js && node tools/test-content-selection.js && node tools/test-selection-ui.js && node tools/test-tutorial.js",
+    "build": "node tools/build-bundle.js && node tools/build-precache.js",
+    "check": "npm run build && git diff --exit-code app.bundle.js precache.json && npm test",
+    "docx:render": "node tools/render-docx.js",
+    "docx:baselines": "node tools/render-docx.js --update",
+    "vendor": "node tools/vendor-assets.js",
+    "e2e": "playwright test",
+    "e2e:install": "playwright install --with-deps chromium"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.1",
+    "@fontsource/inter": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "@fontsource/noto-nastaliq-urdu": "^5.3.0",
+    "@playwright/test": "^1.65.1",
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1",
     "jsdom": "^24.1.0",
-    "jszip": "^3.10.1"
+    "jszip": "^3.10.2",
+    "mathjax": "^3.2.2",
+    "pixelmatch": "^5.3.0",
+    "pngjs": "^7.0.0"
   },
   "optionalDependencies": {
     "@napi-rs/canvas": "^0.1.0"

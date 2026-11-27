@@ -1,6 +1,6 @@
 "use strict";
 /* ══════════ BUG REPORTS (every report carries its own ID + diagnostics) ══════════ */
-const APP_BUILD='v39 · 2026-11-27',ISSUES='https://github.com/Ugwattu/paper-press/issues';
+const APP_BUILD='v40 · 2026-11-27',ISSUES='https://github.com/Ugwattu/paper-press/issues';
 function bugReport(){
  const s=state,b=B(),id='PP-'+Date.now().toString(36).toUpperCase()+'-'+Math.random().toString(36).slice(2,6).toUpperCase();
  const sch=(typeof activeScheme==='function'&&activeScheme())||{},mk=plan&&plan.marks||{};
@@ -36,6 +36,7 @@ function bugReport(){
   try{
    const sanitized={...j.data};const pr=sanitized['pp.presets.v7'];if(Array.isArray(pr))sanitized['pp.presets.v7']=pr.map(p=>p&&p.cfg?({...p,cfg:cleanCfg(p.cfg)}):p).filter(p=>p&&(!p.cfg||Object.keys(p.cfg).length));
    const sc=sanitized['pp.schemes.v7'];if(Array.isArray(sc))sanitized['pp.schemes.v7']=sc.map(cleanScheme).filter(Boolean);
+   if(sanitized['pp.history.v1']!==undefined)sanitized['pp.history.v1']=cleanHistory(sanitized['pp.history.v1']);
    const st=sanitized['pp.state.v7'];if(st&&typeof st==='object'){const clean=Object.assign({},DEF,cleanCfg(st),{logo:''});['contentSelection','contentCatalogCustom','contentExcludedOverrides','questionTags','longPick'].forEach(k=>{if(st[k]&&typeof st[k]==='object'&&!Array.isArray(st[k]))clean[k]=JSON.parse(JSON.stringify(st[k]));});sanitized['pp.state.v7']=clean;}
    const snapshot={};keys.forEach(k=>snapshot[k]=localStorage.getItem(k));const oldLogo=await idbGet('logo');const lg=typeof j.logo==='string'&&/^data:image\/(png|jpe?g|gif|webp);base64,/.test(j.logo)&&j.logo.length<2e6?j.logo:'';
    try{keys.forEach(k=>localStorage.setItem(k,JSON.stringify(sanitized[k])));if(!await idbSet('logo',lg))throw new Error('IndexedDB logo write failed');}catch(writeErr){keys.forEach(k=>{if(snapshot[k]===null)localStorage.removeItem(k);else localStorage.setItem(k,snapshot[k]);});await idbSet('logo',oldLogo);throw writeErr;}
@@ -98,6 +99,9 @@ hiddenF=LS.get('pp.hiddenFactory.v1',[]);if(!Array.isArray(hiddenF))hiddenF=[];h
 const saved=LS.get('pp.state.v7',null);
 if(saved&&typeof saved==='object'){
  state=Object.assign(JSON.parse(JSON.stringify(DEF)),saved);
+ /* defence in depth: stored data is untrusted. Only raster data URLs may be a logo and free-text fields are length-capped (normal values are far shorter). */
+ if(!safeImgSrc(state.logo)||state.logo.length>=2e6)state.logo='';
+ Object.keys(state).forEach(k=>{if(typeof state[k]==='string'&&k!=='logo'){if(state[k].length>2000)state[k]=state[k].slice(0,2000);if(k in DEF&&typeof DEF[k]==='string')state[k]=cleanToken(k,state[k],DEF[k]);}});
  ['contentSelection','contentCatalogCustom','contentExcludedOverrides','questionTags'].forEach(k=>{if(!state[k]||typeof state[k]!=='object'||Array.isArray(state[k]))state[k]={};});
  delete state.time; /* legacy free-text duration replaced by objective/subjective minutes */
  state.timeObj=Number.isFinite(+state.timeObj)?clamp(Math.round(+state.timeObj),0,600):0;state.timeSubj=Number.isFinite(+state.timeSubj)?clamp(Math.round(+state.timeSubj),0,600):0;
@@ -255,3 +259,6 @@ requestAnimationFrame(()=>{if(state.autoFit!==false)fitZoom();else applyZoom();p
  const btn=document.getElementById('btnTutorial');if(btn)btn.addEventListener('click',start);
  if(!localStorage.getItem(completionKey))setTimeout(()=>{if(!overlay)start();},900);
 })();
+initHistory();
+/* Offline support: sw.js?v=<build> gives each release its own cache names. Needs https or localhost; failures are harmless. */
+if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js?v='+encodeURIComponent(APP_BUILD.split(' ')[0])).catch(e=>console.warn('Service worker not registered:',e&&e.message));});}

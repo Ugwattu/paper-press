@@ -2,7 +2,7 @@
 (function (root) {
  'use strict';
  const LETTERS='ABCD', fail=m=>{throw new Error(m);}, str=v=>v==null?'':String(v), obj=v=>!!v&&typeof v==='object'&&!Array.isArray(v);
- const APP_SCRIPTS=['app-core.js','app-schemes.js','app-long.js','app-planning.js','app-paper.js','app-docx.js','app-analysis.js','app-presets.js','app-render.js','app-editors.js','app-interface.js','app-runtime.js'];const APP_BUNDLE='app.bundle.js';
+ const APP_SCRIPTS=['app-core.js','app-state.js','app-schemes.js','app-long.js','app-planning.js','app-paper.js','app-docx.js','app-analysis.js','app-presets.js','app-history.js','app-render.js','app-editors.js','app-interface.js','app-runtime.js'];const APP_BUNDLE='app.bundle.js';
  const whole=v=>Number.isInteger(Number(v))&&Number(v)>=0;
  function figureRef(v,at){const x=str(v).trim();if(!x)return'';const n=x.replace(/^figures\//i,'');if(!/^[a-z0-9][a-z0-9._-]*\.(?:png|svg)$/i.test(n))fail(`${at}: figure must be a PNG/SVG filename inside figures/`);return'figures/'+n;}
  function convertLongGroups(groups,course,valid,at){
@@ -124,5 +124,6 @@
   root.PP_GROUPS=gDefs;root.PP_COURSES=valid.map(x=>{const gs=Array.isArray(x.manifest.groups)?x.manifest.groups.map(String):[];gs.forEach(id=>{if(!gIds.has(id))console.warn(`manifest.json: course ${x.manifest.id} lists unknown group "${id}"`);});return Object.assign({},x.converted.meta,{groups:gs.filter(id=>gIds.has(id))});});root.PP_DATA={};valid.forEach(x=>root.PP_DATA[x.manifest.id]={raw:x.converted.raw,meta:x.converted.meta,patterns:x.converted.patterns});root.PP_BANK_ERRORS=loaded.filter(x=>x.error).map(x=>({id:x.manifest.id,error:String(x.error.message||x.error)}));
   const s=document.createElement('script');s.src=APP_BUNDLE+q;s.onload=()=>{};s.onerror=()=>fail(APP_BUNDLE+' failed to load');document.body.appendChild(s);
  }catch(e){showError(e);}}
- const api={convert,convertPattern,boot,bundle:APP_BUNDLE,scripts:APP_SCRIPTS.slice()};root.PPBanks=api;if(typeof module!=='undefined'&&module.exports)module.exports=api;
+ const api={convert,convertPattern,boot,bundle:APP_BUNDLE,scripts:APP_SCRIPTS.slice()};root.PPBanks=api;
+ const self=typeof document!=='undefined'&&document.currentScript;if(self&&self.dataset&&self.dataset.boot)boot(self.dataset.boot); /* no inline script needed: the tag carries data-boot="<build>" */if(typeof module!=='undefined'&&module.exports)module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);

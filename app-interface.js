@@ -22,7 +22,7 @@ async function doDocx(){
   await preloadMathAssets();
   const bytes=await zipPack(buildDocx(true));
   const name=`${B().code}-${state.alp?'ALP':'FULL'}-V${String(state.seed).padStart(2,'0')}-${plan.marks.total}marks.docx`;
-  download(bytes,name,'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+  download(bytes,name,'application/vnd.openxmlformats-officedocument.wordprocessingml.document');recordHistory();
   stamp('DOCX SAVED',`${(bytes.length/1024).toFixed(0)} KB · ${plan.marks.total} MARKS`);
   toast('Saved '+name,'ok');
  }catch(err){console.error(err);toast('Could not build .docx — '+(err&&err.message?err.message:'unexpected export error'),'err');}
@@ -66,7 +66,7 @@ function assignQuestionTag(qid,ch,kind){const cat=contentConfig(+ch)[kind];const
 function buildChips(){
  const b=B();
  $('chGrid').innerHTML=b.chapters.slice().sort((a,b)=>a-b).map(c=>{const k=caps(c);
-  return `<div class="chip" data-ch="${c}" data-lock="${state.alp&&B().alpEx.includes(c)?'ALP':'—'}"><b>${c}</b><small>${b.names[c]}</small><span class="cap">${k.m}·${k.s}·${k.l}</span></div>`;}).join('');
+  return `<div class="chip" data-ch="${c}" data-lock="${state.alp&&B().alpEx.includes(c)?'ALP':'—'}"><b>${c}</b><small>${esc(b.names[c])}</small><span class="cap">${k.m}·${k.s}·${k.l}</span></div>`;}).join('');
  $('chGrid').querySelectorAll('.chip').forEach(el=>el.addEventListener('click',()=>{
   const c=+el.dataset.ch,b2=B();
   if(!b2.chapters.includes(c)){toast('Chapter '+c+' was not supplied for Class '+state.grade+'.','warn');return;}
@@ -114,9 +114,9 @@ function paintCourseUI(){
  const gg=gradeGroups(coursePickerGrade),bar=$('groupBar');if(coursePickerGroup!=='all'&&!gg.some(g=>g.id===coursePickerGroup))coursePickerGroup='all';
  if(bar){bar.classList.toggle('hidden',!gg.length);bar.innerHTML=gg.length?[{id:'all',label:'All subjects'}].concat(gg).map(g=>`<button type="button" class="chip${g.id===coursePickerGroup?' on':''}" data-group="${esc(g.id)}" aria-pressed="${g.id===coursePickerGroup}">${esc(g.label)}</button>`).join(''):'';}
  $('courseGrid').innerHTML=COURSE_SUBJECTS(coursePickerGrade).map(sid=>{const id=`${coursePickerGrade}-${sid}`,b=BOOKS[id],available=!!(b&&b.hasQuestions),active=id===cid();
-  return `<button type="button" data-course="${id}" class="${active?'on':''} ${available?'available':'coming'}" ${available?'':'disabled'}><span class="subject-symbol">${SUBJECT_ICON[sid]||sid.slice(0,2).toUpperCase()}</span><span class="subject-info"><b>${SUBJECT_LABELS[sid]}</b><small>${available?b.questionCount+' questions available':'Question bank coming soon'}</small></span><span class="subject-state">${active?'✓ Selected':available?'Open':'Soon'}</span></button>`;
+  return `<button type="button" data-course="${id}" class="${active?'on':''} ${available?'available':'coming'}" aria-pressed="${active}" ${available?'':'disabled'}><span class="subject-symbol">${SUBJECT_ICON[sid]||sid.slice(0,2).toUpperCase()}</span><span class="subject-info"><b>${SUBJECT_LABELS[sid]}</b><small>${available?b.questionCount+' questions available':'Question bank coming soon'}</small></span><span class="subject-state">${active?'✓ Selected':available?'Open':'Soon'}</span></button>`;
  }).join('');
- const current=BOOKS[cid()];$('selectedCourse').innerHTML=current?`<span class="selected-check">✓</span><span><small>Current paper course</small><b>${current.name} · ${current.subject}</b></span>`:'';
+ const current=BOOKS[cid()];$('selectedCourse').innerHTML=current?`<span class="selected-check">✓</span><span><small>Current paper course</small><b>${esc(current.name)} · ${esc(current.subject)}</b></span>`:'';
 }
 function setCourse(id){
  const b=BOOKS[id];if(!b||!b.hasQuestions){toast('Questions have not been added for this course yet.','info');return;}
@@ -174,7 +174,7 @@ function syncUI(){
  $('pinT').textContent=np?np+' question'+(np>1?'s':'')+' locked to your choice.':'Nothing pinned — every slot re-draws on shuffle.';
  $('logoBox').classList.toggle('has',!!state.logo);
  $('logoThumb').classList.toggle('empty',!state.logo);
- $('logoThumb').innerHTML=state.logo?`<img src="${state.logo}" alt="">`:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>';
+ $('logoThumb').innerHTML=safeImgSrc(state.logo)?`<img src="${esc(state.logo)}" alt="">`:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>';
  $('logoName').textContent=state.logo?(state.logoName||'Institute logo'):'No logo uploaded';
  $('logoMeta').textContent=state.logo?(logoPNG?'Rasterised · embedded in .docx':'Will embed on export'):'PNG · JPG · SVG · embedded in .docx';
  $('rLogo').value=state.logoH;$('vLogo').textContent=state.logoH+' pt';
@@ -338,7 +338,7 @@ $('btnShuffle').addEventListener('click',doShuffle);$('miniShuffle').addEventLis
 $('miniKey').addEventListener('click',()=>{state.showKey=!state.showKey;render();});
 $('btnExp').addEventListener('click',doDocx);$('topExp').addEventListener('click',doDocx);
 $('btnDoc').addEventListener('click',doDoc);
-$('btnPrint').addEventListener('click',()=>setTimeout(()=>window.print(),120));
+$('btnPrint').addEventListener('click',()=>{recordHistory();setTimeout(()=>window.print(),120);});
 $('btnFit').addEventListener('click',fitZoom);
 $('btn100').addEventListener('click',()=>{state.zoom=100;state.autoFit=false;syncUI();applyZoom();});
 $('btnReset').addEventListener('click',()=>{const keep={contentCatalogCustom:state.contentCatalogCustom,contentExcludedOverrides:state.contentExcludedOverrides,questionTags:state.questionTags};state=JSON.parse(JSON.stringify(DEF));Object.assign(state,keep);overrides={};sticky={};activeSlot=null;

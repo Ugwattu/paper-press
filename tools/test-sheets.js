@@ -34,7 +34,8 @@ const stub = vm.createContext({
     { name: 'word/_rels/document.xml.rels', data: '<Relationships/>' },
     { name: 'word/media/image3.png', data: new Uint8Array([1, 2, 3]) }
   ],
-  zipStore: files => files
+  zipStore: files => files,
+  answerKeyRows: () => [] /* buildDocx now appends the optional answer key; this harness stubs the paper model, so there are no MCQs */
 });
 vm.runInContext(script.slice(start, end), stub);
 const merged = vm.runInContext('buildDocx(true)', stub);

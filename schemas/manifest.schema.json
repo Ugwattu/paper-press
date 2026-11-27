@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ugwattu.github.io/paper-press/schemas/manifest.schema.json",
+  "title": "Paper Press bank manifest (version 2)",
+  "type": "object",
+  "required": ["version", "courses"],
+  "properties": {
+    "version": { "const": 2 },
+    "_help": { "type": "string" },
+    "groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "label"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+          "label": { "type": "string", "minLength": 1 }
+        },
+        "additionalProperties": false
+      }
+    },
+    "courses": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "class", "subject", "file"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[0-9]+-[a-z0-9-]+$" },
+          "class": { "type": "integer", "minimum": 1, "maximum": 12 },
+          "subject": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "file": { "type": "string", "pattern": "^[A-Za-z0-9._-]+\\.json$" },
+          "bankCourseId": { "type": "string" },
+          "overrides": { "type": "object" },
+          "groups": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+          "expected": {
+            "type": "object",
+            "required": ["marks", "times", "language"],
+            "properties": {
+              "marks": { "type": "integer", "minimum": 1 },
+              "times": {
+                "type": "object",
+                "required": ["objective", "subjective", "basis"],
+                "properties": {
+                  "objective": { "type": "number", "exclusiveMinimum": 0 },
+                  "subjective": { "type": "number", "exclusiveMinimum": 0 },
+                  "basis": { "enum": ["stated", "inferred"] }
+                },
+                "additionalProperties": false
+              },
+              "language": { "enum": ["bilingual", "english"] }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

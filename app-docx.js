@@ -127,7 +127,20 @@ function tc(content,o){o=o||{};let p='<w:tcPr>'+`<w:tcW w:w="${Math.max(1,o.w||1
  return `<w:tc>${p}${body}</w:tc>`;}
 function tr(cells){return `<w:tr><w:trPr><w:cantSplit/></w:trPr>${cells.join('')}</w:tr>`;}
 function pageBreak(){return '<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="20" w:lineRule="exact"/></w:pPr><w:r><w:br w:type="page"/></w:r></w:p>';}
+function answerKeyDocxXml(){
+ const rows=answerKeyRows();if(!state.answerKey||!rows.length)return'';
+ const pg=PAGES[state.page],CW=tw(pg.w)-2*tw(state.margin),per=10,cw=Math.floor(CW/(per*2)),grid=Array(per*2).fill(cw),trs=[];
+ for(let i=0;i<rows.length;i+=per){const chunk=rows.slice(i,i+per),cells=[];
+  chunk.forEach(r=>{cells.push(tc(txtP(String(r.no),{b:true,align:'center'}),{w:cw}),tc(txtP(r.letter,{align:'center'}),{w:cw}));});
+  for(let k=chunk.length;k<per;k++)cells.push(tc('',{w:cw,noBorder:true}),tc('',{w:cw,noBorder:true}));
+  trs.push(tr(cells));}
+ return pageBreak()+txtP('Answer Key — MCQs ('+state.subject+', '+state.klass+') · Paper '+B().code+' / V-'+String(state.seed).padStart(2,'0'),{b:true,align:'center',after:8})+tbl(grid,trs,{pad:2})+para('',{exact:1});}
+function withAnswerKey(files){
+ const k=answerKeyDocxXml();if(!k)return files;
+ return files.map(f=>{if(f.name!=='word/document.xml')return f;const i=f.data.lastIndexOf('<w:sectPr');if(i<0)throw new Error('Missing Word section properties');return{name:f.name,data:f.data.slice(0,i)+k+f.data.slice(i)};});}
 function buildDocx(raw){
+ const files=withAnswerKey(buildDocxCore(true));return raw?files:zipStore(files);}
+function buildDocxCore(raw){
  if(state.sheetMode!=='two')return buildDocxSheet(raw,'single');
  const objective=buildDocxSheet(true,'objective'),subjective=buildDocxSheet(true,'subjective',true);
  const get=f=>objective.find(x=>x.name===f).data,doc=get('word/document.xml');

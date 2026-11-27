@@ -2,6 +2,7 @@
 <html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'none'">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
 <title>Paper Press — PECTAA Board Paper Studio · Classes 9–12</title>
 <link rel="icon" href="icons/favicon.svg" type="image/svg+xml">
@@ -10,10 +11,9 @@
 <link rel="manifest" href="manifest.webmanifest">
 
 <meta name="theme-color" content="#ffffff">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="app.css?v=39">
-<link rel="stylesheet" href="paper.css?v=39">
+<link rel="stylesheet" href="fonts/fonts.css?v=40">
+<link rel="stylesheet" href="app.css?v=40">
+<link rel="stylesheet" href="paper.css?v=40">
 
 </head>
 <body>
@@ -100,7 +100,7 @@
       <div class="ctl"><div class="lab"><span>Long question sources</span><b id="vLongSrc"></b></div><div class="attgrid" id="longSrc"></div>
         <div class="hint">Compulsory chapters are locked; <s>“either / or”</s> slots let you choose which chapter prints.</div></div>
       <div class="row2"><button class="filebtn" id="schExport">Export schemes</button><button class="filebtn" id="schImport">Import schemes</button></div>
-      <input type="file" id="schFile" accept="application/json,.json" class="hidden">
+      <input type="file" id="schFile" aria-label="Import scheme file" accept="application/json,.json" class="hidden">
     </div>
   </div>
   <div class="grp g-a" id="grpMcq">
@@ -188,7 +188,7 @@
         <div class="logothumb empty" id="logoThumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
         <div class="logoinfo"><b id="logoName">No logo uploaded</b><small id="logoMeta">PNG · JPG · SVG · embedded in .docx</small></div>
       </div>
-      <input type="file" id="logoFile" accept="image/*" class="hidden">
+      <input type="file" id="logoFile" aria-label="Choose logo image" accept="image/*" class="hidden">
       <div class="row2"><button class="filebtn" id="logoPick">Upload</button><button class="filebtn danger" id="logoClear">Remove</button></div>
       <div class="ctl"><div class="lab"><span>Logo height</span><b id="vLogo">54 pt</b></div><input type="range" id="rLogo" min="20" max="130" step="2"></div>
       <div class="ctl"><div class="lab"><span>Placement</span></div>
@@ -261,6 +261,7 @@
           <div class="tg" data-tg="omrRule"><div><span>Instruction bar</span></div><div class="sw"></div></div>
           <div class="tg" id="omrUrduControl" data-tg="omrUrdu"><div><span>Urdu heading</span></div><div class="sw"></div></div>
           <div class="tg" data-tg="omrNewPage"><div><span>OMR starts on a new page</span></div><div class="sw"></div></div>
+          <div class="tg" data-tg="answerKey"><div><span>Add MCQ answer key page (same file)</span></div><div class="sw"></div></div>
         </div>
         <div class="ctl"><div class="lab"><span>Position on paper</span></div>
           <div class="omap" id="omap">
@@ -322,7 +323,7 @@
       <div class="bulkbar hidden" id="bulkBar"><span id="bulkTxt">0 selected</span><button class="qb mag" id="bulkDel" style="flex:none;width:76px">Delete</button><button class="qb" id="bulkClr" style="flex:none;width:56px">Clear</button></div>
       <div class="plist" id="preList"></div>
       <div class="row2"><button class="filebtn" id="preExport">Export JSON</button><button class="filebtn" id="preImport">Import JSON</button></div>
-      <input type="file" id="preFile" accept="application/json,.json" class="hidden">
+      <input type="file" id="preFile" aria-label="Import presets file" accept="application/json,.json" class="hidden">
     </div>
   </div>
   <div class="grp g-v">
@@ -344,8 +345,17 @@
       <div class="hint">One file with your presets, schemes, current paper, settings and logo. Browsers can clear site data, so keep a copy somewhere safe.</div>
       <div class="actg"><button class="act sav" id="btnBackup">Back up</button><button class="act" id="btnRestore">Restore…</button></div>
       <button class="act wide hidden" id="btnAutoBackup"></button>
-      <input type="file" id="backupFile" accept="application/json,.json" hidden>
+      <input type="file" id="backupFile" aria-label="Choose backup file to restore" accept="application/json,.json" hidden>
       <div class="hint" id="backupInfo"></div>
+    </div>
+  </div>
+  <div class="grp g-v">
+    <h3><i></i>Paper history<em>regenerate exactly</em></h3>
+    <div class="bd">
+      <div class="hint">The last 20 papers you exported or printed, with seed, scheme, chapters and pins. Question text is not copied; regenerating rebuilds the paper from your bank.</div>
+      <div id="historyList" class="hist-list" aria-live="polite"></div>
+      <div class="actg"><button class="act sav" id="btnHistSave">Save now</button><button class="act" id="btnHistClear">Clear history</button></div>
+      <div class="hint" id="historyUsage"></div>
     </div>
   </div>
   <div class="grp g-a">
@@ -415,7 +425,7 @@
   <div class="dhead"><div class="r1"><h3 id="dTitle">Choose question<small id="dSub"></small></h3><button class="dclose" id="dClose" aria-label="Close panel">✕</button></div></div>
   <div class="dsearch" id="dSearchWrap">
     <input type="text" id="dSearch" placeholder="Search English or Urdu across the whole book…">
-    <div class="drow"><select id="dChap"></select><button class="extog" id="dEx" title="Show ALP-excluded questions too">+ Excluded</button></div>
+    <div class="drow"><select id="dChap" aria-label="Filter by chapter"></select><button class="extog" id="dEx" title="Show ALP-excluded questions too">+ Excluded</button></div>
     <div class="seg mag" id="dFilter"><button data-v="all">All</button><button data-v="free">Available</button><button data-v="pinned">Pinned</button></div>
     <div class="dmeta" id="dMeta"></div>
   </div>
@@ -426,8 +436,7 @@
 <div class="busy" id="busy" role="status" aria-live="polite"><div class="bx"><div class="sp2"></div><b>Building your .docx</b><small>packaging WordprocessingML + images…</small></div></div>
 <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
 
-<script src="bank-loader.js?v=39"></script>
-<script>PPBanks.boot('39');</script>
+<script src="bank-loader.js?v=40" data-boot="40"></script>
 <noscript><p style="position:fixed;inset:0;background:#05091a;color:#fff;padding:2em;font:16px sans-serif">Paper Press needs JavaScript to build question papers.</p></noscript>
 
 </body>

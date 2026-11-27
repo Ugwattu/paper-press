@@ -14,7 +14,7 @@ const checks=[
  ['progress indicator is accessible and updates per step',runtime.includes('role="progressbar"')&&runtime.includes('aria-valuenow=')],
  ['Back, Next, End tour and keyboard controls are available',runtime.includes('tour-prev')&&runtime.includes('tour-next')&&runtime.includes('tour-skip')&&runtime.includes("e.key==='Escape'")],
  ['reduced motion preference is respected',runtime.includes('prefers-reduced-motion: reduce')&&css.includes('prefers-reduced-motion:reduce')],
- ['cache and build versions align to v39',runtime.includes("APP_BUILD='v39")&&html.includes('app.css?v=39')&&html.includes('paper.css?v=39')&&html.includes('bank-loader.js?v=39')&&html.includes("PPBanks.boot('39')")]
+ ['cache and build versions align to v40',runtime.includes("APP_BUILD='v40")&&html.includes('app.css?v=40')&&html.includes('paper.css?v=40')&&html.includes('bank-loader.js?v=40')&&html.includes('data-boot="40"')]
 ];
 for(const [name,ok] of checks){console.log((ok?'PASS ':'FAIL ')+name);if(!ok)process.exitCode=1;}
 console.log(`${checks.filter(x=>x[1]).length}/${checks.length} tutorial checks passed`);

@@ -52,7 +52,7 @@ function paintLedger(){paintSections();
  built.long.forEach(q=>{if(q.parts&&q.parts.length)q.parts.forEach(p=>al[p.ch]=(al[p.ch]||0)+1);else al[q.ch]=(al[q.ch]||0)+1;});
  const chs=[...new Set([...plan.chs,...Object.keys(am).map(Number),...Object.keys(as).map(Number),...Object.keys(al).map(Number)])].sort((x,y)=>x-y);
  $('allocBody').innerHTML=chs.map(c=>{const m=am[c]||0,s=as[c]||0,l=al[c]||0,k=caps(c);
-  return `<tr><td>${c}. ${b.names[c]}</td><td class="${m?'':'zero'}"><b>${m}</b><i>/${k.m}</i></td><td class="${s?'':'zero'}"><s>${s}</s><i>/${k.s}</i></td><td class="${l?'':'zero'}"><u>${l}</u><i>/${k.l}</i></td></tr>`;}).join('')
+  return `<tr><td>${c}. ${esc(b.names[c])}</td><td class="${m?'':'zero'}"><b>${m}</b><i>/${k.m}</i></td><td class="${s?'':'zero'}"><s>${s}</s><i>/${k.s}</i></td><td class="${l?'':'zero'}"><u>${l}</u><i>/${k.l}</i></td></tr>`;}).join('')
   +`<tr class="tot"><td>Printed total</td><td>${built.mcq.length}</td><td>${ts}</td><td>${built.long.length}</td></tr>`;
  $('allocEm').textContent=chs.length+' chapters'+(a.crossN?' · '+a.crossN+'↔':'');
  const mx=Math.max(1,...chs.map(c=>am[c]||0));
@@ -60,14 +60,14 @@ function paintLedger(){paintSections();
  $('spreadEm').textContent=built.mcq.length+' placed';
  $('shortRows').innerHTML=built.short.map(p=>{const g={};p.items.forEach(q=>g[q.ch]=(g[q.ch]||0)+1);
   return `<div class="row"><div class="pip"></div><div class="nm">Q.${p.q} · ${Object.keys(g).sort((x,y)=>x-y).map(c=>'C'+c+'×'+g[c]).join(' + ')}</div><div class="ct">try <b>${p.attempt}</b> = ${p.attempt*state.shortMark}</div></div>`;}).join('');
- $('longRows').innerHTML=built.long.map((q,i)=>q.parts&&q.parts.length?`<div class="row"><div class="pip"></div><div class="nm">Q.${q.no} · ${q.parts.map(p=>`(${p.label}) Ch ${p.ch} ${b.names[p.ch]}`).join(' · ')}</div><div class="ct"><b>${q.marks} marks</b></div></div>`:`<div class="row"><div class="pip"></div><div class="nm">Q.${first+i} · Ch ${q.ch} ${b.names[q.ch]}</div><div class="ct"><b>${state.longMark}</b></div></div>`).join('');
+ $('longRows').innerHTML=built.long.map((q,i)=>q.parts&&q.parts.length?`<div class="row"><div class="pip"></div><div class="nm">Q.${q.no} · ${q.parts.map(p=>`(${esc(p.label)}) Ch ${p.ch} ${esc(b.names[p.ch])}`).join(' · ')}</div><div class="ct"><b>${q.marks} marks</b></div></div>`:`<div class="row"><div class="pip"></div><div class="nm">Q.${first+i} · Ch ${q.ch} ${esc(b.names[q.ch])}</div><div class="ct"><b>${state.longMark}</b></div></div>`).join('');
  $('pinEm').textContent=np;
  const pk=Object.keys(overrides);
  $('pinRows').innerHTML=pk.length?pk.map(k=>{const s=slotMap[k];if(!s)return'';
-  return `<div class="row"><div class="pip mag"></div><div class="nm">${s.label} · Ch ${s.ch}${s.ch!==s.planCh?' ↔':''}</div><button class="xb" data-unpin="${k}">✕</button></div>`;}).join('')
+  return `<div class="row"><div class="pip mag"></div><div class="nm">${esc(s.label)} · Ch ${s.ch}${s.ch!==s.planCh?' ↔':''}</div><button class="xb" data-unpin="${k}">✕</button></div>`;}).join('')
   :'<div class="empty">No pinned questions yet.<br>Click a question on the paper and press 📌.</div>';
  $('confEm').textContent=a.confOk+' / '+a.conf.length;
- $('confRows').innerHTML=a.conf.map(c=>`<div class="row"><div class="pip ${c.ok?'':'warn'}"></div><div class="nm">${c.label}</div><div class="ct"><b>${c.got}</b></div></div>`).join('')
+ $('confRows').innerHTML=a.conf.map(c=>`<div class="row"><div class="pip ${c.ok?'':'warn'}"></div><div class="nm">${esc(c.label)}</div><div class="ct"><b>${c.got}</b></div></div>`).join('')
   +(a.crossN?`<div class="row"><div class="pip warn"></div><div class="nm">Cross-chapter picks</div><div class="ct"><b>${a.crossN}</b></div></div>`:'');
  const good=a.confOk===a.conf.length&&!a.crossN;
  $('ledDot').style.background=good?'var(--green)':'var(--amber)';
@@ -75,7 +75,7 @@ function paintLedger(){paintSections();
  const th=a.hits.reduce((x,y)=>x+y.n,0);
  $('exEm').textContent=state.alp?(th===0?'clean':th+' hits'):(th+' allowed');
  $('exEm').style.color=state.alp?(th===0?'var(--green)':'var(--red)'):'var(--amber)';
- $('exList').innerHTML=a.hits.map(x=>`<div class="ex ${x.n>0?'hit':''}">${x.n>0?WRN:CHK}<div><b>Unit ${x.e.u} — ${x.e.name}</b><span>${x.e.pp} · ${x.n} ${state.alp?'match':'in play'}</span></div></div>`).join('');
+ $('exList').innerHTML=a.hits.map(x=>`<div class="ex ${x.n>0?'hit':''}">${x.n>0?WRN:CHK}<div><b>Unit ${esc(x.e.u)} — ${esc(x.e.name)}</b><span>${esc(x.e.pp)} · ${x.n} ${state.alp?'match':'in play'}</span></div></div>`).join('');
  const pg=PAGES[state.page],usable=pg.h*96/72-state.margin*2*96/72;
  let est=Math.max(1,Math.ceil(($('sheet').offsetHeight||900)/usable));if(state.omr&&built.mcq.length&&state.omrNewPage)est++;
  $('tagPages').textContent=`${pg.label} · ${est} sheet${est>1?'s':''}`;

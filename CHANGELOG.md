@@ -1,5 +1,17 @@
 # Paper Press Changelog
 
+## v40 — CI, validation, offline, security, accessibility, answer key, history
+- CI: GitHub Actions builds, fails on a stale `app.bundle.js`/`precache.json`, runs `npm test`; separate DOCX-fidelity (LibreOffice) and Playwright jobs. `package-lock.json` committed.
+- Bank validation: JSON Schemas for banks and manifest; checks for duplicate ids/text, MCQ answer keys, Urdu on bilingual courses, figures, chapter references, group ids and manifest `expected`. Errors name file, chapter and question id.
+- DOCX fidelity: four fixture papers, XML assertions (RTL/bidi, OMR bubbles, table widths) and LibreOffice render baselines. LibreOffice is not Word: a manual Word/OnlyOffice check stays part of each release.
+- Offline: self-hosted Noto Nastaliq Urdu, Inter and JetBrains Mono (woff2, `font-display: swap`) and MathJax 3.2.2 (local, then cdnjs, then jsDelivr, same SRI). Service worker with build-versioned caches, stale-while-revalidate banks, updated web manifest. No inline script remains.
+- Security: Content-Security-Policy; escaped bank names, course labels, chapter and allocation tables; `safeImgSrc` for logos; font and enum fields sanitised on boot, restore and in presets; paper history sanitised. New hostile-data test suite (state, presets, schemes, bank, backup, oversize).
+- Accessibility: WCAG AA colour tokens (light `text3`, `obj`, `short`/`ok`, `danger`; dark `long`, `danger`), labels on file inputs and the drawer chapter filter, `aria-pressed` on course cards, solid focus ring for form fields, axe check in the Playwright suite.
+- New: optional MCQ answer key (preview, print and the same .docx). Paper history of the last 20 exported/printed papers (seed, course, scheme, chapters, pins), regenerates exactly, included in backup/restore, shows storage use, can be cleared.
+- Code: `app-state.js` accessor layer (first step of Phase 8); `app-history.js` uses it.
+- Tests updated, not weakened: version assertions (v40, `data-boot`), the chapter-grid test now requires the escaped label, the sheet-merge harness stubs `answerKeyRows`.
+- Not verified: Playwright suites, GitHub CI run, real browser offline/CSP, Word/OnlyOffice.
+
 ## v39 — Picker regression fix, groups, SRI
 - Fixed the course picker: it read `c.grade` / `c.sid`, but loader course objects use `classNo` / `subjectId`, so only one blank grade and no subject cards appeared (also affected grade/subject label maps).
 - Added the Pre-Medical / Pre-Engineering / ICS / FA group filter for classes 11–12. Groups are data: top-level `groups` and per-course `groups` in `banks/manifest.json` (no bank duplication).

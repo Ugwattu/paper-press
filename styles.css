@@ -1,0 +1,6 @@
+
+/* paper history */
+.hist-list{display:flex;flex-direction:column;gap:6px;margin:6px 0}
+.hist-row{display:flex;gap:8px;align-items:center;justify-content:space-between;padding:6px 8px;border:1px solid var(--line,#d0d7de);border-radius:8px}
+.hist-row small{display:block;opacity:.75;font-size:11px;line-height:1.3}
+.hist-row>span{display:flex;gap:4px;flex:none}

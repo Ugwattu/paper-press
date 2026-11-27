@@ -33,7 +33,7 @@ const SCOPES={
  counts:{label:'Question counts & marks',keys:['incMcq','incShort','incLong','mcqCount','mcqMark','shortParts','shortPrinted','shortMark','shortAttempts','longPrinted','longAttempt','longMark']},
  header:{label:'Header, student fields & logo',keys:['institute','title','klass','subject','subjectUr','timeObj','timeSubj','sheetMode','date','sectionVal','showName','showRoll','showSection','showDate','infoPos','hdrStyle','infoStyle','footer','logo','logoName','logoH','logoPos']},
  type:{label:'Fonts, sizes & bold',keys:['enFont','enSize','urFont','urSize','lineH','pad','bHeader','bBar','bInstr','bNum','bStem','bShort','bLong']},
- omr:{label:'OMR layout & position',keys:['omr','omrRule','omrUrdu','omrPos','omrCols','bubSize','omrPad','omrAlign','omrWidth','omrGapT','omrGapB','omrNewPage']},
+ omr:{label:'OMR layout & position',keys:['omr','omrRule','omrUrdu','omrPos','omrCols','bubSize','omrPad','omrAlign','omrWidth','omrGapT','omrGapB','omrNewPage','answerKey']},
  page:{label:'Page, table & layers',keys:['hideLines','borderW','numW','insSplit','insAuto','optMode','page','margin','shade','zebra','showUrdu']}
 };
 const ALLSC=Object.keys(SCOPES);
@@ -46,12 +46,16 @@ const FIRST_BOOK=Object.values(BOOKS)[0];const DEF={grade:FIRST_BOOK.grade,sid:F
  bHeader:true,bBar:true,bInstr:true,bNum:true,bStem:true,bShort:false,bLong:false,
  omr:true,omrRule:true,omrUrdu:true,omrPos:'front',omrCols:4,bubSize:13,omrPad:4,omrAlign:'center',omrWidth:100,omrGapT:6,omrGapB:8,omrNewPage:false,
  hideLines:false,borderW:.75,numW:10,insSplit:58,insAuto:true,optMode:'auto',page:'a4',margin:24,shade:true,zebra:false,
- showUrdu:true,showKey:false,showTags:false,
+ showUrdu:true,showKey:false,answerKey:false,showTags:false,
  qTools:true,noDup:true,showPins:true,zoom:100,autoFit:true,seed:7,presetId:'',dirty:false};
 const CFG_KEYS=new Set([].concat(...Object.values(SCOPES).map(s=>s.keys)));
+/* Values that are interpolated into style/attribute context must be plain tokens: strip quote/angle/brace/semicolon characters from font names and validate enums. */
+const CFG_ENUMS={omrAlign:['left','center','right'],logoPos:['left','center','right'],omrPos:['front','end'],sheetMode:['single','two']};
+function cleanToken(k,v,fallback){if(k==='enFont'||k==='urFont'){const t=String(v).replace(/["'<>{};\\`$&]/g,'').replace(/\s+/g,' ').trim().slice(0,80);return t||fallback;}
+ if(CFG_ENUMS[k])return CFG_ENUMS[k].includes(v)?v:fallback;return v;}
 function cleanCfg(c){const o={};if(!c||typeof c!=='object')return o;CFG_KEYS.forEach(k=>{if(!(k in c)||!(k in DEF))return;const v=c[k],d=DEF[k];
  if(typeof v!==typeof d||Array.isArray(v)!==Array.isArray(d))return;
- if(typeof v==='string'){if(k==='logo'){o[k]=(v===''||(/^data:image\/(png|jpe?g|gif|webp);base64,/.test(v)&&v.length<2e6))?v:'';return;}o[k]=v.slice(0,300);return;}
+ if(typeof v==='string'){if(k==='logo'){o[k]=(v===''||(safeImgSrc(v)&&v.length<2e6))?v:'';return;}o[k]=cleanToken(k,v.slice(0,300),d);return;}
  if(typeof v==='number'){if(isFinite(v))o[k]=(k==='timeObj'||k==='timeSubj')?clamp(Math.round(v),0,600):v;return;}o[k]=JSON.parse(JSON.stringify(v));});return o;}
 function cleanScheme(s){if(!s||typeof s!=='object'||!s.mcq||(!Array.isArray(s.long)&&!Array.isArray(s.longGroups))||!Array.isArray(s.short))return null;
  const courseId=s.courseId||(Number(s.grade||DEFAULT_COURSE.classNo)+'-'+(s.sid||DEFAULT_SUBJECT)),book=BOOKS[courseId];if(!book)return null;
@@ -90,6 +94,8 @@ let hiddenF=[],presets=[],preSel=new Set(),preFilter='all',preQuery='',preSort='
 let activeSlot=null,drawerMode=null,drawerSlot=null,drawerFilter='all',drawerQuery='',drawerCh='all',drawerEx=false,exporting=false,schDraft=null,schEditId=null,previewSheet='both';
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+/* Only inline raster data URLs may reach an <img src>; anything else (javascript:, http:, svg, malformed) is refused. */
+const safeImgSrc=v=>typeof v==='string'&&v.length<3e6&&/^data:image\/(?:png|jpe?g|gif|webp);base64,[A-Za-z0-9+/]+={0,2}$/.test(v);
 /* Safe inline authoring syntax: semantic HTML-lite markup, isotope shorthand and restricted TeX math. */
 function safeLatex(tex){
  const x=String(tex==null?'':tex).trim();
@@ -132,8 +138,8 @@ function ensureMathJax(){
  if(mathJaxPromise)return mathJaxPromise;
  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],packages:{'[+]':['ams']}},svg:{fontCache:'none'},options:{enableMenu:false},startup:{typeset:false}};
  mathJaxPromise=new Promise((resolve,reject)=>{
-  /* Both hosts serve the identical MathJax 3.2.2 file, so one integrity hash covers either; a tampered or changed file is refused. */
-  const SRC=['https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js','https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js'],SRI='sha384-KKWa9jJ1MZvssLeOoXG6FiOAZfAgmzsIIfw8BXwI9+kYm0lPCbC6yTQPBC00F1/L';
+  /* Order: the committed local copy, then cdnjs, then jsDelivr. All three are the identical MathJax 3.2.2 file, so one integrity hash covers each; a tampered or changed file is refused. */
+  const SRC=['vendor/mathjax-3.2.2-tex-svg.js','https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js','https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js'],SRI='sha384-KKWa9jJ1MZvssLeOoXG6FiOAZfAgmzsIIfw8BXwI9+kYm0lPCbC6yTQPBC00F1/L';
   const tryLoad=i=>{
    if(i>=SRC.length){mathJaxPromise=null;reject(new Error('MathJax could not load. Check your internet connection and try again.'));return;}
    const script=document.createElement('script');script.async=true;script.src=SRC[i];script.integrity=SRI;script.crossOrigin='anonymous';
@@ -199,6 +205,23 @@ const NE=['ZERO','ONE','TWO','THREE','FOUR','FIVE','SIX','SEVEN','EIGHT','NINE',
 const NU=['صفر','ایک','دو','تین','چار','پانچ','چھ','سات','آٹھ','نو','دس'];
 const ZLABEL={front:'Top of paper',after:'After MCQs',mid:'After short questions',end:'End of paper'};
 
+
+;
+/* === app-state.js === */
+"use strict";
+/* ══════════ STATE ACCESSORS ══════════
+   First step of reducing shared mutable globals. `state`, `plan`, `built`, `sticky` and `overrides` still live in app-core.js (older modules use them directly);
+   NEW code reads and writes them only through PPState, so a later move to a private store changes this file alone. */
+const PPState={
+ get:()=>state,
+ plan:()=>plan,
+ built:()=>built,
+ pins:()=>overrides,
+ setPins(p){overrides=p&&typeof p==='object'?p:{};},
+ clearSticky(){sticky={};},
+ patch(o){Object.assign(state,o);},
+ course:()=>cid()
+};
 
 ;
 /* === app-schemes.js === */
@@ -472,7 +495,7 @@ function paperInnerSheet(s,mode){
  const screen=(mode==='screen'),bi=urduOn(s),showKey=screen&&s.showKey,showTags=screen&&s.showTags,SN=serials();
  const sheetKind=s._sheetKind||'single',allMarks=plan.marks;
  const mk=sheetKind==='objective'?{mcq:allMarks.mcq,short:0,long:0,total:allMarks.mcq}:sheetKind==='subjective'?{mcq:0,short:allMarks.short,long:allMarks.long,total:allMarks.short+allMarks.long}:allMarks;
- const F=s.enFont,FS=s.enSize,UF=s.urFont,US=s.urSize,BD=`${s.borderW}pt solid #000000`;
+ const F=esc(s.enFont),FS=s.enSize,UF=esc(s.urFont),US=s.urSize,BD=`${s.borderW}pt solid #000000`;
  const cb=s.hideLines?'border:0;':`border:${BD};`,bAttr=s.hideLines?'0':'1';
  const base=`font-family:'${F}',serif;font-size:${FS}pt;line-height:${s.lineH};color:#000;`;
  const VA='top',SA='top'; /* text and serial numbers are always top-aligned */
@@ -503,7 +526,7 @@ function paperInnerSheet(s,mode){
   return `<tr><td colspan="${G.sp(0,100)}" style="padding:0;${cb}">${split}</td></tr>`;};
  let h='';
  if(s.footer)h+=`<div style="${base}font-size:${FS-2}pt;text-align:center;margin-bottom:6pt;${s.hideLines?'':'border-bottom:'+BD+';'}padding-bottom:4pt;">Paper ${B().code}-${s.alp?'ALP':'FULL'} / V-${String(s.seed).padStart(2,'0')}${sheetKind==='single'?'':` / ${sheetKind==='objective'?'Objective':'Subjective'}`} &nbsp;·&nbsp; ${esc(plan.sch.name)} &nbsp;·&nbsp; Examiner: ____________________</div>`;
- const logoImg=s.logo?`<img src="${s.logo}" alt="logo" style="height:${s.logoH}pt;width:auto;display:block;">`:'';
+ const logoImg=safeImgSrc(s.logo)?`<img src="${esc(s.logo)}" alt="logo" style="height:${s.logoH}pt;width:auto;display:block;">`:'';
  const titleBlock=()=>{let t='';
   if(s.institute.trim())t+=`<div style="${base}font-size:${FS+5}pt;font-weight:${wH};">${esc(s.institute)}</div>`;
   t+=`<div style="${base}font-size:${FS+1}pt;font-weight:${wH};margin-top:1pt;">${esc(s.title)}</div>`;
@@ -635,7 +658,16 @@ function paperInnerSheet(s,mode){
  if(s.infoPos==='bottom')h+=infoRowAny();
  return h;
 }
+/* Answer key: derived from the generated paper (built.mcq), never from stored text. */
+function answerKeyRows(){return (built.mcq||[]).map((m,i)=>({no:i+1,letter:'ABCD'[m.a]||'?'}));}
+function answerKeyHTML(s,mode){
+ const rows=answerKeyRows();if(!s.answerKey||!rows.length)return'';const pg=PAGES[s.page],per=10,trs=[];
+ for(let i=0;i<rows.length;i+=per){const chunk=rows.slice(i,i+per);trs.push('<tr>'+chunk.map(r=>`<td style="border:0.75pt solid #000;padding:3pt 6pt;text-align:center;font-weight:bold;">${r.no}</td><td style="border:0.75pt solid #000;padding:3pt 6pt;text-align:center;">${r.letter}</td>`).join('')+'</tr>');}
+ const brk=mode==='screen'?'':'page-break-before:always;break-before:page;';
+ return `<div class="pp-answer-key" style="${brk}width:100%;box-sizing:border-box;background:#fff;${mode==='screen'?`min-height:${pg.h}pt;padding:${s.margin}pt;margin:0 0 16pt;`:''}font-family:'${esc(s.enFont)}',serif;font-size:${s.enSize}pt;color:#000;"><div style="text-align:center;font-weight:bold;font-size:${s.enSize+3}pt;margin-bottom:8pt;">Answer Key — MCQs (${esc(s.subject)}, ${esc(s.klass)}) · Paper ${esc(B().code)} / V-${String(s.seed).padStart(2,'0')}</div><table style="border-collapse:collapse;margin:0 auto;">${trs.join('')}</table></div>`;}
 function paperInner(s,mode,forceBoth=false){
+ return paperInnerBody(s,mode,forceBoth)+answerKeyHTML(s,mode);}
+function paperInnerBody(s,mode,forceBoth=false){
  if(s.sheetMode!=='two')return paperInnerSheet(s,mode);
  const pg=PAGES[s.page],chosen=forceBoth||previewSheet==='both'?['objective','subjective']:previewSheet==='objective'?['objective']:['subjective'];
  return chosen.map((kind,i)=>{
@@ -648,15 +680,15 @@ function paperInner(s,mode,forceBoth=false){
 function omrHTML(s,showKey,screen){
  const n=built.mcq.length;if(!n)return'';
  const cols=clamp(parseInt(s.omrCols,10)||4,1,4),rows=Math.ceil(n/cols),FS=s.enSize,BD=`${s.borderW}pt solid #000000`;
- const base=`font-family:'${s.enFont}',serif;font-size:${FS}pt;color:#000;`;
+ const base=`font-family:'${esc(s.enFont)}',serif;font-size:${FS}pt;color:#000;`;
  let h='';
  if(s.omrNewPage)h+='<br clear="all" style="mso-special-character:line-break;page-break-before:always">';
- h+=`<div class="omrwrap" ${screen?'data-omr="1"':''} style="margin:${s.omrGapT}pt 0 ${s.omrGapB}pt 0;text-align:${s.omrAlign};">`;
+ h+=`<div class="omrwrap" ${screen?'data-omr="1"':''} style="margin:${s.omrGapT}pt 0 ${s.omrGapB}pt 0;text-align:${esc(s.omrAlign)};">`;
  if(screen)h+='<div class="omrhandle" id="omrHandle" title="Drag to another position"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 9h14M5 15h14"/></svg>Drag OMR</div>';
    const AR="font-family:Arial,Helvetica,sans-serif;color:#000;",tSz=FS+3,sSz=Math.max(5,FS-5),nSz=Math.max(5,FS-4.5),NUMP=18;
   h+=`<div style="display:inline-block;width:${s.omrWidth}%;text-align:left;">`;
   h+=`<div style="text-align:center;margin:0 0 6pt 0;${AR}line-height:1.25;"><span style="font-size:${tSz}pt;font-weight:bold;">MCQs RESPONSE PART</span><span style="font-size:${sSz}pt;"> (TO BE FILLED BY THE STUDENT)</span>`;
-  if(s.omrUrdu&&urduOn(s))h+=`<span dir="rtl" lang="ur" style="font-family:'${s.urFont}','Noto Nastaliq Urdu',serif;font-size:${s.urSize+1}pt;"> &nbsp;(اُمیدوار خود پُر کرے)</span>`;
+  if(s.omrUrdu&&urduOn(s))h+=`<span dir="rtl" lang="ur" style="font-family:'${esc(s.urFont)}','Noto Nastaliq Urdu',serif;font-size:${s.urSize+1}pt;"> &nbsp;(اُمیدوار خود پُر کرے)</span>`;
   h+='</div>';
   if(s.omrRule)h+=`<table cellspacing="0" cellpadding="0" style="border-collapse:collapse;width:100%;border:${BD};margin-bottom:6pt;${AR}"><tr><td style="border:${BD};padding:${s.pad+2}pt;text-align:center;font-weight:bold;font-size:${FS-2.5}pt;">PLEASE CAREFULLY READ THE&nbsp; QUESTIONS AND FILL THE ANSWER CORRECTLY</td></tr></table>`;
   h+=`<table cellspacing="0" cellpadding="0" style="border-collapse:collapse;table-layout:fixed;width:100%;border:${BD};${AR}"><colgroup>`;
@@ -676,7 +708,7 @@ function omrHTML(s,showKey,screen){
 function wordHtmlDoc(s){const pg=PAGES[s.page];
  return `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>${esc(s.title)}</title>
 <!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom></w:WordDocument></xml><![endif]-->
-<style>@page Section1{size:${pg.w}pt ${pg.h}pt;margin:${s.margin}pt;}div.Section1{page:Section1;}body{font-family:'${s.enFont}',serif;font-size:${s.enSize}pt;}table{border-collapse:collapse;}p,div{margin:0;}</style>
+<style>@page Section1{size:${pg.w}pt ${pg.h}pt;margin:${s.margin}pt;}div.Section1{page:Section1;}body{font-family:'${esc(s.enFont)}',serif;font-size:${s.enSize}pt;}table{border-collapse:collapse;}p,div{margin:0;}</style>
 </head><body><div class="Section1">${paperInner(s,'export',true)}</div></body></html>`;}
 
 
@@ -811,7 +843,20 @@ function tc(content,o){o=o||{};let p='<w:tcPr>'+`<w:tcW w:w="${Math.max(1,o.w||1
  return `<w:tc>${p}${body}</w:tc>`;}
 function tr(cells){return `<w:tr><w:trPr><w:cantSplit/></w:trPr>${cells.join('')}</w:tr>`;}
 function pageBreak(){return '<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="20" w:lineRule="exact"/></w:pPr><w:r><w:br w:type="page"/></w:r></w:p>';}
+function answerKeyDocxXml(){
+ const rows=answerKeyRows();if(!state.answerKey||!rows.length)return'';
+ const pg=PAGES[state.page],CW=tw(pg.w)-2*tw(state.margin),per=10,cw=Math.floor(CW/(per*2)),grid=Array(per*2).fill(cw),trs=[];
+ for(let i=0;i<rows.length;i+=per){const chunk=rows.slice(i,i+per),cells=[];
+  chunk.forEach(r=>{cells.push(tc(txtP(String(r.no),{b:true,align:'center'}),{w:cw}),tc(txtP(r.letter,{align:'center'}),{w:cw}));});
+  for(let k=chunk.length;k<per;k++)cells.push(tc('',{w:cw,noBorder:true}),tc('',{w:cw,noBorder:true}));
+  trs.push(tr(cells));}
+ return pageBreak()+txtP('Answer Key — MCQs ('+state.subject+', '+state.klass+') · Paper '+B().code+' / V-'+String(state.seed).padStart(2,'0'),{b:true,align:'center',after:8})+tbl(grid,trs,{pad:2})+para('',{exact:1});}
+function withAnswerKey(files){
+ const k=answerKeyDocxXml();if(!k)return files;
+ return files.map(f=>{if(f.name!=='word/document.xml')return f;const i=f.data.lastIndexOf('<w:sectPr');if(i<0)throw new Error('Missing Word section properties');return{name:f.name,data:f.data.slice(0,i)+k+f.data.slice(i)};});}
 function buildDocx(raw){
+ const files=withAnswerKey(buildDocxCore(true));return raw?files:zipStore(files);}
+function buildDocxCore(raw){
  if(state.sheetMode!=='two')return buildDocxSheet(raw,'single');
  const objective=buildDocxSheet(true,'objective'),subjective=buildDocxSheet(true,'subjective',true);
  const get=f=>objective.find(x=>x.name===f).data,doc=get('word/document.xml');
@@ -1049,7 +1094,7 @@ function paintLedger(){paintSections();
  built.long.forEach(q=>{if(q.parts&&q.parts.length)q.parts.forEach(p=>al[p.ch]=(al[p.ch]||0)+1);else al[q.ch]=(al[q.ch]||0)+1;});
  const chs=[...new Set([...plan.chs,...Object.keys(am).map(Number),...Object.keys(as).map(Number),...Object.keys(al).map(Number)])].sort((x,y)=>x-y);
  $('allocBody').innerHTML=chs.map(c=>{const m=am[c]||0,s=as[c]||0,l=al[c]||0,k=caps(c);
-  return `<tr><td>${c}. ${b.names[c]}</td><td class="${m?'':'zero'}"><b>${m}</b><i>/${k.m}</i></td><td class="${s?'':'zero'}"><s>${s}</s><i>/${k.s}</i></td><td class="${l?'':'zero'}"><u>${l}</u><i>/${k.l}</i></td></tr>`;}).join('')
+  return `<tr><td>${c}. ${esc(b.names[c])}</td><td class="${m?'':'zero'}"><b>${m}</b><i>/${k.m}</i></td><td class="${s?'':'zero'}"><s>${s}</s><i>/${k.s}</i></td><td class="${l?'':'zero'}"><u>${l}</u><i>/${k.l}</i></td></tr>`;}).join('')
   +`<tr class="tot"><td>Printed total</td><td>${built.mcq.length}</td><td>${ts}</td><td>${built.long.length}</td></tr>`;
  $('allocEm').textContent=chs.length+' chapters'+(a.crossN?' · '+a.crossN+'↔':'');
  const mx=Math.max(1,...chs.map(c=>am[c]||0));
@@ -1057,14 +1102,14 @@ function paintLedger(){paintSections();
  $('spreadEm').textContent=built.mcq.length+' placed';
  $('shortRows').innerHTML=built.short.map(p=>{const g={};p.items.forEach(q=>g[q.ch]=(g[q.ch]||0)+1);
   return `<div class="row"><div class="pip"></div><div class="nm">Q.${p.q} · ${Object.keys(g).sort((x,y)=>x-y).map(c=>'C'+c+'×'+g[c]).join(' + ')}</div><div class="ct">try <b>${p.attempt}</b> = ${p.attempt*state.shortMark}</div></div>`;}).join('');
- $('longRows').innerHTML=built.long.map((q,i)=>q.parts&&q.parts.length?`<div class="row"><div class="pip"></div><div class="nm">Q.${q.no} · ${q.parts.map(p=>`(${p.label}) Ch ${p.ch} ${b.names[p.ch]}`).join(' · ')}</div><div class="ct"><b>${q.marks} marks</b></div></div>`:`<div class="row"><div class="pip"></div><div class="nm">Q.${first+i} · Ch ${q.ch} ${b.names[q.ch]}</div><div class="ct"><b>${state.longMark}</b></div></div>`).join('');
+ $('longRows').innerHTML=built.long.map((q,i)=>q.parts&&q.parts.length?`<div class="row"><div class="pip"></div><div class="nm">Q.${q.no} · ${q.parts.map(p=>`(${esc(p.label)}) Ch ${p.ch} ${esc(b.names[p.ch])}`).join(' · ')}</div><div class="ct"><b>${q.marks} marks</b></div></div>`:`<div class="row"><div class="pip"></div><div class="nm">Q.${first+i} · Ch ${q.ch} ${esc(b.names[q.ch])}</div><div class="ct"><b>${state.longMark}</b></div></div>`).join('');
  $('pinEm').textContent=np;
  const pk=Object.keys(overrides);
  $('pinRows').innerHTML=pk.length?pk.map(k=>{const s=slotMap[k];if(!s)return'';
-  return `<div class="row"><div class="pip mag"></div><div class="nm">${s.label} · Ch ${s.ch}${s.ch!==s.planCh?' ↔':''}</div><button class="xb" data-unpin="${k}">✕</button></div>`;}).join('')
+  return `<div class="row"><div class="pip mag"></div><div class="nm">${esc(s.label)} · Ch ${s.ch}${s.ch!==s.planCh?' ↔':''}</div><button class="xb" data-unpin="${k}">✕</button></div>`;}).join('')
   :'<div class="empty">No pinned questions yet.<br>Click a question on the paper and press 📌.</div>';
  $('confEm').textContent=a.confOk+' / '+a.conf.length;
- $('confRows').innerHTML=a.conf.map(c=>`<div class="row"><div class="pip ${c.ok?'':'warn'}"></div><div class="nm">${c.label}</div><div class="ct"><b>${c.got}</b></div></div>`).join('')
+ $('confRows').innerHTML=a.conf.map(c=>`<div class="row"><div class="pip ${c.ok?'':'warn'}"></div><div class="nm">${esc(c.label)}</div><div class="ct"><b>${c.got}</b></div></div>`).join('')
   +(a.crossN?`<div class="row"><div class="pip warn"></div><div class="nm">Cross-chapter picks</div><div class="ct"><b>${a.crossN}</b></div></div>`:'');
  const good=a.confOk===a.conf.length&&!a.crossN;
  $('ledDot').style.background=good?'var(--green)':'var(--amber)';
@@ -1072,7 +1117,7 @@ function paintLedger(){paintSections();
  const th=a.hits.reduce((x,y)=>x+y.n,0);
  $('exEm').textContent=state.alp?(th===0?'clean':th+' hits'):(th+' allowed');
  $('exEm').style.color=state.alp?(th===0?'var(--green)':'var(--red)'):'var(--amber)';
- $('exList').innerHTML=a.hits.map(x=>`<div class="ex ${x.n>0?'hit':''}">${x.n>0?WRN:CHK}<div><b>Unit ${x.e.u} — ${x.e.name}</b><span>${x.e.pp} · ${x.n} ${state.alp?'match':'in play'}</span></div></div>`).join('');
+ $('exList').innerHTML=a.hits.map(x=>`<div class="ex ${x.n>0?'hit':''}">${x.n>0?WRN:CHK}<div><b>Unit ${esc(x.e.u)} — ${esc(x.e.name)}</b><span>${esc(x.e.pp)} · ${x.n} ${state.alp?'match':'in play'}</span></div></div>`).join('');
  const pg=PAGES[state.page],usable=pg.h*96/72-state.margin*2*96/72;
  let est=Math.max(1,Math.ceil(($('sheet').offsetHeight||900)/usable));if(state.omr&&built.mcq.length&&state.omrNewPage)est++;
  $('tagPages').textContent=`${pg.label} · ${est} sheet${est>1?'s':''}`;
@@ -1153,6 +1198,70 @@ $('preRestoreF').addEventListener('click',()=>{hiddenF=[];saveHidden();renderPre
 
 /* ══════════ RENDER ══════════ */
 const sheet=$('sheet'),wrap=$('sheetwrap'),stage=$('stage'),qtools=$('qtools');
+
+;
+/* === app-history.js === */
+"use strict";
+/* ══════════ PAPER HISTORY ══════════
+   Keeps the last HIST_MAX generated papers (recorded on .docx export, print, and "Save now") so a paper can be regenerated exactly:
+   same course, scheme, chapters, seed (Set V-xx), pinned questions and layout settings. Stored in pp.history.v1, included in backups.
+   Question TEXT is never copied; only ids, so edits to the bank show up on regeneration and removed questions are reported. */
+const HIST_KEY='pp.history.v1',HIST_MAX=20,HIST_BYTES=400000;
+/* Uses PPState accessors only (see app-state.js); never touches the shared globals directly. */
+const HIST_SKIP=new Set(['logo','presetId','dirty']);
+function cleanHistory(arr){
+ if(!Array.isArray(arr))return[];const out=[];const str=(v,n)=>typeof v==='string'?v.slice(0,n):'';
+ for(const e of arr){if(out.length>=HIST_MAX)break;if(!e||typeof e!=='object')continue;
+  const course=str(e.course,60);if(!/^\d{1,2}-[a-z0-9-]+$/.test(course))continue;
+  const seed=Math.round(+e.seed);if(!(seed>=1&&seed<=99))continue;
+  const chapters=Array.isArray(e.chapters)?e.chapters.map(Number).filter(n=>Number.isInteger(n)&&n>0&&n<1000).slice(0,60):[];
+  const pins={};if(e.pins&&typeof e.pins==='object'&&!Array.isArray(e.pins))Object.keys(e.pins).slice(0,400).forEach(k=>{const v=e.pins[k];if(k.length<=120&&(typeof v==='string'&&v.length<=80||Number.isFinite(v)))pins[k]=v;});
+  const qids=Array.isArray(e.qids)?e.qids.filter(x=>typeof x==='string'&&x.length<=80).slice(0,400):[];
+  const scheme=e.scheme?cleanScheme(e.scheme):null;
+  out.push({id:str(e.id,40)||('h'+out.length),at:Number.isFinite(+e.at)?+e.at:0,course,seed,schemeId:str(e.schemeId,120),schemeName:str(e.schemeName,120),scheme,chapters,alp:!!e.alp,pins,qids,cfg:cleanCfg(e.cfg)});}
+ return out;}
+function histLoad(){return cleanHistory(LS.get(HIST_KEY,[]));}
+function histSave(list){let l=list.slice(0,HIST_MAX);while(l.length>1&&JSON.stringify(l).length>HIST_BYTES)l.pop();return LS.set(HIST_KEY,l);}
+function histSnapshot(){
+ const cfg={};const st=PPState.get(),bt=PPState.built();Object.keys(DEF).forEach(k=>{if(!HIST_SKIP.has(k)&&k in st)cfg[k]=st[k];});
+ const sc=allSchemes().find(s=>s.id===st.schemeId&&s.courseId===PPState.course())||null;
+ return{id:'h'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),at:Date.now(),course:PPState.course(),seed:st.seed,schemeId:st.schemeId,schemeName:sc?sc.name:'',
+  scheme:sc&&sc.custom?JSON.parse(JSON.stringify(sc)):null,chapters:(st.chapters||[]).slice(),alp:!!st.alp,pins:JSON.parse(JSON.stringify(PPState.pins())),
+  qids:[...(bt.mcq||[]).map(q=>q.id),...(bt.short||[]).flatMap(p=>p.items.map(q=>q.id)),...(bt.long||[]).map(q=>q.id||(q.parts&&q.parts.map(x=>x.id).join('+'))||'')].filter(Boolean),cfg};}
+/* Same paper twice in a row (same course, seed, chapters, scheme, pins, qids) is one entry. */
+function histSig(e){return JSON.stringify([e.course,e.seed,e.schemeId,e.chapters,e.alp,e.pins,e.qids]);}
+function recordHistory(){
+ if(!PPState.built()||!PPState.plan()||!B().hasQuestions)return false;
+ const e=histSnapshot(),list=histLoad();if(list.length&&histSig(list[0])===histSig(e))return false;
+ histSave([e,...list.filter(x=>histSig(x)!==histSig(e))]);paintHistory();return true;}
+function histRegenerate(id){
+ const e=histLoad().find(x=>x.id===id);if(!e)return toast('That history entry is gone.','err');
+ const book=BOOKS[e.course];if(!book||!book.hasQuestions)return toast('That course is no longer available.','err');
+ if(e.scheme&&!allSchemes().some(s=>s.id===e.scheme.id)){customSchemes.push(e.scheme);LS.set('pp.schemes.v7',customSchemes);}
+ PPState.patch(JSON.parse(JSON.stringify(e.cfg)));const state=PPState.get();
+ const m=e.course.match(/^(\d+)-(.+)$/);state.grade=+m[1];state.sid=m[2];coursePickerGrade=state.grade;
+ state.alp=e.alp;state.chapters=e.chapters.filter(c=>book.chapters.includes(c));state.seed=e.seed;state.presetId='';
+ state.schemeId=allSchemes().some(s=>s.id===e.schemeId&&s.courseId===e.course)?e.schemeId:((offFor(e.course)||{}).id||'');
+ PPState.setPins(JSON.parse(JSON.stringify(e.pins)));PPState.clearSticky();activeSlot=null;
+ paintCourseUI();buildChips();render();syncUI();markDirty&&markDirty();
+ const nb=PPState.built(),have=new Set([...(nb.mcq||[]).map(q=>q.id),...(nb.short||[]).flatMap(p=>p.items.map(q=>q.id)),...(nb.long||[]).map(q=>q.id||(q.parts&&q.parts.map(x=>x.id).join('+'))||'')]);
+ const missing=e.qids.filter(q=>!have.has(q)).length;
+ toast(missing?'Regenerated Set V-'+String(e.seed).padStart(2,'0')+' — '+missing+' question(s) differ because the bank or scheme changed since.':'Regenerated Set V-'+String(e.seed).padStart(2,'0')+' exactly.',missing?'warn':'ok');}
+function histUsage(){let total=0,hist=0;try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&k.startsWith('pp.')){const n=k.length+(localStorage.getItem(k)||'').length;total+=n;if(k===HIST_KEY)hist=n;}}}catch(e){}return{hist,total};}
+const fmtKB=n=>n<1024?n+' B':(n/1024).toFixed(1)+' KB';
+function paintHistory(){
+ const box=document.getElementById('historyList');if(!box)return;const list=histLoad(),u=histUsage();
+ box.innerHTML=list.length?list.map(e=>{const bk=BOOKS[e.course],name=bk?bk.name+' · '+bk.subject:e.course;
+  return `<div class="hist-row" data-id="${esc(e.id)}"><div><b>${esc(name)}</b><small>Set V-${String(e.seed).padStart(2,'0')} · ${esc(e.schemeName||'scheme')} · ${e.chapters.length} ch · ${e.qids.length} questions${Object.keys(e.pins).length?' · '+Object.keys(e.pins).length+' pinned':''} · ${e.at?esc(new Date(e.at).toLocaleString()):''}</small></div><span><button class="act" data-hist-go="${esc(e.id)}" aria-label="Regenerate this paper">Regenerate</button><button class="act" data-hist-del="${esc(e.id)}" aria-label="Delete this history entry">✕</button></span></div>`;}).join(''):'<div class="hint">No papers saved yet. A paper is recorded when you export or print it, or press “Save now”.</div>';
+ const info=document.getElementById('historyUsage');if(info)info.textContent=`History: ${list.length} of ${HIST_MAX} papers · ${fmtKB(u.hist)} (all Paper Press data on this device: ${fmtKB(u.total)} of roughly 5 MB browser storage)`;
+ const clr=document.getElementById('btnHistClear');if(clr)clr.disabled=!list.length;}
+function initHistory(){
+ const box=document.getElementById('historyList');if(!box)return;
+ box.addEventListener('click',e=>{const g=e.target.closest('[data-hist-go]'),d=e.target.closest('[data-hist-del]');
+  if(g)histRegenerate(g.dataset.histGo);else if(d){histSave(histLoad().filter(x=>x.id!==d.dataset.histDel));paintHistory();}});
+ const save=document.getElementById('btnHistSave');if(save)save.addEventListener('click',()=>{toast(recordHistory()?'Saved to paper history.':'This exact paper is already the latest entry.','info');});
+ const clr=document.getElementById('btnHistClear');if(clr)clr.addEventListener('click',()=>{if(!histLoad().length)return;if(!confirm('Delete all saved paper history on this device? This cannot be undone (your presets, schemes and current paper are not touched).'))return;try{localStorage.removeItem(HIST_KEY);}catch(x){}paintHistory();toast('Paper history cleared.','ok');});
+ paintHistory();}
 
 ;
 /* === app-render.js === */
@@ -1249,11 +1358,11 @@ function drawerShow(kind){
 function openPicker(key){
  const s=slotMap[key];if(!s)return;
  drawerMode='pick';drawerSlot=key;drawerQuery='';drawerFilter='all';drawerCh='all';drawerEx=false;
- $('dTitle').innerHTML='Choose any question<small>'+s.label+' · slot chapter '+s.planCh+' — '+B().names[s.planCh]+'</small>';
+ $('dTitle').innerHTML='Choose any question<small>'+esc(s.label)+' · slot chapter '+s.planCh+' — '+esc(B().names[s.planCh])+'</small>';
  drawerShow('pick');
  $('dSearch').value='';$('dEx').classList.remove('on');
  const b=B();
- $('dChap').innerHTML='<option value="all">All chapters — whole '+b.name+' book</option><option value="slot">Slot chapter '+s.planCh+' — '+esc(b.names[s.planCh])+'</option>'+b.chapters.map(c=>`<option value="${c}">Ch ${c} — ${esc(b.names[c])}</option>`).join('');
+ $('dChap').innerHTML='<option value="all">All chapters — whole '+esc(b.name)+' book</option><option value="slot">Slot chapter '+s.planCh+' — '+esc(b.names[s.planCh])+'</option>'+b.chapters.map(c=>`<option value="${c}">Ch ${c} — ${esc(b.names[c])}</option>`).join('');
  $('dChap').value='all';
  document.querySelectorAll('#dFilter button').forEach(x=>x.classList.toggle('on',x.dataset.v==='all'));
  $('dFoot').innerHTML='<button id="dpRand">Random from shown</button><button class="pri" id="dpPin">'+(overrides[key]?'Release pin':'Pin current')+'</button>';
@@ -1451,7 +1560,7 @@ async function doDocx(){
   await preloadMathAssets();
   const bytes=await zipPack(buildDocx(true));
   const name=`${B().code}-${state.alp?'ALP':'FULL'}-V${String(state.seed).padStart(2,'0')}-${plan.marks.total}marks.docx`;
-  download(bytes,name,'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+  download(bytes,name,'application/vnd.openxmlformats-officedocument.wordprocessingml.document');recordHistory();
   stamp('DOCX SAVED',`${(bytes.length/1024).toFixed(0)} KB · ${plan.marks.total} MARKS`);
   toast('Saved '+name,'ok');
  }catch(err){console.error(err);toast('Could not build .docx — '+(err&&err.message?err.message:'unexpected export error'),'err');}
@@ -1495,7 +1604,7 @@ function assignQuestionTag(qid,ch,kind){const cat=contentConfig(+ch)[kind];const
 function buildChips(){
  const b=B();
  $('chGrid').innerHTML=b.chapters.slice().sort((a,b)=>a-b).map(c=>{const k=caps(c);
-  return `<div class="chip" data-ch="${c}" data-lock="${state.alp&&B().alpEx.includes(c)?'ALP':'—'}"><b>${c}</b><small>${b.names[c]}</small><span class="cap">${k.m}·${k.s}·${k.l}</span></div>`;}).join('');
+  return `<div class="chip" data-ch="${c}" data-lock="${state.alp&&B().alpEx.includes(c)?'ALP':'—'}"><b>${c}</b><small>${esc(b.names[c])}</small><span class="cap">${k.m}·${k.s}·${k.l}</span></div>`;}).join('');
  $('chGrid').querySelectorAll('.chip').forEach(el=>el.addEventListener('click',()=>{
   const c=+el.dataset.ch,b2=B();
   if(!b2.chapters.includes(c)){toast('Chapter '+c+' was not supplied for Class '+state.grade+'.','warn');return;}
@@ -1543,9 +1652,9 @@ function paintCourseUI(){
  const gg=gradeGroups(coursePickerGrade),bar=$('groupBar');if(coursePickerGroup!=='all'&&!gg.some(g=>g.id===coursePickerGroup))coursePickerGroup='all';
  if(bar){bar.classList.toggle('hidden',!gg.length);bar.innerHTML=gg.length?[{id:'all',label:'All subjects'}].concat(gg).map(g=>`<button type="button" class="chip${g.id===coursePickerGroup?' on':''}" data-group="${esc(g.id)}" aria-pressed="${g.id===coursePickerGroup}">${esc(g.label)}</button>`).join(''):'';}
  $('courseGrid').innerHTML=COURSE_SUBJECTS(coursePickerGrade).map(sid=>{const id=`${coursePickerGrade}-${sid}`,b=BOOKS[id],available=!!(b&&b.hasQuestions),active=id===cid();
-  return `<button type="button" data-course="${id}" class="${active?'on':''} ${available?'available':'coming'}" ${available?'':'disabled'}><span class="subject-symbol">${SUBJECT_ICON[sid]||sid.slice(0,2).toUpperCase()}</span><span class="subject-info"><b>${SUBJECT_LABELS[sid]}</b><small>${available?b.questionCount+' questions available':'Question bank coming soon'}</small></span><span class="subject-state">${active?'✓ Selected':available?'Open':'Soon'}</span></button>`;
+  return `<button type="button" data-course="${id}" class="${active?'on':''} ${available?'available':'coming'}" aria-pressed="${active}" ${available?'':'disabled'}><span class="subject-symbol">${SUBJECT_ICON[sid]||sid.slice(0,2).toUpperCase()}</span><span class="subject-info"><b>${SUBJECT_LABELS[sid]}</b><small>${available?b.questionCount+' questions available':'Question bank coming soon'}</small></span><span class="subject-state">${active?'✓ Selected':available?'Open':'Soon'}</span></button>`;
  }).join('');
- const current=BOOKS[cid()];$('selectedCourse').innerHTML=current?`<span class="selected-check">✓</span><span><small>Current paper course</small><b>${current.name} · ${current.subject}</b></span>`:'';
+ const current=BOOKS[cid()];$('selectedCourse').innerHTML=current?`<span class="selected-check">✓</span><span><small>Current paper course</small><b>${esc(current.name)} · ${esc(current.subject)}</b></span>`:'';
 }
 function setCourse(id){
  const b=BOOKS[id];if(!b||!b.hasQuestions){toast('Questions have not been added for this course yet.','info');return;}
@@ -1603,7 +1712,7 @@ function syncUI(){
  $('pinT').textContent=np?np+' question'+(np>1?'s':'')+' locked to your choice.':'Nothing pinned — every slot re-draws on shuffle.';
  $('logoBox').classList.toggle('has',!!state.logo);
  $('logoThumb').classList.toggle('empty',!state.logo);
- $('logoThumb').innerHTML=state.logo?`<img src="${state.logo}" alt="">`:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>';
+ $('logoThumb').innerHTML=safeImgSrc(state.logo)?`<img src="${esc(state.logo)}" alt="">`:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>';
  $('logoName').textContent=state.logo?(state.logoName||'Institute logo'):'No logo uploaded';
  $('logoMeta').textContent=state.logo?(logoPNG?'Rasterised · embedded in .docx':'Will embed on export'):'PNG · JPG · SVG · embedded in .docx';
  $('rLogo').value=state.logoH;$('vLogo').textContent=state.logoH+' pt';
@@ -1767,7 +1876,7 @@ $('btnShuffle').addEventListener('click',doShuffle);$('miniShuffle').addEventLis
 $('miniKey').addEventListener('click',()=>{state.showKey=!state.showKey;render();});
 $('btnExp').addEventListener('click',doDocx);$('topExp').addEventListener('click',doDocx);
 $('btnDoc').addEventListener('click',doDoc);
-$('btnPrint').addEventListener('click',()=>setTimeout(()=>window.print(),120));
+$('btnPrint').addEventListener('click',()=>{recordHistory();setTimeout(()=>window.print(),120);});
 $('btnFit').addEventListener('click',fitZoom);
 $('btn100').addEventListener('click',()=>{state.zoom=100;state.autoFit=false;syncUI();applyZoom();});
 $('btnReset').addEventListener('click',()=>{const keep={contentCatalogCustom:state.contentCatalogCustom,contentExcludedOverrides:state.contentExcludedOverrides,questionTags:state.questionTags};state=JSON.parse(JSON.stringify(DEF));Object.assign(state,keep);overrides={};sticky={};activeSlot=null;
@@ -1869,7 +1978,7 @@ document.addEventListener('keydown',e=>{if(!(e.ctrlKey||e.metaKey)||e.altKey)ret
 /* === app-runtime.js === */
 "use strict";
 /* ══════════ BUG REPORTS (every report carries its own ID + diagnostics) ══════════ */
-const APP_BUILD='v39 · 2026-11-27',ISSUES='https://github.com/Ugwattu/paper-press/issues';
+const APP_BUILD='v40 · 2026-11-27',ISSUES='https://github.com/Ugwattu/paper-press/issues';
 function bugReport(){
  const s=state,b=B(),id='PP-'+Date.now().toString(36).toUpperCase()+'-'+Math.random().toString(36).slice(2,6).toUpperCase();
  const sch=(typeof activeScheme==='function'&&activeScheme())||{},mk=plan&&plan.marks||{};
@@ -1905,6 +2014,7 @@ function bugReport(){
   try{
    const sanitized={...j.data};const pr=sanitized['pp.presets.v7'];if(Array.isArray(pr))sanitized['pp.presets.v7']=pr.map(p=>p&&p.cfg?({...p,cfg:cleanCfg(p.cfg)}):p).filter(p=>p&&(!p.cfg||Object.keys(p.cfg).length));
    const sc=sanitized['pp.schemes.v7'];if(Array.isArray(sc))sanitized['pp.schemes.v7']=sc.map(cleanScheme).filter(Boolean);
+   if(sanitized['pp.history.v1']!==undefined)sanitized['pp.history.v1']=cleanHistory(sanitized['pp.history.v1']);
    const st=sanitized['pp.state.v7'];if(st&&typeof st==='object'){const clean=Object.assign({},DEF,cleanCfg(st),{logo:''});['contentSelection','contentCatalogCustom','contentExcludedOverrides','questionTags','longPick'].forEach(k=>{if(st[k]&&typeof st[k]==='object'&&!Array.isArray(st[k]))clean[k]=JSON.parse(JSON.stringify(st[k]));});sanitized['pp.state.v7']=clean;}
    const snapshot={};keys.forEach(k=>snapshot[k]=localStorage.getItem(k));const oldLogo=await idbGet('logo');const lg=typeof j.logo==='string'&&/^data:image\/(png|jpe?g|gif|webp);base64,/.test(j.logo)&&j.logo.length<2e6?j.logo:'';
    try{keys.forEach(k=>localStorage.setItem(k,JSON.stringify(sanitized[k])));if(!await idbSet('logo',lg))throw new Error('IndexedDB logo write failed');}catch(writeErr){keys.forEach(k=>{if(snapshot[k]===null)localStorage.removeItem(k);else localStorage.setItem(k,snapshot[k]);});await idbSet('logo',oldLogo);throw writeErr;}
@@ -1967,6 +2077,9 @@ hiddenF=LS.get('pp.hiddenFactory.v1',[]);if(!Array.isArray(hiddenF))hiddenF=[];h
 const saved=LS.get('pp.state.v7',null);
 if(saved&&typeof saved==='object'){
  state=Object.assign(JSON.parse(JSON.stringify(DEF)),saved);
+ /* defence in depth: stored data is untrusted. Only raster data URLs may be a logo and free-text fields are length-capped (normal values are far shorter). */
+ if(!safeImgSrc(state.logo)||state.logo.length>=2e6)state.logo='';
+ Object.keys(state).forEach(k=>{if(typeof state[k]==='string'&&k!=='logo'){if(state[k].length>2000)state[k]=state[k].slice(0,2000);if(k in DEF&&typeof DEF[k]==='string')state[k]=cleanToken(k,state[k],DEF[k]);}});
  ['contentSelection','contentCatalogCustom','contentExcludedOverrides','questionTags'].forEach(k=>{if(!state[k]||typeof state[k]!=='object'||Array.isArray(state[k]))state[k]={};});
  delete state.time; /* legacy free-text duration replaced by objective/subjective minutes */
  state.timeObj=Number.isFinite(+state.timeObj)?clamp(Math.round(+state.timeObj),0,600):0;state.timeSubj=Number.isFinite(+state.timeSubj)?clamp(Math.round(+state.timeSubj),0,600):0;
@@ -2124,3 +2237,6 @@ requestAnimationFrame(()=>{if(state.autoFit!==false)fitZoom();else applyZoom();p
  const btn=document.getElementById('btnTutorial');if(btn)btn.addEventListener('click',start);
  if(!localStorage.getItem(completionKey))setTimeout(()=>{if(!overlay)start();},900);
 })();
+initHistory();
+/* Offline support: sw.js?v=<build> gives each release its own cache names. Needs https or localhost; failures are harmless. */
+if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js?v='+encodeURIComponent(APP_BUILD.split(' ')[0])).catch(e=>console.warn('Service worker not registered:',e&&e.message));});}

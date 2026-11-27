@@ -501,3 +501,9 @@ input[type=text],input[type=number],select,textarea{height:40px;border-radius:10
 #selSheetMode:focus{outline:2px solid color-mix(in srgb,var(--accent) 30%,transparent);outline-offset:1px}
 
 .groupbar{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.groupbar.hidden{display:none}.groupbar .chip{padding:5px 11px;font-size:12px;font-weight:600;border:1.5px solid var(--border);background:var(--surface);cursor:pointer}.groupbar .chip.on{border-color:var(--accent);background:var(--accent-weak);color:var(--accent)}
+
+/* ── WCAG AA colour-token fixes (v40): every text token reaches >=4.5:1 on every surface. Verify with: node tools/contrast.js ── */
+:root{--text3:#606e83;--obj:#9b5e00;--short:#087c56;--ok:#087c56;--danger:#cc2e49}
+html[data-theme=dark]{--long:#9e8aff;--danger:#f37389}
+/* a11y: keyboard focus on form fields gets the same solid ring as buttons (the soft glow alone is faint) */
+input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:1px}

@@ -1,0 +1,319 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ugwattu.github.io/paper-press/schemas/bank.schema.json",
+  "title": "Paper Press course bank (schemaVersion 2)",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "courseId",
+    "class",
+    "subjectId",
+    "subject",
+    "language",
+    "marks",
+    "times",
+    "alp",
+    "chapters"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 2
+    },
+    "courseId": {
+      "type": "string",
+      "pattern": "^[0-9]+-[a-z0-9-]+$"
+    },
+    "class": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 12
+    },
+    "classLabel": {
+      "type": "string"
+    },
+    "classUr": {
+      "type": "string"
+    },
+    "subjectId": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "code": {
+      "type": "string"
+    },
+    "subject": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subjectUr": {
+      "type": "string"
+    },
+    "language": {
+      "enum": [
+        "bilingual",
+        "english"
+      ]
+    },
+    "marks": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "times": {
+      "type": "object",
+      "required": [
+        "objective",
+        "subjective",
+        "basis"
+      ],
+      "properties": {
+        "objective": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "subjective": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "basis": {
+          "enum": [
+            "stated",
+            "inferred"
+          ]
+        }
+      }
+    },
+    "alp": {
+      "type": "object",
+      "required": [
+        "chapters",
+        "excludedChapters"
+      ],
+      "properties": {
+        "chapters": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "excludedChapters": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "summary": {
+          "type": "string"
+        }
+      }
+    },
+    "exclusionRules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "chapter",
+          "pattern"
+        ],
+        "properties": {
+          "chapter": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "name": {
+            "type": "string"
+          },
+          "pages": {
+            "type": "string"
+          },
+          "pattern": {
+            "type": "string"
+          },
+          "flags": {
+            "type": "string",
+            "pattern": "^[gimsuy]*$"
+          }
+        }
+      }
+    },
+    "patterns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ]
+      }
+    },
+    "chapters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "number",
+          "name"
+        ],
+        "properties": {
+          "number": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "mcq": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/mcq"
+            }
+          },
+          "short": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/text"
+            }
+          },
+          "long": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/long"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "text": {
+      "type": "object",
+      "required": [
+        "id",
+        "question"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^q-[A-Za-z0-9]+$"
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1
+        },
+        "questionUr": {
+          "type": "string"
+        },
+        "figure": {
+          "type": "string"
+        },
+        "figureAlt": {
+          "type": "string"
+        },
+        "alpExcluded": {
+          "type": "boolean"
+        }
+      }
+    },
+    "long": {
+      "type": "object",
+      "required": [
+        "id",
+        "question"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^q-[A-Za-z0-9]+$"
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1
+        },
+        "questionUr": {
+          "type": "string"
+        },
+        "figure": {
+          "type": "string"
+        },
+        "figureAlt": {
+          "type": "string"
+        },
+        "alpExcluded": {
+          "type": "boolean"
+        },
+        "source": {
+          "enum": [
+            "bank",
+            "composed"
+          ]
+        }
+      }
+    },
+    "mcq": {
+      "type": "object",
+      "required": [
+        "id",
+        "question",
+        "options",
+        "answer"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^q-[A-Za-z0-9]+$"
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1
+        },
+        "questionUr": {
+          "type": "string"
+        },
+        "options": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "required": [
+              "en"
+            ],
+            "properties": {
+              "en": {
+                "type": "string"
+              },
+              "ur": {
+                "type": "string"
+              },
+              "figure": {
+                "type": "string"
+              },
+              "figureAlt": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "answer": {
+          "enum": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ]
+        },
+        "figure": {
+          "type": "string"
+        },
+        "figureAlt": {
+          "type": "string"
+        },
+        "alpExcluded": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

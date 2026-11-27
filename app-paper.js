@@ -31,7 +31,7 @@ function paperInnerSheet(s,mode){
  const screen=(mode==='screen'),bi=urduOn(s),showKey=screen&&s.showKey,showTags=screen&&s.showTags,SN=serials();
  const sheetKind=s._sheetKind||'single',allMarks=plan.marks;
  const mk=sheetKind==='objective'?{mcq:allMarks.mcq,short:0,long:0,total:allMarks.mcq}:sheetKind==='subjective'?{mcq:0,short:allMarks.short,long:allMarks.long,total:allMarks.short+allMarks.long}:allMarks;
- const F=s.enFont,FS=s.enSize,UF=s.urFont,US=s.urSize,BD=`${s.borderW}pt solid #000000`;
+ const F=esc(s.enFont),FS=s.enSize,UF=esc(s.urFont),US=s.urSize,BD=`${s.borderW}pt solid #000000`;
  const cb=s.hideLines?'border:0;':`border:${BD};`,bAttr=s.hideLines?'0':'1';
  const base=`font-family:'${F}',serif;font-size:${FS}pt;line-height:${s.lineH};color:#000;`;
  const VA='top',SA='top'; /* text and serial numbers are always top-aligned */
@@ -62,7 +62,7 @@ function paperInnerSheet(s,mode){
   return `<tr><td colspan="${G.sp(0,100)}" style="padding:0;${cb}">${split}</td></tr>`;};
  let h='';
  if(s.footer)h+=`<div style="${base}font-size:${FS-2}pt;text-align:center;margin-bottom:6pt;${s.hideLines?'':'border-bottom:'+BD+';'}padding-bottom:4pt;">Paper ${B().code}-${s.alp?'ALP':'FULL'} / V-${String(s.seed).padStart(2,'0')}${sheetKind==='single'?'':` / ${sheetKind==='objective'?'Objective':'Subjective'}`} &nbsp;·&nbsp; ${esc(plan.sch.name)} &nbsp;·&nbsp; Examiner: ____________________</div>`;
- const logoImg=s.logo?`<img src="${s.logo}" alt="logo" style="height:${s.logoH}pt;width:auto;display:block;">`:'';
+ const logoImg=safeImgSrc(s.logo)?`<img src="${esc(s.logo)}" alt="logo" style="height:${s.logoH}pt;width:auto;display:block;">`:'';
  const titleBlock=()=>{let t='';
   if(s.institute.trim())t+=`<div style="${base}font-size:${FS+5}pt;font-weight:${wH};">${esc(s.institute)}</div>`;
   t+=`<div style="${base}font-size:${FS+1}pt;font-weight:${wH};margin-top:1pt;">${esc(s.title)}</div>`;
@@ -194,7 +194,16 @@ function paperInnerSheet(s,mode){
  if(s.infoPos==='bottom')h+=infoRowAny();
  return h;
 }
+/* Answer key: derived from the generated paper (built.mcq), never from stored text. */
+function answerKeyRows(){return (built.mcq||[]).map((m,i)=>({no:i+1,letter:'ABCD'[m.a]||'?'}));}
+function answerKeyHTML(s,mode){
+ const rows=answerKeyRows();if(!s.answerKey||!rows.length)return'';const pg=PAGES[s.page],per=10,trs=[];
+ for(let i=0;i<rows.length;i+=per){const chunk=rows.slice(i,i+per);trs.push('<tr>'+chunk.map(r=>`<td style="border:0.75pt solid #000;padding:3pt 6pt;text-align:center;font-weight:bold;">${r.no}</td><td style="border:0.75pt solid #000;padding:3pt 6pt;text-align:center;">${r.letter}</td>`).join('')+'</tr>');}
+ const brk=mode==='screen'?'':'page-break-before:always;break-before:page;';
+ return `<div class="pp-answer-key" style="${brk}width:100%;box-sizing:border-box;background:#fff;${mode==='screen'?`min-height:${pg.h}pt;padding:${s.margin}pt;margin:0 0 16pt;`:''}font-family:'${esc(s.enFont)}',serif;font-size:${s.enSize}pt;color:#000;"><div style="text-align:center;font-weight:bold;font-size:${s.enSize+3}pt;margin-bottom:8pt;">Answer Key — MCQs (${esc(s.subject)}, ${esc(s.klass)}) · Paper ${esc(B().code)} / V-${String(s.seed).padStart(2,'0')}</div><table style="border-collapse:collapse;margin:0 auto;">${trs.join('')}</table></div>`;}
 function paperInner(s,mode,forceBoth=false){
+ return paperInnerBody(s,mode,forceBoth)+answerKeyHTML(s,mode);}
+function paperInnerBody(s,mode,forceBoth=false){
  if(s.sheetMode!=='two')return paperInnerSheet(s,mode);
  const pg=PAGES[s.page],chosen=forceBoth||previewSheet==='both'?['objective','subjective']:previewSheet==='objective'?['objective']:['subjective'];
  return chosen.map((kind,i)=>{
@@ -207,15 +216,15 @@ function paperInner(s,mode,forceBoth=false){
 function omrHTML(s,showKey,screen){
  const n=built.mcq.length;if(!n)return'';
  const cols=clamp(parseInt(s.omrCols,10)||4,1,4),rows=Math.ceil(n/cols),FS=s.enSize,BD=`${s.borderW}pt solid #000000`;
- const base=`font-family:'${s.enFont}',serif;font-size:${FS}pt;color:#000;`;
+ const base=`font-family:'${esc(s.enFont)}',serif;font-size:${FS}pt;color:#000;`;
  let h='';
  if(s.omrNewPage)h+='<br clear="all" style="mso-special-character:line-break;page-break-before:always">';
- h+=`<div class="omrwrap" ${screen?'data-omr="1"':''} style="margin:${s.omrGapT}pt 0 ${s.omrGapB}pt 0;text-align:${s.omrAlign};">`;
+ h+=`<div class="omrwrap" ${screen?'data-omr="1"':''} style="margin:${s.omrGapT}pt 0 ${s.omrGapB}pt 0;text-align:${esc(s.omrAlign)};">`;
  if(screen)h+='<div class="omrhandle" id="omrHandle" title="Drag to another position"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 9h14M5 15h14"/></svg>Drag OMR</div>';
    const AR="font-family:Arial,Helvetica,sans-serif;color:#000;",tSz=FS+3,sSz=Math.max(5,FS-5),nSz=Math.max(5,FS-4.5),NUMP=18;
   h+=`<div style="display:inline-block;width:${s.omrWidth}%;text-align:left;">`;
   h+=`<div style="text-align:center;margin:0 0 6pt 0;${AR}line-height:1.25;"><span style="font-size:${tSz}pt;font-weight:bold;">MCQs RESPONSE PART</span><span style="font-size:${sSz}pt;"> (TO BE FILLED BY THE STUDENT)</span>`;
-  if(s.omrUrdu&&urduOn(s))h+=`<span dir="rtl" lang="ur" style="font-family:'${s.urFont}','Noto Nastaliq Urdu',serif;font-size:${s.urSize+1}pt;"> &nbsp;(اُمیدوار خود پُر کرے)</span>`;
+  if(s.omrUrdu&&urduOn(s))h+=`<span dir="rtl" lang="ur" style="font-family:'${esc(s.urFont)}','Noto Nastaliq Urdu',serif;font-size:${s.urSize+1}pt;"> &nbsp;(اُمیدوار خود پُر کرے)</span>`;
   h+='</div>';
   if(s.omrRule)h+=`<table cellspacing="0" cellpadding="0" style="border-collapse:collapse;width:100%;border:${BD};margin-bottom:6pt;${AR}"><tr><td style="border:${BD};padding:${s.pad+2}pt;text-align:center;font-weight:bold;font-size:${FS-2.5}pt;">PLEASE CAREFULLY READ THE&nbsp; QUESTIONS AND FILL THE ANSWER CORRECTLY</td></tr></table>`;
   h+=`<table cellspacing="0" cellpadding="0" style="border-collapse:collapse;table-layout:fixed;width:100%;border:${BD};${AR}"><colgroup>`;
@@ -235,6 +244,6 @@ function omrHTML(s,showKey,screen){
 function wordHtmlDoc(s){const pg=PAGES[s.page];
  return `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>${esc(s.title)}</title>
 <!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom></w:WordDocument></xml><![endif]-->
-<style>@page Section1{size:${pg.w}pt ${pg.h}pt;margin:${s.margin}pt;}div.Section1{page:Section1;}body{font-family:'${s.enFont}',serif;font-size:${s.enSize}pt;}table{border-collapse:collapse;}p,div{margin:0;}</style>
+<style>@page Section1{size:${pg.w}pt ${pg.h}pt;margin:${s.margin}pt;}div.Section1{page:Section1;}body{font-family:'${esc(s.enFont)}',serif;font-size:${s.enSize}pt;}table{border-collapse:collapse;}p,div{margin:0;}</style>
 </head><body><div class="Section1">${paperInner(s,'export',true)}</div></body></html>`;}
 

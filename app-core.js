@@ -32,7 +32,7 @@ const SCOPES={
  counts:{label:'Question counts & marks',keys:['incMcq','incShort','incLong','mcqCount','mcqMark','shortParts','shortPrinted','shortMark','shortAttempts','longPrinted','longAttempt','longMark']},
  header:{label:'Header, student fields & logo',keys:['institute','title','klass','subject','subjectUr','timeObj','timeSubj','sheetMode','date','sectionVal','showName','showRoll','showSection','showDate','infoPos','hdrStyle','infoStyle','footer','logo','logoName','logoH','logoPos']},
  type:{label:'Fonts, sizes & bold',keys:['enFont','enSize','urFont','urSize','lineH','pad','bHeader','bBar','bInstr','bNum','bStem','bShort','bLong']},
- omr:{label:'OMR layout & position',keys:['omr','omrRule','omrUrdu','omrPos','omrCols','bubSize','omrPad','omrAlign','omrWidth','omrGapT','omrGapB','omrNewPage']},
+ omr:{label:'OMR layout & position',keys:['omr','omrRule','omrUrdu','omrPos','omrCols','bubSize','omrPad','omrAlign','omrWidth','omrGapT','omrGapB','omrNewPage','answerKey']},
  page:{label:'Page, table & layers',keys:['hideLines','borderW','numW','insSplit','insAuto','optMode','page','margin','shade','zebra','showUrdu']}
 };
 const ALLSC=Object.keys(SCOPES);
@@ -45,12 +45,16 @@ const FIRST_BOOK=Object.values(BOOKS)[0];const DEF={grade:FIRST_BOOK.grade,sid:F
  bHeader:true,bBar:true,bInstr:true,bNum:true,bStem:true,bShort:false,bLong:false,
  omr:true,omrRule:true,omrUrdu:true,omrPos:'front',omrCols:4,bubSize:13,omrPad:4,omrAlign:'center',omrWidth:100,omrGapT:6,omrGapB:8,omrNewPage:false,
  hideLines:false,borderW:.75,numW:10,insSplit:58,insAuto:true,optMode:'auto',page:'a4',margin:24,shade:true,zebra:false,
- showUrdu:true,showKey:false,showTags:false,
+ showUrdu:true,showKey:false,answerKey:false,showTags:false,
  qTools:true,noDup:true,showPins:true,zoom:100,autoFit:true,seed:7,presetId:'',dirty:false};
 const CFG_KEYS=new Set([].concat(...Object.values(SCOPES).map(s=>s.keys)));
+/* Values that are interpolated into style/attribute context must be plain tokens: strip quote/angle/brace/semicolon characters from font names and validate enums. */
+const CFG_ENUMS={omrAlign:['left','center','right'],logoPos:['left','center','right'],omrPos:['front','end'],sheetMode:['single','two']};
+function cleanToken(k,v,fallback){if(k==='enFont'||k==='urFont'){const t=String(v).replace(/["'<>{};\\`$&]/g,'').replace(/\s+/g,' ').trim().slice(0,80);return t||fallback;}
+ if(CFG_ENUMS[k])return CFG_ENUMS[k].includes(v)?v:fallback;return v;}
 function cleanCfg(c){const o={};if(!c||typeof c!=='object')return o;CFG_KEYS.forEach(k=>{if(!(k in c)||!(k in DEF))return;const v=c[k],d=DEF[k];
  if(typeof v!==typeof d||Array.isArray(v)!==Array.isArray(d))return;
- if(typeof v==='string'){if(k==='logo'){o[k]=(v===''||(/^data:image\/(png|jpe?g|gif|webp);base64,/.test(v)&&v.length<2e6))?v:'';return;}o[k]=v.slice(0,300);return;}
+ if(typeof v==='string'){if(k==='logo'){o[k]=(v===''||(safeImgSrc(v)&&v.length<2e6))?v:'';return;}o[k]=cleanToken(k,v.slice(0,300),d);return;}
  if(typeof v==='number'){if(isFinite(v))o[k]=(k==='timeObj'||k==='timeSubj')?clamp(Math.round(v),0,600):v;return;}o[k]=JSON.parse(JSON.stringify(v));});return o;}
 function cleanScheme(s){if(!s||typeof s!=='object'||!s.mcq||(!Array.isArray(s.long)&&!Array.isArray(s.longGroups))||!Array.isArray(s.short))return null;
  const courseId=s.courseId||(Number(s.grade||DEFAULT_COURSE.classNo)+'-'+(s.sid||DEFAULT_SUBJECT)),book=BOOKS[courseId];if(!book)return null;
@@ -89,6 +93,8 @@ let hiddenF=[],presets=[],preSel=new Set(),preFilter='all',preQuery='',preSort='
 let activeSlot=null,drawerMode=null,drawerSlot=null,drawerFilter='all',drawerQuery='',drawerCh='all',drawerEx=false,exporting=false,schDraft=null,schEditId=null,previewSheet='both';
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+/* Only inline raster data URLs may reach an <img src>; anything else (javascript:, http:, svg, malformed) is refused. */
+const safeImgSrc=v=>typeof v==='string'&&v.length<3e6&&/^data:image\/(?:png|jpe?g|gif|webp);base64,[A-Za-z0-9+/]+={0,2}$/.test(v);
 /* Safe inline authoring syntax: semantic HTML-lite markup, isotope shorthand and restricted TeX math. */
 function safeLatex(tex){
  const x=String(tex==null?'':tex).trim();
@@ -131,8 +137,8 @@ function ensureMathJax(){
  if(mathJaxPromise)return mathJaxPromise;
  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],packages:{'[+]':['ams']}},svg:{fontCache:'none'},options:{enableMenu:false},startup:{typeset:false}};
  mathJaxPromise=new Promise((resolve,reject)=>{
-  /* Both hosts serve the identical MathJax 3.2.2 file, so one integrity hash covers either; a tampered or changed file is refused. */
-  const SRC=['https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js','https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js'],SRI='sha384-KKWa9jJ1MZvssLeOoXG6FiOAZfAgmzsIIfw8BXwI9+kYm0lPCbC6yTQPBC00F1/L';
+  /* Order: the committed local copy, then cdnjs, then jsDelivr. All three are the identical MathJax 3.2.2 file, so one integrity hash covers each; a tampered or changed file is refused. */
+  const SRC=['vendor/mathjax-3.2.2-tex-svg.js','https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js','https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js'],SRI='sha384-KKWa9jJ1MZvssLeOoXG6FiOAZfAgmzsIIfw8BXwI9+kYm0lPCbC6yTQPBC00F1/L';
   const tryLoad=i=>{
    if(i>=SRC.length){mathJaxPromise=null;reject(new Error('MathJax could not load. Check your internet connection and try again.'));return;}
    const script=document.createElement('script');script.async=true;script.src=SRC[i];script.integrity=SRI;script.crossOrigin='anonymous';
