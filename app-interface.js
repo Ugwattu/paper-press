@@ -27,7 +27,7 @@ async function doDocx(){
   toast('Saved '+name,'ok');
  }catch(err){console.error(err);toast('Could not build .docx — '+(err&&err.message?err.message:'unexpected export error'),'err');}
  finally{$('busy').classList.remove('on');$('topExp').disabled=false;$('btnExp').disabled=false;exporting=false;}}
-function doDoc(){download('\ufeff'+wordHtmlDoc(state),`${B().code}-V${String(state.seed).padStart(2,'0')}.doc`,'application/msword;charset=utf-8');
+function doDoc(){if(!confirm('This exports the legacy HTML-based .doc format. It is less reliable than the modern .docx export. Continue?'))return;download('\ufeff'+wordHtmlDoc(state),`${B().code}-V${String(state.seed).padStart(2,'0')}.doc`,'application/msword;charset=utf-8');
  stamp('DOC SAVED',`${plan.marks.total} MARKS · LEGACY`);toast('Legacy .doc saved','info');}
 
 /* ══════════ UI SYNC ══════════ */
@@ -55,7 +55,7 @@ function buildContentSelection(){
  $('contentPick').querySelectorAll('[data-content-kind]').forEach(x=>x.addEventListener('change',()=>{const c=+x.dataset.contentCh,sel=state.contentSelection[course][c],arr=sel[x.dataset.contentKind],id=x.dataset.contentId;if(x.checked){if(!arr.includes(id))arr.push(id);}else sel[x.dataset.contentKind]=arr.filter(v=>v!==id);markDirty();render();}));
  $('contentPick').querySelectorAll('[data-content-untagged]').forEach(x=>x.addEventListener('change',()=>{state.contentSelection[course][+x.dataset.contentUntagged].includeUntagged=x.checked;markDirty();render();}));
  $('contentPick').querySelectorAll('[data-content-add]').forEach(x=>x.addEventListener('click',()=>{const label=prompt('Name this '+(x.dataset.contentAdd==='topics'?'topic':'exercise')+' in Chapter '+x.dataset.contentCh);if(!label||!label.trim())return;addContentCatalogItem(+x.dataset.contentCh,x.dataset.contentAdd,label);markDirty();render();}));
- $('contentPick').querySelector('[data-content-export]').addEventListener('click',()=>{const out={courseId:course,contentCatalog:{},questionContent:JSON.parse(JSON.stringify(b.questionContent||{}))};b.chapters.forEach(c=>{const cat=contentConfig(c);if(cat.topics.length||cat.exercises.length)out.contentCatalog[c]={topics:cat.topics,exercises:cat.exercises};});const tags=(state.questionTags||{})[course]||{};Object.keys(tags).forEach(id=>{const m=id.match(/-c(\d+)-(m|s|l)(\d+)$/);if(!m)return;const c=m[1],type={m:'mcq',s:'short',l:'long'}[m[2]],idx=m[3];out.questionContent[c]=out.questionContent[c]||{};out.questionContent[c][type]=out.questionContent[c][type]||{};out.questionContent[c][type][idx]=tags[id];});download(JSON.stringify(out,null,2),course+'-content-tags.json','application/json');toast('Topic/exercise metadata exported for '+course,'ok');});
+ $('contentPick').querySelector('[data-content-export]').addEventListener('click',()=>{const out={courseId:course,contentCatalog:{},questionContent:JSON.parse(JSON.stringify(b.questionContent||{}))};b.chapters.forEach(c=>{const cat=contentConfig(c);if(cat.topics.length||cat.exercises.length)out.contentCatalog[c]={topics:cat.topics,exercises:cat.exercises};});const tags=(state.questionTags||{})[course]||{};Object.keys(tags).forEach(qid=>{const q=[...b.chapters.flatMap(c=>[...(b.mcq[c]||[]),...(b.short[c]||[]),...(b.long[c]||[])])].find(x=>x.id===qid);if(!q)return;const c=String(q.ch),type=(b.mcq[c]||[]).some(x=>x.id===qid)?'mcq':(b.short[c]||[]).some(x=>x.id===qid)?'short':'long';out.questionContent[c]=out.questionContent[c]||{};out.questionContent[c][type]=out.questionContent[c][type]||{};out.questionContent[c][type][qid]=tags[qid];});download(JSON.stringify(out,null,2),course+'-content-tags.json','application/json');toast('Topic/exercise metadata exported for '+course,'ok');});
  $('contentPick').querySelectorAll('[data-content-alp]').forEach(x=>x.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();const course=cid(),ch=x.dataset.contentCh,kind=x.dataset.contentAlp,id=x.dataset.contentId;state.contentExcludedOverrides=state.contentExcludedOverrides||{};state.contentExcludedOverrides[course]=state.contentExcludedOverrides[course]||{};state.contentExcludedOverrides[course][ch]=state.contentExcludedOverrides[course][ch]||{topics:{},exercises:{}};const o=state.contentExcludedOverrides[course][ch][kind],cur=contentConfig(+ch)[kind].find(it=>it.id===id);o[id]=!(cur&&cur.alpExcluded);const sel=state.contentSelection[course][ch];if(o[id])sel[kind]=sel[kind].filter(v=>v!==id);markDirty();render();}));
  $('contentPick').querySelectorAll('[data-content-all]').forEach(x=>x.addEventListener('click',()=>{const c=+x.dataset.contentCh,kind=x.dataset.contentAll,cat=contentConfig(c),sel=state.contentSelection[course][c];sel[kind]=cat[kind].filter(it=>!(state.alp&&it.alpExcluded)).map(it=>it.id);markDirty();render();}));
  $('contentPick').querySelectorAll('[data-content-none]').forEach(x=>x.addEventListener('click',()=>{state.contentSelection[course][+x.dataset.contentCh][x.dataset.contentNone]=[];markDirty();render();}));
@@ -101,19 +101,22 @@ function buildLongSrc(){
  $('longSrc').querySelectorAll('[data-long]').forEach(sel=>sel.addEventListener('change',()=>{
   state.longPick[+sel.dataset.long]=+sel.value;markDirty();render();
   toast('Q.'+(first+ +sel.dataset.long)+' will print from Chapter '+sel.value,'ok');}));}
-let coursePickerGrade=9;
+let coursePickerGrade=DEF.grade;const COURSE_GRADES=[...new Set(PP_COURSES.map(c=>c.classNo))].sort((a,b)=>a-b);let coursePickerGroup='all';const GROUPS=(typeof PP_GROUPS!=='undefined'&&Array.isArray(PP_GROUPS))?PP_GROUPS:[];const gradeGroups=grade=>GROUPS.filter(g=>PP_COURSES.some(c=>c.classNo===grade&&(c.groups||[]).includes(g.id)));const COURSE_SUBJECTS=grade=>PP_COURSES.filter(c=>c.classNo===grade&&(coursePickerGroup==='all'||!gradeGroups(grade).some(g=>g.id===coursePickerGroup)||(c.groups||[]).includes(coursePickerGroup))).map(c=>c.subjectId);const COURSE_CLASS_LABEL=g=>PP_COURSES.find(c=>c.classNo===g)?.classLabel||String(g);const SUBJECT_ICON={computer:'CS',maths:'∑',physics:'Φ',chemistry:'⚗',biology:'BIO'};
 function buildCourseUI(){
- $('gradeCard').innerHTML=Object.keys(GRADE_LABELS).map(g=>`<button type="button" data-grade="${g}"><span class="grade-number">${g}</span><span class="grade-name">${GRADE_LABELS[g]}</span><span class="grade-check">✓</span></button>`).join('');
+ $('gradeCard').innerHTML=COURSE_GRADES.map(g=>`<button type="button" data-grade="${g}"><span class="grade-number">${g}</span><span class="grade-name">${GRADE_LABELS[g]}</span><span class="grade-check">✓</span></button>`).join('');
  $('gradeCard').addEventListener('click',e=>{const b=e.target.closest('[data-grade]');if(!b)return;coursePickerGrade=+b.dataset.grade;paintCourseUI();});
+ $('groupBar').addEventListener('click',e=>{const b=e.target.closest('[data-group]');if(!b)return;coursePickerGroup=b.dataset.group;paintCourseUI();});
  $('courseGrid').addEventListener('click',e=>{const b=e.target.closest('[data-course]');if(!b||b.disabled)return;setCourse(b.dataset.course);});paintCourseUI();
 }
 function paintCourseUI(){
  if(!$('gradeCard')||!$('courseGrid'))return;
  $('gradeCard').querySelectorAll('[data-grade]').forEach(b=>b.classList.toggle('on',+b.dataset.grade===coursePickerGrade));
- $('courseGrid').innerHTML=Object.keys(SUBJECT_LABELS).map(sid=>{const id=`${coursePickerGrade}-${sid}`,b=BOOKS[id],available=!!(b&&b.hasQuestions),active=id===cid();
-  return `<button type="button" data-course="${id}" class="${active?'on':''} ${available?'available':'coming'}" ${available?'':'disabled'}><span class="subject-symbol">${({computer:'CS',maths:'∑',physics:'Φ',chemistry:'⚗',biology:'BIO'})[sid]||sid.slice(0,2).toUpperCase()}</span><span class="subject-info"><b>${SUBJECT_LABELS[sid]}</b><small>${available?b.questionCount+' questions available':'Question bank coming soon'}</small></span><span class="subject-state">${active?'✓ Selected':available?'Open':'Soon'}</span></button>`;
+ const gg=gradeGroups(coursePickerGrade),bar=$('groupBar');if(coursePickerGroup!=='all'&&!gg.some(g=>g.id===coursePickerGroup))coursePickerGroup='all';
+ if(bar){bar.classList.toggle('hidden',!gg.length);bar.innerHTML=gg.length?[{id:'all',label:'All subjects'}].concat(gg).map(g=>`<button type="button" class="chip${g.id===coursePickerGroup?' on':''}" data-group="${esc(g.id)}" aria-pressed="${g.id===coursePickerGroup}">${esc(g.label)}</button>`).join(''):'';}
+ $('courseGrid').innerHTML=COURSE_SUBJECTS(coursePickerGrade).map(sid=>{const id=`${coursePickerGrade}-${sid}`,b=BOOKS[id],available=!!(b&&b.hasQuestions),active=id===cid();
+  return `<button type="button" data-course="${id}" class="${active?'on':''} ${available?'available':'coming'}" ${available?'':'disabled'}><span class="subject-symbol">${SUBJECT_ICON[sid]||sid.slice(0,2).toUpperCase()}</span><span class="subject-info"><b>${SUBJECT_LABELS[sid]}</b><small>${available?b.questionCount+' questions available':'Question bank coming soon'}</small></span><span class="subject-state">${active?'✓ Selected':available?'Open':'Soon'}</span></button>`;
  }).join('');
- const current=BOOKS[cid()];$('selectedCourse').innerHTML=current?`<span class="selected-check">✓</span><span><small>Current paper course</small><b>${GRADE_LABELS[current.grade]} · ${SUBJECT_LABELS[current.sid]}</b></span>`:'';
+ const current=BOOKS[cid()];$('selectedCourse').innerHTML=current?`<span class="selected-check">✓</span><span><small>Current paper course</small><b>${current.name} · ${current.subject}</b></span>`:'';
 }
 function setCourse(id){
  const b=BOOKS[id];if(!b||!b.hasQuestions){toast('Questions have not been added for this course yet.','info');return;}
@@ -122,7 +125,7 @@ function setCourse(id){
  state.chapters=b.alpCh.slice();state.schemeId=(offFor(id)||{}).id||'';state.timeObj=0;state.timeSubj=0;state.longPick={};overrides={};sticky={};activeSlot=null;
  coursePickerGrade=b.grade;applySchemeCounts(true);state.presetId='';state.dirty=true;
  paintCourseUI();buildChips();render();renderPresets();if(state.autoFit)fitZoom();
- toast(`${GRADE_LABELS[b.grade]} · ${SUBJECT_LABELS[b.sid]} course loaded`,'ok');
+ toast(`${b.name} · ${b.subject} course loaded`,'ok');
 }
 function syncUI(){
  const b=B(),sch=activeScheme(),t=schemeTotals(sch);buildContentSelection();
@@ -294,7 +297,7 @@ document.querySelectorAll('#segOmrCols button').forEach(b=>b.addEventListener('c
  ['rLogo','logoH','vLogo',v=>v+' pt'],['rEn','enSize','vEn',v=>v+' pt'],['rUr','urSize','vUr',v=>v+' pt'],
  ['rLh','lineH','vLh',v=>v.toFixed(2)],['rPad','pad','vPad',v=>v+' pt'],['rBw','borderW','vBw',v=>v+' pt'],
  ['rNumW','numW','vNumW',v=>v+'%'],['rInsSplit','insSplit','vInsSplit',v=>v+'%'],['rMg','margin','vMg',v=>v+' pt']]
-.forEach(([id,k,vid,f])=>{$(id).addEventListener('input',e=>{state[k]=parseFloat(e.target.value);$(vid).textContent=f(state[k]);bump($(vid));markDirty();(k==='margin'?repaint():repaintSoon());if(state.autoFit&&k==='margin')fitZoom();});});
+.forEach(([id,k,vid,f])=>{$(id).addEventListener('input',e=>{state[k]=parseFloat(e.target.value);$(vid).textContent=f(state[k]);bump($(vid));markDirty();repaintSoon();if(state.autoFit&&k==='margin'){_post.add(fitZoom);}});});
 $('rZm').addEventListener('input',e=>{state.zoom=+e.target.value;state.autoFit=false;$('vZm').textContent=state.zoom+'%';bump($('vZm'));applyZoom();});
 document.querySelectorAll('.rail .tg[data-tg]').forEach(t=>t.addEventListener('click',()=>{
  const k=t.dataset.tg;state[k]=!state[k];markDirty();
@@ -351,7 +354,7 @@ $('preList').addEventListener('click',e=>{
  const ap=e.target.closest('[data-apply]');if(ap){applyPreset(allPresets().find(p=>p.id===ap.dataset.apply));return;}
  const du=e.target.closest('[data-dup]');
  if(du){const src=allPresets().find(p=>p.id===du.dataset.dup);if(!src)return;
-  const np={id:uid('p'),name:src.name+' (copy)',note:src.note||'',factory:false,grade:src.cfg.grade||src.grade,sid:src.cfg.sid||src.sid||'computer',courseId:src.cfg.grade?`${src.cfg.grade}-${src.cfg.sid||src.sid||'computer'}`:(src.courseId||`${src.grade||9}-${src.sid||'computer'}`),scopes:src.scopes.slice(),cfg:JSON.parse(JSON.stringify(src.cfg)),created:Date.now(),updated:Date.now()};
+  const np={id:uid('p'),name:src.name+' (copy)',note:src.note||'',factory:false,grade:src.cfg.grade||src.grade,sid:src.cfg.sid||src.sid||DEFAULT_SUBJECT,courseId:src.cfg.grade?`${src.cfg.grade}-${src.cfg.sid||src.sid||DEFAULT_SUBJECT}`:(src.courseId||`${src.grade||9}-${src.sid||DEFAULT_SUBJECT}`),scopes:src.scopes.slice(),cfg:JSON.parse(JSON.stringify(src.cfg)),created:Date.now(),updated:Date.now()};
   presets.unshift(np);savePresets();renderPresets();toast('Duplicated as “'+np.name+'”','ok');return;}
  const ed=e.target.closest('[data-edit]');if(ed&&!ed.disabled){openPresetForm(ed.dataset.edit);return;}
  const de=e.target.closest('[data-del]');if(de){deletePresets([de.dataset.del]);return;}
@@ -368,7 +371,7 @@ $('preFile').addEventListener('change',e=>{const f=e.target.files&&e.target.file
   if(!Array.isArray(arr))throw 0;let n=0;
   if(Array.isArray(d.schemes))d.schemes.forEach(s=>{const cs=cleanScheme(s);if(cs){cs.id=uid('s');customSchemes.unshift(cs);}});
   arr.forEach(p=>{if(!p||!p.name||!p.cfg)return;
-   const cfg=cleanCfg(p.cfg),grade=Number(p.grade||cfg.grade||9),sid=String(p.sid||p.courseId?.split('-')[1]||cfg.sid||'computer');
+   const cfg=cleanCfg(p.cfg),grade=Number(p.grade||cfg.grade||9),sid=String(p.sid||p.courseId?.split('-')[1]||cfg.sid||DEFAULT_SUBJECT);
    presets.unshift({id:uid('p'),name:String(p.name),note:String(p.note||''),factory:false,grade,sid,courseId:`${grade}-${sid}`,
     scopes:Array.isArray(p.scopes)&&p.scopes.length?p.scopes.filter(s=>SCOPES[s]):ALLSC.slice(),cfg,created:Date.now(),updated:Date.now()});n++;});
   if(!n)throw 0;savePresets();saveSchemes();renderPresets();syncUI();toast(n+' preset'+(n>1?'s':'')+' imported','ok');
@@ -394,8 +397,8 @@ if(window.ResizeObserver)new ResizeObserver(()=>applyZoom()).observe(sheet);
 const _fc=document.createElement('canvas').getContext('2d');
 function fontInstalled(f){const s='مرحبا Hamburgefonstiv 0123',w=b=>{_fc.font='40px '+b;return _fc.measureText(s).width;};return['monospace','serif','sans-serif'].some(b=>w('"'+f+'",'+b)!==w(b));}
 /* ══════════ RENDER BATCHING ══════════ */
-let _rq=0,_rf=0;
-function _sched(){if(_rf)return;_rf=requestAnimationFrame(()=>{_rf=0;const m=_rq;_rq=0;if(m>=2)render();else if(m)repaint();});}
+let _rq=0,_rf=0;const _post=new Set();
+function _sched(){if(_rf)return;_rf=requestAnimationFrame(()=>{_rf=0;const m=_rq;_rq=0;if(m>=2)render();else if(m)repaint();const fns=[..._post];_post.clear();fns.forEach(f=>{try{f();}catch(e){console.error(e);}});});}
 function renderSoon(){_rq=2;_sched();}
 function repaintSoon(){_rq=Math.max(_rq,1);_sched();}
 /* ══════════ UNDO / REDO ══════════ */

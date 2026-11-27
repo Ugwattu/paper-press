@@ -58,7 +58,7 @@
   "questionContent": {
     "1": {
       "mcq": {
-        "0": {
+        "q-replace-with-stable-unique-id": {
           "topics": [
             "topic-1"
           ],
@@ -105,7 +105,8 @@
           ],
           "answer": "A",
           "figure": "",
-          "figureAlt": ""
+          "figureAlt": "",
+          "id": "q-replace-with-stable-unique-id"
         }
       ],
       "short": [
@@ -113,7 +114,8 @@
           "question": "Write a short question here.",
           "questionUr": "مختصر سوال یہاں لکھیں۔",
           "figure": "",
-          "figureAlt": ""
+          "figureAlt": "",
+          "id": "q-replace-with-stable-unique-id"
         }
       ],
       "long": [
@@ -122,7 +124,8 @@
           "questionUr": "تفصیلی سوال یہاں لکھیں۔",
           "source": "bank",
           "figure": "",
-          "figureAlt": ""
+          "figureAlt": "",
+          "id": "q-replace-with-stable-unique-id"
         }
       ]
     }

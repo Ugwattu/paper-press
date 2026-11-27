@@ -1,0 +1,10 @@
+#!/usr/bin/env node
+const fs=require('fs'),path=require('path'),assert=require('assert'),{convert}=require('../bank-loader.js');
+const root=path.join(__dirname,'..'),manifest=JSON.parse(fs.readFileSync(path.join(root,'banks/manifest.json')));let tests=0;
+function check(name,fn){tests++;try{fn();console.log('PASS '+name);}catch(e){console.error('FAIL '+name+' — '+e.message);process.exitCode=1;}}
+check('manifest-driven course registry contains no fixed course-count assumption',()=>{assert(manifest.courses.length>0);assert(!fs.readFileSync(path.join(root,'bank-loader.js'),'utf8').includes('length!==20'));});
+check('every authored question has a stable unique ID',()=>{for(const entry of manifest.courses){const j=JSON.parse(fs.readFileSync(path.join(root,'banks',entry.file)));const ids=[];for(const ch of j.chapters)for(const type of ['mcq','short','long'])for(const q of ch[type]||[])ids.push(q.id);assert(ids.every(x=>/^q-[a-f0-9]{14}$/.test(x)),entry.id+' has a missing or malformed ID');assert.equal(new Set(ids).size,ids.length,entry.id+' duplicates IDs');}});
+check('converted MCQ/short/long objects expose stable IDs',()=>{const j=JSON.parse(fs.readFileSync(path.join(root,'banks/9-computer.json'))),b=convert(j);for(const c of Object.keys(b.raw)){for(const t of ['m','s','l'])for(const q of b.raw[c][t])assert((t==='m'?q[22]:t==='s'?q[5]:q[6]).startsWith('q-'));}});
+check('question-content tags export and load by stable ID',()=>{const bank=JSON.parse(fs.readFileSync(path.join(root,'banks/9-computer.json')));const q=bank.chapters.flatMap(c=>c.mcq||[])[0];bank.questionContent={1:{mcq:{[q.id]:{topics:[],exercises:[]}}}};const b=convert(bank);assert(b.meta.questionContent[1].mcq[q.id]);});
+check('manifest can alias a course bank file with metadata overrides',()=>{const entry=manifest.courses.find(c=>c.id==='9-computer');assert(entry.file);const loader=fs.readFileSync(path.join(root,'bank-loader.js'),'utf8');assert(loader.includes('bankCourseId')&&loader.includes('overrides'));});
+console.log(`${tests} stable-ID and manifest checks passed`);

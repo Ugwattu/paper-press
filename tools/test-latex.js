@@ -30,5 +30,5 @@ check('DOCX embeds formulas inline and on centered display paragraphs',docx.incl
 check('DOCX scans MCQ options, short, long and split-part formulas',docx.includes('(q.o||[]).forEach')&&docx.includes('(built.short||[]).forEach')&&docx.includes('(built.long||[]).forEach'));
 check('export preloads LaTeX and reports formula-conversion errors',iface.includes('await preloadMathAssets()')&&iface.includes("err.message?err.message"));
 check('live preview and question picker are scheduled for MathJax typesetting',render.includes('typesetMathIn(sheet)')&&render.includes("typesetMathIn($('dList'))"));
-check('MathJax loads from the configured v3 SVG output CDN only on demand',core.includes('https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js')&&core.includes('function ensureMathJax()'));
+check('MathJax loads from the configured v3 SVG output CDN only on demand',core.includes('https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js')&&core.includes('function ensureMathJax()')&&core.includes('script.crossOrigin=\'anonymous\''));
 console.log(`\n${passed}/${passed+failed} LaTeX checks passed`);process.exit(failed?1:0);

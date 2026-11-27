@@ -1,6 +1,6 @@
 "use strict";
 /* ══════════ BUG REPORTS (every report carries its own ID + diagnostics) ══════════ */
-const APP_BUILD='v37 · 2026-11-26',ISSUES='https://github.com/Ugwattu/paper-press/issues';
+const APP_BUILD='v39 · 2026-11-27',ISSUES='https://github.com/Ugwattu/paper-press/issues';
 function bugReport(){
  const s=state,b=B(),id='PP-'+Date.now().toString(36).toUpperCase()+'-'+Math.random().toString(36).slice(2,6).toUpperCase();
  const sch=(typeof activeScheme==='function'&&activeScheme())||{},mk=plan&&plan.marks||{};
@@ -15,6 +15,7 @@ function bugReport(){
  const cp=$('btnCopyDiag');if(cp)cp.addEventListener('click',async()=>{const r=bugReport();try{await navigator.clipboard.writeText('Report ID: '+r.id+'\n'+r.diag);toast('Diagnostics copied ('+r.id+')','ok');}catch(e){toast('Could not copy — your browser blocked clipboard access.','warn');}});
  const bi=$('buildInfo');if(bi)bi.textContent='Build '+APP_BUILD;})();
 /* ══════════ BACKUP & RESTORE ══════════
+*/
 (function(){
  const MAGIC='paper-press-backup',info=$('backupInfo'),stamp=()=>{const t=LS.get('pp.lastBackup',null);info.textContent=t?'Last backup from this device: '+new Date(t).toLocaleString():'No backup made from this device yet.';};
  async function collect(){flushState();const data={};
@@ -33,19 +34,18 @@ function bugReport(){
   if(!confirm('Restore '+keys.length+' saved items from this backup'+(j.created?' (made '+new Date(j.created).toLocaleString()+')':'')+'?\n\nThis replaces the current paper, presets and schemes on this device.'))return;
   window.__ppRestoring=true;
   try{
-   const pr=j.data['pp.presets.v7'];if(Array.isArray(pr))pr.forEach(p=>{if(p&&p.cfg)p.cfg=cleanCfg(p.cfg);});
-   const sc=j.data['pp.schemes.v7'];if(Array.isArray(sc))j.data['pp.schemes.v7']=sc.map(cleanScheme).filter(Boolean);
-   const st=j.data['pp.state.v7'];if(st&&typeof st==='object'){st.logo='';}
-   keys.forEach(k=>localStorage.setItem(k,JSON.stringify(j.data[k])));
-   const lg=typeof j.logo==='string'&&/^data:image\/(png|jpe?g|gif|webp);base64,/.test(j.logo)&&j.logo.length<4e6?j.logo:'';
-   await idbSet('logo',lg);
+   const sanitized={...j.data};const pr=sanitized['pp.presets.v7'];if(Array.isArray(pr))sanitized['pp.presets.v7']=pr.map(p=>p&&p.cfg?({...p,cfg:cleanCfg(p.cfg)}):p).filter(p=>p&&(!p.cfg||Object.keys(p.cfg).length));
+   const sc=sanitized['pp.schemes.v7'];if(Array.isArray(sc))sanitized['pp.schemes.v7']=sc.map(cleanScheme).filter(Boolean);
+   const st=sanitized['pp.state.v7'];if(st&&typeof st==='object'){const clean=Object.assign({},DEF,cleanCfg(st),{logo:''});['contentSelection','contentCatalogCustom','contentExcludedOverrides','questionTags','longPick'].forEach(k=>{if(st[k]&&typeof st[k]==='object'&&!Array.isArray(st[k]))clean[k]=JSON.parse(JSON.stringify(st[k]));});sanitized['pp.state.v7']=clean;}
+   const snapshot={};keys.forEach(k=>snapshot[k]=localStorage.getItem(k));const oldLogo=await idbGet('logo');const lg=typeof j.logo==='string'&&/^data:image\/(png|jpe?g|gif|webp);base64,/.test(j.logo)&&j.logo.length<2e6?j.logo:'';
+   try{keys.forEach(k=>localStorage.setItem(k,JSON.stringify(sanitized[k])));if(!await idbSet('logo',lg))throw new Error('IndexedDB logo write failed');}catch(writeErr){keys.forEach(k=>{if(snapshot[k]===null)localStorage.removeItem(k);else localStorage.setItem(k,snapshot[k]);});await idbSet('logo',oldLogo);throw writeErr;}
   }catch(x){window.__ppRestoring=false;return toast('Could not write the backup into browser storage.','err');}
   toast('Backup restored — reloading…','ok');setTimeout(()=>location.reload(),800);});
  stamp();
- const ab=LS.get('pp.autobackup',null),abBtn=$('btnAutoBackup');
- if(ab&&ab.raw&&abBtn){abBtn.classList.remove('hidden');abBtn.textContent='Download the safety copy made before the last update ('+new Date(ab.saved).toLocaleDateString()+')';
+ const abBtn=$('btnAutoBackup');
+ idbGet('autobackup').then(v=>{const ab=(v&&v.raw)?v:LS.get('pp.autobackup',null);if(!(ab&&ab.raw&&abBtn))return;abBtn.classList.remove('hidden');abBtn.textContent='Download the safety copy made before the last update ('+new Date(ab.saved).toLocaleDateString()+')';
   abBtn.addEventListener('click',()=>{const data={};for(const k in ab.raw){try{data[k]=JSON.parse(ab.raw[k]);}catch(e){}}
-   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({app:MAGIC,version:1,created:ab.saved,data,logo:''})],{type:'application/json'}));a.download='paper-press-safety-copy-'+ab.saved.slice(0,10)+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);});}})();
+   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({app:MAGIC,version:1,created:ab.saved,data,logo:''})],{type:'application/json'}));a.download='paper-press-safety-copy-'+ab.saved.slice(0,10)+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);});});})();
 /* ══════════ PAPER SECTIONS: at least one must stay on ══════════ */
 (function(){const K=['incMcq','incShort','incLong'];K.forEach(k=>{const el=document.querySelector('.tg[data-tg="'+k+'"]');if(!el)return;
  el.addEventListener('click',e=>{if(state[k]!==false&&K.filter(x=>x!==k).every(x=>state[x]===false)){e.stopImmediatePropagation();toast('At least one section must stay on.','warn');}},true);});})();
@@ -82,14 +82,19 @@ const SHORTCUTS=[
 /* ══════════ BOOT ══════════ */
 /* When a new build opens existing data, keep a raw copy of it first (downloadable from Library → Backup & restore). */
 try{if(LS.get('pp.build',null)!==APP_BUILD){const raw={};['pp.state.v7','pp.presets.v7','pp.schemes.v7','pp.theme'].forEach(k=>{const v=localStorage.getItem(k);if(v!==null)raw[k]=v;});
- if(raw['pp.state.v7']||raw['pp.presets.v7']||raw['pp.schemes.v7'])LS.set('pp.autobackup',{build:LS.get('pp.build','an earlier version'),saved:new Date().toISOString(),raw});LS.set('pp.build',APP_BUILD);}}catch(e){}
+ if(raw['pp.state.v7']||raw['pp.presets.v7']||raw['pp.schemes.v7']){try{if(raw['pp.state.v7']){const st=JSON.parse(raw['pp.state.v7']);st.logo='';raw['pp.state.v7']=JSON.stringify(st);}
+  const full={build:LS.get('pp.build','an earlier version'),saved:new Date().toISOString(),raw:Object.assign({},raw)};
+  /* The full safety copy lives in IndexedDB (it does not count against the 5 MB localStorage quota). If IndexedDB is unavailable, fall back to a size-capped localStorage copy. */
+  const lsCopy=()=>{try{const slim={build:full.build,saved:full.saved,raw:Object.assign({},raw)};let payload=JSON.stringify(slim);if(payload.length>180000){delete slim.raw['pp.presets.v7'];payload=JSON.stringify(slim);}if(payload.length>180000){delete slim.raw['pp.schemes.v7'];payload=JSON.stringify(slim);}
+    if(payload.length<=180000)LS.set('pp.autobackup',slim);else LS.set('pp.autobackup',{build:slim.build,saved:slim.saved,raw:{'pp.state.v7':raw['pp.state.v7']}});}catch(e){}};
+  if(window.indexedDB)idbSet('autobackup',full).then(ok=>{if(ok){try{localStorage.removeItem('pp.autobackup');}catch(e){}}else lsCopy();});else lsCopy();}catch(e){}}LS.set('pp.build',APP_BUILD);}}catch(e){}
 setTheme(LS.get('pp.theme',null)||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'));
 customSchemes=(LS.get('pp.schemes.v7',[])||[]).map(cleanScheme).filter(Boolean);
 presets=LS.get('pp.presets.v7',[]);
 /* Legacy presets stored one free-text duration. Drop that obsolete field and inherit the course ALP split. */
 let migratedPresetTimes=false;presets.forEach(p=>{if(p&&p.cfg&&Object.prototype.hasOwnProperty.call(p.cfg,'time')){migratedPresetTimes=true;delete p.cfg.time;if(Array.isArray(p.scopes)&&p.scopes.includes('header')){if(p.cfg.timeObj===undefined)p.cfg.timeObj=0;if(p.cfg.timeSubj===undefined)p.cfg.timeSubj=0;}}});
 if(migratedPresetTimes)LS.set('pp.presets.v7',presets);
-hiddenF=LS.get('pp.hiddenFactory.v1',[]);if(!Array.isArray(hiddenF))hiddenF=[];
+hiddenF=LS.get('pp.hiddenFactory.v1',[]);if(!Array.isArray(hiddenF))hiddenF=[];hiddenF=hiddenF.map(id=>id==='f-alp9'?'f-alp-9-computer':id==='f-alp10'?'f-alp-10-computer':id);LS.set('pp.hiddenFactory.v1',hiddenF);
 const saved=LS.get('pp.state.v7',null);
 if(saved&&typeof saved==='object'){
  state=Object.assign(JSON.parse(JSON.stringify(DEF)),saved);
@@ -97,13 +102,14 @@ if(saved&&typeof saved==='object'){
  delete state.time; /* legacy free-text duration replaced by objective/subjective minutes */
  state.timeObj=Number.isFinite(+state.timeObj)?clamp(Math.round(+state.timeObj),0,600):0;state.timeSubj=Number.isFinite(+state.timeSubj)?clamp(Math.round(+state.timeSubj),0,600):0;
  state.sheetMode=state.sheetMode==='two'?'two':'single';
- if(!state.sid)state.sid='computer';
- if(!BOOKS[cid()]||!B().hasQuestions){state.grade=9;state.sid='computer';}
+ if(!state.sid)state.sid=DEFAULT_SUBJECT;
+ if(!BOOKS[cid()]){state.grade=DEFAULT_COURSE.classNo||9;state.sid=DEFAULT_SUBJECT;}
  state.chapters=(state.chapters||[]).filter(c=>B().chapters.includes(c));
  if(!state.chapters.length)state.chapters=B().alpCh.slice();
  state.longPick=state.longPick||{};
+ for(const course in state.questionTags||{}){const book=BOOKS[course];if(!book)continue;const tags=state.questionTags[course]||{},migrated={};for(const oldId in tags){const m=oldId.match(/-c(\d+)-(m|s|l)(\d+)$/);if(!m){migrated[oldId]=tags[oldId];continue;}const ch=+m[1],type={m:'mcq',s:'short',l:'long'}[m[2]],q=(book[type][ch]||[])[+m[3]];if(q)migrated[q.id]=tags[oldId];}state.questionTags[course]=migrated;}
 }
-if(!allSchemes().some(s=>s.id===state.schemeId&&s.courseId===cid()))state.schemeId=(offFor(cid())||{}).id||'off9';
+if(!allSchemes().some(s=>s.id===state.schemeId&&s.courseId===cid()))state.schemeId=(offFor(cid())||{}).id||'';
 coursePickerGrade=state.grade;buildCourseUI();
 document.querySelectorAll('#segPreFilter button').forEach(x=>x.classList.toggle('on',x.dataset.v==='all'));
 buildChips();render();histPush();

@@ -6,23 +6,24 @@ function hydrate(courseId){
   code:m.code,marks:m.marks,times:m.times,language:m.language,lang:m.language,subject:m.subject,subjectUr:m.subjectUr,alpSummary:m.alpSummary,
   chapters:Object.keys(raw).map(Number),names:{},mcq:{},short:{},long:{},alpCh:m.alpCh.slice(),alpEx:m.alpEx.slice(),exRules:m.exRules,patterns:d.patterns.slice(),contentCatalog:m.contentCatalog||{},questionContent:m.questionContent||{}};
  for(const k in raw){const c=+k,r=raw[k];B.names[c]=r.n;
-  B.mcq[c]=(r.m||[]).map((a,i)=>({id:`${courseId}-c${c}-m${i}`,ch:c,en:a[0],ur:a[1],o:[[a[2],a[3]],[a[4],a[5]],[a[6],a[7]],[a[8],a[9]]],of:[a[14],a[16],a[18],a[20]],oa:[a[15],a[17],a[19],a[21]],a:a[10],ex:!!a[11],figure:a[12]||'',figureAlt:a[13]||'',content:(B.questionContent[c]&&B.questionContent[c].mcq&&B.questionContent[c].mcq[i])||{topics:[],exercises:[]}}));
-  B.short[c]=(r.s||[]).map((a,i)=>({id:`${courseId}-c${c}-s${i}`,ch:c,en:a[0],ur:a[1],ex:!!a[2],figure:a[3]||'',figureAlt:a[4]||'',content:(B.questionContent[c]&&B.questionContent[c].short&&B.questionContent[c].short[i])||{topics:[],exercises:[]}}));
-  B.long[c]=(r.l||[]).map((a,i)=>({id:`${courseId}-c${c}-l${i}`,ch:c,en:a[0],ur:a[1],src:a[2]==='c'?'composed':'bank',ex:!!a[3],figure:a[4]||'',figureAlt:a[5]||'',content:(B.questionContent[c]&&B.questionContent[c].long&&B.questionContent[c].long[i])||{topics:[],exercises:[]}}));}
+  B.mcq[c]=(r.m||[]).map((a,i)=>({id:a[22]||`legacy-${courseId}-c${c}-m${i}`,ch:c,en:a[0],ur:a[1],o:[[a[2],a[3]],[a[4],a[5]],[a[6],a[7]],[a[8],a[9]]],of:[a[14],a[16],a[18],a[20]],oa:[a[15],a[17],a[19],a[21]],a:a[10],ex:!!a[11],figure:a[12]||'',figureAlt:a[13]||'',content:(B.questionContent[c]&&B.questionContent[c].mcq&&B.questionContent[c].mcq[a[22]])||(B.questionContent[c]&&B.questionContent[c].mcq&&B.questionContent[c].mcq[i])||{topics:[],exercises:[]}}));
+  B.short[c]=(r.s||[]).map((a,i)=>({id:a[5]||`legacy-${courseId}-c${c}-s${i}`,ch:c,en:a[0],ur:a[1],ex:!!a[2],figure:a[3]||'',figureAlt:a[4]||'',content:(B.questionContent[c]&&B.questionContent[c].short&&B.questionContent[c].short[a[5]])||(B.questionContent[c]&&B.questionContent[c].short&&B.questionContent[c].short[i])||{topics:[],exercises:[]}}));
+  B.long[c]=(r.l||[]).map((a,i)=>({id:a[6]||`legacy-${courseId}-c${c}-l${i}`,ch:c,en:a[0],ur:a[1],src:a[2]==='c'?'composed':'bank',ex:!!a[3],figure:a[4]||'',figureAlt:a[5]||'',content:(B.questionContent[c]&&B.questionContent[c].long&&B.questionContent[c].long[a[6]])||(B.questionContent[c]&&B.questionContent[c].long&&B.questionContent[c].long[i])||{topics:[],exercises:[]}}));}
  B.hasQuestions=B.chapters.some(c=>(B.mcq[c]||[]).length||(B.short[c]||[]).length||(B.long[c]||[]).length);
  B.questionCount=B.chapters.reduce((n,c)=>n+(B.mcq[c]||[]).length+(B.short[c]||[]).length+(B.long[c]||[]).length,0);
  return B;
 }
 const BOOKS=Object.fromEntries(PP_COURSES.map(c=>[c.courseId,hydrate(c.courseId)]));
 const OFFICIAL=Object.values(BOOKS).flatMap(b=>b.patterns);
-const cid=()=>`${state.grade}-${state.sid||'computer'}`;
-const B=()=>BOOKS[cid()]||BOOKS['9-computer'];
+const DEFAULT_COURSE=PP_COURSES[0]||{courseId:'1-subject',classNo:1,subjectId:'subject'};const DEFAULT_SUBJECT=DEFAULT_COURSE.subjectId;
+const cid=()=>`${state.grade}-${state.sid||DEFAULT_SUBJECT}`;
+const B=()=>BOOKS[cid()]||BOOKS[DEFAULT_COURSE.courseId]||Object.values(BOOKS)[0];
 const isBilingualCourse=()=>B().lang==='bilingual';
 const urduOn=(s=state)=>isBilingualCourse()&&!!(s&&s.showUrdu);
 const offFor=courseId=>OFFICIAL.find(s=>s.courseId===courseId)||null;
 const ALLCH=Array.from(new Set(Object.values(BOOKS).flatMap(b=>b.chapters))).sort((a,b)=>a-b);
-const GRADE_LABELS={9:'9th',10:'10th',11:'1st Year',12:'2nd Year'};
-const SUBJECT_LABELS={computer:'Computer',physics:'Physics',chemistry:'Chemistry',biology:'Biology',maths:'Maths'};
+const GRADE_LABELS=Object.fromEntries([...new Set(PP_COURSES.map(c=>c.classNo))].map(g=>[g,PP_COURSES.find(c=>c.classNo===g)?.classLabel||String(g)]));
+const SUBJECT_LABELS=Object.fromEntries([...new Set(PP_COURSES.map(c=>c.subjectId))].map(sid=>[sid,PP_COURSES.find(c=>c.subjectId===sid)?.subject||sid]));
 
 /* ══════════ STATE ══════════ */
 const SCOPES={
@@ -35,10 +36,10 @@ const SCOPES={
  page:{label:'Page, table & layers',keys:['hideLines','borderW','numW','insSplit','insAuto','optMode','page','margin','shade','zebra','showUrdu']}
 };
 const ALLSC=Object.keys(SCOPES);
-const DEF={grade:9,sid:'computer',alp:true,chapters:BOOKS['9-computer'].alpCh.slice(),contentSelection:{},contentCatalogCustom:{},contentExcludedOverrides:{},questionTags:{},schemeId:'off9',longPick:{},
+const FIRST_BOOK=Object.values(BOOKS)[0];const DEF={grade:FIRST_BOOK.grade,sid:FIRST_BOOK.sid,alp:true,chapters:FIRST_BOOK.alpCh.slice(),contentSelection:{},contentCatalogCustom:{},contentExcludedOverrides:{},questionTags:{},schemeId:(offFor(FIRST_BOOK.courseId)||{}).id||'',longPick:{},
  mcqCount:10,mcqMark:1,incMcq:true,incShort:true,incLong:true,shortParts:3,shortPrinted:6,shortMark:2,shortAttempts:[4,4,4,4],longPrinted:3,longAttempt:2,longMark:8,
  logo:'',logoName:'',logoH:54,logoPos:'center',
- institute:'Government High School, Lahore',title:'Model Question Paper',klass:BOOKS['9-computer'].name,subject:BOOKS['9-computer'].subject,subjectUr:BOOKS['9-computer'].subjectUr,timeObj:0,timeSubj:0,sheetMode:'single',date:'',sectionVal:'',
+ institute:'Government High School, Lahore',title:'Model Question Paper',klass:FIRST_BOOK.name,subject:FIRST_BOOK.subject,subjectUr:FIRST_BOOK.subjectUr,timeObj:0,timeSubj:0,sheetMode:'single',date:'',sectionVal:'',
  showName:true,showRoll:true,showSection:false,showDate:true,infoPos:'top',hdrStyle:'classic',infoStyle:'table',footer:true,
  enFont:'Times New Roman',enSize:11,urFont:'Jameel Noori Nastaleeq',urSize:11,lineH:1.35,pad:4,
  bHeader:true,bBar:true,bInstr:true,bNum:true,bStem:true,bShort:false,bLong:false,
@@ -52,7 +53,7 @@ function cleanCfg(c){const o={};if(!c||typeof c!=='object')return o;CFG_KEYS.for
  if(typeof v==='string'){if(k==='logo'){o[k]=(v===''||(/^data:image\/(png|jpe?g|gif|webp);base64,/.test(v)&&v.length<2e6))?v:'';return;}o[k]=v.slice(0,300);return;}
  if(typeof v==='number'){if(isFinite(v))o[k]=(k==='timeObj'||k==='timeSubj')?clamp(Math.round(v),0,600):v;return;}o[k]=JSON.parse(JSON.stringify(v));});return o;}
 function cleanScheme(s){if(!s||typeof s!=='object'||!s.mcq||(!Array.isArray(s.long)&&!Array.isArray(s.longGroups))||!Array.isArray(s.short))return null;
- const courseId=s.courseId||(Number(s.grade||9)+'-'+(s.sid||'computer')),book=BOOKS[courseId];if(!book)return null;
+ const courseId=s.courseId||(Number(s.grade||DEFAULT_COURSE.classNo)+'-'+(s.sid||DEFAULT_SUBJECT)),book=BOOKS[courseId];if(!book)return null;
  const chs=book.chapters,n=(v,d)=>Number.isFinite(+v)?Math.max(0,Math.min(100,Math.round(+v))):d,
  ob=m=>{const o={};Object.keys(m||{}).forEach(k=>{if(chs.includes(+k))o[+k]=n(m[k],0);});return o;};
  const groups=Array.isArray(s.longGroups)?s.longGroups.slice(0,10).map((g,gi)=>{
@@ -72,7 +73,7 @@ const COURSE_FACTORY=OFFICIAL.map(s=>{
   timeObj:0,timeSubj:0,mcqCount:Object.values(s.mcq).reduce((n,v)=>n+Number(v||0),0),mcqMark:s.mcqMark,
   shortParts:s.short.length,shortPrinted:Math.max(2,...printed),shortMark:s.shortMark,shortAttempts:s.short.map(p=>p.attempt),
   longPrinted:s.longGroups&&s.longGroups.length?s.longGroups.reduce((n,g)=>n+g.questions.length,0):s.long.length,longAttempt:s.longGroups&&s.longGroups.length?s.longGroups.reduce((n,g)=>n+g.attempt,0):s.longAttempt,longMark:s.longMark,alp:true,longPick:{}});
- return{id:b.courseId==='9-computer'?'f-alp9':b.courseId==='10-computer'?'f-alp10':`f-alp-${b.courseId}`,name:`ALP full paper · ${GRADE_LABELS[b.grade]} · ${SUBJECT_LABELS[b.sid]} · ${b.marks}`,
+ return{id:`f-alp-${b.courseId}`,name:`ALP full paper · ${GRADE_LABELS[b.grade]} · ${SUBJECT_LABELS[b.sid]} · ${b.marks}`,
   note:s.note,factory:true,grade:b.grade,sid:b.sid,courseId:b.courseId,scopes:ALLSC.slice(),cfg};
 });
 const FACTORY=[
@@ -130,10 +131,15 @@ function ensureMathJax(){
  if(mathJaxPromise)return mathJaxPromise;
  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],packages:{'[+]':['ams']}},svg:{fontCache:'none'},options:{enableMenu:false},startup:{typeset:false}};
  mathJaxPromise=new Promise((resolve,reject)=>{
-  const script=document.createElement('script');script.async=true;script.src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js';
-  script.onload=()=>{const mj=window.MathJax;if(!mj||!mj.startup||!mj.startup.promise){mathJaxPromise=null;reject(new Error('MathJax did not finish starting'));return;}mj.startup.promise.then(()=>resolve(mj),e=>{mathJaxPromise=null;reject(e);});};
-  script.onerror=()=>{mathJaxPromise=null;reject(new Error('MathJax could not load. Check your internet connection and try again.'));};
-  document.head.appendChild(script);
+  /* Both hosts serve the identical MathJax 3.2.2 file, so one integrity hash covers either; a tampered or changed file is refused. */
+  const SRC=['https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js','https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js'],SRI='sha384-KKWa9jJ1MZvssLeOoXG6FiOAZfAgmzsIIfw8BXwI9+kYm0lPCbC6yTQPBC00F1/L';
+  const tryLoad=i=>{
+   if(i>=SRC.length){mathJaxPromise=null;reject(new Error('MathJax could not load. Check your internet connection and try again.'));return;}
+   const script=document.createElement('script');script.async=true;script.src=SRC[i];script.integrity=SRI;script.crossOrigin='anonymous';
+   script.onload=()=>{const mj=window.MathJax;if(!mj||!mj.startup||!mj.startup.promise){mathJaxPromise=null;reject(new Error('MathJax did not finish starting'));return;}mj.startup.promise.then(()=>resolve(mj),e=>{mathJaxPromise=null;reject(e);});};
+   script.onerror=()=>{script.remove();tryLoad(i+1);};
+   document.head.appendChild(script);};
+  tryLoad(0);
  });
  return mathJaxPromise;
 }
@@ -142,15 +148,15 @@ async function typesetMathIn(root){
  const ver=(mathTypesetVersion.get(root)||0)+1;mathTypesetVersion.set(root,ver);
  try{const mj=await ensureMathJax();if(mathTypesetVersion.get(root)!==ver)return;
   if(mj.typesetClear)mj.typesetClear([root]);await mj.typesetPromise([root]);
- }catch(e){console.warn('Math rendering is unavailable; the original LaTeX source remains visible.',e);}
+ }catch(e){console.warn('Math rendering is unavailable; the original LaTeX source remains visible. Check network access or use the app offline.',e);if(!window.__ppMathWarning){window.__ppMathWarning=true;try{toast('MathJax unavailable — LaTeX source is shown until the CDN is reachable.','warn');}catch(_){}}}
 }
 function cleanFigureRef(value){let x=String(value==null?'':value).trim();if(!x)return'';x=x.replace(/^figures\//i,'');return /^[a-z0-9][a-z0-9._-]*\.(?:png|svg)$/i.test(x)?'figures/'+x:'';}
 function figureHtml(ref,alt,kind){const src=cleanFigureRef(ref);if(!src)return'';const cls=kind==='option'?' option':'';return `<div class="pp-figure${cls}"><img src="${src}" alt="${esc(alt||'Question figure')}" loading="lazy"></div>`;}
-function syncSubject(g,sid){const next=BOOKS[`${g}-${sid||state.sid||'computer'}`];if(!next)return;const dflt=k=>Object.values(BOOKS).some(b=>b[k]===state[k]);if(dflt('subject'))state.subject=next.subject;if(dflt('subjectUr'))state.subjectUr=next.subjectUr;}
+function syncSubject(g,sid){const next=BOOKS[`${g}-${sid||state.sid||DEFAULT_SUBJECT}`];if(!next)return;const dflt=k=>Object.values(BOOKS).some(b=>b[k]===state[k]);if(dflt('subject'))state.subject=next.subject;if(dflt('subjectUr'))state.subjectUr=next.subjectUr;}
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const sum=o=>Object.keys(o).reduce((a,k)=>a+(+o[k]||0),0);
 function effectiveTimes(s=state){
- const book=BOOKS[`${s.grade}-${s.sid||'computer'}`]||B(),d=book.times||{objective:15,subjective:105,basis:'stated'};
+ const book=BOOKS[`${s.grade}-${s.sid||DEFAULT_SUBJECT}`]||B(),d=book.times||{objective:15,subjective:105,basis:'stated'};
  const objective=Number(s.timeObj)>0?clamp(Math.round(Number(s.timeObj)),1,600):d.objective;
  const subjective=Number(s.timeSubj)>0?clamp(Math.round(Number(s.timeSubj)),1,600):d.subjective;
  return{objective,subjective,total:objective+subjective,basis:d.basis||'stated'};

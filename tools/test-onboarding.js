@@ -8,7 +8,7 @@ const tests=[
  ['tour can be restarted from the Guide button',js.includes('btnTutorial')&&js.includes("btn.addEventListener('click',start)")&&js.includes('function start()')],
  ['new users receive the v4 walkthrough',js.includes('pp.tutorial.v4')],
  ['Back, Next and End tour controls exist',js.includes('tour-skip')&&js.includes('tour-prev')&&js.includes('tour-next')],
- ['cache/build version aligned to v37',html.includes('app.css?v=37')&&html.includes('paper.css?v=37')&&html.includes('bank-loader.js?v=37')&&html.includes("PPBanks.boot('37')")&&js.includes("APP_BUILD='v37")]
+ ['cache/build version aligned to v39',html.includes('app.css?v=39')&&html.includes('paper.css?v=39')&&html.includes('bank-loader.js?v=39')&&html.includes("PPBanks.boot('39')")&&js.includes("APP_BUILD='v39")]
 ];
 for(const [name,ok] of tests){console.log((ok?'PASS ':'FAIL ')+name);if(!ok)process.exitCode=1;}
 console.log(`${tests.filter(x=>x[1]).length}/${tests.length} onboarding checks passed`);

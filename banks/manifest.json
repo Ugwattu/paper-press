@@ -1,126 +1,366 @@
 {
   "version": 2,
-  "_help": "One course per entry. file is relative to this folder.",
+  "_help": "One course per entry. file is relative to this folder. Optional top-level \"groups\" ([{id,label}]) and per-course \"groups\" ([ids]) drive the Pre-Medical / Pre-Engineering / ICS / FA filter in the course picker; a course can belong to several groups without copying its bank.",
   "courses": [
     {
       "id": "9-computer",
       "class": 9,
       "subject": "computer",
-      "file": "9-computer.json"
+      "file": "9-computer.json",
+      "expected": {
+        "marks": 50,
+        "times": {
+          "objective": 15,
+          "subjective": 105,
+          "basis": "stated"
+        },
+        "language": "bilingual"
+      }
     },
     {
       "id": "9-physics",
       "class": 9,
       "subject": "physics",
-      "file": "9-physics.json"
+      "file": "9-physics.json",
+      "expected": {
+        "marks": 60,
+        "times": {
+          "objective": 15,
+          "subjective": 105,
+          "basis": "stated"
+        },
+        "language": "bilingual"
+      }
     },
     {
       "id": "9-chemistry",
       "class": 9,
       "subject": "chemistry",
-      "file": "9-chemistry.json"
+      "file": "9-chemistry.json",
+      "expected": {
+        "marks": 60,
+        "times": {
+          "objective": 15,
+          "subjective": 105,
+          "basis": "stated"
+        },
+        "language": "bilingual"
+      }
     },
     {
       "id": "9-biology",
       "class": 9,
       "subject": "biology",
-      "file": "9-biology.json"
+      "file": "9-biology.json",
+      "expected": {
+        "marks": 60,
+        "times": {
+          "objective": 15,
+          "subjective": 105,
+          "basis": "stated"
+        },
+        "language": "bilingual"
+      }
     },
     {
       "id": "9-maths",
       "class": 9,
       "subject": "maths",
-      "file": "9-maths.json"
+      "file": "9-maths.json",
+      "expected": {
+        "marks": 75,
+        "times": {
+          "objective": 20,
+          "subjective": 130,
+          "basis": "stated"
+        },
+        "language": "bilingual"
+      }
     },
     {
       "id": "10-computer",
       "class": 10,
       "subject": "computer",
-      "file": "10-computer.json"
+      "file": "10-computer.json",
+      "expected": {
+        "marks": 50,
+        "times": {
+          "objective": 15,
+          "subjective": 105,
+          "basis": "stated"
+        },
+        "language": "bilingual"
+      }
     },
     {
       "id": "10-physics",
       "class": 10,
       "subject": "physics",
-      "file": "10-physics.json"
+      "file": "10-physics.json",
+      "expected": {
+        "marks": 60,
+        "times": {
+          "objective": 15,
+          "subjective": 105,
+          "basis": "stated"
+        },
+        "language": "bilingual"
+      }
     },
     {
       "id": "10-chemistry",
       "class": 10,
       "subject": "chemistry",
-      "file": "10-chemistry.json"
+      "file": "10-chemistry.json",
+      "expected": {
+        "marks": 60,
+        "times": {
+          "objective": 15,
+          "subjective": 105,
+          "basis": "inferred"
+        },
+        "language": "bilingual"
+      }
     },
     {
       "id": "10-biology",
       "class": 10,
       "subject": "biology",
-      "file": "10-biology.json"
+      "file": "10-biology.json",
+      "expected": {
+        "marks": 60,
+        "times": {
+          "objective": 15,
+          "subjective": 105,
+          "basis": "inferred"
+        },
+        "language": "bilingual"
+      }
     },
     {
       "id": "10-maths",
       "class": 10,
       "subject": "maths",
-      "file": "10-maths.json"
+      "file": "10-maths.json",
+      "expected": {
+        "marks": 75,
+        "times": {
+          "objective": 20,
+          "subjective": 130,
+          "basis": "stated"
+        },
+        "language": "bilingual"
+      }
     },
     {
       "id": "11-computer",
       "class": 11,
       "subject": "computer",
-      "file": "11-computer.json"
+      "file": "11-computer.json",
+      "expected": {
+        "marks": 75,
+        "times": {
+          "objective": 20,
+          "subjective": 130,
+          "basis": "stated"
+        },
+        "language": "english"
+      },
+      "groups": [
+        "ics",
+        "fa"
+      ]
     },
     {
       "id": "11-physics",
       "class": 11,
       "subject": "physics",
-      "file": "11-physics.json"
+      "file": "11-physics.json",
+      "expected": {
+        "marks": 85,
+        "times": {
+          "objective": 20,
+          "subjective": 160,
+          "basis": "stated"
+        },
+        "language": "english"
+      },
+      "groups": [
+        "pre-medical",
+        "pre-engineering",
+        "ics"
+      ]
     },
     {
       "id": "11-chemistry",
       "class": 11,
       "subject": "chemistry",
-      "file": "11-chemistry.json"
+      "file": "11-chemistry.json",
+      "expected": {
+        "marks": 85,
+        "times": {
+          "objective": 20,
+          "subjective": 160,
+          "basis": "stated"
+        },
+        "language": "english"
+      },
+      "groups": [
+        "pre-medical",
+        "pre-engineering"
+      ]
     },
     {
       "id": "11-biology",
       "class": 11,
       "subject": "biology",
-      "file": "11-biology.json"
+      "file": "11-biology.json",
+      "expected": {
+        "marks": 85,
+        "times": {
+          "objective": 20,
+          "subjective": 160,
+          "basis": "stated"
+        },
+        "language": "english"
+      },
+      "groups": [
+        "pre-medical"
+      ]
     },
     {
       "id": "11-maths",
       "class": 11,
       "subject": "maths",
-      "file": "11-maths.json"
+      "file": "11-maths.json",
+      "expected": {
+        "marks": 100,
+        "times": {
+          "objective": 30,
+          "subjective": 150,
+          "basis": "stated"
+        },
+        "language": "english"
+      },
+      "groups": [
+        "pre-engineering",
+        "ics",
+        "fa"
+      ]
     },
     {
       "id": "12-computer",
       "class": 12,
       "subject": "computer",
-      "file": "12-computer.json"
+      "file": "12-computer.json",
+      "expected": {
+        "marks": 75,
+        "times": {
+          "objective": 20,
+          "subjective": 130,
+          "basis": "inferred"
+        },
+        "language": "english"
+      },
+      "groups": [
+        "ics",
+        "fa"
+      ]
     },
     {
       "id": "12-physics",
       "class": 12,
       "subject": "physics",
-      "file": "12-physics.json"
+      "file": "12-physics.json",
+      "expected": {
+        "marks": 85,
+        "times": {
+          "objective": 20,
+          "subjective": 160,
+          "basis": "inferred"
+        },
+        "language": "english"
+      },
+      "groups": [
+        "pre-medical",
+        "pre-engineering",
+        "ics"
+      ]
     },
     {
       "id": "12-chemistry",
       "class": 12,
       "subject": "chemistry",
-      "file": "12-chemistry.json"
+      "file": "12-chemistry.json",
+      "expected": {
+        "marks": 85,
+        "times": {
+          "objective": 20,
+          "subjective": 160,
+          "basis": "inferred"
+        },
+        "language": "english"
+      },
+      "groups": [
+        "pre-medical",
+        "pre-engineering"
+      ]
     },
     {
       "id": "12-biology",
       "class": 12,
       "subject": "biology",
-      "file": "12-biology.json"
+      "file": "12-biology.json",
+      "expected": {
+        "marks": 85,
+        "times": {
+          "objective": 20,
+          "subjective": 160,
+          "basis": "stated"
+        },
+        "language": "english"
+      },
+      "groups": [
+        "pre-medical"
+      ]
     },
     {
       "id": "12-maths",
       "class": 12,
       "subject": "maths",
-      "file": "12-maths.json"
+      "file": "12-maths.json",
+      "expected": {
+        "marks": 100,
+        "times": {
+          "objective": 30,
+          "subjective": 150,
+          "basis": "inferred"
+        },
+        "language": "english"
+      },
+      "groups": [
+        "pre-engineering",
+        "ics",
+        "fa"
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "id": "pre-medical",
+      "label": "Pre-Medical"
+    },
+    {
+      "id": "pre-engineering",
+      "label": "Pre-Engineering"
+    },
+    {
+      "id": "ics",
+      "label": "ICS"
+    },
+    {
+      "id": "fa",
+      "label": "FA"
     }
   ]
 }

@@ -499,3 +499,5 @@ input[type=text],input[type=number],select,textarea{height:40px;border-radius:10
    The global select appearance:none + background shorthand hid the custom arrow. */
 #selSheetMode{appearance:auto;-webkit-appearance:menulist;background-image:none!important;cursor:pointer;padding-right:11px;border:1px solid var(--border2);box-shadow:inset 0 1px 2px rgba(20,33,56,.04)}
 #selSheetMode:focus{outline:2px solid color-mix(in srgb,var(--accent) 30%,transparent);outline-offset:1px}
+
+.groupbar{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.groupbar.hidden{display:none}.groupbar .chip{padding:5px 11px;font-size:12px;font-weight:600;border:1.5px solid var(--border);background:var(--surface);cursor:pointer}.groupbar .chip.on{border-color:var(--accent);background:var(--accent-weak);color:var(--accent)}

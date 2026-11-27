@@ -94,8 +94,16 @@ const bad = (tag, m) => { fails++; console.error(`FAIL ${tag}: ${m}`); };
       if (!en || !ur) bad(tag, 'instruction row cells not found'); else if (!(width(en) > width(ur))) bad(tag, `instruction row: English cell (${width(en)}) must be wider than Urdu (${width(ur)}), like the template`);
       const sub = (doc.match(/<w:p>(?:(?!<\/w:p>)[\s\S])*جماعت(?:(?!<\/w:p>)[\s\S])*<\/w:p>/g) || [])[0];
       if (!sub || !/<w:jc w:val="center"\/>/.test(sub)) bad(tag, 'the Urdu subject line in the header must be centered');
-      const plain = (doc.match(/<w:p>[\s\S]*?<\/w:p>/g) || []).filter((p) => { const t = (p.match(/<w:r>(?:(?!<\/w:r>)[\s\S])*<\/w:r>/g) || []).filter((r) => /<w:t[ >]/.test(r)); return t.length && t.every((r) => r.includes('<w:rtl/>')) && t.some((r) => !r.includes('<w:b/>')); });
-      if (plain.length) bad(tag, `${plain.length} Urdu-only paragraphs are not bold although every bold option is on`);
+      const isUrduOnly = (p) => { const runs = (p.match(/<w:r>(?:(?!<\/w:r>)[\s\S])*<\/w:r>/g) || []).filter((r) => /<w:t[ >]/.test(r)); return runs.length && runs.every((r) => r.includes('<w:rtl/>')); };
+      // MCQ option translations are intentionally not bold. Identify Urdu option paragraphs
+      // inside cells whose English option text begins A./B./C./D.; exclude those from this check.
+      const optionUrdu = new Set();
+      for (const cell of doc.match(/<w:tc>[\s\S]*?<\/w:tc>/g) || []) {
+        const ps = cell.match(/<w:p>[\s\S]*?<\/w:p>/g) || [];
+        if (ps.some((p) => /<w:t[^>]*>[ABCD]\.\s/.test(p))) ps.filter(isUrduOnly).forEach((p) => optionUrdu.add(p));
+      }
+      const plain = (doc.match(/<w:p>[\s\S]*?<\/w:p>/g) || []).filter((p) => isUrduOnly(p) && !optionUrdu.has(p) && p.includes('<w:rtl/>') && !p.includes('<w:b/>'));
+      if (plain.length) bad(tag, `${plain.length} non-option Urdu-only paragraphs are not bold although every bold option is on`);
       const topCells = tcs.filter((t) => /Which software enhances|Data unit in packet/.test(t));
       if (!topCells.length || topCells.some((t) => !/<w:vAlign w:val="top"\/>/.test(t))) bad(tag, 'question text cells must be top-aligned');
     } catch (e) { bad(tag, e.stack.split('\n').slice(0, 3).join(' | ')); }

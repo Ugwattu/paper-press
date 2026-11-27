@@ -1,5 +1,13 @@
 # Paper Press Changelog
 
+## v39 — Picker regression fix, groups, SRI
+- Fixed the course picker: it read `c.grade` / `c.sid`, but loader course objects use `classNo` / `subjectId`, so only one blank grade and no subject cards appeared (also affected grade/subject label maps).
+- Added the Pre-Medical / Pre-Engineering / ICS / FA group filter for classes 11–12. Groups are data: top-level `groups` and per-course `groups` in `banks/manifest.json` (no bank duplication).
+- MathJax 3.2.2 now loads with a Subresource Integrity hash, with a second host (jsDelivr) as fallback; a changed or tampered file is refused.
+- Margin slider now uses the same batched repaint as other controls.
+- Build safety copy moved to IndexedDB (no localStorage quota use); size-capped localStorage copy kept as fallback when IndexedDB is unavailable.
+- Added `tools/test-groups.js`; `npm test` now includes it.
+
 ## v31 — UI refresh + header styles
 - Reworked the app visual design: updated spacing, cards, navigation, buttons, surfaces, and paper preview.
 - Improved responsive layout for desktop, tablet, and mobile.
@@ -93,3 +101,12 @@
 - Fixed the Paper format selector rendering like a plain text field: the global `appearance:none` plus a later background shorthand removed its dropdown arrow.
 - Restored a native dropdown indicator and pointer affordance specifically for `#selSheetMode`; it remains styled to match the app and has a clearer focus outline.
 - Updated cache/build identifiers to v37.
+
+
+## v38 — Data integrity, restore safety, and load optimization
+- Added persistent stable question IDs to authored question objects and updated runtime identity, pin/tag migration and question-content metadata to use IDs. Legacy positional `questionContent` and saved tags are migrated.
+- Restore now sanitizes saved paper state with `cleanCfg`, presets and schemes with their validators, and uses a storage snapshot/rollback for write failures. Autobackups omit logo payload and prune/cap storage copies.
+- Removed fixed manifest course-count validation; course picker class/subject options are derived from the registry. Shared bank-file aliases and overrides are supported; bank files are fetched in parallel/cached, with per-bank failures isolated.
+- Generated one ordered `app.bundle.js` from 12 source modules to reduce script requests. `npm run build` regenerates it.
+- Pinned MathJax CDN to 3.2.2 and improved offline failure messaging; legacy HTML `.doc` export is labelled and confirmed.
+- Updated tests and handoff. Standalone regressions pass 20/20 and repo hygiene checks pass 8/8. Full DOM/DOCX tests remain unverified without jsdom/jszip; real-browser and offline checks are still required.

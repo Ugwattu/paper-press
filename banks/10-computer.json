@@ -81,7 +81,8 @@
               "ur": "ویب سائٹس ڈیزائن کرنا"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-89349ff487b115"
         },
         {
           "question": "The OS acts as a central controller by behaving like a:",
@@ -104,7 +105,8 @@
               "ur": "پاور سپلائی"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-a2eab6df7ef139"
         },
         {
           "question": "In a multi-user environment the OS ensures:",
@@ -127,7 +129,8 @@
               "ur": "ہارڈ ویئر شیئر نہیں ہوتا"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-3e35d6cffba8d7"
         },
         {
           "question": "Which account type provides full control over the OS?",
@@ -150,7 +153,8 @@
               "ur": "پبلک"
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-99fb965c4f4efb"
         },
         {
           "question": "The core part of the OS controlling CPU and memory is the:",
@@ -173,7 +177,8 @@
               "ur": "میٹا ڈیٹا"
             }
           ],
-          "answer": "A"
+          "answer": "A",
+          "id": "q-8ff88c7cda933b"
         },
         {
           "question": "A Graphical Shell allows a user to:",
@@ -196,7 +201,8 @@
               "ur": "بائنری کوڈ لکھنا"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-e0eb3477dc533d"
         },
         {
           "question": "Which layer manages memory and storage?",
@@ -219,7 +225,8 @@
               "ur": "بیرونی تہہ"
             }
           ],
-          "answer": "A"
+          "answer": "A",
+          "id": "q-8358bb80e64687"
         },
         {
           "question": "Device drivers are special programs that:",
@@ -242,7 +249,8 @@
               "ur": "اکاؤنٹ بناتے ہیں"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-0d63e76de53eba"
         },
         {
           "question": "What is a process?",
@@ -265,7 +273,8 @@
               "ur": "فائل کی قسم"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-afb190df622256"
         },
         {
           "question": "Primary memory is also known as:",
@@ -288,7 +297,8 @@
               "ur": "روم"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-aed691ef187c11"
         },
         {
           "question": "The smallest unit of execution within a process is a:",
@@ -311,7 +321,8 @@
               "ur": "ڈرائیور"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-b38e6d258b85eb"
         },
         {
           "question": "Which system call creates a new process?",
@@ -334,7 +345,8 @@
               "ur": "رائٹ"
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-06d9ec3ad87e6e"
         },
         {
           "question": "Which file system is commonly used by Windows?",
@@ -357,7 +369,8 @@
               "ur": ""
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-b553a6ade63211"
         },
         {
           "question": "An OS designed to respond within a strict deadline is:",
@@ -380,7 +393,8 @@
               "ur": "موبائل او ایس"
             }
           ],
-          "answer": "A"
+          "answer": "A",
+          "id": "q-269e29387f4865"
         },
         {
           "question": "In FCFS scheduling which process is completed first?",
@@ -404,7 +418,8 @@
             }
           ],
           "answer": "B",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-4cc0dd610c04ea"
         },
         {
           "question": "The convoy effect in FCFS refers to:",
@@ -428,102 +443,125 @@
             }
           ],
           "answer": "B",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-5d0118b4fb12da"
         }
       ],
       "short": [
         {
           "question": "Define an operating system.",
-          "questionUr": "آپریٹنگ سسٹم کی تعریف کریں۔"
+          "questionUr": "آپریٹنگ سسٹم کی تعریف کریں۔",
+          "id": "q-63fb4bb7a484c0"
         },
         {
           "question": "Why is the OS referred to as a traffic controller?",
-          "questionUr": "او ایس کو ٹریفک کنٹرولر کیوں کہا جاتا ہے؟"
+          "questionUr": "او ایس کو ٹریفک کنٹرولر کیوں کہا جاتا ہے؟",
+          "id": "q-f979100f798c07"
         },
         {
           "question": "How does the OS facilitate user-hardware interaction?",
-          "questionUr": "او ایس رابطہ کیسے آسان بناتا ہے؟"
+          "questionUr": "او ایس رابطہ کیسے آسان بناتا ہے؟",
+          "id": "q-5a861d924eaf8e"
         },
         {
           "question": "List three responsibilities of an OS in multi-user environments.",
-          "questionUr": "ملٹی یوزر ماحول میں تین ذمہ داریاں لکھیں۔"
+          "questionUr": "ملٹی یوزر ماحول میں تین ذمہ داریاں لکھیں۔",
+          "id": "q-94c74a774ba303"
         },
         {
           "question": "What are the three common account types?",
-          "questionUr": "اکاؤنٹ کی تین عام اقسام کون سی ہیں؟"
+          "questionUr": "اکاؤنٹ کی تین عام اقسام کون سی ہیں؟",
+          "id": "q-716262f264c9e6"
         },
         {
           "question": "Differentiate between the Kernel and the Shell.",
-          "questionUr": "کرنل اور شیل میں فرق کریں۔"
+          "questionUr": "کرنل اور شیل میں فرق کریں۔",
+          "id": "q-949a267b5c8c48"
         },
         {
           "question": "What is the purpose of System Libraries?",
-          "questionUr": "سسٹم لائبریریوں کا مقصد کیا ہے؟"
+          "questionUr": "سسٹم لائبریریوں کا مقصد کیا ہے؟",
+          "id": "q-6b8211ae0afb40"
         },
         {
           "question": "Define a Device Driver.",
-          "questionUr": "ڈیوائس ڈرائیور کی تعریف کریں۔"
+          "questionUr": "ڈیوائس ڈرائیور کی تعریف کریں۔",
+          "id": "q-39dedc074f9dfb"
         },
         {
           "question": "Describe the Creation stage of a process.",
-          "questionUr": "پروسیس کا تخلیقی مرحلہ بیان کریں۔"
+          "questionUr": "پروسیس کا تخلیقی مرحلہ بیان کریں۔",
+          "id": "q-ff8d5854c2790d"
         },
         {
           "question": "Define Multitasking with an example.",
-          "questionUr": "مثال کے ساتھ ملٹی ٹاسکنگ کی تعریف کریں۔"
+          "questionUr": "مثال کے ساتھ ملٹی ٹاسکنگ کی تعریف کریں۔",
+          "id": "q-70a46d99a331d2"
         },
         {
           "question": "Why is RAM considered volatile?",
-          "questionUr": "ریم کو وولیٹائل کیوں سمجھا جاتا ہے؟"
+          "questionUr": "ریم کو وولیٹائل کیوں سمجھا جاتا ہے؟",
+          "id": "q-9ba4374121d652"
         },
         {
           "question": "Define a Thread.",
-          "questionUr": "تھریڈ کی تعریف کریں۔"
+          "questionUr": "تھریڈ کی تعریف کریں۔",
+          "id": "q-073e5680f55786"
         },
         {
           "question": "What is a System Call?",
-          "questionUr": "سسٹم کال کیا ہے؟"
+          "questionUr": "سسٹم کال کیا ہے؟",
+          "id": "q-b53dba43c91976"
         },
         {
           "question": "Identify four common file systems.",
-          "questionUr": "چار عام فائل سسٹم بتائیں۔"
+          "questionUr": "چار عام فائل سسٹم بتائیں۔",
+          "id": "q-1d57af0e03fb3c"
         },
         {
           "question": "Where are Embedded Operating Systems used?",
-          "questionUr": "ایمبیڈڈ او ایس کہاں استعمال ہوتے ہیں؟"
+          "questionUr": "ایمبیڈڈ او ایس کہاں استعمال ہوتے ہیں؟",
+          "id": "q-ea54e0b9be12c3"
         },
         {
           "question": "Explain the FCFS scheduling concept.",
           "questionUr": "FCFS شیڈولنگ کی وضاحت کریں۔",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-2a8563c66395fc"
         },
         {
           "question": "What is a major disadvantage of FCFS?",
           "questionUr": "FCFS کا بڑا نقصان کیا ہے؟",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-564c1733eacc72"
         }
       ],
       "long": [
         {
           "question": "Describe the architecture of an operating system: kernel, shell and layered design.",
-          "questionUr": "آپریٹنگ سسٹم کی ساخت: کرنل، شیل اور لیئرڈ ڈیزائن بیان کریں۔"
+          "questionUr": "آپریٹنگ سسٹم کی ساخت: کرنل، شیل اور لیئرڈ ڈیزائن بیان کریں۔",
+          "id": "q-677305bc143600"
         },
         {
           "question": "Explain the process lifecycle in detail with an example.",
-          "questionUr": "پروسیس لائف سائیکل مثال کے ساتھ واضح کریں۔"
+          "questionUr": "پروسیس لائف سائیکل مثال کے ساتھ واضح کریں۔",
+          "id": "q-2864627cfc0249"
         },
         {
           "question": "Differentiate RAM and Virtual Memory, and explain multithreading benefits.",
-          "questionUr": "RAM اور ورچوئل میموری میں فرق اور ملٹی تھریڈنگ کے فوائد واضح کریں۔"
+          "questionUr": "RAM اور ورچوئل میموری میں فرق اور ملٹی تھریڈنگ کے فوائد واضح کریں۔",
+          "id": "q-a0caec9ac3397d"
         },
         {
           "question": "Describe system calls and give examples of three different types.",
-          "questionUr": "سسٹم کالز اور تین اقسام کی مثالیں دیں۔"
+          "questionUr": "سسٹم کالز اور تین اقسام کی مثالیں دیں۔",
+          "id": "q-1748e8407e74e9"
         },
         {
           "question": "Compare and contrast the four main types of operating systems.",
           "questionUr": "او ایس کی چار اقسام کا موازنہ کریں۔",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-db8a5d1c140c21"
         }
       ]
     },
@@ -553,7 +591,8 @@
             }
           ],
           "answer": "B",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-470a8cd64dd735"
         },
         {
           "question": "Which tool monitors CPU, memory and disk in real time?",
@@ -577,7 +616,8 @@
             }
           ],
           "answer": "B",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-67912e6525ce3f"
         },
         {
           "question": "Which tool records logs of system activities and errors?",
@@ -601,7 +641,8 @@
             }
           ],
           "answer": "A",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-178f00a3c91fc6"
         },
         {
           "question": "Safe Mode starts Windows with:",
@@ -625,7 +666,8 @@
             }
           ],
           "answer": "B",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-e5c64ef1080008"
         },
         {
           "question": "A saved snapshot of system settings is a:",
@@ -649,7 +691,8 @@
             }
           ],
           "answer": "B",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-c8e040f167eeaa"
         },
         {
           "question": "Which software creates a bootable USB drive?",
@@ -673,7 +716,8 @@
             }
           ],
           "answer": "B",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-d2c52bcd342505"
         },
         {
           "question": "Modern standard partition style for newer PCs:",
@@ -697,7 +741,8 @@
             }
           ],
           "answer": "B",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-98fccc9cc51f07"
         },
         {
           "question": "Software built into the motherboard is:",
@@ -721,7 +766,8 @@
             }
           ],
           "answer": "B",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-bb9b2e17755510"
         },
         {
           "question": "POST stands for:",
@@ -745,7 +791,8 @@
             }
           ],
           "answer": "A",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-541afe0dd1838d"
         },
         {
           "question": "Which tool safely removes temporary files?",
@@ -769,7 +816,8 @@
             }
           ],
           "answer": "A",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-ef639d40381a58"
         },
         {
           "question": "The built-in security tool in Windows is:",
@@ -793,7 +841,8 @@
             }
           ],
           "answer": "B",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-230d95438cbc76"
         },
         {
           "question": "GPT supports a maximum of how many partitions?",
@@ -817,64 +866,76 @@
             }
           ],
           "answer": "B",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-df6e76ad94ba35"
         }
       ],
       "short": [
         {
           "question": "What is post-troubleshooting maintenance?",
           "questionUr": "ٹربل شوٹنگ کے بعد دیکھ بھال کیا ہے؟",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-bfcda58917b75b"
         },
         {
           "question": "Define the role of the Task Manager.",
           "questionUr": "ٹاسک مینیجر کا کردار بیان کریں۔",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-284a3e2d4ec8fb"
         },
         {
           "question": "How does Resource Monitor differ from Task Manager?",
           "questionUr": "ریسورس مانیٹر کیسے مختلف ہے؟",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-5f9808af4aa55e"
         },
         {
           "question": "What is the function of the Event Viewer?",
           "questionUr": "ایونٹ ویور کا کام کیا ہے؟",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-7d6dd702b42929"
         },
         {
           "question": "Define Safe Mode and when it is used.",
           "questionUr": "سیف موڈ کی تعریف اور استعمال بتائیں۔",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-e91482f644bf9b"
         },
         {
           "question": "What is a Restore Point?",
           "questionUr": "ریسٹور پوائنٹ کیا ہے؟",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-99edf6238490b1"
         },
         {
           "question": "What is the role of Rufus?",
           "questionUr": "Rufus کا کردار کیا ہے؟",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-2547d976fa9112"
         },
         {
           "question": "Differentiate MBR and GPT.",
           "questionUr": "MBR اور GPT میں فرق کریں۔",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-ca1c5be6cea991"
         },
         {
           "question": "Explain the purpose of POST.",
           "questionUr": "پوسٹ کا مقصد واضح کریں۔",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-408e772c7b838d"
         },
         {
           "question": "What are the benefits of Disk Cleanup?",
           "questionUr": "ڈسک کلین اپ کے فوائد کیا ہیں؟",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-a1c41966751982"
         },
         {
           "question": "Explain the two main types of software updates.",
           "questionUr": "سافٹ ویئر اپ ڈیٹس کی دو اقسام بتائیں۔",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-0cf70b97442a6f"
         }
       ],
       "long": [
@@ -882,19 +943,22 @@
           "question": "Explain system health monitoring tools: Task Manager, Resource Monitor, Event Viewer.",
           "questionUr": "سسٹم نگرانی کے ٹولز کی وضاحت کریں۔",
           "source": "composed",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-805556c10cfb50"
         },
         {
           "question": "Describe System Restore, restore points and bootable recovery media.",
           "questionUr": "سسٹم ریسٹور اور بوٹ ایبل ریکوری میڈیا بیان کریں۔",
           "source": "composed",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-c1c0b7c2728443"
         },
         {
           "question": "Compare BIOS and UEFI, explain POST, and differentiate MBR and GPT.",
           "questionUr": "BIOS و UEFI کا موازنہ، POST اور MBR و GPT میں فرق واضح کریں۔",
           "source": "composed",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-95c9bcfdbf321c"
         }
       ]
     },
@@ -923,7 +987,8 @@
               "ur": "مشکل"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-8c2346b6a083a9"
         },
         {
           "question": "Programming is compared to giving a friend:",
@@ -946,7 +1011,8 @@
               "ur": "تحفہ"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-dc63aefef7917f"
         },
         {
           "question": "Which field commonly uses Python?",
@@ -969,7 +1035,8 @@
               "ur": "پرنٹنگ"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-1a481c25d504ee"
         },
         {
           "question": "Official website to download Python:",
@@ -992,7 +1059,8 @@
               "ur": "وی ایس کوڈ"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-a6b17367c1411b"
         },
         {
           "question": "An example of a cloud-based Python IDE is:",
@@ -1015,7 +1083,8 @@
               "ur": ""
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-289eec77611961"
         },
         {
           "question": "The symbol used for single-line comments is:",
@@ -1038,7 +1107,8 @@
               "ur": ""
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-cb8a3e6433bc85"
         },
         {
           "question": "Variables function in programming as:",
@@ -1061,7 +1131,8 @@
               "ur": "کی بورڈز"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-5630596a22d15f"
         },
         {
           "question": "Variable names cannot start with a:",
@@ -1084,7 +1155,8 @@
               "ur": "حروف تہجی"
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-161b0a82cc3597"
         },
         {
           "question": "Data type used for whole numbers:",
@@ -1107,7 +1179,8 @@
               "ur": ""
             }
           ],
-          "answer": "A"
+          "answer": "A",
+          "id": "q-aa8343e963395f"
         },
         {
           "question": "The default return type of input() is:",
@@ -1130,7 +1203,8 @@
               "ur": ""
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-c373ed5a6c8f4c"
         },
         {
           "question": "What defines code structure in Python?",
@@ -1153,7 +1227,8 @@
               "ur": "کوما"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-ad0d5b46bf4ca1"
         },
         {
           "question": "Arithmetic operator for remainder:",
@@ -1176,7 +1251,8 @@
               "ur": ""
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-13633bee467655"
         },
         {
           "question": "Arithmetic operator for exponentiation:",
@@ -1199,7 +1275,8 @@
               "ur": ""
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-7e4b3bf00afaaa"
         },
         {
           "question": "Which has the highest precedence?",
@@ -1222,7 +1299,8 @@
               "ur": "تقسیم"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-59737e5e5ed5fd"
         },
         {
           "question": "What will be the output of print(10 // 3)?",
@@ -1245,87 +1323,106 @@
               "ur": ""
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-24e7d47cdf471b"
         }
       ],
       "short": [
         {
           "question": "What is computer programming?",
-          "questionUr": "کمپیوٹر پروگرامنگ کیا ہے؟"
+          "questionUr": "کمپیوٹر پروگرامنگ کیا ہے؟",
+          "id": "q-12481e8e460f37"
         },
         {
           "question": "Why is Python suitable for beginners and professionals?",
-          "questionUr": "پائتھون موزوں کیوں ہے؟"
+          "questionUr": "پائتھون موزوں کیوں ہے؟",
+          "id": "q-5ae5ea916b245f"
         },
         {
           "question": "Define a development environment.",
-          "questionUr": "ڈیولپمنٹ انوائرمنٹ کی تعریف کریں۔"
+          "questionUr": "ڈیولپمنٹ انوائرمنٹ کی تعریف کریں۔",
+          "id": "q-5d379afd7e98e2"
         },
         {
           "question": "List two popular Python IDEs.",
-          "questionUr": "دو مشہور IDEs لکھیں۔"
+          "questionUr": "دو مشہور IDEs لکھیں۔",
+          "id": "q-f1b34661d410c4"
         },
         {
           "question": "What are the advantages of Google Colab?",
-          "questionUr": "گوگل کولیب کے فوائد کیا ہیں؟"
+          "questionUr": "گوگل کولیب کے فوائد کیا ہیں؟",
+          "id": "q-4e9a6ff8064fd3"
         },
         {
           "question": "What is the purpose of comments?",
-          "questionUr": "کمنٹس کا مقصد کیا ہے؟"
+          "questionUr": "کمنٹس کا مقصد کیا ہے؟",
+          "id": "q-8fb9b75c6d3d2b"
         },
         {
           "question": "Define a variable and its role in memory.",
-          "questionUr": "ویری ایبل اور میموری میں کردار بتائیں۔"
+          "questionUr": "ویری ایبل اور میموری میں کردار بتائیں۔",
+          "id": "q-3988ff0c29493b"
         },
         {
           "question": "State two rules for naming variables.",
-          "questionUr": "نام کے دو اصول بتائیں۔"
+          "questionUr": "نام کے دو اصول بتائیں۔",
+          "id": "q-694b555a22ffb2"
         },
         {
           "question": "Name the four common data types in Python.",
-          "questionUr": "چار عام ڈیٹا ٹائپس بتائیں۔"
+          "questionUr": "چار عام ڈیٹا ٹائپس بتائیں۔",
+          "id": "q-2f058c172edb9a"
         },
         {
           "question": "Describe the input() statement.",
-          "questionUr": "input() کی وضاحت کریں۔"
+          "questionUr": "input() کی وضاحت کریں۔",
+          "id": "q-90125f8ce67d80"
         },
         {
           "question": "What is the significance of indentation?",
-          "questionUr": "انڈنٹیشن کی اہمیت کیا ہے؟"
+          "questionUr": "انڈنٹیشن کی اہمیت کیا ہے؟",
+          "id": "q-bf7cd87551f864"
         },
         {
           "question": "Differentiate / and // operators.",
-          "questionUr": "/ اور // میں فرق کریں۔"
+          "questionUr": "/ اور // میں فرق کریں۔",
+          "id": "q-0bc0ca48ede141"
         },
         {
           "question": "Name the three logical operators.",
-          "questionUr": "تین لاجیکل آپریٹرز بتائیں۔"
+          "questionUr": "تین لاجیکل آپریٹرز بتائیں۔",
+          "id": "q-ecdda9538fcf93"
         },
         {
           "question": "Define operator precedence.",
-          "questionUr": "آپریٹر پریسیڈنس کی تعریف کریں۔"
+          "questionUr": "آپریٹر پریسیڈنس کی تعریف کریں۔",
+          "id": "q-79baabfa6d57d5"
         }
       ],
       "long": [
         {
           "question": "Explain Python variables, naming rules and the four common data types.",
           "questionUr": "پائتھون ویری ایبلز، نام کے اصول اور چار ڈیٹا ٹائپس واضح کریں۔",
-          "source": "composed"
+          "source": "composed",
+          "id": "q-3d207c57ed7b13"
         },
         {
           "question": "Describe input(), print() and type conversion with a sum program.",
           "questionUr": "input()، print() اور ٹائپ کنورژن بیان کریں اور مجموعہ کا پروگرام لکھیں۔",
-          "source": "composed"
+          "source": "composed",
+          "id": "q-a2c5d5a6c89275"
         },
         {
           "question": "Explain arithmetic, comparison, assignment and logical operators with precedence.",
           "questionUr": "حسابی، موازنہ، اسائنمنٹ اور لاجیکل آپریٹرز ترجیح کے ساتھ واضح کریں۔",
-          "source": "composed"
+          "source": "composed",
+          "id": "q-c40630f153c2d0"
         },
         {
           "question": "Describe setting up a Python development environment.",
           "questionUr": "پائتھون ڈویلپمنٹ ماحول بنانا بیان کریں۔",
-          "source": "composed"
+          "source": "composed",
+          "id": "q-76a131d6bae67b"
         }
       ]
     },
@@ -1354,7 +1451,8 @@
               "ur": "پائتھون انسٹال کرنا"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-f8fc8014437b8c"
         },
         {
           "question": "Which statement runs code only if a condition is True?",
@@ -1377,7 +1475,8 @@
               "ur": ""
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-2b0a6c05dead95"
         },
         {
           "question": "What is mandatory to define a code block in Python?",
@@ -1400,7 +1499,8 @@
               "ur": "قوسین"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-cf46f2f85d5790"
         },
         {
           "question": "Which block runs when the if condition is False?",
@@ -1423,7 +1523,8 @@
               "ur": ""
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-a97485adabc542"
         },
         {
           "question": "Checking conditions inside another condition is called:",
@@ -1446,7 +1547,8 @@
               "ur": "ٹیسٹنگ"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-317800c83de2f2"
         },
         {
           "question": "Which loop continues while a condition remains True?",
@@ -1469,7 +1571,8 @@
               "ur": ""
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-c0c90d360e2565"
         },
         {
           "question": "Which loop iterates over a sequence like a list?",
@@ -1492,7 +1595,8 @@
               "ur": ""
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-37a5703b36ee63"
         },
         {
           "question": "What is the output of range(5)?",
@@ -1515,7 +1619,8 @@
               "ur": ""
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-1c96233224dc26"
         },
         {
           "question": "A toolbox of ready-made instructions is called a:",
@@ -1538,7 +1643,8 @@
               "ur": "لوپ"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-0eab2002862140"
         },
         {
           "question": "Which keyword brings a library into your code?",
@@ -1561,7 +1667,8 @@
               "ur": ""
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-72c58b335542ca"
         },
         {
           "question": "Which library calculates the mean of a list?",
@@ -1584,7 +1691,8 @@
               "ur": "لسٹ"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-84030a4a43836a"
         },
         {
           "question": "What is the first index of a Python list?",
@@ -1607,7 +1715,8 @@
               "ur": ""
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-9b78e08a53a68d"
         },
         {
           "question": "Which method adds an item to the end of a list?",
@@ -1630,7 +1739,8 @@
               "ur": ""
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-edeec59309d3c0"
         },
         {
           "question": "Which method arranges list items in ascending order?",
@@ -1653,7 +1763,8 @@
               "ur": "گروپ"
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-8be2713e9880f6"
         },
         {
           "question": "The process of finding and fixing bugs is:",
@@ -1676,256 +1787,318 @@
               "ur": "لوپنگ"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-db82584b035904"
         }
       ],
       "short": [
         {
           "question": "What are the two main categories of control structures?",
-          "questionUr": "کنٹرول اسٹرکچرز کی دو اقسام کون سی ہیں؟"
+          "questionUr": "کنٹرول اسٹرکچرز کی دو اقسام کون سی ہیں؟",
+          "id": "q-1a3c14c2b6f53e"
         },
         {
           "question": "How does the if statement facilitate decision-making?",
-          "questionUr": "if فیصلہ سازی میں کیسے مدد کرتی ہے؟"
+          "questionUr": "if فیصلہ سازی میں کیسے مدد کرتی ہے؟",
+          "id": "q-3aa36f43f2dfdc"
         },
         {
           "question": "Explain the importance of indentation.",
-          "questionUr": "انڈنٹیشن کی اہمیت واضح کریں۔"
+          "questionUr": "انڈنٹیشن کی اہمیت واضح کریں۔",
+          "id": "q-c5a471d631daec"
         },
         {
           "question": "Under what condition does the else block execute?",
-          "questionUr": "else بلاک کب چلتا ہے؟"
+          "questionUr": "else بلاک کب چلتا ہے؟",
+          "id": "q-c4f37698d55957"
         },
         {
           "question": "Define nested conditions.",
-          "questionUr": "نیسٹڈ کنڈیشنز کی تعریف کریں۔"
+          "questionUr": "نیسٹڈ کنڈیشنز کی تعریف کریں۔",
+          "id": "q-4417e4f46a55d9"
         },
         {
           "question": "Describe the behavior of a while loop.",
-          "questionUr": "while لوپ کا طریقہ بیان کریں۔"
+          "questionUr": "while لوپ کا طریقہ بیان کریں۔",
+          "id": "q-ec52e0f8ac718d"
         },
         {
           "question": "What is the primary use of a for loop?",
-          "questionUr": "for لوپ کا بنیادی استعمال کیا ہے؟"
+          "questionUr": "for لوپ کا بنیادی استعمال کیا ہے؟",
+          "id": "q-a5dbd6949d00c3"
         },
         {
           "question": "List the three parameters of range().",
-          "questionUr": "range() کے تین پیرامیٹرز لکھیں۔"
+          "questionUr": "range() کے تین پیرامیٹرز لکھیں۔",
+          "id": "q-722cf9ad14b507"
         },
         {
           "question": "Define nested loops.",
-          "questionUr": "نیسٹڈ لوپس کی تعریف کریں۔"
+          "questionUr": "نیسٹڈ لوپس کی تعریف کریں۔",
+          "id": "q-8294b1b012bcb5"
         },
         {
           "question": "What is a Python library?",
-          "questionUr": "پائتھون لائبریری کیا ہے؟"
+          "questionUr": "پائتھون لائبریری کیا ہے؟",
+          "id": "q-7b4a4baae7f336"
         },
         {
           "question": "What does random.randint(1, 10) do?",
-          "questionUr": "random.randint(1, 10) کیا کرتا ہے؟"
+          "questionUr": "random.randint(1, 10) کیا کرتا ہے؟",
+          "id": "q-351ea4b7969400"
         },
         {
           "question": "Define a list as a data structure.",
-          "questionUr": "لسٹ کی تعریف کریں۔"
+          "questionUr": "لسٹ کی تعریف کریں۔",
+          "id": "q-4c0265e1d7895d"
         },
         {
           "question": "What is the purpose of append()?",
-          "questionUr": "append() کا مقصد کیا ہے؟"
+          "questionUr": "append() کا مقصد کیا ہے؟",
+          "id": "q-dbb31759124c2f"
         },
         {
           "question": "Differentiate sort() and reverse().",
-          "questionUr": "sort() اور reverse() میں فرق کریں۔"
+          "questionUr": "sort() اور reverse() میں فرق کریں۔",
+          "id": "q-34acdfc7041734"
         },
         {
           "question": "Define Unit Testing and Integration Testing.",
-          "questionUr": "یونٹ اور انٹیگریشن ٹیسٹنگ کی تعریف کریں۔"
+          "questionUr": "یونٹ اور انٹیگریشن ٹیسٹنگ کی تعریف کریں۔",
+          "id": "q-2c713e4f24aabc"
         },
         {
           "question": "Find the output of the following code:\nmarks = 45\nif marks >= 50:\n\tprint(\"Pass\")\nelse:\n\tprint(\"Fail\")",
-          "questionUr": "مندرجہ ذیل کوڈ کا آؤٹ پٹ معلوم کریں:\nmarks = 45\nif marks >= 50:\n \tprint(\"Pass\")\nelse:\n \tprint(\"Fail\")"
+          "questionUr": "مندرجہ ذیل کوڈ کا آؤٹ پٹ معلوم کریں:\nmarks = 45\nif marks >= 50:\n \tprint(\"Pass\")\nelse:\n \tprint(\"Fail\")",
+          "id": "q-b5f03ba4c37006"
         },
         {
           "question": "What will be the output of this range() loop?\nfor i in range(2, 10, 3):\n\tprint(i, end=\" \")",
-          "questionUr": "اس range() لوپ کا آؤٹ پٹ کیا ہوگا؟\nfor i in range(2, 10, 3):\n\tprint(i, end=\" \")"
+          "questionUr": "اس range() لوپ کا آؤٹ پٹ کیا ہوگا؟\nfor i in range(2, 10, 3):\n\tprint(i, end=\" \")",
+          "id": "q-c96c1dd2066c64"
         },
         {
           "question": "Predict the output using the end parameter:\nprint(\"Hi\", end=\"-\")\nprint(\"Class 10\")",
-          "questionUr": "end پیرامیٹر کے استعمال سے آؤٹ پٹ بتائیں:\nprint(\"Hi\", end=\"-\")\nprint(\"Class 10\")"
+          "questionUr": "end پیرامیٹر کے استعمال سے آؤٹ پٹ بتائیں:\nprint(\"Hi\", end=\"-\")\nprint(\"Class 10\")",
+          "id": "q-4df1dcd508a809"
         },
         {
           "question": "What is the output of this nested if statement?\nx = 12\nif (x > 5):\n     if (x % 2 == 0):\n\tprint(\"Even and > 5\")",
-          "questionUr": "اس نیسٹڈ if سٹیٹمنٹ کا آؤٹ پٹ کیا ہے؟\nx = 12\nif (x > 5):\n     if (x % 2 == 0):\n\tprint(\"Even and > 5\")"
+          "questionUr": "اس نیسٹڈ if سٹیٹمنٹ کا آؤٹ پٹ کیا ہے؟\nx = 12\nif (x > 5):\n     if (x % 2 == 0):\n\tprint(\"Even and > 5\")",
+          "id": "q-c47e977cb127fe"
         },
         {
           "question": "Determine the output of the while loop:\ncount = 3\nwhile count > 0:\n\tprint(count, end=\" \")\n\tcount -= 1",
-          "questionUr": "while لوپ کا آؤٹ پٹ معلوم کریں:\ncount = 3\nwhile count > 0:\n\tprint(count, end=\" \")\n\tcount -= 1"
+          "questionUr": "while لوپ کا آؤٹ پٹ معلوم کریں:\ncount = 3\nwhile count > 0:\n\tprint(count, end=\" \")\n\tcount -= 1",
+          "id": "q-ff6ba42e8df868"
         },
         {
           "question": "What is the output of these nested loops?\nfor i in range(2):\n      for j in range(2):\n \tprint(f\"({i},{j})\", end=\" \")",
-          "questionUr": "ان نیسٹڈ لوپس کا آؤٹ پٹ کیا ہوگا؟\nfor i in range(2):\n      for j in range(2):\n \tprint(f\"({i},{j})\", end=\" \")"
+          "questionUr": "ان نیسٹڈ لوپس کا آؤٹ پٹ کیا ہوگا؟\nfor i in range(2):\n      for j in range(2):\n \tprint(f\"({i},{j})\", end=\" \")",
+          "id": "q-1e3470178c5377"
         },
         {
           "question": "Find the output after append() and remove():\nfruits = [\"apple\", \"banana\", \"apple\"]\nfruits.append(\"mango\")\nfruits.remove(\"apple\")\nprint(fruits[0], fruits[1])",
-          "questionUr": "append() اور remove() کے بعد آؤٹ پٹ بتائیں:\nfruits = [\"apple\", \"banana\", \"apple\"]\nfruits.append(\"mango\")\nfruits.remove(\"apple\")\nprint(fruits[0], fruits[1])"
+          "questionUr": "append() اور remove() کے بعد آؤٹ پٹ بتائیں:\nfruits = [\"apple\", \"banana\", \"apple\"]\nfruits.append(\"mango\")\nfruits.remove(\"apple\")\nprint(fruits[0], fruits[1])",
+          "id": "q-94375ab705caa8"
         },
         {
           "question": "What is the output of sort() followed by reverse()?\nnums = [30, 10, 20]\nnums.sort()\nnums.reverse()\nprint(nums)",
-          "questionUr": "sort() اور پھر reverse() کا آؤٹ پٹ کیا ہوگا؟\nnums = [30, 10, 20]\nnums.sort()\nnums.reverse()\nprint(nums)"
+          "questionUr": "sort() اور پھر reverse() کا آؤٹ پٹ کیا ہوگا؟\nnums = [30, 10, 20]\nnums.sort()\nnums.reverse()\nprint(nums)",
+          "id": "q-c50ab043e205ad"
         },
         {
           "question": "Predict the output using the statistics library:\nimport statistics\nscores = [10, 20, 30]\nprint(statistics.mean(scores))",
-          "questionUr": "statistics لائبریری کے استعمال سے آؤٹ پٹ بتائیں:\nimport statistics\nscores = [10, 20, 30]\nprint(statistics.mean(scores))"
+          "questionUr": "statistics لائبریری کے استعمال سے آؤٹ پٹ بتائیں:\nimport statistics\nscores = [10, 20, 30]\nprint(statistics.mean(scores))",
+          "id": "q-2ef6a10fed6ec1"
         },
         {
           "question": "Identify the error in this code:\nage = 16\nif (age >= 18):\n\tprint(\"Eligible to vote\")",
-          "questionUr": "اس کوڈ میں موجود غلطی (Error) کی نشاندہی کریں:\nage = 16\nif (age >= 18):\n\tprint(\"Eligible to vote\")"
+          "questionUr": "اس کوڈ میں موجود غلطی (Error) کی نشاندہی کریں:\nage = 16\nif (age >= 18):\n\tprint(\"Eligible to vote\")",
+          "id": "q-6c1e97729bd6d8"
         },
         {
           "question": "What error occurs when running this code?\ncolors = [\"red\", \"blue\", \"green\"]\nprint(colors[3])",
-          "questionUr": "یہ کوڈ چلانے پر کون سا ایرر آئے گا؟\ncolors = [\"red\", \"blue\", \"green\"]\nprint(colors[3])"
+          "questionUr": "یہ کوڈ چلانے پر کون سا ایرر آئے گا؟\ncolors = [\"red\", \"blue\", \"green\"]\nprint(colors[3])",
+          "id": "q-ed219ce9f812bb"
         },
         {
           "question": "Identify the error in this library call:\nprint(random.randint(1, 6))",
-          "questionUr": "اس لائبریری کال میں غلطی کی نشاندہی کریں:\nprint(random.randint(1, 6))"
+          "questionUr": "اس لائبریری کال میں غلطی کی نشاندہی کریں:\nprint(random.randint(1, 6))",
+          "id": "q-ae30921d703a52"
         },
         {
           "question": "Spot the error in this list operation:\nitems = [1, 2, 3]\nitems.add(4)",
-          "questionUr": "لسٹ کے اس عمل میں غلطی تلاش کریں:\nitems = [1, 2, 3]\nitems.add(4)"
+          "questionUr": "لسٹ کے اس عمل میں غلطی تلاش کریں:\nitems = [1, 2, 3]\nitems.add(4)",
+          "id": "q-a83a0b4aa9233c"
         },
         {
           "question": "What type of error is in this while loop?\nn = 1\nwhile n < 5:\n\t print(n)",
-          "questionUr": "اس while لوپ میں کس قسم کی غلطی ہے؟\nn = 1\nwhile n < 5:\n\t print(n)"
+          "questionUr": "اس while لوپ میں کس قسم کی غلطی ہے؟\nn = 1\nwhile n < 5:\n\t print(n)",
+          "id": "q-ba5a8ee45d114d"
         },
         {
           "question": "Identify the logic error in this condition:\nmarks = 85\nif (marks >= 50):\n\tprint(\"Grade C\")\nelif (marks >= 80):\n\tprint(\"Grade A\")",
-          "questionUr": "اس شرط میں منطقی غلطی (Logic Error) بتائیں:\nmarks = 85\nif (marks >= 50):\n\tprint(\"Grade C\")\nelif (marks >= 80):\n\tprint(\"Grade A\")"
+          "questionUr": "اس شرط میں منطقی غلطی (Logic Error) بتائیں:\nmarks = 85\nif (marks >= 50):\n\tprint(\"Grade C\")\nelif (marks >= 80):\n\tprint(\"Grade A\")",
+          "id": "q-53be27c407965d"
         }
       ],
       "long": [
         {
           "question": "Discuss decision-making in Python: if, if-else and nested conditions.",
-          "questionUr": "پائتھون میں فیصلہ سازی: if، if-else اور نیسٹڈ کنڈیشنز بیان کریں۔"
+          "questionUr": "پائتھون میں فیصلہ سازی: if، if-else اور نیسٹڈ کنڈیشنز بیان کریں۔",
+          "id": "q-5707dc98dc0f3d"
         },
         {
           "question": "Compare while and for loops with syntaxes and a scenario.",
-          "questionUr": "while اور for لوپس کا موازنہ اور ایک موثر صورتحال بیان کریں۔"
+          "questionUr": "while اور for لوپس کا موازنہ اور ایک موثر صورتحال بیان کریں۔",
+          "id": "q-e911f19e615b5e"
         },
         {
           "question": "Explain the role of libraries: random and statistics.",
-          "questionUr": "لائبریریوں کا کردار، random اور statistics کی وضاحت کریں۔"
+          "questionUr": "لائبریریوں کا کردار، random اور statistics کی وضاحت کریں۔",
+          "id": "q-da7b5fd9006f2b"
         },
         {
           "question": "Detail how to manage data using lists and four built-in methods.",
-          "questionUr": "لسٹ سے ڈیٹا مینیج کرنا اور چار میتھڈز بیان کریں۔"
+          "questionUr": "لسٹ سے ڈیٹا مینیج کرنا اور چار میتھڈز بیان کریں۔",
+          "id": "q-562dcad0dc57c2"
         },
         {
           "question": "Write a Python program using a loop that prints all odd numbers between 1 and 20.",
           "questionUr": "لوپ سے 1 تا 20 کے طاق اعداد پرنٹ کرنے کا پروگرام لکھیں۔",
-          "source": "composed"
+          "source": "composed",
+          "id": "q-4cbbd123c26f81"
         },
         {
           "question": "Write a program that inputs a number and determines whether it is even or odd.",
-          "questionUr": "ایک ایسا پروگرام لکھیں جو صارف سے ایک عدد (نمبر) لے اور معلوم کرے کہ وہ جفت (even) ہے یا طاق (odd)۔"
+          "questionUr": "ایک ایسا پروگرام لکھیں جو صارف سے ایک عدد (نمبر) لے اور معلوم کرے کہ وہ جفت (even) ہے یا طاق (odd)۔",
+          "id": "q-8df0998afeb07e"
         },
         {
           "question": "Write a program that inputs two numbers and finds whether both are equal.",
-          "questionUr": "ایک ایسا پروگرام لکھیں جو دو اعداد (نمبرز) لے اور معلوم کرے کہ آیا دونوں برابر ہیں یا نہیں۔"
+          "questionUr": "ایک ایسا پروگرام لکھیں جو دو اعداد (نمبرز) لے اور معلوم کرے کہ آیا دونوں برابر ہیں یا نہیں۔",
+          "id": "q-bbdb228d77f933"
         },
         {
           "question": "Write a program that inputs three numbers and prints the largest one.",
-          "questionUr": "ایک ایسا پروگرام لکھیں جو تین اعداد (نمبرز) لے اور ان میں سے سب سے بڑا عدد پرنٹ کرے۔"
+          "questionUr": "ایک ایسا پروگرام لکھیں جو تین اعداد (نمبرز) لے اور ان میں سے سب سے بڑا عدد پرنٹ کرے۔",
+          "id": "q-f99918aadb1f5d"
         },
         {
           "question": "Write a program that inputs two numbers and displays the greater number.",
-          "questionUr": "ایک ایسا پروگرام لکھیں جو دو اعداد (نمبرز) لے اور بڑا عدد دکھائے۔"
+          "questionUr": "ایک ایسا پروگرام لکھیں جو دو اعداد (نمبرز) لے اور بڑا عدد دکھائے۔",
+          "id": "q-d3a8b86008e03c"
         },
         {
           "question": "Write a program that reads a number and prints its square if the number is greater than 10 otherwise prints its cube.",
-          "questionUr": "ایک ایسا پروگرام لکھیں جو ایک عدد پڑھے اور اگر وہ عدد 10 سے بڑا ہو تو اس کا مربع (square) پرنٹ کرے، ورنہ اس کا مکعب (cube) پرنٹ کرے۔"
+          "questionUr": "ایک ایسا پروگرام لکھیں جو ایک عدد پڑھے اور اگر وہ عدد 10 سے بڑا ہو تو اس کا مربع (square) پرنٹ کرے، ورنہ اس کا مکعب (cube) پرنٹ کرے۔",
+          "id": "q-1bf80a5b5f9d4d"
         },
         {
           "question": "Write a program to input a number and prints the message whether it is odd, even, or zero.",
-          "questionUr": "ایک عدد ان پٹ کرنے کے لیے پروگرام لکھیں اور یہ پیغام پرنٹ کرے کہ آیا وہ طاق (odd) ہے، جفت (even) ہے، یا صفر (zero) ہے۔"
+          "questionUr": "ایک عدد ان پٹ کرنے کے لیے پروگرام لکھیں اور یہ پیغام پرنٹ کرے کہ آیا وہ طاق (odd) ہے، جفت (even) ہے، یا صفر (zero) ہے۔",
+          "id": "q-4366a450f50d72"
         },
         {
           "question": "Write a program that displays counting from 1 to 3 using a while loop.",
-          "questionUr": "ایک ایسا پروگرام لکھیں جو while لوپ کے ذریعے 1 سے 3 تک گنتی دکھائے۔"
+          "questionUr": "ایک ایسا پروگرام لکھیں جو while لوپ کے ذریعے 1 سے 3 تک گنتی دکھائے۔",
+          "id": "q-aed40d699fe8f7"
         },
         {
           "question": "Write a program that displays back-counting from 10 to 1 using while loop.",
-          "questionUr": "ایک ایسا پروگرام لکھیں جو while لوپ کے ذریعے 10 سے 1 تک الٹی گنتی (back-counting) دکھائے۔"
+          "questionUr": "ایک ایسا پروگرام لکھیں جو while لوپ کے ذریعے 10 سے 1 تک الٹی گنتی (back-counting) دکھائے۔",
+          "id": "q-014b04ee70d102"
         },
         {
           "question": "Write a program that displays first five numbers with their square using while loop.",
-          "questionUr": "ایک ایسا پروگرام لکھیں جو while لوپ کے ذریعے پہلے پانچ اعداد ان کے مربع (square) سمیت دکھائے۔"
+          "questionUr": "ایک ایسا پروگرام لکھیں جو while لوپ کے ذریعے پہلے پانچ اعداد ان کے مربع (square) سمیت دکھائے۔",
+          "id": "q-6281a02f73b571"
         },
         {
           "question": "Write a program that displays first five numbers and their sum using while loop.",
-          "questionUr": "ایک ایسا پروگرام لکھیں جو while لوپ کے ذریعے پہلے پانچ اعداد اور ان کا مجموعہ (sum) دکھائے۔"
+          "questionUr": "ایک ایسا پروگرام لکھیں جو while لوپ کے ذریعے پہلے پانچ اعداد اور ان کا مجموعہ (sum) دکھائے۔",
+          "id": "q-a1a4248c800bd4"
         },
         {
           "question": "Write a program that inputs a number from the user and displays a table of that number using while loop.",
-          "questionUr": "ایک ایسا پروگرام لکھیں جو صارف سے ایک عدد لے اور while لوپ کے ذریعے اس عدد کا پہاڑا (table) دکھائے۔"
+          "questionUr": "ایک ایسا پروگرام لکھیں جو صارف سے ایک عدد لے اور while لوپ کے ذریعے اس عدد کا پہاڑا (table) دکھائے۔",
+          "id": "q-aefd8cd9d8a412"
         },
         {
           "question": "Write a program using a loop that prints all the odd numbers between 1 and 20.",
-          "questionUr": "ایک لوپ استعمال کرتے ہوئے ایسا پروگرام لکھیں جو 1 اور 20 کے درمیان تمام طاق اعداد (odd numbers) پرنٹ کرے۔"
+          "questionUr": "ایک لوپ استعمال کرتے ہوئے ایسا پروگرام لکھیں جو 1 اور 20 کے درمیان تمام طاق اعداد (odd numbers) پرنٹ کرے۔",
+          "id": "q-952a32aa5fc731"
         },
         {
           "question": "Write a program that inputs a number from the user and displays the factorial of that number using while loop.",
-          "questionUr": "ایک ایسا پروگرام لکھیں جو صارف سے ایک عدد لے اور while لوپ کے ذریعے اس عدد کا فیکٹوریل (factorial) دکھائے۔"
+          "questionUr": "ایک ایسا پروگرام لکھیں جو صارف سے ایک عدد لے اور while لوپ کے ذریعے اس عدد کا فیکٹوریل (factorial) دکھائے۔",
+          "id": "q-131ac36704bea0"
         },
         {
           "question": "Write a program using range() to display even numbers from 2 to 10 and odd numbers from 1 to 9.",
-          "questionUr": "range() استعمال کرتے ہوئے ایسا پروگرام لکھیں جو 2 سے 10 تک جفت اعداد (even numbers) اور 1 سے 9 تک طاق اعداد (odd numbers) دکھائے۔"
+          "questionUr": "range() استعمال کرتے ہوئے ایسا پروگرام لکھیں جو 2 سے 10 تک جفت اعداد (even numbers) اور 1 سے 9 تک طاق اعداد (odd numbers) دکھائے۔",
+          "id": "q-4f97d2f8f22e6c"
         },
         {
           "question": "Write a program using range() to display odd numbers from 1 to 9.",
-          "questionUr": "range() استعمال کرتے ہوئے ایسا پروگرام لکھیں جو 1 سے 9 تک طاق اعداد (odd numbers) دکھائے۔"
+          "questionUr": "range() استعمال کرتے ہوئے ایسا پروگرام لکھیں جو 1 سے 9 تک طاق اعداد (odd numbers) دکھائے۔",
+          "id": "q-387fd44954fccd"
         },
         {
           "question": "Write a program that displays \"Pakistan\" five times using for loop.",
-          "questionUr": "ایک ایسا پروگرام لکھیں جو for لوپ کے ذریعے \"Pakistan\" پانچ مرتبہ دکھائے۔"
+          "questionUr": "ایک ایسا پروگرام لکھیں جو for لوپ کے ذریعے \"Pakistan\" پانچ مرتبہ دکھائے۔",
+          "id": "q-ab864a1fa588aa"
         },
         {
           "question": "Write a program to print numbers from 1 to 5 on a single line.",
-          "questionUr": "ایک ہی لائن میں 1 سے 5 تک اعداد پرنٹ کرنے کے لیے پروگرام لکھیں۔"
+          "questionUr": "ایک ہی لائن میں 1 سے 5 تک اعداد پرنٹ کرنے کے لیے پروگرام لکھیں۔",
+          "id": "q-c7456821db6482"
         },
         {
           "question": "Write a for loop using range() to print the even numbers from 2 to 10 on a single line.",
-          "questionUr": "range() کا استعمال کرتے ہوئے ایک for لوپ لکھیں جو 2 سے 10 تک جفت اعداد (even numbers) ایک ہی لائن میں پرنٹ کرے۔"
+          "questionUr": "range() کا استعمال کرتے ہوئے ایک for لوپ لکھیں جو 2 سے 10 تک جفت اعداد (even numbers) ایک ہی لائن میں پرنٹ کرے۔",
+          "id": "q-516343470eee72"
         },
         {
           "question": "Write a program that displays back-counting from 10 to 1 using a for loop.",
-          "questionUr": "ایک ایسا پروگرام لکھیں جو for لوپ کے ذریعے 10 سے 1 تک الٹی گنتی (back-counting) دکھائے۔"
+          "questionUr": "ایک ایسا پروگرام لکھیں جو for لوپ کے ذریعے 10 سے 1 تک الٹی گنتی (back-counting) دکھائے۔",
+          "id": "q-9b467047038193"
         },
         {
           "question": "Write a program that prints the first 10 multiples of 3 using a for loop and range() function.",
-          "questionUr": "ایک ایسا پروگرام لکھیں جو for لوپ اور range() فنکشن کے ذریعے 3 کے پہلے 10 مضاعف (multiples) پرنٹ کرے۔"
+          "questionUr": "ایک ایسا پروگرام لکھیں جو for لوپ اور range() فنکشن کے ذریعے 3 کے پہلے 10 مضاعف (multiples) پرنٹ کرے۔",
+          "id": "q-240ef87b6ac12c"
         },
         {
           "question": "Write a program that prints all the odd numbers between 1 and 20 using for loop.",
-          "questionUr": "ایک ایسا پروگرام لکھیں جو for لوپ کے ذریعے 1 اور 20 کے درمیان تمام طاق اعداد (odd numbers) پرنٹ کرے۔"
+          "questionUr": "ایک ایسا پروگرام لکھیں جو for لوپ کے ذریعے 1 اور 20 کے درمیان تمام طاق اعداد (odd numbers) پرنٹ کرے۔",
+          "id": "q-508da28ae3ff49"
         },
         {
           "question": "Write a program that inputs a number from the user and displays the factorial of that number using for loop.",
-          "questionUr": "ایک ایسا پروگرام لکھیں جو صارف سے ایک عدد لے اور for لوپ کے ذریعے اس عدد کا فیکٹوریل (factorial) دکھائے۔"
+          "questionUr": "ایک ایسا پروگرام لکھیں جو صارف سے ایک عدد لے اور for لوپ کے ذریعے اس عدد کا فیکٹوریل (factorial) دکھائے۔",
+          "id": "q-e640362dcf7cdc"
         },
         {
           "question": "Write a program that inputs a number from the user and displays a table of that number using for loop from 1 to 10.",
-          "questionUr": "ایک ایسا پروگرام لکھیں جو صارف سے ایک عدد لے اور 1 سے 10 تک for لوپ کے ذریعے اس عدد کا پہاڑا (table) دکھائے۔"
+          "questionUr": "ایک ایسا پروگرام لکھیں جو صارف سے ایک عدد لے اور 1 سے 10 تک for لوپ کے ذریعے اس عدد کا پہاڑا (table) دکھائے۔",
+          "id": "q-17458b70f92139"
         },
         {
           "question": "Write a program that displays the following shape using nested loops.\n*\n* *\n* * *\n* * * *\n* * * * *",
-          "questionUr": "نیسٹڈ لوپس (nested loops) کے ذریعے درج ذیل شکل دکھانے کے \nلیے پروگرام لکھیں۔\n*\n* *\n* * *\n* * * *\n* * * * *"
+          "questionUr": "نیسٹڈ لوپس (nested loops) کے ذریعے درج ذیل شکل دکھانے کے \nلیے پروگرام لکھیں۔\n*\n* *\n* * *\n* * * *\n* * * * *",
+          "id": "q-19713a3d3a57f4"
         },
         {
           "question": "Write a program to print stars (asterisk) in rectangular pattern using nested loops .\n* * * * *\n* * * * *\n* * * * *",
-          "questionUr": "نیسٹڈ لوپس کے ذریعے پر مشتمل مستطیلی پیٹرن میں ستارے پرنٹ کرنے کے لیے پروگرام لکھیں۔\n* * * * *\n* * * * *\n* * * * *"
+          "questionUr": "نیسٹڈ لوپس کے ذریعے پر مشتمل مستطیلی پیٹرن میں ستارے پرنٹ کرنے کے لیے پروگرام لکھیں۔\n* * * * *\n* * * * *\n* * * * *",
+          "id": "q-049854518020d7"
         },
         {
           "question": "Write a program that displays the following shape using nested loops.\n* * * * * * *\n* * * * * * \n* * * * *\n* * * * \n* * *\n* *\n*",
-          "questionUr": "نیسٹڈ لوپس (nested loops) کے ذریعے درج ذیل شکل دکھانے کے \nلیے پروگرام لکھیں۔\n* * * * * * *\n* * * * * * \n* * * * *\n* * * * \n* * *\n* *\n*"
+          "questionUr": "نیسٹڈ لوپس (nested loops) کے ذریعے درج ذیل شکل دکھانے کے \nلیے پروگرام لکھیں۔\n* * * * * * *\n* * * * * * \n* * * * *\n* * * * \n* * *\n* *\n*",
+          "id": "q-ced1a37d386d20"
         }
       ]
     },
@@ -1954,7 +2127,8 @@
               "ur": "کمپیوٹر بنانا"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-7d78b0f175ba5a"
         },
         {
           "question": "First step in the Data Science Life Cycle?",
@@ -1977,7 +2151,8 @@
               "ur": "نتائج کی بصری شکل"
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-c14c58d639f400"
         },
         {
           "question": "Data science in healthcare helps to:",
@@ -2000,7 +2175,8 @@
               "ur": "موسیقی چلانا"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-cb151e59841286"
         },
         {
           "question": "Setting clear goals for a project is defining:",
@@ -2023,7 +2199,8 @@
               "ur": "تعصب"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-c7d028f7c9bcc7"
         },
         {
           "question": "Which method is best for collecting student opinions?",
@@ -2046,7 +2223,8 @@
               "ur": "ویب اسکریپنگ"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-815df6e81bb0c0"
         },
         {
           "question": "APIs allow software to collect data:",
@@ -2069,7 +2247,8 @@
               "ur": "کبھی نہیں"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-a7f46a1a17b758"
         },
         {
           "question": "Collecting public website data programmatically is:",
@@ -2092,7 +2271,8 @@
               "ur": "ڈیٹا اسٹوریج"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-53a881fea5b701"
         },
         {
           "question": "Data not yet checked or cleaned is called:",
@@ -2115,7 +2295,8 @@
               "ur": "حتمی ڈیٹا"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-ee6f09ee07ed85"
         },
         {
           "question": "Checking that data follows correct rules is called:",
@@ -2138,7 +2319,8 @@
               "ur": "بصری شکل"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-752ea350704f5c"
         },
         {
           "question": "The main goal of analyzing data is to find:",
@@ -2161,7 +2343,8 @@
               "ur": "ویب سائٹس"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-e302d665b20075"
         },
         {
           "question": "Databases are better than spreadsheets for:",
@@ -2184,7 +2367,8 @@
               "ur": "اکیلے صارف"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-8ee5957d3447db"
         },
         {
           "question": "In a database table a single row is a:",
@@ -2207,7 +2391,8 @@
               "ur": "کیوری"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-482d9d01197579"
         },
         {
           "question": "Which SQL command retrieves data?",
@@ -2230,7 +2415,8 @@
               "ur": "اپ ڈیٹ"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-f3574377dd8fe1"
         },
         {
           "question": "Which chart is best for comparing groups?",
@@ -2254,7 +2440,8 @@
             }
           ],
           "answer": "B",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-98d2754becf282"
         },
         {
           "question": "Which chart shows parts of a whole?",
@@ -2278,7 +2465,8 @@
             }
           ],
           "answer": "A",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-0a90e1df0f7ebd"
         },
         {
           "question": "A single place showing multiple visuals is a:",
@@ -2302,96 +2490,117 @@
             }
           ],
           "answer": "B",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-f0a2f663d5e720"
         }
       ],
       "short": [
         {
           "question": "Define Data Science.",
-          "questionUr": "ڈیٹا سائنس کی تعریف کریں۔"
+          "questionUr": "ڈیٹا سائنس کی تعریف کریں۔",
+          "id": "q-8b9d483b1b6601"
         },
         {
           "question": "How does data science help better decisions?",
-          "questionUr": "ڈیٹا سائنس بہتر فیصلوں میں کیسے مدد دیتی ہے؟"
+          "questionUr": "ڈیٹا سائنس بہتر فیصلوں میں کیسے مدد دیتی ہے؟",
+          "id": "q-73966ba17121d7"
         },
         {
           "question": "Name two real-life applications of data science.",
-          "questionUr": "دو اطلاقات بتائیں۔"
+          "questionUr": "دو اطلاقات بتائیں۔",
+          "id": "q-35e9a6907507ca"
         },
         {
           "question": "List the six steps of the Data Science Life Cycle.",
-          "questionUr": "DSLC کے چھ مراحل لکھیں۔"
+          "questionUr": "DSLC کے چھ مراحل لکھیں۔",
+          "id": "q-23685eaa91e409"
         },
         {
           "question": "What are objectives in a data science project?",
-          "questionUr": "مقاصد کیا ہیں؟"
+          "questionUr": "مقاصد کیا ہیں؟",
+          "id": "q-3975ede84d463e"
         },
         {
           "question": "Name two common methods of data collection.",
-          "questionUr": "ڈیٹا کے دو طریقے بتائیں۔"
+          "questionUr": "ڈیٹا کے دو طریقے بتائیں۔",
+          "id": "q-ac54aa980170a0"
         },
         {
           "question": "What is the role of an API?",
-          "questionUr": "API کا کردار کیا ہے؟"
+          "questionUr": "API کا کردار کیا ہے؟",
+          "id": "q-475f52a581d5e7"
         },
         {
           "question": "Explain how IoT devices collect data.",
-          "questionUr": "آئی او ٹی ڈیٹا کیسے اکٹھا کرتی ہیں؟"
+          "questionUr": "آئی او ٹی ڈیٹا کیسے اکٹھا کرتی ہیں؟",
+          "id": "q-b78abc12f3d9b0"
         },
         {
           "question": "What is web scraping?",
-          "questionUr": "ویب سکریپنگ کیا ہے؟"
+          "questionUr": "ویب سکریپنگ کیا ہے؟",
+          "id": "q-4bef6543c28dee"
         },
         {
           "question": "What is bias in data?",
-          "questionUr": "ڈیٹا میں تعصب کیا ہے؟"
+          "questionUr": "ڈیٹا میں تعصب کیا ہے؟",
+          "id": "q-19ed702d7e68b1"
         },
         {
           "question": "What is raw data?",
-          "questionUr": "خام ڈیٹا کیا ہے؟"
+          "questionUr": "خام ڈیٹا کیا ہے؟",
+          "id": "q-f35590a20b13b4"
         },
         {
           "question": "Define data validation.",
-          "questionUr": "ڈیٹا ویلیڈیشن کی تعریف کریں۔"
+          "questionUr": "ڈیٹا ویلیڈیشن کی تعریف کریں۔",
+          "id": "q-5f6ca741ef5420"
         },
         {
           "question": "Explain spreadsheet versus database.",
-          "questionUr": "سپریڈ شیٹ اور ڈیٹا بیس میں فرق کریں۔"
+          "questionUr": "سپریڈ شیٹ اور ڈیٹا بیس میں فرق کریں۔",
+          "id": "q-c408304ed27f8a"
         },
         {
           "question": "Define Record and Field.",
-          "questionUr": "ریکارڈ اور فیلڈ کی تعریف کریں۔"
+          "questionUr": "ریکارڈ اور فیلڈ کی تعریف کریں۔",
+          "id": "q-579d300c4a90bd"
         },
         {
           "question": "What is a DBMS?",
-          "questionUr": "DBMS کیا ہے؟"
+          "questionUr": "DBMS کیا ہے؟",
+          "id": "q-23b36a04c2cb58"
         },
         {
           "question": "What is the purpose of a line chart?",
           "questionUr": "لائن چارٹ کا مقصد کیا ہے؟",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-1007fb7a2d9331"
         }
       ],
       "long": [
         {
           "question": "Explain the Data Science Life Cycle with an example.",
           "questionUr": "ڈیٹا سائنس لائف سائیکل مثال کے ساتھ بیان کریں۔",
-          "source": "composed"
+          "source": "composed",
+          "id": "q-6ceb36d2d7c757"
         },
         {
           "question": "Describe data collection methods, bias, validation and cleaning.",
           "questionUr": "ڈیٹا کے طریقے، تعصب، توثیق اور صفائی بیان کریں۔",
-          "source": "composed"
+          "source": "composed",
+          "id": "q-97dbc90dee3b12"
         },
         {
           "question": "Differentiate spreadsheets and databases; explain DBMS and SQL.",
           "questionUr": "سپریڈ شیٹ اور ڈیٹا بیس میں فرق، DBMS اور SQL واضح کریں۔",
-          "source": "composed"
+          "source": "composed",
+          "id": "q-0852453eca4300"
         },
         {
           "question": "Explain data analysis and interpretation and choosing the right source.",
           "questionUr": "ڈیٹا تجزیہ و تشریح اور درست ماخذ کا انتخاب واضح کریں۔",
-          "source": "composed"
+          "source": "composed",
+          "id": "q-5f1afc35abfe5f"
         }
       ]
     },
@@ -2420,7 +2629,8 @@
               "ur": "ویب براؤزنگ"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-0d64147b48fe42"
         },
         {
           "question": "Which field is a subset of AI that learns from data?",
@@ -2443,7 +2653,8 @@
               "ur": "ڈیٹا بیس مینجمنٹ"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-16323c693f3141"
         },
         {
           "question": "Which type of learning uses labeled data?",
@@ -2466,7 +2677,8 @@
               "ur": "خودکار"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-04dc2ebc251f42"
         },
         {
           "question": "Unsupervised learning finds patterns in:",
@@ -2489,7 +2701,8 @@
               "ur": "ڈیلیٹ شدہ ڈیٹا"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-3e6a2d2371fa72"
         },
         {
           "question": "Supervised learning is best for:",
@@ -2512,7 +2725,8 @@
               "ur": "بجلی بچانا"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-55dcb9042860ea"
         },
         {
           "question": "Grouping students by shared interests uses:",
@@ -2535,7 +2749,8 @@
               "ur": "ڈیٹا کی صفائی"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-5eb40c4a07d256"
         },
         {
           "question": "In a confusion matrix TP stands for:",
@@ -2558,7 +2773,8 @@
               "ur": "ٹیسٹ پیشگوئی"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-856315e0bdf7b4"
         },
         {
           "question": "What does a False Positive indicate?",
@@ -2581,7 +2797,8 @@
               "ur": "ڈیٹا غائب تھا"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-c8cb937e3af3f2"
         },
         {
           "question": "Accuracy tells us how many predictions were:",
@@ -2604,7 +2821,8 @@
               "ur": "صارف نے حذف کیں"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-e5910f2e71ea41"
         },
         {
           "question": "If a model has 12 correct out of 15 its accuracy is:",
@@ -2627,7 +2845,8 @@
               "ur": ""
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-a4fdf1cde148d6"
         },
         {
           "question": "K-Means Clustering is an example of:",
@@ -2650,7 +2869,8 @@
               "ur": "ڈیٹا کی صفائی"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-d2c95eba7a90ed"
         },
         {
           "question": "Which ML model uses a tree-like structure?",
@@ -2673,7 +2893,8 @@
               "ur": "کنفیوژن میٹرکس"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-082ee2fa620207"
         },
         {
           "question": "AI learns better when data is:",
@@ -2696,7 +2917,8 @@
               "ur": "پرانا"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-bd935049f1ac5a"
         },
         {
           "question": "Which algorithm predicts values on a straight-line relationship?",
@@ -2720,93 +2942,114 @@
             }
           ],
           "answer": "B",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-b2d298020a81a4"
         }
       ],
       "short": [
         {
           "question": "Define Artificial Intelligence (AI).",
-          "questionUr": "آرٹیفیشل انٹیلی جنس کی تعریف کریں۔"
+          "questionUr": "آرٹیفیشل انٹیلی جنس کی تعریف کریں۔",
+          "id": "q-33a96db7ee8c71"
         },
         {
           "question": "What is Machine Learning (ML)?",
-          "questionUr": "مشین لرننگ کیا ہے؟"
+          "questionUr": "مشین لرننگ کیا ہے؟",
+          "id": "q-00892096ca0a07"
         },
         {
           "question": "How are AI and ML different in their goals?",
-          "questionUr": "AI اور ML کے مقاصد کیسے مختلف ہیں؟"
+          "questionUr": "AI اور ML کے مقاصد کیسے مختلف ہیں؟",
+          "id": "q-8cefc09fb909f5"
         },
         {
           "question": "Provide two real-life examples of AI.",
-          "questionUr": "AI کی دو مثالیں دیں۔"
+          "questionUr": "AI کی دو مثالیں دیں۔",
+          "id": "q-241d80760a4801"
         },
         {
           "question": "Define Supervised Learning.",
-          "questionUr": "سپروائزڈ لرننگ کی تعریف کریں۔"
+          "questionUr": "سپروائزڈ لرننگ کی تعریف کریں۔",
+          "id": "q-46551f48a5a664"
         },
         {
           "question": "What are labels in Machine Learning?",
-          "questionUr": "لیبلز کیا ہیں؟"
+          "questionUr": "لیبلز کیا ہیں؟",
+          "id": "q-b7c38f456bf5d0"
         },
         {
           "question": "Define Unsupervised Learning.",
-          "questionUr": "ان سپروائزڈ لرننگ کی تعریف کریں۔"
+          "questionUr": "ان سپروائزڈ لرننگ کی تعریف کریں۔",
+          "id": "q-221b87674a8c44"
         },
         {
           "question": "Give an example of Unsupervised Learning in schools.",
-          "questionUr": "اسکولوں میں مثال دیں۔"
+          "questionUr": "اسکولوں میں مثال دیں۔",
+          "id": "q-04e95c2d56981f"
         },
         {
           "question": "What is a chatbot?",
-          "questionUr": "چیٹ بوٹ کیا ہے؟"
+          "questionUr": "چیٹ بوٹ کیا ہے؟",
+          "id": "q-6be5ed78b838fc"
         },
         {
           "question": "Explain how bias can enter an AI system.",
-          "questionUr": "AI میں تعصب کیسے آتا ہے؟"
+          "questionUr": "AI میں تعصب کیسے آتا ہے؟",
+          "id": "q-89b94f81b70e9d"
         },
         {
           "question": "Define a Confusion Matrix.",
-          "questionUr": "کنفیوژن میٹرکس کی تعریف کریں۔"
+          "questionUr": "کنفیوژن میٹرکس کی تعریف کریں۔",
+          "id": "q-e55b2ec78792e8"
         },
         {
           "question": "Write the formula for Accuracy.",
-          "questionUr": "درستگی کا فارمولا لکھیں۔"
+          "questionUr": "درستگی کا فارمولا لکھیں۔",
+          "id": "q-b0b61afa737baa"
         },
         {
           "question": "What is the purpose of K-Means Clustering?",
-          "questionUr": "کے-مینز کلسٹرنگ کا مقصد کیا ہے؟"
+          "questionUr": "کے-مینز کلسٹرنگ کا مقصد کیا ہے؟",
+          "id": "q-826c9f18e8cfb6"
         },
         {
           "question": "Describe the structure of a Decision Tree.",
-          "questionUr": "ڈیسیژن ٹری کی ساخت بیان کریں۔"
+          "questionUr": "ڈیسیژن ٹری کی ساخت بیان کریں۔",
+          "id": "q-8a8b2b72e84176"
         },
         {
           "question": "What is Linear Regression used for?",
           "questionUr": "لینیئر ریگریشن کس لیے ہے؟",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-8fa4a843d909ea"
         }
       ],
       "long": [
         {
           "question": "Compare and contrast Artificial Intelligence and Machine Learning.",
-          "questionUr": "AI اور مشین لرننگ کا موازنہ کریں۔"
+          "questionUr": "AI اور مشین لرننگ کا موازنہ کریں۔",
+          "id": "q-ccca108efa1615"
         },
         {
           "question": "Detail the differences between Supervised and Unsupervised Learning.",
-          "questionUr": "سپروائزڈ اور ان سپروائزڈ لرننگ میں فرق بیان کریں۔"
+          "questionUr": "سپروائزڈ اور ان سپروائزڈ لرننگ میں فرق بیان کریں۔",
+          "id": "q-65287e5730927a"
         },
         {
           "question": "Discuss the practical applications of AI and ML in modern life.",
-          "questionUr": "جدید زندگی میں AI اور ML کے استعمال پر بحث کریں۔"
+          "questionUr": "جدید زندگی میں AI اور ML کے استعمال پر بحث کریں۔",
+          "id": "q-5e79778fb5f5e2"
         },
         {
           "question": "Describe how the performance of an ML model is evaluated.",
-          "questionUr": "مشین لرننگ ماڈل کی کارکردگی کی جانچ بیان کریں۔"
+          "questionUr": "مشین لرننگ ماڈل کی کارکردگی کی جانچ بیان کریں۔",
+          "id": "q-53e258e3689d86"
         },
         {
           "question": "Explain Linear Regression as a Machine Learning algorithm.",
           "questionUr": "لینیئر ریگریشن کو الگورتھم کے طور پر واضح کریں۔",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-8b68045cd4940e"
         }
       ]
     },
@@ -2835,7 +3078,8 @@
               "ur": "زیادہ بجلی"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-de82990d8029dd"
         },
         {
           "question": "Which technology helps computers understand human language?",
@@ -2858,7 +3102,8 @@
               "ur": "ایس کیو ایل"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-9c41f633f6facd"
         },
         {
           "question": "Examples of NLP include chatbots and:",
@@ -2881,7 +3126,8 @@
               "ur": "مانیٹر اسکرینز"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-847a9f96d4b2c8"
         },
         {
           "question": "Speech technology allows computers to:",
@@ -2904,7 +3150,8 @@
               "ur": "ڈرائیوز اسکین"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-b287305bde1d3b"
         },
         {
           "question": "Which of these is a voice assistant?",
@@ -2927,7 +3174,8 @@
               "ur": "گوگل کروم"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-de972cf9a1a719"
         },
         {
           "question": "Recommendation systems suggest items based on:",
@@ -2950,7 +3198,8 @@
               "ur": "کی بورڈ کی قسم"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-53c955c5f9ef73"
         },
         {
           "question": "Autonomous vehicles are also known as:",
@@ -2973,7 +3222,8 @@
               "ur": "دستی ٹرک"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-aa705bd0b5fdbd"
         },
         {
           "question": "One new job role created by AI is:",
@@ -2996,7 +3246,8 @@
               "ur": "ڈاکیا"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-e6aa2a1d9c5be7"
         },
         {
           "question": "In AI data Quality refers to:",
@@ -3019,7 +3270,8 @@
               "ur": "رنگ"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-864e9dab5256db"
         },
         {
           "question": "Bias in AI happens when a system gives:",
@@ -3042,7 +3294,8 @@
               "ur": "کوئی نتائج نہیں"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-fe81f49f0ee6a9"
         },
         {
           "question": "Understanding how an AI made a decision is called:",
@@ -3065,7 +3318,8 @@
               "ur": "اسٹوریج"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-ba570c666b3ac1"
         },
         {
           "question": "When cameras watch people’s actions it is called:",
@@ -3088,7 +3342,8 @@
               "ur": "پروگرامنگ"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-0ae346c409c537"
         },
         {
           "question": "The responsibility for AI decisions lies with:",
@@ -3111,91 +3366,111 @@
               "ur": "انٹرنیٹ پر"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-dc992df49fb28e"
         }
       ],
       "short": [
         {
           "question": "Define Artificial Intelligence.",
-          "questionUr": "مصنوعی ذہانت کی تعریف کریں۔"
+          "questionUr": "مصنوعی ذہانت کی تعریف کریں۔",
+          "id": "q-db64e48c4c7309"
         },
         {
           "question": "What is the role of Natural Language Processing?",
-          "questionUr": "این ایل پی کا کردار کیا ہے؟"
+          "questionUr": "این ایل پی کا کردار کیا ہے؟",
+          "id": "q-e860553574fd6d"
         },
         {
           "question": "List two common examples of NLP.",
-          "questionUr": "این ایل پی کی دو مثالیں لکھیں۔"
+          "questionUr": "این ایل پی کی دو مثالیں لکھیں۔",
+          "id": "q-b5de0f31d27690"
         },
         {
           "question": "How does speech technology benefit disabled people?",
-          "questionUr": "اسپیچ ٹیکنالوجی معذور افراد کو کیسے فائدہ دیتی ہے؟"
+          "questionUr": "اسپیچ ٹیکنالوجی معذور افراد کو کیسے فائدہ دیتی ہے؟",
+          "id": "q-faaad119597e82"
         },
         {
           "question": "What are voice assistants?",
-          "questionUr": "وائس اسسٹنٹس کیا ہیں؟"
+          "questionUr": "وائس اسسٹنٹس کیا ہیں؟",
+          "id": "q-a23c9754d1c56d"
         },
         {
           "question": "How do recommendation systems improve experience?",
-          "questionUr": "ریکمنڈیشن سسٹم تجربہ کیسے بہتر بناتے ہیں؟"
+          "questionUr": "ریکمنڈیشن سسٹم تجربہ کیسے بہتر بناتے ہیں؟",
+          "id": "q-a2548d472046bf"
         },
         {
           "question": "Define an autonomous vehicle.",
-          "questionUr": "خود مختار گاڑی کی تعریف کریں۔"
+          "questionUr": "خود مختار گاڑی کی تعریف کریں۔",
+          "id": "q-4f1d3443ae718c"
         },
         {
           "question": "Name two sensors used by self-driving cars.",
-          "questionUr": "دو سینسر بتائیں۔"
+          "questionUr": "دو سینسر بتائیں۔",
+          "id": "q-83305abb2b43b4"
         },
         {
           "question": "Name two new professional roles created by AI.",
-          "questionUr": "دو نئے کردار بتائیں۔"
+          "questionUr": "دو نئے کردار بتائیں۔",
+          "id": "q-81a5acd8ebc8f8"
         },
         {
           "question": "Explain data Quantity versus Quality.",
-          "questionUr": "مقدار اور معیار میں فرق کریں۔"
+          "questionUr": "مقدار اور معیار میں فرق کریں۔",
+          "id": "q-836d8cd776d619"
         },
         {
           "question": "Define bias in AI.",
-          "questionUr": "AI میں تعصب کی تعریف کریں۔"
+          "questionUr": "AI میں تعصب کی تعریف کریں۔",
+          "id": "q-4fe765667b1257"
         },
         {
           "question": "What does fairness mean in AI?",
-          "questionUr": "AI میں انصاف سے کیا مراد ہے؟"
+          "questionUr": "AI میں انصاف سے کیا مراد ہے؟",
+          "id": "q-8602e9bf87eab9"
         },
         {
           "question": "Define transparency in an AI system.",
-          "questionUr": "شفافیت کی تعریف کریں۔"
+          "questionUr": "شفافیت کی تعریف کریں۔",
+          "id": "q-d95f9d2d838e36"
         },
         {
           "question": "What is surveillance?",
-          "questionUr": "نگرانی کیا ہے؟"
+          "questionUr": "نگرانی کیا ہے؟",
+          "id": "q-7f3460de04e832"
         },
         {
           "question": "What is the moral duty of AI designers?",
-          "questionUr": "ڈیزائنرز کا اخلاقی فرض کیا ہے؟"
+          "questionUr": "ڈیزائنرز کا اخلاقی فرض کیا ہے؟",
+          "id": "q-522c1dc642a067"
         }
       ],
       "long": [
         {
           "question": "Define AI and explain NLP, speech technology and recommendation systems.",
           "questionUr": "AI، NLP، اسپیچ ٹیکنالوجی اور ریکمنڈیشن سسٹم واضح کریں۔",
-          "source": "composed"
+          "source": "composed",
+          "id": "q-fd1896aeb974fd"
         },
         {
           "question": "Explain bias, fairness, transparency and privacy in AI systems.",
           "questionUr": "AI میں تعصب، انصاف، شفافیت اور رازداری واضح کریں۔",
-          "source": "composed"
+          "source": "composed",
+          "id": "q-dbd1137cdbf6f5"
         },
         {
           "question": "Discuss autonomous vehicles: sensors, testing and safety concerns.",
           "questionUr": "خود مختار گاڑیاں: سینسرز، ٹیسٹنگ اور حفاظتی خدشات۔",
-          "source": "composed"
+          "source": "composed",
+          "id": "q-3a2a9d8a016145"
         },
         {
           "question": "Explain how AI is changing work and the duty of AI designers.",
           "questionUr": "AI سے کام میں تبدیلی اور ڈیزائنرز کا فرض واضح کریں۔",
-          "source": "composed"
+          "source": "composed",
+          "id": "q-34e969ef052380"
         }
       ]
     },
@@ -3224,7 +3499,8 @@
               "ur": "سسٹم وائر آرڈر ٹاسک"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-b7eb4cbe216b8a"
         },
         {
           "question": "The main reason behind a recurring business problem is the:",
@@ -3247,7 +3523,8 @@
               "ur": "نتیجہ"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-1225f52d04cc9e"
         },
         {
           "question": "Which term describes a business’s ability to change when needed?",
@@ -3270,7 +3547,8 @@
               "ur": "اخلاقیات"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-52f7e4e0bfa3db"
         },
         {
           "question": "Which IPR protects brand names, logos or symbols?",
@@ -3293,7 +3571,8 @@
               "ur": "تجارتی راز"
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-2135af1d5ea2e0"
         },
         {
           "question": "Copyrights protect original creative works like:",
@@ -3316,7 +3595,8 @@
               "ur": "برانڈ کے نام"
             }
           ],
-          "answer": "A"
+          "answer": "A",
+          "id": "q-745edd006cc78e"
         },
         {
           "question": "What should be used to protect Trade Secrets?",
@@ -3339,7 +3619,8 @@
               "ur": "کھلی فائلیں"
             }
           ],
-          "answer": "A"
+          "answer": "A",
+          "id": "q-f104f671da530c"
         },
         {
           "question": "Marketing decisions based on facts and analysis are:",
@@ -3362,7 +3643,8 @@
               "ur": "روایتی"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-bfee240a93d2fc"
         },
         {
           "question": "What does KPI stand for in marketing?",
@@ -3385,7 +3667,8 @@
               "ur": "کائنڈ پروگرام انفو"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-4d02e51064e0a5"
         },
         {
           "question": "What does ROI measure?",
@@ -3408,7 +3691,8 @@
               "ur": "علاقائی معلومات"
             }
           ],
-          "answer": "A"
+          "answer": "A",
+          "id": "q-5637bcc380d14c"
         },
         {
           "question": "Which tool is used for Customer Relationship Management?",
@@ -3431,7 +3715,8 @@
               "ur": "ونڈوز"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-e79a6890b8b640"
         },
         {
           "question": "Marketing automation helps businesses handle tasks:",
@@ -3454,7 +3739,8 @@
               "ur": "ایک بار"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-efc526e64a3f47"
         },
         {
           "question": "A loyalty program helps a business in:",
@@ -3477,7 +3763,8 @@
               "ur": "بگز ٹھیک کرنے میں"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-9d8c75df3f23d5"
         },
         {
           "question": "Which law protects children’s online privacy?",
@@ -3501,7 +3788,8 @@
             }
           ],
           "answer": "C",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-ece2ae61e22ae3"
         },
         {
           "question": "Which authority registers startups in Pakistan?",
@@ -3525,7 +3813,8 @@
             }
           ],
           "answer": "B",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-7d2754d2ad7d75"
         },
         {
           "question": "What is a written agreement between two parties called?",
@@ -3549,7 +3838,8 @@
             }
           ],
           "answer": "A",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-18d1a16dffaeeb"
         },
         {
           "question": "Digital ethics ensures an online environment is:",
@@ -3573,109 +3863,133 @@
             }
           ],
           "answer": "B",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-8db1aaa222148f"
         }
       ],
       "short": [
         {
           "question": "Define digital entrepreneurship.",
-          "questionUr": "ڈیجیٹل انٹرپرینیورشپ کی تعریف کریں۔"
+          "questionUr": "ڈیجیٹل انٹرپرینیورشپ کی تعریف کریں۔",
+          "id": "q-5955ced65802e0"
         },
         {
           "question": "What is the purpose of a SWOT analysis?",
-          "questionUr": "SWOT تجزیے کا مقصد کیا ہے؟"
+          "questionUr": "SWOT تجزیے کا مقصد کیا ہے؟",
+          "id": "q-27c58723269e1d"
         },
         {
           "question": "Explain root cause with an example.",
-          "questionUr": "مثال کے ساتھ بنیادی وجہ کی وضاحت کریں۔"
+          "questionUr": "مثال کے ساتھ بنیادی وجہ کی وضاحت کریں۔",
+          "id": "q-8beac63640a978"
         },
         {
           "question": "Differentiate adaptability and resilience.",
-          "questionUr": "مطابقت اور لچک میں فرق کریں۔"
+          "questionUr": "مطابقت اور لچک میں فرق کریں۔",
+          "id": "q-3664365d2dc53f"
         },
         {
           "question": "What are Intellectual Property Rights?",
-          "questionUr": "IPR کیا ہیں؟"
+          "questionUr": "IPR کیا ہیں؟",
+          "id": "q-b5e9105cc57731"
         },
         {
           "question": "How does a trademark protect a business?",
-          "questionUr": "ٹریڈ مارک تحفظ کیسے کرتا ہے؟"
+          "questionUr": "ٹریڈ مارک تحفظ کیسے کرتا ہے؟",
+          "id": "q-a120f27376b922"
         },
         {
           "question": "Difference between patent and copyright?",
-          "questionUr": "پیٹنٹ اور کاپی رائٹ میں فرق؟"
+          "questionUr": "پیٹنٹ اور کاپی رائٹ میں فرق؟",
+          "id": "q-5dc07fb91801db"
         },
         {
           "question": "How can a business protect trade secrets?",
-          "questionUr": "تجارتی رازوں کا تحفظ کیسے ہو؟"
+          "questionUr": "تجارتی رازوں کا تحفظ کیسے ہو؟",
+          "id": "q-6e31b49eb170d1"
         },
         {
           "question": "Define data-driven marketing.",
-          "questionUr": "ڈیٹا پر مبنی مارکیٹنگ کی تعریف کریں۔"
+          "questionUr": "ڈیٹا پر مبنی مارکیٹنگ کی تعریف کریں۔",
+          "id": "q-43a521ebf7bcb0"
         },
         {
           "question": "What are KPIs and why are they used?",
-          "questionUr": "KPIs کیا ہیں اور کیوں؟"
+          "questionUr": "KPIs کیا ہیں اور کیوں؟",
+          "id": "q-2796d7c903ccec"
         },
         {
           "question": "How is ROI calculated?",
-          "questionUr": "ROI کیسے نکالتے ہیں؟"
+          "questionUr": "ROI کیسے نکالتے ہیں؟",
+          "id": "q-ba5b043f408f64"
         },
         {
           "question": "What is Customer Relationship Management?",
-          "questionUr": "CRM کیا ہے؟"
+          "questionUr": "CRM کیا ہے؟",
+          "id": "q-79dd54f0baa2c0"
         },
         {
           "question": "Define marketing automation.",
-          "questionUr": "مارکیٹنگ آٹومیشن کی تعریف کریں۔"
+          "questionUr": "مارکیٹنگ آٹومیشن کی تعریف کریں۔",
+          "id": "q-7eea9f48361be4"
         },
         {
           "question": "What is a brand in the digital age?",
-          "questionUr": "ڈیجیٹل دور میں برانڈ کیا ہے؟"
+          "questionUr": "ڈیجیٹل دور میں برانڈ کیا ہے؟",
+          "id": "q-e2507b6f64fd68"
         },
         {
           "question": "What is a conflict of interest?",
           "questionUr": "مفادات کا ٹکراؤ کیا ہے؟",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-e6b372fa64e03f"
         },
         {
           "question": "What is a compliance audit?",
           "questionUr": "کمپلائنس آڈٹ کیا ہے؟",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-cf4f9cbe9b4781"
         },
         {
           "question": "List the five elements of a valid contract.",
           "questionUr": "معاہدے کے پانچ عناصر لکھیں۔",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-58df39ac571801"
         }
       ],
       "long": [
         {
           "question": "Explain the four components of SWOT analysis.",
-          "questionUr": "SWOT تجزیے کے چار اجزاء کی وضاحت کریں۔"
+          "questionUr": "SWOT تجزیے کے چار اجزاء کی وضاحت کریں۔",
+          "id": "q-479f298aa2ef5d"
         },
         {
           "question": "Discuss the three main types of Intellectual Property Rights.",
-          "questionUr": "دانشورانہ ملکیت کے حقوق کی تین اقسام پر بحث کریں۔"
+          "questionUr": "دانشورانہ ملکیت کے حقوق کی تین اقسام پر بحث کریں۔",
+          "id": "q-8fb7323aaedcd2"
         },
         {
           "question": "Analyze how data-driven marketing, CRM and automation aid growth.",
-          "questionUr": "ڈیٹا مارکیٹنگ، CRM اور آٹومیشن کا ترقی میں کردار واضح کریں۔"
+          "questionUr": "ڈیٹا مارکیٹنگ، CRM اور آٹومیشن کا ترقی میں کردار واضح کریں۔",
+          "id": "q-4d6180cbf19aee"
         },
         {
           "question": "Explain problem solving and adaptability in digital entrepreneurship.",
           "questionUr": "ڈیجیٹل انٹرپرینیورشپ میں مسئلہ حل اور مطابقت واضح کریں۔",
-          "source": "composed"
+          "source": "composed",
+          "id": "q-e9209d2d6e3c95"
         },
         {
           "question": "Describe the process of registering a startup in Pakistan.",
           "questionUr": "پاکستان میں اسٹارٹ اپ رجسٹریشن کا طریقہ بیان کریں۔",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-0404072d9a59b4"
         },
         {
           "question": "Detail the five essential elements of a valid contract.",
           "questionUr": "قانونی معاہدے کے پانچ عناصر بیان کریں۔",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-021b4bb1a50d2d"
         }
       ]
     }

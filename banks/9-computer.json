@@ -82,7 +82,8 @@
               "ur": "تفریح فراہم کرنا"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-19c06eb464b389"
         },
         {
           "question": "One of the fundamental concepts of any system is:",
@@ -105,7 +106,8 @@
               "ur": "قیمت"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-221a938bd0563c"
         },
         {
           "question": "An example of a simple system is:",
@@ -128,7 +130,8 @@
               "ur": "انٹرنیٹ"
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-2618b7e7d23f91"
         },
         {
           "question": "The basic components of a system are:",
@@ -151,7 +154,8 @@
               "ur": "سینسرز، ایکچیوٹرز، کنٹرولرز"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-d2beef4dddf274"
         },
         {
           "question": "Which describes the Von Neumann architecture’s main characteristic?",
@@ -174,7 +178,8 @@
               "ur": "مختلف کاموں کے لیے متعدد CPUs"
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-f74eff7e430986"
         },
         {
           "question": "Which software enhances system performance and security?",
@@ -197,7 +202,8 @@
               "ur": "ڈیوائس ڈرائیورز"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-838146ca39d761"
         },
         {
           "question": "Which is an example of application software?",
@@ -220,7 +226,8 @@
               "ur": "ڈیوائس مینیجر"
             }
           ],
-          "answer": "A"
+          "answer": "A",
+          "id": "q-457ee53fe2f532"
         },
         {
           "question": "The Von Neumann model was developed during the:",
@@ -243,7 +250,8 @@
               "ur": ""
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-7779bb9c1d796a"
         },
         {
           "question": "Which instruction-cycle step determines what the instruction is?",
@@ -266,7 +274,8 @@
               "ur": "اسٹورنگ"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-fcf4312ada4453"
         },
         {
           "question": "The building blocks of any system are its:",
@@ -289,7 +298,8 @@
               "ur": "آؤٹ پٹس"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-034e8b14326f47"
         },
         {
           "question": "Everything external that interacts with a system is its:",
@@ -312,7 +322,8 @@
               "ur": "مواصلات"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-46e3adeaf5b5fe"
         },
         {
           "question": "When a program starts, it is loaded into:",
@@ -335,7 +346,8 @@
               "ur": "پرنٹر"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-fd86cf6e87cddb"
         },
         {
           "question": "ASCII stands for:",
@@ -359,7 +371,8 @@
             }
           ],
           "answer": "A",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-7459d1b7c35320"
         },
         {
           "question": "The binary number system is base-:",
@@ -383,7 +396,8 @@
             }
           ],
           "answer": "A",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-780d11550155de"
         },
         {
           "question": "One Kilobyte (KB) is equal to:",
@@ -407,7 +421,8 @@
             }
           ],
           "answer": "B",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-29a8fed4c69533"
         },
         {
           "question": "In Hexadecimal, which letter represents the value 15?",
@@ -431,126 +446,154 @@
             }
           ],
           "answer": "D",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-71813d70b96953"
         }
       ],
       "short": [
         {
           "question": "Define a system.",
-          "questionUr": "سسٹم کی تعریف کریں۔"
+          "questionUr": "سسٹم کی تعریف کریں۔",
+          "id": "q-c2dac727c18550"
         },
         {
           "question": "What is an Information System?",
-          "questionUr": "انفارمیشن سسٹم کیا ہے؟"
+          "questionUr": "انفارمیشن سسٹم کیا ہے؟",
+          "id": "q-7666ca4749a84c"
         },
         {
           "question": "Enlist the four pillars that describe a system.",
-          "questionUr": "سسٹم کے چار ستونوں کے نام لکھیں۔"
+          "questionUr": "سسٹم کے چار ستونوں کے نام لکھیں۔",
+          "id": "q-151332eac7c411"
         },
         {
           "question": "Define system Objectives.",
-          "questionUr": "سسٹم کے مقاصد کی تعریف کریں۔"
+          "questionUr": "سسٹم کے مقاصد کی تعریف کریں۔",
+          "id": "q-45a1e747e688c7"
         },
         {
           "question": "What are Components in a system?",
-          "questionUr": "سسٹم میں اجزاء کیا ہوتے ہیں؟"
+          "questionUr": "سسٹم میں اجزاء کیا ہوتے ہیں؟",
+          "id": "q-6446a382ab0dcc"
         },
         {
           "question": "Define a system’s Environment.",
-          "questionUr": "سسٹم کے ماحول کی تعریف کریں۔"
+          "questionUr": "سسٹم کے ماحول کی تعریف کریں۔",
+          "id": "q-175b0421c5c536"
         },
         {
           "question": "Define Software.",
-          "questionUr": "سافٹ ویئر کی تعریف کریں۔"
+          "questionUr": "سافٹ ویئر کی تعریف کریں۔",
+          "id": "q-bf0fea59150f7d"
         },
         {
           "question": "What is System Software?",
-          "questionUr": "سسٹم سافٹ ویئر کیا ہے؟"
+          "questionUr": "سسٹم سافٹ ویئر کیا ہے؟",
+          "id": "q-e5d6bc95282b0c"
         },
         {
           "question": "Enlist the four primary components of Von Neumann architecture.",
-          "questionUr": "وان نیومن آرکیٹیکچر کے چار اجزاء لکھیں۔"
+          "questionUr": "وان نیومن آرکیٹیکچر کے چار اجزاء لکھیں۔",
+          "id": "q-e201687732a6b7"
         },
         {
           "question": "Who developed the Neumann model and when?",
-          "questionUr": "نیومن ماڈل کس نے اور کب تیار کیا؟"
+          "questionUr": "نیومن ماڈل کس نے اور کب تیار کیا؟",
+          "id": "q-c546b87ae59a51"
         },
         {
           "question": "What is the function of the ALU?",
-          "questionUr": "اے ایل یو کا کیا کام ہے؟"
+          "questionUr": "اے ایل یو کا کیا کام ہے؟",
+          "id": "q-7ea99a560b6066"
         },
         {
           "question": "What is the function of the Control Unit?",
-          "questionUr": "کنٹرول یونٹ کا کیا کام ہے؟"
+          "questionUr": "کنٹرول یونٹ کا کیا کام ہے؟",
+          "id": "q-a5ee13a8659fa1"
         },
         {
           "question": "Define a System Bus.",
-          "questionUr": "سسٹم بس کی تعریف کریں۔"
+          "questionUr": "سسٹم بس کی تعریف کریں۔",
+          "id": "q-594c260b6be984"
         },
         {
           "question": "Enlist the four stages of the CPU instruction cycle.",
-          "questionUr": "سی پی یو انسٹرکشن سائیکل کے چار مراحل لکھیں۔"
+          "questionUr": "سی پی یو انسٹرکشن سائیکل کے چار مراحل لکھیں۔",
+          "id": "q-057019ad666ded"
         },
         {
           "question": "What happens during the Fetching stage?",
-          "questionUr": "فیچنگ کے مرحلے میں کیا ہوتا ہے؟"
+          "questionUr": "فیچنگ کے مرحلے میں کیا ہوتا ہے؟",
+          "id": "q-cddcb921fcdaa5"
         },
         {
           "question": "What is the difference between HDD and SSD?",
-          "questionUr": "ایچ ڈی ڈی اور ایس ایس ڈی میں کیا فرق ہے؟"
+          "questionUr": "ایچ ڈی ڈی اور ایس ایس ڈی میں کیا فرق ہے؟",
+          "id": "q-b77010e969feb4"
         },
         {
           "question": "What is Computer Science?",
-          "questionUr": "کمپیوٹر سائنس کیا ہے؟"
+          "questionUr": "کمپیوٹر سائنس کیا ہے؟",
+          "id": "q-2795a738635c2d"
         },
         {
           "question": "Why is communication key to a system?",
           "questionUr": "سسٹم کے لیے مواصلات کیوں کلیدی ہیں؟",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-f64cbc248173f6"
         },
         {
           "question": "Give two examples of system software.",
           "questionUr": "سسٹم سافٹ ویئر کی دو مثالیں دیں۔",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-938a6b51e76ff5"
         },
         {
           "question": "What is Application Software?",
           "questionUr": "ایپلی کیشن سافٹ ویئر کیا ہے؟",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-24111efebc5735"
         },
         {
           "question": "Define Decimal Number System.",
           "questionUr": "ڈیسیمل نمبر سسٹم کی تعریف کریں۔",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-1c5e89075b66b1"
         },
         {
           "question": "What is the difference between ASCII and Unicode?",
           "questionUr": "ASCII اور یونیکوڈ میں کیا فرق ہے؟",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-7dfa6210fef0d9"
         },
         {
           "question": "Define a Byte.",
           "questionUr": "بائٹ کی تعریف کریں۔",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-ccac3046f5c543"
         }
       ],
       "long": [
         {
           "question": "Describe the Basic Concept and Pillars of a System.",
-          "questionUr": "سسٹم کے بنیادی تصور اور ستونوں کی وضاحت کریں۔"
+          "questionUr": "سسٹم کے بنیادی تصور اور ستونوں کی وضاحت کریں۔",
+          "id": "q-be79c6ded87d8d"
         },
         {
           "question": "Explain the Von Neumann Architecture and its Components.",
-          "questionUr": "وان نیومن آرکیٹیکچر اور اس کے اجزاء کی وضاحت کریں۔"
+          "questionUr": "وان نیومن آرکیٹیکچر اور اس کے اجزاء کی وضاحت کریں۔",
+          "id": "q-d8f2a1e4c9412c"
         },
         {
           "question": "Detail the Working of the CPU Instruction Cycle.",
-          "questionUr": "سی پی یو انسٹرکشن سائیکل کی تفصیل بتائیں۔"
+          "questionUr": "سی پی یو انسٹرکشن سائیکل کی تفصیل بتائیں۔",
+          "id": "q-7044d71b597242"
         },
         {
           "question": "Discuss Data Representation and Text Encoding in Computing.",
           "questionUr": "ڈیٹا کی نمائندگی اور ٹیکسٹ انکوڈنگ پر بحث کریں۔",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-d7d437af5d9e82"
         }
       ]
     },
@@ -580,7 +623,8 @@
             }
           ],
           "answer": "B",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-1c1c5ddfbf3507"
         },
         {
           "question": "Which logic gate outputs true only if both inputs are true?",
@@ -604,7 +648,8 @@
             }
           ],
           "answer": "B",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-f81a3ba740d3c8"
         },
         {
           "question": "What is the first step in systematic troubleshooting?",
@@ -628,7 +673,8 @@
             }
           ],
           "answer": "C",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-077448af3fa8f5"
         },
         {
           "question": "Digital systems manipulate information in the form of:",
@@ -652,7 +698,8 @@
             }
           ],
           "answer": "B",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-4a04f68ed9f1e7"
         },
         {
           "question": "Which process converts continuous signals into discrete signals?",
@@ -676,7 +723,8 @@
             }
           ],
           "answer": "B",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-9551f83b756144"
         },
         {
           "question": "The NAND gate is the inverse of which gate?",
@@ -700,7 +748,8 @@
             }
           ],
           "answer": "B",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-812386ac5bd1b8"
         },
         {
           "question": "Which gate outputs true only when exactly one input is true?",
@@ -724,7 +773,8 @@
             }
           ],
           "answer": "C",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-0e7a9a79592b27"
         },
         {
           "question": "The building blocks of a digital circuit are:",
@@ -748,7 +798,8 @@
             }
           ],
           "answer": "C",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-5a0de7e1cf4c7b"
         },
         {
           "question": "Which gate implements the NOT function?",
@@ -772,7 +823,8 @@
             }
           ],
           "answer": "B",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-7007e25603959d"
         },
         {
           "question": "In Boolean algebra the value 0 represents:",
@@ -796,7 +848,8 @@
             }
           ],
           "answer": "B",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-01fda84217ba01"
         },
         {
           "question": "George Boole, inventor of Boolean algebra, was born in:",
@@ -820,7 +873,8 @@
             }
           ],
           "answer": "B",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-4166f78b64a73f"
         },
         {
           "question": "What does a DAC do?",
@@ -844,69 +898,82 @@
             }
           ],
           "answer": "C",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-8f11c223e8bdff"
         }
       ],
       "short": [
         {
           "question": "Define a Boolean function.",
           "questionUr": "بولین فنکشن کی تعریف کریں۔",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-af600119b0632f"
         },
         {
           "question": "What is the significance of a truth table?",
           "questionUr": "ٹروتھ ٹیبل کی اہمیت کیا ہے؟",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-2726633976d241"
         },
         {
           "question": "Differentiate analog and digital signals.",
           "questionUr": "اینالاگ اور ڈیجیٹل سگنلز میں فرق کریں۔",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-64ab0513186a93"
         },
         {
           "question": "What is the purpose of ADC?",
           "questionUr": "اے ڈی سی کا مقصد کیا ہے؟",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-e3593e44dfa97a"
         },
         {
           "question": "Define an AND gate.",
           "questionUr": "اینڈ گیٹ کی تعریف کریں۔",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-125efa16313b94"
         },
         {
           "question": "What is a NOT gate?",
           "questionUr": "ناٹ گیٹ کیا ہے؟",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-a32e3fe9aa7f9d"
         },
         {
           "question": "Explain the NAND gate.",
           "questionUr": "نینڈ گیٹ کی وضاحت کریں۔",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-70fde63a5bfbd4"
         },
         {
           "question": "What is an XOR gate?",
           "questionUr": "ایکس اور گیٹ کیا ہے؟",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-b6c6a6f080ed10"
         },
         {
           "question": "Why is troubleshooting important?",
           "questionUr": "ٹربل شوٹنگ کیوں اہم ہے؟",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-4dbe6e74def930"
         },
         {
           "question": "State De Morgan’s Theorems.",
           "questionUr": "ڈی مارگن کے قوانین بیان کریں۔",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-8f56de29d05915"
         },
         {
           "question": "What is a logic diagram?",
           "questionUr": "لاجک ڈایاگرام کیا ہے؟",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-7ba781c312d647"
         },
         {
           "question": "Why are software updates essential for security?",
           "questionUr": "سیکیورٹی کے لیے اپ ڈیٹس کیوں ضروری ہیں؟",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-e6daf92dc0a8f6"
         }
       ],
       "long": [
@@ -914,19 +981,22 @@
           "question": "Explain Boolean algebra and its laws. State De Morgan’s theorems.",
           "questionUr": "بولین الجبرا اور قوانین کی وضاحت کریں۔ ڈی مارگن کے تھیوریم بیان کریں۔",
           "source": "composed",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-ebda793d952127"
         },
         {
           "question": "Describe basic logic gates with symbols and truth tables.",
           "questionUr": "بنیادی لاجک گیٹس علامات اور ٹروتھ ٹیبلز کے ساتھ بیان کریں۔",
           "source": "composed",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-0b2a95ee1d7a3a"
         },
         {
           "question": "Explain the systematic troubleshooting process step by step.",
           "questionUr": "ٹربل شوٹنگ کا عمل مرحلہ وار بیان کریں۔",
           "source": "composed",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-ab498582222611"
         }
       ]
     },
@@ -955,7 +1025,8 @@
               "ur": "انٹرا نیٹ"
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-fc7649f86f1cc0"
         },
         {
           "question": "Transmission allowed in only one direction is:",
@@ -978,7 +1049,8 @@
               "ur": "ملٹی پلیکس"
             }
           ],
-          "answer": "A"
+          "answer": "A",
+          "id": "q-9a57bb6a72beac"
         },
         {
           "question": "A network covering a city is a:",
@@ -1001,7 +1073,8 @@
               "ur": "وین"
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-7749f1233d127f"
         },
         {
           "question": "Reliable data transfer protocol:",
@@ -1024,7 +1097,8 @@
               "ur": "آئی پی"
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-e79582b5129a9f"
         },
         {
           "question": "Layer responsible for IP addresses:",
@@ -1047,7 +1121,8 @@
               "ur": "ٹرانسپورٹ"
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-fb6068aae95b79"
         },
         {
           "question": "Translates domain names to IP addresses:",
@@ -1070,7 +1145,8 @@
               "ur": "ایف ٹی پی"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-409d8d65cf2212"
         },
         {
           "question": "Central device in a Star topology:",
@@ -1093,7 +1169,8 @@
               "ur": "ٹرمینل"
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-9d9cfac7e1025d"
         },
         {
           "question": "The most reliable network topology:",
@@ -1116,7 +1193,8 @@
               "ur": "میش"
             }
           ],
-          "answer": "D"
+          "answer": "D",
+          "id": "q-b0233e933f0707"
         },
         {
           "question": "Simultaneous two-way data transmission:",
@@ -1139,7 +1217,8 @@
               "ur": "یک طرفہ"
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-bf1892136a7400"
         },
         {
           "question": "Monitors and controls network traffic:",
@@ -1162,7 +1241,8 @@
               "ur": "راؤٹر"
             }
           ],
-          "answer": "A"
+          "answer": "A",
+          "id": "q-0245f382d85aa4"
         },
         {
           "question": "Inventor of the World Wide Web:",
@@ -1185,7 +1265,8 @@
               "ur": "اسٹیو جابز"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-e20edc4acfcae9"
         },
         {
           "question": "Unreliable, connectionless protocol:",
@@ -1208,7 +1289,8 @@
               "ur": "ایف ٹی پی"
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-cc69a77436b99d"
         },
         {
           "question": "Data unit in packet switching:",
@@ -1231,7 +1313,8 @@
               "ur": "فریم"
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-ccf82085059911"
         },
         {
           "question": "Primary objective of networks:",
@@ -1254,95 +1337,117 @@
               "ur": "ریاضیاتی منطق"
             }
           ],
-          "answer": "A"
+          "answer": "A",
+          "id": "q-4723c81938dde6"
         }
       ],
       "short": [
         {
           "question": "Define a computer network.",
-          "questionUr": "کمپیوٹر نیٹ ورک کی تعریف کریں۔"
+          "questionUr": "کمپیوٹر نیٹ ورک کی تعریف کریں۔",
+          "id": "q-3ef52b9bac61f4"
         },
         {
           "question": "Enlist key components of data communication.",
-          "questionUr": "ڈیٹا کمیونیکیشن کے اجزاء لکھیں۔"
+          "questionUr": "ڈیٹا کمیونیکیشن کے اجزاء لکھیں۔",
+          "id": "q-b48c6aa9d888d9"
         },
         {
           "question": "What is the role of a router?",
-          "questionUr": "راؤٹر کا کیا کردار ہے؟"
+          "questionUr": "راؤٹر کا کیا کردار ہے؟",
+          "id": "q-4472aec8a49038"
         },
         {
           "question": "Define a Personal Area Network (PAN).",
-          "questionUr": "پرسنل ایریا نیٹ ورک کی تعریف کریں۔"
+          "questionUr": "پرسنل ایریا نیٹ ورک کی تعریف کریں۔",
+          "id": "q-0b1dc244f11284"
         },
         {
           "question": "How does a network switch function?",
-          "questionUr": "نیٹ ورک سوئچ کیسے کام کرتا ہے؟"
+          "questionUr": "نیٹ ورک سوئچ کیسے کام کرتا ہے؟",
+          "id": "q-54bf51c081f43d"
         },
         {
           "question": "Give an example of simplex communication.",
-          "questionUr": "سمپلیکس کمیونیکیشن کی مثال دیں۔"
+          "questionUr": "سمپلیکس کمیونیکیشن کی مثال دیں۔",
+          "id": "q-d590075a5d4d87"
         },
         {
           "question": "Describe the function of the Network Layer.",
-          "questionUr": "نیٹ ورک لیئر کا کام بیان کریں۔"
+          "questionUr": "نیٹ ورک لیئر کا کام بیان کریں۔",
+          "id": "q-938d9c3834bd26"
         },
         {
           "question": "Why is TCP reliable compared to UDP?",
-          "questionUr": "ٹی سی پی یو ڈی پی سے بہتر کیوں ہے؟"
+          "questionUr": "ٹی سی پی یو ڈی پی سے بہتر کیوں ہے؟",
+          "id": "q-6e3d0792377327"
         },
         {
           "question": "What is a firewall?",
-          "questionUr": "فائر وال کیا ہے؟"
+          "questionUr": "فائر وال کیا ہے؟",
+          "id": "q-420b35cfefff65"
         },
         {
           "question": "Define Local Area Network (LAN).",
-          "questionUr": "لوکل ایریا نیٹ ورک کی تعریف کریں۔"
+          "questionUr": "لوکل ایریا نیٹ ورک کی تعریف کریں۔",
+          "id": "q-de5b6c8d96d0d0"
         },
         {
           "question": "What is the purpose of DNS?",
-          "questionUr": "ڈی این ایس کا مقصد کیا ہے؟"
+          "questionUr": "ڈی این ایس کا مقصد کیا ہے؟",
+          "id": "q-ea4e9c358892d7"
         },
         {
           "question": "Why is Mesh topology very reliable?",
-          "questionUr": "میش ٹوپولوجی قابل بھروسہ کیوں ہے؟"
+          "questionUr": "میش ٹوپولوجی قابل بھروسہ کیوں ہے؟",
+          "id": "q-069ab8af3add29"
         },
         {
           "question": "What is the main weakness of Bus topology?",
-          "questionUr": "بس ٹوپولوجی کی کمزوری کیا ہے؟"
+          "questionUr": "بس ٹوپولوجی کی کمزوری کیا ہے؟",
+          "id": "q-f4f32f8ebd0d99"
         },
         {
           "question": "What is a node in a network?",
-          "questionUr": "نیٹ ورک میں نوڈ کیا ہے؟"
+          "questionUr": "نیٹ ورک میں نوڈ کیا ہے؟",
+          "id": "q-403990cc29d201"
         },
         {
           "question": "Define an Intranet.",
-          "questionUr": "انٹرا نیٹ کی تعریف کریں۔"
+          "questionUr": "انٹرا نیٹ کی تعریف کریں۔",
+          "id": "q-5ceca63351a7b7"
         },
         {
           "question": "What is an IP address?",
-          "questionUr": "آئی پی ایڈریس کیا ہے؟"
+          "questionUr": "آئی پی ایڈریس کیا ہے؟",
+          "id": "q-72ab6df6f3de24"
         }
       ],
       "long": [
         {
           "question": "Discuss Primary Objectives and Benefits of Computer Networks.",
-          "questionUr": "کمپیوٹر نیٹ ورکس کے مقاصد اور فوائد پر بحث کریں۔"
+          "questionUr": "کمپیوٹر نیٹ ورکس کے مقاصد اور فوائد پر بحث کریں۔",
+          "id": "q-8518bda1fb92de"
         },
         {
           "question": "Define the OSI Network Model and explain the functions of its layers.",
-          "questionUr": "او ایس آئی ماڈل اور اس کی تہوں کے افعال واضح کریں۔"
+          "questionUr": "او ایس آئی ماڈل اور اس کی تہوں کے افعال واضح کریں۔",
+          "id": "q-57661bd17d6736"
         },
         {
           "question": "Explain Network Topologies and compare Star and Bus.",
-          "questionUr": "نیٹ ورک ٹوپولوجیز اور اسٹار و بس کا موازنہ کریں۔"
+          "questionUr": "نیٹ ورک ٹوپولوجیز اور اسٹار و بس کا موازنہ کریں۔",
+          "id": "q-da194757d6f5b8"
         },
         {
           "question": "Describe the Fundamental Concepts and Components of Data Communication.",
-          "questionUr": "ڈیٹا کمیونیکیشن کے تصورات اور اجزاء بیان کریں۔"
+          "questionUr": "ڈیٹا کمیونیکیشن کے تصورات اور اجزاء بیان کریں۔",
+          "id": "q-44d065fe02726e"
         },
         {
           "question": "Discuss Real-World Applications of Networks in Business and Education.",
-          "questionUr": "کاروبار و تعلیم میں نیٹ ورکس کے اطلاق پر بحث کریں۔"
+          "questionUr": "کاروبار و تعلیم میں نیٹ ورکس کے اطلاق پر بحث کریں۔",
+          "id": "q-4deb4e94c1b87e"
         }
       ]
     },
@@ -1371,7 +1476,8 @@
               "ur": "ویب ڈویلپمنٹ"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-1113fd18446123"
         },
         {
           "question": "Which technique breaks a complex problem into smaller parts?",
@@ -1394,7 +1500,8 @@
               "ur": "سیمولیشن"
             }
           ],
-          "answer": "A"
+          "answer": "A",
+          "id": "q-0bb180ad6cbb9d"
         },
         {
           "question": "Finding similarities or regularities within problems is:",
@@ -1417,7 +1524,8 @@
               "ur": "پراسیس فلو"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-ea3bcfdde575d0"
         },
         {
           "question": "Hiding complex details to focus on essentials is:",
@@ -1440,7 +1548,8 @@
               "ur": "ڈی کمپوزیشن"
             }
           ],
-          "answer": "A"
+          "answer": "A",
+          "id": "q-c8c5b4b8587b93"
         },
         {
           "question": "A step-by-step set of instructions to achieve a goal is an:",
@@ -1463,7 +1572,8 @@
               "ur": "ان پٹ"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-41265b099a9576"
         },
         {
           "question": "The oval symbol in a flowchart represents:",
@@ -1486,7 +1596,8 @@
               "ur": "فیصلہ"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-be35d9eb67d214"
         },
         {
           "question": "Which flowchart symbol is used for a task or operation?",
@@ -1509,7 +1620,8 @@
               "ur": "تیر"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-71bd4ea620ae73"
         },
         {
           "question": "A parallelogram in a flowchart represents:",
@@ -1532,7 +1644,8 @@
               "ur": "فلو لائن"
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-369198b1b158f7"
         },
         {
           "question": "A human-readable high-level description of an algorithm is:",
@@ -1555,7 +1668,8 @@
               "ur": "بیانیہ"
             }
           ],
-          "answer": "A"
+          "answer": "A",
+          "id": "q-c9e4eb12cc3472"
         },
         {
           "question": "What measures how running time changes as input grows?",
@@ -1578,7 +1692,8 @@
               "ur": "سیمولیشن"
             }
           ],
-          "answer": "A"
+          "answer": "A",
+          "id": "q-011c67ba88da15"
         },
         {
           "question": "Manually walking through an algorithm with sample data is a:",
@@ -1601,7 +1716,8 @@
               "ur": "ٹیسٹ کیس"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-3e4773dd1b3c23"
         },
         {
           "question": "Which pillar lets us reuse solutions from similar problems?",
@@ -1624,7 +1740,8 @@
               "ur": "سلیکشن"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-71bf2aae05623c"
         },
         {
           "question": "What does the acronym LARP stand for?",
@@ -1648,7 +1765,8 @@
             }
           ],
           "answer": "B",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-a3b8609080d8b5"
         },
         {
           "question": "Finding and fixing algorithm mistakes is:",
@@ -1672,7 +1790,8 @@
             }
           ],
           "answer": "A",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-89aa13a5cd9595"
         },
         {
           "question": "Dividing by zero during execution results in a:",
@@ -1696,103 +1815,125 @@
             }
           ],
           "answer": "B",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-8e5523ac8d4991"
         }
       ],
       "short": [
         {
           "question": "Define computational thinking.",
-          "questionUr": "کمپیوٹیشنل تھنکنگ کی تعریف کریں۔"
+          "questionUr": "کمپیوٹیشنل تھنکنگ کی تعریف کریں۔",
+          "id": "q-a2685a48a19463"
         },
         {
           "question": "Enlist the four components of computational thinking.",
-          "questionUr": "کمپیوٹیشنل تھنکنگ کے چار اجزاء لکھیں۔"
+          "questionUr": "کمپیوٹیشنل تھنکنگ کے چار اجزاء لکھیں۔",
+          "id": "q-689cbf921ed221"
         },
         {
           "question": "What is the objective of decomposition?",
-          "questionUr": "ڈی کمپوزیشن کا مقصد کیا ہے؟"
+          "questionUr": "ڈی کمپوزیشن کا مقصد کیا ہے؟",
+          "id": "q-5a34dd1915ef1c"
         },
         {
           "question": "Explain the significance of pattern recognition.",
-          "questionUr": "پیٹرن ریکگنیشن کی اہمیت واضح کریں۔"
+          "questionUr": "پیٹرن ریکگنیشن کی اہمیت واضح کریں۔",
+          "id": "q-02a53037cd5ab5"
         },
         {
           "question": "Describe abstraction in problem-solving.",
-          "questionUr": "ایبسٹریکشن کی وضاحت کریں۔"
+          "questionUr": "ایبسٹریکشن کی وضاحت کریں۔",
+          "id": "q-8a8ee9742d1d71"
         },
         {
           "question": "What is an algorithm?",
-          "questionUr": "الگورتھم کیا ہے؟"
+          "questionUr": "الگورتھم کیا ہے؟",
+          "id": "q-d811ba8cf8c895"
         },
         {
           "question": "Define a flowchart.",
-          "questionUr": "فلو چارٹ کی تعریف کریں۔"
+          "questionUr": "فلو چارٹ کی تعریف کریں۔",
+          "id": "q-1926a95f749451"
         },
         {
           "question": "What are flowlines?",
-          "questionUr": "فلو لائنز کیا ہوتی ہیں؟"
+          "questionUr": "فلو لائنز کیا ہوتی ہیں؟",
+          "id": "q-b192e6ed28508f"
         },
         {
           "question": "Explain the purpose of a decision symbol.",
-          "questionUr": "ڈیسیشن سمبل کا مقصد واضح کریں۔"
+          "questionUr": "ڈیسیشن سمبل کا مقصد واضح کریں۔",
+          "id": "q-b91546290d703d"
         },
         {
           "question": "What is pseudocode?",
-          "questionUr": "سوڈو کوڈ کیا ہے؟"
+          "questionUr": "سوڈو کوڈ کیا ہے؟",
+          "id": "q-48427daca05060"
         },
         {
           "question": "Define time complexity.",
-          "questionUr": "ٹائم کمپلیکسٹی کی تعریف کریں۔"
+          "questionUr": "ٹائم کمپلیکسٹی کی تعریف کریں۔",
+          "id": "q-18f24f31925458"
         },
         {
           "question": "Define space complexity.",
-          "questionUr": "اسپیس کمپلیکسٹی کی تعریف کریں۔"
+          "questionUr": "اسپیس کمپلیکسٹی کی تعریف کریں۔",
+          "id": "q-60222275fa33e3"
         },
         {
           "question": "What is a dry run?",
-          "questionUr": "ڈرائی رن کیا ہے؟"
+          "questionUr": "ڈرائی رن کیا ہے؟",
+          "id": "q-a7df65b8412b17"
         },
         {
           "question": "Explain simulation.",
-          "questionUr": "سیمولیشن کی وضاحت کریں۔"
+          "questionUr": "سیمولیشن کی وضاحت کریں۔",
+          "id": "q-a3b8ee437b7ad8"
         },
         {
           "question": "What is LARP?",
           "questionUr": "لیرپ کیا ہے؟",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-5b1e821e5b01a4"
         },
         {
           "question": "Define a syntax error.",
           "questionUr": "سنٹیکس ایرر کی تعریف کریں۔",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-e9743dae521da0"
         },
         {
           "question": "What is debugging?",
           "questionUr": "ڈی بگنگ کیا ہے؟",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-cbc5175e671787"
         }
       ],
       "long": [
         {
           "question": "Explain the four pillars of computational thinking with examples.",
           "questionUr": "کمپیوٹیشنل تھنکنگ کے چار ستون مثالوں کے ساتھ واضح کریں۔",
-          "source": "composed"
+          "source": "composed",
+          "id": "q-61009799237091"
         },
         {
           "question": "Describe flowchart symbols and draw a flowchart to find the largest of three numbers.",
           "questionUr": "فلو چارٹ علامات اور تین اعداد میں سب سے بڑا عدد معلوم کرنے کا فلو چارٹ بنائیں۔",
-          "source": "composed"
+          "source": "composed",
+          "id": "q-60032c4630c0aa"
         },
         {
           "question": "Explain algorithms, pseudocode, time and space complexity and dry run.",
           "questionUr": "الگورتھم، سوڈو کوڈ، کمپلیکسٹی اور ڈرائی رن کی وضاحت کریں۔",
-          "source": "composed"
+          "source": "composed",
+          "id": "q-3027f922a3c351"
         },
         {
           "question": "What is LARP? Explain error types and the debugging process.",
           "questionUr": "لیرپ کیا ہے؟ ایرر کی اقسام اور ڈی بگنگ بیان کریں۔",
           "source": "composed",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-b75eb6d904884e"
         }
       ]
     },
@@ -1821,7 +1962,8 @@
               "ur": "نیٹ ورک سیٹ اپ"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-30b2c32499215d"
         },
         {
           "question": "What manages behind-the-scenes logic?",
@@ -1844,7 +1986,8 @@
               "ur": "یو ایکس ڈیزائن"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-e46150b5fe078c"
         },
         {
           "question": "Developers managing all aspects are:",
@@ -1867,7 +2010,8 @@
               "ur": "ویب ڈیزائنر"
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-d74a6660e3f764"
         },
         {
           "question": "The standard HTML root element is:",
@@ -1890,7 +2034,8 @@
               "ur": ""
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-04da6ffe20df08"
         },
         {
           "question": "Elements in HTML are called:",
@@ -1913,7 +2058,8 @@
               "ur": "فولڈرز"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-f897a206a17905"
         },
         {
           "question": "Which tag defines a large heading?",
@@ -1936,7 +2082,8 @@
               "ur": ""
             }
           ],
-          "answer": "A"
+          "answer": "A",
+          "id": "q-bc50d2ec605df8"
         },
         {
           "question": "Which tag defines a paragraph?",
@@ -1959,7 +2106,8 @@
               "ur": ""
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-749d6cea27c62e"
         },
         {
           "question": "Visible content is placed inside:",
@@ -1982,7 +2130,8 @@
               "ur": ""
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-23f6601ddee340"
         },
         {
           "question": "The HTML file extension is:",
@@ -2005,7 +2154,8 @@
               "ur": ""
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-b91f5abb3bef8d"
         },
         {
           "question": "Which tag creates a hyperlink?",
@@ -2028,7 +2178,8 @@
               "ur": ""
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-8c1c07bc6c90a7"
         },
         {
           "question": "What creates an unordered list?",
@@ -2051,7 +2202,8 @@
               "ur": ""
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-6961a09a321164"
         },
         {
           "question": "Which tool is a common text editor?",
@@ -2074,7 +2226,8 @@
               "ur": "سفاری"
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-de0a116e7afbdd"
         },
         {
           "question": "Which language structures web content?",
@@ -2098,7 +2251,8 @@
             }
           ],
           "answer": "C",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-80e1c66a769998"
         },
         {
           "question": "What is used to style web pages?",
@@ -2122,7 +2276,8 @@
             }
           ],
           "answer": "A",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-61830f84650ee5"
         },
         {
           "question": "Who created JavaScript?",
@@ -2146,7 +2301,8 @@
             }
           ],
           "answer": "B",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-dd648763da670e"
         },
         {
           "question": "JavaScript stores data in:",
@@ -2170,100 +2326,121 @@
             }
           ],
           "answer": "B",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-94c2c6765e3f2c"
         }
       ],
       "short": [
         {
           "question": "Define Web Development.",
-          "questionUr": "ویب ڈویلپمنٹ کی تعریف کریں۔"
+          "questionUr": "ویب ڈویلپمنٹ کی تعریف کریں۔",
+          "id": "q-602cd48b76271e"
         },
         {
           "question": "What is Front-end Development?",
-          "questionUr": "فرنٹ اینڈ ڈویلپمنٹ کیا ہے؟"
+          "questionUr": "فرنٹ اینڈ ڈویلپمنٹ کیا ہے؟",
+          "id": "q-4d2783431ed7ec"
         },
         {
           "question": "Describe Back-end Development.",
-          "questionUr": "بیک اینڈ ڈویلپمنٹ کی وضاحت کریں۔"
+          "questionUr": "بیک اینڈ ڈویلپمنٹ کی وضاحت کریں۔",
+          "id": "q-3f1d5be5b20f92"
         },
         {
           "question": "What are HTML tags?",
-          "questionUr": "ایچ ٹی ایم ایل ٹیگز کیا ہیں؟"
+          "questionUr": "ایچ ٹی ایم ایل ٹیگز کیا ہیں؟",
+          "id": "q-cc60fc1933feee"
         },
         {
           "question": "Describe the head section.",
-          "questionUr": "ہیڈ سیکشن کی وضاحت کریں۔"
+          "questionUr": "ہیڈ سیکشن کی وضاحت کریں۔",
+          "id": "q-5eb69e96f4e71f"
         },
         {
           "question": "What is the body section used for?",
-          "questionUr": "باڈی سیکشن کس لیے ہے؟"
+          "questionUr": "باڈی سیکشن کس لیے ہے؟",
+          "id": "q-b8458589311356"
         },
         {
           "question": "What does the title tag do?",
-          "questionUr": "ٹائٹل ٹیگ کیا کرتا ہے؟"
+          "questionUr": "ٹائٹل ٹیگ کیا کرتا ہے؟",
+          "id": "q-373bc1981528f0"
         },
         {
           "question": "Define a hyperlink in HTML.",
-          "questionUr": "ہائپر لنک کی تعریف کریں۔"
+          "questionUr": "ہائپر لنک کی تعریف کریں۔",
+          "id": "q-48168a03491c4c"
         },
         {
           "question": "List two tools for a development environment.",
-          "questionUr": "ڈویلپمنٹ ماحول کے دو ٹولز لکھیں۔"
+          "questionUr": "ڈویلپمنٹ ماحول کے دو ٹولز لکھیں۔",
+          "id": "q-1cb0f722081fef"
         },
         {
           "question": "Why are headings important for SEO?",
-          "questionUr": "ایس ای او کے لیے ہیڈنگز کیوں اہم ہیں؟"
+          "questionUr": "ایس ای او کے لیے ہیڈنگز کیوں اہم ہیں؟",
+          "id": "q-aba634092649b2"
         },
         {
           "question": "What is the purpose of comments in HTML?",
-          "questionUr": "کمنٹس کا مقصد کیا ہے؟"
+          "questionUr": "کمنٹس کا مقصد کیا ہے؟",
+          "id": "q-aca35a3b4501e6"
         },
         {
           "question": "What is the use of the table tag?",
-          "questionUr": "table ٹیگ کا استعمال کیا ہے؟"
+          "questionUr": "table ٹیگ کا استعمال کیا ہے؟",
+          "id": "q-640833f3dacbea"
         },
         {
           "question": "What is a Full-stack developer?",
           "questionUr": "فل اسٹیک ڈویلپر کون ہوتا ہے؟",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-2afc584f2310b6"
         },
         {
           "question": "What is the role of CSS?",
           "questionUr": "سی ایس ایس کا کردار کیا ہے؟",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-54cfa9abb60035"
         },
         {
           "question": "What are CSS selectors?",
           "questionUr": "سی ایس ایس سلیکٹرز کیا ہیں؟",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-f550d32d29a239"
         },
         {
           "question": "What is a variable in JavaScript?",
           "questionUr": "جاوا اسکرپٹ میں ویری ایبل کیا ہے؟",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-9262af8434b1c3"
         }
       ],
       "long": [
         {
           "question": "Explain the structure of an HTML document with an example.",
           "questionUr": "ایچ ٹی ایم ایل دستاویز کی ساخت مثال کے ساتھ واضح کریں۔",
-          "source": "composed"
+          "source": "composed",
+          "id": "q-46ddb1b5101d33"
         },
         {
           "question": "Differentiate front-end and back-end development and describe the tools needed.",
           "questionUr": "فرنٹ اینڈ و بیک اینڈ میں فرق اور درکار ٹولز بیان کریں۔",
-          "source": "composed"
+          "source": "composed",
+          "id": "q-6ff5f0be09fd48"
         },
         {
           "question": "What are HTML tags? Explain headings, paragraphs, links, lists and tables.",
           "questionUr": "ایچ ٹی ایم ایل ٹیگز، ہیڈنگز، پیراگراف، لنکس، فہرستیں اور ٹیبلز واضح کریں۔",
-          "source": "composed"
+          "source": "composed",
+          "id": "q-cd481a3ec5c931"
         },
         {
           "question": "Explain CSS selectors, rules and the box model with examples.",
           "questionUr": "سی ایس ایس سلیکٹرز، رولز اور باکس ماڈل واضح کریں۔",
           "source": "composed",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-4c013c30d66484"
         }
       ]
     },
@@ -2292,7 +2469,8 @@
               "ur": "پروگرامز"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-3b39d97d40d078"
         },
         {
           "question": "Data described by categories or labels is:",
@@ -2315,7 +2493,8 @@
               "ur": "حسابی"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-2f51782d04b778"
         },
         {
           "question": "Which data type is used for measurements?",
@@ -2338,7 +2517,8 @@
               "ur": "معیاری"
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-06eef05f1e2ed0"
         },
         {
           "question": "Data organized in spreadsheets is considered:",
@@ -2361,7 +2541,8 @@
               "ur": "آزادانہ ساخت"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-3e16312a59407c"
         },
         {
           "question": "Text from emails and social media is:",
@@ -2384,7 +2565,8 @@
               "ur": "ترتیب وار"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-61057d824b9fac"
         },
         {
           "question": "Saving files online for any-device access is:",
@@ -2407,7 +2589,8 @@
               "ur": "ہارڈ ڈرائیو"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-7fc9b5caf08615"
         },
         {
           "question": "Solving problems using data, math and computer skills is:",
@@ -2430,7 +2613,8 @@
               "ur": "ہارڈ ویئر"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-54f9d2b1f65d37"
         },
         {
           "question": "Turning numbers into pictures to understand them is:",
@@ -2453,7 +2637,8 @@
               "ur": "ٹائپنگ"
             }
           ],
-          "answer": "A"
+          "answer": "A",
+          "id": "q-3f25a702f46f5d"
         },
         {
           "question": "Charts help identify patterns and:",
@@ -2476,7 +2661,8 @@
               "ur": "نام"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-92739a6d194e5c"
         },
         {
           "question": "Talking to individuals one-on-one to gather data is:",
@@ -2499,7 +2685,8 @@
               "ur": "تحقیق"
             }
           ],
-          "answer": "A"
+          "answer": "A",
+          "id": "q-996d48754d6a9c"
         },
         {
           "question": "Preparing data by cleaning and organizing it is:",
@@ -2522,7 +2709,8 @@
               "ur": "آرکائیونگ"
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-2c081049ce5db7"
         },
         {
           "question": "Analyzing data to support decisions is called:",
@@ -2545,91 +2733,112 @@
               "ur": "ڈیٹا پرنٹنگ"
             }
           ],
-          "answer": "A"
+          "answer": "A",
+          "id": "q-d9e9274c18880a"
         }
       ],
       "short": [
         {
           "question": "Define data.",
-          "questionUr": "ڈیٹا کی تعریف کریں۔"
+          "questionUr": "ڈیٹا کی تعریف کریں۔",
+          "id": "q-b76bf6583ec3d4"
         },
         {
           "question": "What is qualitative data?",
-          "questionUr": "کوالٹیٹیو ڈیٹا کیا ہے؟"
+          "questionUr": "کوالٹیٹیو ڈیٹا کیا ہے؟",
+          "id": "q-c22816a7f33f66"
         },
         {
           "question": "Define quantitative data.",
-          "questionUr": "کوانٹیٹیٹیو ڈیٹا کی تعریف کریں۔"
+          "questionUr": "کوانٹیٹیٹیو ڈیٹا کی تعریف کریں۔",
+          "id": "q-62248e3d4afe58"
         },
         {
           "question": "Give an example of qualitative data.",
-          "questionUr": "کوالٹیٹیو ڈیٹا کی مثال دیں۔"
+          "questionUr": "کوالٹیٹیو ڈیٹا کی مثال دیں۔",
+          "id": "q-068b7de7233122"
         },
         {
           "question": "What is structured data?",
-          "questionUr": "اسٹرکچرڈ ڈیٹا کیا ہے؟"
+          "questionUr": "اسٹرکچرڈ ڈیٹا کیا ہے؟",
+          "id": "q-80ed60e6fae450"
         },
         {
           "question": "What is unstructured data?",
-          "questionUr": "ان اسٹرکچرڈ ڈیٹا کیا ہے؟"
+          "questionUr": "ان اسٹرکچرڈ ڈیٹا کیا ہے؟",
+          "id": "q-2d80bb6294b0f9"
         },
         {
           "question": "Define data visualization.",
-          "questionUr": "ڈیٹا ویژولائزیشن کی تعریف کریں۔"
+          "questionUr": "ڈیٹا ویژولائزیشن کی تعریف کریں۔",
+          "id": "q-51cef0b80e8dc3"
         },
         {
           "question": "Enlist three common types of charts.",
-          "questionUr": "چارٹس کی تین اقسام لکھیں۔"
+          "questionUr": "چارٹس کی تین اقسام لکھیں۔",
+          "id": "q-8d73eee30397ae"
         },
         {
           "question": "Explain data pre-processing.",
-          "questionUr": "ڈیٹا پری پروسیسنگ کی وضاحت کریں۔"
+          "questionUr": "ڈیٹا پری پروسیسنگ کی وضاحت کریں۔",
+          "id": "q-5c0733786cc639"
         },
         {
           "question": "What are surveys?",
-          "questionUr": "سروے کیا ہوتے ہیں؟"
+          "questionUr": "سروے کیا ہوتے ہیں؟",
+          "id": "q-bf70dfc2bf0ce0"
         },
         {
           "question": "What is cloud storage?",
-          "questionUr": "کلاؤڈ اسٹوریج کیا ہے؟"
+          "questionUr": "کلاؤڈ اسٹوریج کیا ہے؟",
+          "id": "q-d63cfdef69bc94"
         },
         {
           "question": "Define remote access.",
-          "questionUr": "ریموٹ ایکسیس کی تعریف کریں۔"
+          "questionUr": "ریموٹ ایکسیس کی تعریف کریں۔",
+          "id": "q-80e99245339010"
         },
         {
           "question": "What is data science?",
-          "questionUr": "ڈیٹا سائنس کیا ہے؟"
+          "questionUr": "ڈیٹا سائنس کیا ہے؟",
+          "id": "q-a574788a13f3f9"
         },
         {
           "question": "What is a backup?",
-          "questionUr": "بیک اپ کیا ہے؟"
+          "questionUr": "بیک اپ کیا ہے؟",
+          "id": "q-de0098527a6e71"
         },
         {
           "question": "Define data analytics.",
-          "questionUr": "ڈیٹا اینالیٹکس کی تعریف کریں۔"
+          "questionUr": "ڈیٹا اینالیٹکس کی تعریف کریں۔",
+          "id": "q-8dc6312331fe1d"
         }
       ],
       "long": [
         {
           "question": "Differentiate Qualitative and Quantitative Data with examples.",
-          "questionUr": "کوالٹیٹیو اور کوانٹیٹیٹیو ڈیٹا میں فرق مثالوں کے ساتھ کریں۔"
+          "questionUr": "کوالٹیٹیو اور کوانٹیٹیٹیو ڈیٹا میں فرق مثالوں کے ساتھ کریں۔",
+          "id": "q-c9cc0fb9008155"
         },
         {
           "question": "Explain methods and best practices for data collection.",
-          "questionUr": "ڈیٹا اکٹھا کرنے کے طریقے اور اصول واضح کریں۔"
+          "questionUr": "ڈیٹا اکٹھا کرنے کے طریقے اور اصول واضح کریں۔",
+          "id": "q-bb9daf40900e66"
         },
         {
           "question": "Discuss the importance of organizing, analysing and visualizing data.",
-          "questionUr": "ڈیٹا ترتیب، تجزیہ اور ویژولائزیشن کی اہمیت پر بحث کریں۔"
+          "questionUr": "ڈیٹا ترتیب، تجزیہ اور ویژولائزیشن کی اہمیت پر بحث کریں۔",
+          "id": "q-c43ac6550ebd13"
         },
         {
           "question": "Analyze the benefits of cloud storage and collaborative tools.",
-          "questionUr": "کلاؤڈ اسٹوریج اور کولیبوریٹیو ٹولز کے فوائد کا تجزیہ کریں۔"
+          "questionUr": "کلاؤڈ اسٹوریج اور کولیبوریٹیو ٹولز کے فوائد کا تجزیہ کریں۔",
+          "id": "q-37ad37373c1f41"
         },
         {
           "question": "Provide an introduction to Data Science and its practical impact.",
-          "questionUr": "ڈیٹا سائنس کا تعارف اور عملی اثرات بیان کریں۔"
+          "questionUr": "ڈیٹا سائنس کا تعارف اور عملی اثرات بیان کریں۔",
+          "id": "q-43ba0ee73dcefa"
         }
       ]
     },
@@ -2658,7 +2867,8 @@
               "ur": "جذباتی گہرائی"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-b1827237189be1"
         },
         {
           "question": "Machines learning from experience is:",
@@ -2681,7 +2891,8 @@
               "ur": "ساکن منطق"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-f0b447ba4c15b2"
         },
         {
           "question": "Neural networks drive what?",
@@ -2704,7 +2915,8 @@
               "ur": "پاور سپلائی"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-af1d8da42bbaf3"
         },
         {
           "question": "NLP helps computers do what?",
@@ -2727,7 +2939,8 @@
               "ur": "فائلیں محفوظ کرنا"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-76e62824742fd3"
         },
         {
           "question": "Which subfield involves visual understanding?",
@@ -2750,7 +2963,8 @@
               "ur": "ڈیٹا سائنس"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-6622542d7fc824"
         },
         {
           "question": "Transparent AI algorithms are:",
@@ -2773,7 +2987,8 @@
               "ur": "گرے باکس"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-3a8dd90330690b"
         },
         {
           "question": "IoT objects use what to collect data?",
@@ -2796,7 +3011,8 @@
               "ur": "اسپیکرز"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-22d8f72690f6b8"
         },
         {
           "question": "Smart homes help save:",
@@ -2819,7 +3035,8 @@
               "ur": "صرف پانی"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-a5693a607c87e5"
         },
         {
           "question": "The T in IoT stands for:",
@@ -2842,7 +3059,8 @@
               "ur": "ٹولز"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-d735bf951bb7bb"
         },
         {
           "question": "A security concern in IoT is:",
@@ -2865,7 +3083,8 @@
               "ur": "زیادہ وزن"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-94ff7a10b0c198"
         },
         {
           "question": "V2V communication belongs to:",
@@ -2888,7 +3107,8 @@
               "ur": "ای کامرس"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-36ba582fa7c78c"
         },
         {
           "question": "Robots in medicine can perform:",
@@ -2911,78 +3131,95 @@
               "ur": "صرف ٹائپنگ"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-e798b146b4f0a7"
         }
       ],
       "short": [
         {
           "question": "Define Artificial Intelligence (AI).",
-          "questionUr": "آرٹیفیشل انٹیلی جنس کی تعریف کریں۔"
+          "questionUr": "آرٹیفیشل انٹیلی جنس کی تعریف کریں۔",
+          "id": "q-2805b7e7ac35b5"
         },
         {
           "question": "What is the primary goal of machine learning?",
-          "questionUr": "مشین لرننگ کا بنیادی مقصد کیا ہے؟"
+          "questionUr": "مشین لرننگ کا بنیادی مقصد کیا ہے؟",
+          "id": "q-3fd3c6e9c346a4"
         },
         {
           "question": "Explain Natural Language Processing (NLP).",
-          "questionUr": "نیچرل لینگویج پروسیسنگ کی وضاحت کریں۔"
+          "questionUr": "نیچرل لینگویج پروسیسنگ کی وضاحت کریں۔",
+          "id": "q-8069adfc2f5d1d"
         },
         {
           "question": "What is Computer Vision?",
-          "questionUr": "کمپیوٹر ویژن کیا ہے؟"
+          "questionUr": "کمپیوٹر ویژن کیا ہے؟",
+          "id": "q-cb95068a7591ab"
         },
         {
           "question": "Define Robotics.",
-          "questionUr": "روبوٹکس کی تعریف کریں۔"
+          "questionUr": "روبوٹکس کی تعریف کریں۔",
+          "id": "q-37d85aad1a5897"
         },
         {
           "question": "What are explainable (whitebox) algorithms?",
-          "questionUr": "وائٹ باکس الگورتھم کیا ہیں؟"
+          "questionUr": "وائٹ باکس الگورتھم کیا ہیں؟",
+          "id": "q-e2fd990725a1be"
         },
         {
           "question": "Define the Internet of Things (IoT).",
-          "questionUr": "انٹرنیٹ آف تھنگز کی تعریف کریں۔"
+          "questionUr": "انٹرنیٹ آف تھنگز کی تعریف کریں۔",
+          "id": "q-68c74dae85de0a"
         },
         {
           "question": "List three domains where AI is applied.",
-          "questionUr": "AI کے تین شعبے لکھیں۔"
+          "questionUr": "AI کے تین شعبے لکھیں۔",
+          "id": "q-3bd53cc811d823"
         },
         {
           "question": "Give an example of IoT in transportation.",
-          "questionUr": "ٹرانسپورٹ میں IoT کی مثال دیں۔"
+          "questionUr": "ٹرانسپورٹ میں IoT کی مثال دیں۔",
+          "id": "q-f45c4e52860330"
         },
         {
           "question": "What is the function of sensors in IoT?",
-          "questionUr": "آئی او ٹی میں سینسرز کا کام کیا ہے؟"
+          "questionUr": "آئی او ٹی میں سینسرز کا کام کیا ہے؟",
+          "id": "q-3f0758b24085c6"
         },
         {
           "question": "Define a Neural Network.",
-          "questionUr": "نیورل نیٹ ورک کی تعریف کریں۔"
+          "questionUr": "نیورل نیٹ ورک کی تعریف کریں۔",
+          "id": "q-cdd766722d524b"
         },
         {
           "question": "Why is security a major concern in IoT?",
-          "questionUr": "آئی او ٹی میں سیکیورٹی کیوں اہم ہے؟"
+          "questionUr": "آئی او ٹی میں سیکیورٹی کیوں اہم ہے؟",
+          "id": "q-40799e66616732"
         },
         {
           "question": "How does AI help in agriculture?",
-          "questionUr": "AI زراعت میں کیسے مدد کرتی ہے؟"
+          "questionUr": "AI زراعت میں کیسے مدد کرتی ہے؟",
+          "id": "q-d4dc5c2e9273f3"
         }
       ],
       "long": [
         {
           "question": "Define AI and explain its major subfields with applications.",
           "questionUr": "اے آئی اور اس کے ذیلی شعبے اطلاقات کے ساتھ واضح کریں۔",
-          "source": "composed"
+          "source": "composed",
+          "id": "q-7eb787ffd83943"
         },
         {
           "question": "Describe IoT architecture, components, applications and security concerns.",
           "questionUr": "آئی او ٹی فن تعمیر، اجزاء، اطلاقات اور سیکیورٹی بیان کریں۔",
-          "source": "composed"
+          "source": "composed",
+          "id": "q-d1e1712267a0c7"
         },
         {
           "question": "Explain whitebox and blackbox AI and why interpretability matters.",
           "questionUr": "وائٹ باکس و بلیک باکس اے آئی اور تشریح پذیری کی اہمیت واضح کریں۔",
-          "source": "composed"
+          "source": "composed",
+          "id": "q-3784787ed78f79"
         }
       ]
     },
@@ -3011,7 +3248,8 @@
               "ur": "منطق"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-d9263e7d55348c"
         },
         {
           "question": "Check system requirements to ensure what?",
@@ -3034,7 +3272,8 @@
               "ur": "وزن"
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-909b328110f364"
         },
         {
           "question": "Extra security layer beyond passwords:",
@@ -3057,7 +3296,8 @@
               "ur": "سی پی یو"
             }
           ],
-          "answer": "A"
+          "answer": "A",
+          "id": "q-36561fd5802405"
         },
         {
           "question": "Tricking users to steal private data:",
@@ -3080,7 +3320,8 @@
               "ur": "انکرپشن"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-2b4d3f130618a1"
         },
         {
           "question": "Software that harms your device:",
@@ -3103,7 +3344,8 @@
               "ur": "شیئر ویئر"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-fe246fe8a4e98c"
         },
         {
           "question": "Password quality should be:",
@@ -3126,7 +3368,8 @@
               "ur": "مختصر"
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-8801a03803415f"
         },
         {
           "question": "Public Wi-Fi is often:",
@@ -3149,7 +3392,8 @@
               "ur": "مہنگا"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-4e70b266a983d8"
         },
         {
           "question": "Permission given for data collection:",
@@ -3172,7 +3416,8 @@
               "ur": "پائریسی"
             }
           ],
-          "answer": "A"
+          "answer": "A",
+          "id": "q-78b4638f892c9e"
         },
         {
           "question": "Copy of files stored separately:",
@@ -3195,7 +3440,8 @@
               "ur": "لاگ"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-32d410143f52d5"
         },
         {
           "question": "Setting that controls data visibility:",
@@ -3218,7 +3464,8 @@
               "ur": "آڈیو"
             }
           ],
-          "answer": "A"
+          "answer": "A",
+          "id": "q-a1a1d2da8cb7bb"
         },
         {
           "question": "Online behavior should be:",
@@ -3241,7 +3488,8 @@
               "ur": "لاپرواہ"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-0221bb42e2da46"
         },
         {
           "question": "What protects original creative works?",
@@ -3265,7 +3513,8 @@
             }
           ],
           "answer": "C",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-467f2ea2d1f72c"
         },
         {
           "question": "What protects new inventions or processes?",
@@ -3289,7 +3538,8 @@
             }
           ],
           "answer": "B",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-68e036add25873"
         },
         {
           "question": "Illegal copying of software is called:",
@@ -3313,95 +3563,115 @@
             }
           ],
           "answer": "B",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-4861b5f577a7c7"
         }
       ],
       "short": [
         {
           "question": "Define safe computer usage.",
-          "questionUr": "محفوظ کمپیوٹر استعمال کی تعریف کریں۔"
+          "questionUr": "محفوظ کمپیوٹر استعمال کی تعریف کریں۔",
+          "id": "q-ba87363ec5c31b"
         },
         {
           "question": "What is responsible computer usage?",
-          "questionUr": "ذمہ دارانہ کمپیوٹر استعمال کیا ہے؟"
+          "questionUr": "ذمہ دارانہ کمپیوٹر استعمال کیا ہے؟",
+          "id": "q-52849e6c73e894"
         },
         {
           "question": "Define hardware.",
-          "questionUr": "ہارڈ ویئر کی تعریف کریں۔"
+          "questionUr": "ہارڈ ویئر کی تعریف کریں۔",
+          "id": "q-43190854c3c720"
         },
         {
           "question": "Why is compatibility important in software selection?",
-          "questionUr": "سافٹ ویئر میں مطابقت کیوں اہم ہے؟"
+          "questionUr": "سافٹ ویئر میں مطابقت کیوں اہم ہے؟",
+          "id": "q-1e2f61c29a3d19"
         },
         {
           "question": "Why use strong, unique passwords?",
-          "questionUr": "مضبوط منفرد پاس ورڈ کیوں ضروری ہیں؟"
+          "questionUr": "مضبوط منفرد پاس ورڈ کیوں ضروری ہیں؟",
+          "id": "q-9250d71ebaf718"
         },
         {
           "question": "Explain Two-Factor Authentication (2FA).",
-          "questionUr": "ٹو فیکٹر آتھنٹیکیشن کی وضاحت کریں۔"
+          "questionUr": "ٹو فیکٹر آتھنٹیکیشن کی وضاحت کریں۔",
+          "id": "q-c6ccc5b68ff5f4"
         },
         {
           "question": "What is phishing?",
-          "questionUr": "فشنگ کیا ہے؟"
+          "questionUr": "فشنگ کیا ہے؟",
+          "id": "q-0a1372567fbd5f"
         },
         {
           "question": "Define malware.",
-          "questionUr": "میلویئر کی تعریف کریں۔"
+          "questionUr": "میلویئر کی تعریف کریں۔",
+          "id": "q-4d21bce1525901"
         },
         {
           "question": "Why is regular data backup important?",
-          "questionUr": "باقاعدہ بیک اپ کیوں ضروری ہے؟"
+          "questionUr": "باقاعدہ بیک اپ کیوں ضروری ہے؟",
+          "id": "q-89ba29749d27a2"
         },
         {
           "question": "What is the purpose of privacy settings?",
-          "questionUr": "پرائیویسی سیٹنگز کا مقصد کیا ہے؟"
+          "questionUr": "پرائیویسی سیٹنگز کا مقصد کیا ہے؟",
+          "id": "q-cda0fb00985654"
         },
         {
           "question": "What is informed consent in data ethics?",
-          "questionUr": "باخبر رضامندی کیا ہے؟"
+          "questionUr": "باخبر رضامندی کیا ہے؟",
+          "id": "q-5d886ebd8cf2b3"
         },
         {
           "question": "What is data ethics?",
-          "questionUr": "ڈیٹا اخلاقیات کیا ہے؟"
+          "questionUr": "ڈیٹا اخلاقیات کیا ہے؟",
+          "id": "q-b67792ae69639c"
         },
         {
           "question": "What is copyright?",
           "questionUr": "کاپی رائٹ کیا ہے؟",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-df2a1d62019135"
         },
         {
           "question": "Define trademarks.",
           "questionUr": "ٹریڈ مارکس کی تعریف کریں۔",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-69757d9be2bcab"
         },
         {
           "question": "What is software piracy?",
           "questionUr": "سافٹ ویئر پائریسی کیا ہے؟",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-d36acb43273564"
         }
       ],
       "long": [
         {
           "question": "Explain safe and responsible computer usage: passwords, 2FA, phishing and malware.",
           "questionUr": "محفوظ و ذمہ دارانہ استعمال: پاس ورڈ، 2FA، فشنگ اور میلویئر واضح کریں۔",
-          "source": "composed"
+          "source": "composed",
+          "id": "q-16fcabc333cfb2"
         },
         {
           "question": "Discuss data ethics and privacy: consent, privacy settings and backups.",
           "questionUr": "ڈیٹا اخلاقیات و رازداری پر بحث کریں۔",
-          "source": "composed"
+          "source": "composed",
+          "id": "q-f3f450964d9d49"
         },
         {
           "question": "Describe factors in selecting hardware and software.",
           "questionUr": "ہارڈ ویئر و سافٹ ویئر کے انتخاب کے عوامل بیان کریں۔",
-          "source": "composed"
+          "source": "composed",
+          "id": "q-660728d018ddf9"
         },
         {
           "question": "Explain Intellectual Property Rights: copyright, patents, trademarks and piracy.",
           "questionUr": "دانشورانہ ملکیت کے حقوق واضح کریں۔",
           "source": "composed",
-          "alpExcluded": true
+          "alpExcluded": true,
+          "id": "q-af19ae4659a7b5"
         }
       ]
     },
@@ -3430,7 +3700,8 @@
               "ur": "مینجمنٹ"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-f14337cf031bf9"
         },
         {
           "question": "Entrepreneurs are primarily what?",
@@ -3453,7 +3724,8 @@
               "ur": "گاہک"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-d1fff73e9b53ab"
         },
         {
           "question": "Creating something new or improved:",
@@ -3476,7 +3748,8 @@
               "ur": "اسٹوریج"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-d67cc3d83786ff"
         },
         {
           "question": "French origin of entrepreneur means:",
@@ -3499,7 +3772,8 @@
               "ur": "بیچنا"
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-efed948647fa89"
         },
         {
           "question": "Tech startup example:",
@@ -3522,7 +3796,8 @@
               "ur": "ہسپتال"
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-e764921acffa67"
         },
         {
           "question": "Walt Disney’s first office?",
@@ -3545,7 +3820,8 @@
               "ur": "اسکول"
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-9b7cfd22ff000f"
         },
         {
           "question": "Digital entrepreneurship uses what?",
@@ -3568,7 +3844,8 @@
               "ur": "ڈائلز"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-2e7d0ae346a9fe"
         },
         {
           "question": "Buying and selling online?",
@@ -3591,7 +3868,8 @@
               "ur": "شپنگ"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-2847c152be3244"
         },
         {
           "question": "Cloud computing benefit?",
@@ -3614,7 +3892,8 @@
               "ur": "ساکن ڈیٹا"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-573e40de4166df"
         },
         {
           "question": "First step in design thinking?",
@@ -3637,7 +3916,8 @@
               "ur": "ٹیسٹنگ"
             }
           ],
-          "answer": "C"
+          "answer": "C",
+          "id": "q-78bfa4746692b1"
         },
         {
           "question": "Business goals roadmap:",
@@ -3660,7 +3940,8 @@
               "ur": "رسید"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-2e2bd4eac8a744"
         },
         {
           "question": "UN global goals:",
@@ -3683,7 +3964,8 @@
               "ur": ""
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-e4747ee6ac83a7"
         },
         {
           "question": "Growth without harm:",
@@ -3706,87 +3988,107 @@
               "ur": "عالمی"
             }
           ],
-          "answer": "B"
+          "answer": "B",
+          "id": "q-bc7ef033d9e868"
         }
       ],
       "short": [
         {
           "question": "Define entrepreneurship.",
-          "questionUr": "انٹرپرینیورشپ کی تعریف کریں۔"
+          "questionUr": "انٹرپرینیورشپ کی تعریف کریں۔",
+          "id": "q-01606bbc2be6f1"
         },
         {
           "question": "Who are entrepreneurs?",
-          "questionUr": "انٹرپرینیورز کون ہیں؟"
+          "questionUr": "انٹرپرینیورز کون ہیں؟",
+          "id": "q-3d65bce7fd273b"
         },
         {
           "question": "What does Innovation mean?",
-          "questionUr": "جدت طرازی سے کیا مراد ہے؟"
+          "questionUr": "جدت طرازی سے کیا مراد ہے؟",
+          "id": "q-e8c6465f508744"
         },
         {
           "question": "Why is risk-taking essential?",
-          "questionUr": "خطرہ مول لینا کیوں ضروری ہے؟"
+          "questionUr": "خطرہ مول لینا کیوں ضروری ہے؟",
+          "id": "q-e890dc24d0e349"
         },
         {
           "question": "List two examples of local entrepreneurship.",
-          "questionUr": "مقامی انٹرپرینیورشپ کی دو مثالیں لکھیں۔"
+          "questionUr": "مقامی انٹرپرینیورشپ کی دو مثالیں لکھیں۔",
+          "id": "q-4b06059fb8409a"
         },
         {
           "question": "How does entrepreneurship drive economic growth?",
-          "questionUr": "انٹرپرینیورشپ معاشی ترقی کیسے دیتی ہے؟"
+          "questionUr": "انٹرپرینیورشپ معاشی ترقی کیسے دیتی ہے؟",
+          "id": "q-be0f43245b9657"
         },
         {
           "question": "Define digital entrepreneurship.",
-          "questionUr": "ڈیجیٹل انٹرپرینیورشپ کی تعریف کریں۔"
+          "questionUr": "ڈیجیٹل انٹرپرینیورشپ کی تعریف کریں۔",
+          "id": "q-54eb99f00ccd0d"
         },
         {
           "question": "How does social media help entrepreneurs?",
-          "questionUr": "سوشل میڈیا انٹرپرینیورز کی مدد کیسے کرتا ہے؟"
+          "questionUr": "سوشل میڈیا انٹرپرینیورز کی مدد کیسے کرتا ہے؟",
+          "id": "q-fca985018e594b"
         },
         {
           "question": "Explain the benefit of cloud computing.",
-          "questionUr": "کلاؤڈ کمپیوٹنگ کا فائدہ واضح کریں۔"
+          "questionUr": "کلاؤڈ کمپیوٹنگ کا فائدہ واضح کریں۔",
+          "id": "q-328ab109150b03"
         },
         {
           "question": "What is Design Thinking?",
-          "questionUr": "ڈیزائن تھنکنگ کیا ہے؟"
+          "questionUr": "ڈیزائن تھنکنگ کیا ہے؟",
+          "id": "q-9f455a84a16b20"
         },
         {
           "question": "List the five stages of design thinking.",
-          "questionUr": "ڈیزائن تھنکنگ کے پانچ مراحل لکھیں۔"
+          "questionUr": "ڈیزائن تھنکنگ کے پانچ مراحل لکھیں۔",
+          "id": "q-3fb5bd3f3b114f"
         },
         {
           "question": "Define a business plan.",
-          "questionUr": "بزنس پلان کی تعریف کریں۔"
+          "questionUr": "بزنس پلان کی تعریف کریں۔",
+          "id": "q-b6c74d14e86e3c"
         },
         {
           "question": "What is a revenue model?",
-          "questionUr": "ریونیو ماڈل کیا ہے؟"
+          "questionUr": "ریونیو ماڈل کیا ہے؟",
+          "id": "q-f89755b41fe9a2"
         },
         {
           "question": "What are the SDGs?",
-          "questionUr": "ایس ڈی جیز کیا ہیں؟"
+          "questionUr": "ایس ڈی جیز کیا ہیں؟",
+          "id": "q-502f2b7cc8ec64"
         }
       ],
       "long": [
         {
           "question": "Explain the importance of entrepreneurship for economic growth and innovation.",
-          "questionUr": "معاشی ترقی اور جدت کے لیے انٹرپرینیورشپ کی اہمیت واضح کریں۔"
+          "questionUr": "معاشی ترقی اور جدت کے لیے انٹرپرینیورشپ کی اہمیت واضح کریں۔",
+          "id": "q-d126ac68df8b70"
         },
         {
           "question": "Discuss the impact of digital technologies on modern entrepreneurship.",
-          "questionUr": "جدید انٹرپرینیورشپ پر ڈیجیٹل ٹیکنالوجیز کے اثرات پر بحث کریں۔"
+          "questionUr": "جدید انٹرپرینیورشپ پر ڈیجیٹل ٹیکنالوجیز کے اثرات پر بحث کریں۔",
+          "id": "q-4d194a8b98df1c"
         },
         {
           "question": "Describe the steps and significance of the Design Thinking process.",
-          "questionUr": "ڈیزائن تھنکنگ کے مراحل اور اہمیت بیان کریں۔"
+          "questionUr": "ڈیزائن تھنکنگ کے مراحل اور اہمیت بیان کریں۔",
+          "id": "q-f383ba8ebed315"
         },
         {
           "question": "Explain the components and importance of a Business Plan.",
-          "questionUr": "بزنس پلان کے اجزاء اور اہمیت واضح کریں۔"
+          "questionUr": "بزنس پلان کے اجزاء اور اہمیت واضح کریں۔",
+          "id": "q-f2bd098638c038"
         },
         {
           "question": "Analyze the principles of ethical and sustainable entrepreneurship.",
-          "questionUr": "اخلاقی و پائیدار انٹرپرینیورشپ کے اصولوں کا تجزیہ کریں۔"
+          "questionUr": "اخلاقی و پائیدار انٹرپرینیورشپ کے اصولوں کا تجزیہ کریں۔",
+          "id": "q-69bf72a1529888"
         }
       ]
     }

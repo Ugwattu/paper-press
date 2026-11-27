@@ -4,7 +4,7 @@ Paper Press is a static web app for building PECTAA / BISE ALP question papers. 
 
 ## Supported courses
 
-The course picker contains 20 combinations: Classes 9, 10, 11 and 12, each with Computer, Physics, Chemistry, Biology and Mathematics. Classes 9/10 support English and Urdu; Classes 11/12 are English-only. The Computer banks for Classes 9 and 10 contain the currently authored questions. Computer 11 and 12 include their unit names, 2026–27 ALP metadata and PECTAA pairing schemes. All 12 Physics, Chemistry and Biology banks and all four Mathematics banks include chapter registers, ALP chapter lists and course-specific pairing patterns. Science and Mathematics question arrays are intentionally empty so the author can add original questions. Topic-level ALP exclusions are recorded where transcribed; review the applicable revised PECTAA notice for the complete deletion schedule before authoring questions against finer-grained exclusions. Mathematics 9/10 use two independent long-question groups; Mathematics 11/12 use five part-based long questions.
+The course picker is driven by `banks/manifest.json`; it currently lists 20 class/subject combinations across Classes 9–12. Classes 9/10 support English and Urdu; Classes 11/12 are English-only. The Computer banks for Classes 9 and 10 contain the currently authored questions. Computer 11 and 12 include their unit names, 2026–27 ALP metadata and PECTAA pairing schemes. All 12 Physics, Chemistry and Biology banks and all four Mathematics banks include chapter registers, ALP chapter lists and course-specific pairing patterns. Science and Mathematics question arrays are intentionally empty so the author can add original questions. Topic-level ALP exclusions are recorded where transcribed; review the applicable revised PECTAA notice for the complete deletion schedule before authoring questions against finer-grained exclusions. Mathematics 9/10 use two independent long-question groups; Mathematics 11/12 use five part-based long questions.
 
 The app has no in-app question editor. Questions and official ALP/pairing patterns are maintained as JSON by the author. Write original questions; do not copy PCTB textbook passages or model-paper questions.
 
@@ -23,12 +23,12 @@ Then open <http://localhost:8000/>. Avoid opening `index.html` directly from the
 | File / folder | Purpose |
 |---|---|
 | `index.html` | App shell, settings panes, paper stage, dialogs and preview tabs |
-| `bank-loader.js` | Loads and validates the v2 course manifest/banks, then loads the app modules sequentially |
-| `app-*.js` | Twelve ordered classic scripts, including the part-based long-question planner. They share one global scope and are grouped by app subsystem |
+| `bank-loader.js` | Validates manifest/banks in parallel, supports shared-bank aliases, isolates individual bank errors, then injects the app bundle |
+| `app-*.js` | Twelve ordered classic source modules. They share one global scope; `app.bundle.js` is generated from these sources |
 | `app.css`, `paper.css` | Interface and paper-preview / print styling |
-| `banks/manifest.json` | Registry of the 20 courses |
+| `banks/manifest.json` | Data-driven course registry (20 entries at present) |
 | `banks/<class>-<subject>.json` | One schema-v2 bank per course |
-| `banks/class-*-computer-science.json` | Retained schema-v1 source snapshots; not loaded by the v2 manifest |
+| Legacy Computer Science snapshot files are no longer retained |
 | `banks/_template.json` | Schema-v2 authoring template with rich-text, LaTeX and figure examples |
 | `figures/` | Local PNG/SVG question figures referenced from question or option JSON |
 | `tools/` | Bank validator and regression tests |
@@ -43,14 +43,14 @@ Then open <http://localhost:8000/>. Avoid opening `index.html` directly from the
 3. Set `times.objective` and `times.subjective` in minutes. `basis` must be `stated` or `inferred`. An inferred value is labelled in the UI.
 4. Add the ALP chapter list, excluded chapters, summary, any `exclusionRules`, and official `patterns`.
 5. Add each chapter and its `mcq`, `short` and `long` questions. Urdu fields may be empty for English-only courses.
-6. Add the course to `banks/manifest.json` with `{ "id": "11-computer", "class": 11, "subject": "computer", "file": "11-computer.json" }`.
+6. Add the course to `banks/manifest.json` with `{ "id": "11-computer", "class": 11, "subject": "computer", "file": "11-computer.json" }`. For a shared bank file, specify `bankCourseId` and the necessary `overrides` metadata.
 7. Run `node tools/validate-banks.js` before committing.
 
 ### Bank schema notes
 
 - Every bank uses `schemaVersion: 2` and includes `courseId`, course metadata, `language`, `marks`, `times`, `alp`, `patterns`, `exclusionRules` and `chapters`.
 - Each MCQ has `question`, optional `questionUr`, exactly four `options` entries (`{ "en": "...", "ur": "..." }`) and an `answer` of `A`, `B`, `C` or `D`. Questions and options may also include optional `figure` and `figureAlt` strings.
-- Short and long questions have `question` and optional `questionUr`, plus optional `figure` / `figureAlt`. Add `alpExcluded: true` when a question is excluded from ALP papers. Long questions may set `source` to `bank` or `composed`.
+- Short and long questions also require stable `id` fields and have `question` and optional `questionUr`, plus optional `figure` / `figureAlt`. Add `alpExcluded: true` when a question is excluded from ALP papers. Long questions may set `source` to `bank` or `composed`.
 - A pattern records the chapter distribution and marks: `mcq`, `mcqMark`, `short` groups (`ch` and `attempt`), and `shortMark`. Computer-style long questions use the legacy `long` chapter slots with `longAttempt` / `longMark`. Split-part subjects use `longGroups`: each group has its own `attempt` count, printed question list and `totalMarks`; each question contains ordered parts with their own `marks` and `chapterRule`. Rules are `fixed` (one chapter), `either` (choose from listed chapters), `any` (choose from the active ALP chapters, optionally restricted by a list), and `different-from-a` (choose a chapter other than part (a)). Each part is drawn independently from the matching chapter bank. Groups can have independent attempt counts and mark totals; the same course can use different part marks in different groups. Do not combine non-empty legacy `long` slots with `longGroups`. `totalMarks` is optional; when supplied it must agree with the calculated pattern and the course's maximum marks.
 - Chapter numbers are numeric identifiers and do not need to start at 1 or be consecutive.
 
@@ -60,11 +60,11 @@ Question and option text supports a small, safe inline-markup vocabulary: `<sup>
 
 Put figure files in `figures/` as `.png` or `.svg`, then set `"figure": "and-gate.svg"` on a question or MCQ option. Add `figureAlt` for descriptive alternative text. References accept only a filename (or `figures/filename.png`), not a URL or nested path. SVG files must be self-contained, under 2 MB, and contain no scripts, event handlers, embedded data images, or external resources. The live preview uses the original image; `.docx` export embeds PNG files and converts SVG figures to PNG before embedding. Figure `figureAlt` text is also written into the DOCX image accessibility description.
 
-Mathematical notation can be authored with LaTeX delimiters: `$x^2$` or `\(\frac{a}{b}\)` for inline expressions, and `\[\int_0^1 f(x)\,dx\]` or `$$...$$` for centered display equations. MathJax supports common TeX and AMS environments such as `\sqrt`, `\sum`, `\int`, `matrix`, `cases` and `aligned`. The live preview renders MathJax SVG; `.docx` export converts those SVG equations into embedded PNG images. MathJax 3 is loaded on demand from jsDelivr, so an internet connection is required when a paper contains LaTeX. If it cannot load, the preview keeps the source visible and Word export reports the conversion error. Unsafe HTML and resource-loading macros (for example `\href`, `\input`, `\includegraphics` and `\require`) are rejected as math and remain inert text.
+Mathematical notation can be authored with LaTeX delimiters: `$x^2$` or `\(\frac{a}{b}\)` for inline expressions, and `\[\int_0^1 f(x)\,dx\]` or `$$...$$` for centered display equations. MathJax supports common TeX and AMS environments such as `\sqrt`, `\sum`, `\int`, `matrix`, `cases` and `aligned`. The live preview renders MathJax SVG; `.docx` export converts those SVG equations into embedded PNG images. MathJax 3.2.2 is loaded on demand from cdnjs, so an internet connection is required when a paper contains LaTeX. If it cannot load, the preview keeps the source visible and Word export reports the conversion error. Unsafe HTML and resource-loading macros (for example `\href`, `\input`, `\includegraphics` and `\require`) are rejected as math and remain inert text.
 
 Computer 11/12, Physics/Chemistry/Biology 9–12 and Mathematics 9–12 use PECTAA 2026–27 ALP/pairing data. Mathematics 10 uses the revised notification dated 20-11-2026 (Notification No. 1266), which supersedes the 14-11-2026 notice. The source's duplicate “Q-6” label for the fifth Class 12 Mathematics long question is retained in the scheme note; Paper Press numbers the five printed slots sequentially. The official upper-grade science notifications are: [Grade 11 (06-11-2026)](https://pectaa.edu.pk/wp-content/uploads/2026/11/ALP-Notification-Grade-11.pdf) and [Grade 12 (14-11-2026)](https://pectaa.edu.pk/wp-content/uploads/2026/11/ALPs-Notification-14.11.2026-1258-2.pdf). The Grade 10 science banks use the revised PECTAA notification dated 20-11-2026, which supersedes the earlier Grade 10 notice. Class 12 Computer has a 2:30 total and a 20-minute objective model-paper limit; the 2:10 subjective split is inferred and labelled accordingly. The science and Mathematics banks contain patterns and chapter metadata; their question arrays are intentionally empty.
 
-The validator also checks manifest-to-bank consistency, chapter references, question option counts, answer keys, pattern totals and exclusion-rule references. A course may have empty `chapters` and `patterns` while it is still awaiting authoring; it remains visible in the course picker as having no questions yet.
+The validator also checks manifest-to-bank consistency, chapter references, question option counts, answer keys, pattern totals and exclusion-rule references. Question metadata is keyed by stable question IDs; old numeric index keys are accepted for migration. Manifest entries can share bank files via `bankCourseId` and metadata `overrides`. Run `npm run build` to regenerate the bundle. A course may have empty `chapters` and `patterns` while it is still awaiting authoring; it remains visible in the course picker as having no questions yet.
 
 ## Paper formats and timing
 
@@ -85,7 +85,7 @@ npm install
 npm test
 ```
 
-The test command validates all banks, boots the real app in jsdom, checks preview/export question ordering, inspects generated DOCX structure and images, checks persistence and keyboard shortcuts, and runs the timing, language, split-sheet, module-loading, template, Computer 11/12 ALP, rich-text/figure, LaTeX, Mathematics 9–12, part-based long-group, and Physics/Chemistry/Biology 9–12 bank regression tests. The optional `@napi-rs/canvas` dependency improves PNG checks in the DOCX tests; without it, the harness uses a small canvas stub.
+The test command rebuilds the bundle, validates all banks and stable IDs, boots the real app in jsdom, checks preview/export question ordering, inspects generated DOCX structure and images, checks persistence and keyboard shortcuts, and runs the timing, language, split-sheet, module-loading, template, Computer 11/12 ALP, rich-text/figure, LaTeX, Mathematics 9–12, part-based long-group, and Physics/Chemistry/Biology 9–12 bank regression tests. The optional `@napi-rs/canvas` dependency improves PNG checks in the DOCX tests; without it, the harness uses a small canvas stub.
 
 For bank-only validation without the DOM test dependencies:
 

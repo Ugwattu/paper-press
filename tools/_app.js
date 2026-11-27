@@ -15,8 +15,8 @@ function loadApp(opts) {
   else { P.getContext = () => noop; P.toDataURL = () => PNG1; }
   if (opts.storage) for (const k of Object.keys(opts.storage)) w.localStorage.setItem(k, opts.storage[k]); /* an existing browser profile */
   const manifest = JSON.parse(read('banks/manifest.json'));
-  w.PP_COURSES = []; w.PP_DATA = {};
-  manifest.courses.forEach((b) => { const c = convert(JSON.parse(read('banks/' + b.file)), b.file); w.PP_COURSES.push(c.meta); w.PP_DATA[b.id] = { raw: c.raw, meta: c.meta, patterns: c.patterns }; });
+  w.PP_COURSES = []; w.PP_DATA = {}; w.PP_GROUPS = manifest.groups || [];
+  manifest.courses.forEach((b) => { const c = convert(JSON.parse(read('banks/' + b.file)), b.file); w.PP_COURSES.push(Object.assign({}, c.meta, { groups: b.groups || [] })); w.PP_DATA[b.id] = { raw: c.raw, meta: c.meta, patterns: c.patterns }; });
   const ctx = dom.getInternalVMContext();
   for (const file of scripts) new vm.Script(read(file), { filename: file }).runInContext(ctx);
   return { dom, ev: (code) => vm.runInContext(code, ctx), realCanvas: !!nc };

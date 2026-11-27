@@ -6,5 +6,5 @@ let failures=0;function check(ok,msg){console.log((ok?'PASS ':'FAIL ')+msg);if(!
 check(styles.every(s=>html.includes(`data-v="${s}"`)),'Header chooser exposes nine named styles');
 for(const s of styles.slice(1)){check(preview.includes(`HS==='${s}'`),`${s} has a live preview implementation`);check(docx.includes(`HS==='${s}'`),`${s} has a DOCX export implementation`);}
 check(html.includes('hdr-style-grid')&&css.includes('.hdr-style-grid'),'Style picker is presented as a responsive grid');
-check(html.includes('app.css?v=37')&&html.includes('paper.css?v=37')&&html.includes("PPBanks.boot('37')"),'Cache versions are aligned with build 37');
+check(html.includes('app.css?v=39')&&html.includes('paper.css?v=39')&&html.includes("PPBanks.boot('39')"),'Cache versions are aligned with build 38');
 console.log(`${failures?failures+' failure(s)':'Header styles OK'} — ${styles.length} named styles`);process.exit(failures?1:0);

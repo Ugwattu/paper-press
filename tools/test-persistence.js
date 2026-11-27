@@ -10,7 +10,7 @@ const s = (c) => ev(c);
 check('title', s('state.title'), 'Old Title');
 check('legacy course defaults to Computer', s('cid()'), '9-computer');
 check('legacy custom scheme migrated to course', s('customSchemes[0].courseId'), '9-computer');
-check('course-bound ALP factory presets', s('COURSE_FACTORY.map(p=>p.courseId)'), ['9-computer','10-computer']);
+check('course-bound ALP factory presets across all manifest courses', s('COURSE_FACTORY.map(p=>p.courseId)'), JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'banks', 'manifest.json'), 'utf8')).courses.map(c=>c.id));
 check('institute', s('state.institute'), 'My Old School');
 check('MCQ count', s('state.mcqCount'), 12);
 check('OMR columns', s('state.omrCols'), 3);

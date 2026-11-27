@@ -13,11 +13,11 @@ function captureConfig(sc){const cfg={};sc.forEach(s=>SCOPES[s].keys.forEach(k=>
 function applyPreset(p){if(!p)return;
  const cBefore=cid();
  p.scopes.forEach(s=>SCOPES[s].keys.forEach(k=>{if(p.cfg[k]!==undefined)state[k]=JSON.parse(JSON.stringify(p.cfg[k]));}));
- if(!BOOKS[cid()]||!B().hasQuestions){state.grade=9;state.sid='computer';}
+ if(!BOOKS[cid()]||!B().hasQuestions){state.grade=9;state.sid=DEFAULT_SUBJECT;}
  if(cid()!==cBefore){if(!p.cfg||p.cfg.timeObj===undefined)state.timeObj=0;if(!p.cfg||p.cfg.timeSubj===undefined)state.timeSubj=0;state.klass=B().name;syncSubject(state.grade,state.sid);coursePickerGrade=state.grade;overrides={};sticky={};activeSlot=null;paintCourseUI();}
  state.chapters=(state.chapters||[]).filter(c=>B().chapters.includes(c));
  if(!state.chapters.length)state.chapters=B().alpCh.slice();
- if(!allSchemes().some(s=>s.id===state.schemeId&&s.courseId===cid()))state.schemeId=(offFor(cid())||{}).id||'off9';
+ if(!allSchemes().some(s=>s.id===state.schemeId&&s.courseId===cid()))state.schemeId=(offFor(cid())||{}).id||'';
  state.presetId=p.id;state.dirty=false;
  if(state.logo&&!logoPNG)rasterizeLogo(state.logo).then(x=>{logoPNG=x;syncUI();});
  buildChips();render();renderPresets();if(state.autoFit)fitZoom();
@@ -28,7 +28,7 @@ function renderPresets(){
  else if(preFilter==='factory')list=list.filter(p=>p.factory);
  else if(preFilter==='g9')list=list.filter(p=>(p.cfg.grade||p.grade)===9);
  else if(preFilter==='g10')list=list.filter(p=>(p.cfg.grade||p.grade)===10);
- else if(preFilter==='course')list=list.filter(p=>{const g=p.cfg&&p.cfg.grade||p.grade||9,sid=p.cfg&&p.cfg.sid||p.sid;const course=p.courseId||(sid?`${g}-${sid}`:(p.factory?null:`${g}-computer`));return !course||course===cid();});
+ else if(preFilter==='course')list=list.filter(p=>{const g=p.cfg&&p.cfg.grade||p.grade||9,sid=p.cfg&&p.cfg.sid||p.sid;const course=p.courseId||(sid?`${g}-${sid}`:(p.factory?null:`${g}-${DEFAULT_SUBJECT}`));return !course||course===cid();});
  if(preQuery.trim()){const q=preQuery.toLowerCase();list=list.filter(p=>(p.name+' '+(p.note||'')).toLowerCase().includes(q));}
  if(preSort==='name')list.sort((a,b)=>a.name.localeCompare(b.name));
  else if(preSort==='marks')list.sort((a,b)=>presetMarks(b)-presetMarks(a));
